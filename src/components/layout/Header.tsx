@@ -1,7 +1,50 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+
+interface NavLinkProps {
+  href: string;
+  children: ReactNode;
+  isScrolled: boolean;
+  isMobile?: boolean;
+  onClick?: () => void;
+}
+
+const NavLink = ({
+  href,
+  children,
+  isScrolled,
+  isMobile = false,
+  onClick = () => {},
+}: NavLinkProps) => {
+  return (
+    <Link
+      href={href}
+      className={`font-alta text-lg relative group ${
+        isMobile ? "block py-3" : ""
+      }`}
+      onClick={onClick}
+    >
+      <span
+        className={`transition-colors duration-300 ${
+          isScrolled
+            ? "text-muted-sand group-hover:text-elegant-mocha"
+            : "text-white group-hover:text-soft-blush"
+        }`}
+      >
+        {children}
+      </span>
+      <span
+        className={`absolute left-0 bottom-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${
+          isScrolled ? "bg-elegant-mocha" : "bg-soft-blush"
+        }`}
+      />
+    </Link>
+  );
+};
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,119 +60,99 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  const headerVariants = {
+    hidden: { y: -100, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+      },
+    },
+  };
+
+  const mobileMenuVariants = {
+    closed: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1],
+      },
+    },
+    open: {
+      height: "auto",
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        ease: [0.4, 0, 0.2, 1],
+      },
+    },
+  };
+
   return (
-    <header
+    <motion.header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-white bg-opacity-95 shadow-md py-3"
           : "bg-transparent py-5"
       }`}
+      initial="hidden"
+      animate="visible"
+      variants={headerVariants}
     >
       <div className="luxury-container flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="relative z-10">
-          <div className="flex items-center">
-            <div className="mr-3 h-10 w-10 md:h-12 md:w-12 relative flex items-center justify-center overflow-hidden">
-              {/* Actual logo image */}
-              <img
-                src="/images/logo/IMG_0559.jpg"
-                alt="FaceFrame Beauty Logo"
-                width="48"
-                height="48"
-                className="h-full w-full object-cover"
-                style={{ maxWidth: "100%", maxHeight: "100%" }}
-              />
-            </div>
-            <span
-              className={`font-alice text-xl md:text-2xl transition-colors duration-300 ${
-                isScrolled ? "text-[#7F5539]" : "text-white"
-              }`}
-            >
-              FaceFrame Beauty
-            </span>
+        <Link href="/" className="relative z-10 flex items-center group">
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden shadow-sm transition-all duration-300 group-hover:shadow-md">
+            <Image
+              src="/images/logo/IMG_0559.jpg"
+              alt="FaceFrame Beauty Logo"
+              width={48}
+              height={48}
+              className="w-full h-full object-cover"
+            />
           </div>
+          <span
+            className={`font-alice text-xl md:text-2xl ml-3 transition-all duration-300 ${
+              isScrolled ? "text-elegant-mocha" : "text-white text-shadow-sm"
+            }`}
+          >
+            FaceFrame Beauty
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/"
-            className="font-alta transition-colors duration-300"
-            style={{ color: isScrolled ? "#B08968" : "white" }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = isScrolled ? "#B08968" : "white";
-            }}
-          >
+          <NavLink href="/" isScrolled={isScrolled}>
             Home
-          </Link>
-          <Link
-            href="/services"
-            className="font-alta transition-colors duration-300"
-            style={{ color: isScrolled ? "#B08968" : "white" }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = isScrolled ? "#B08968" : "white";
-            }}
-          >
+          </NavLink>
+          <NavLink href="/services" isScrolled={isScrolled}>
             Services
-          </Link>
-          <Link
-            href="/gallery"
-            className="font-alta transition-colors duration-300"
-            style={{ color: isScrolled ? "#B08968" : "white" }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = isScrolled ? "#B08968" : "white";
-            }}
-          >
+          </NavLink>
+          <NavLink href="/gallery" isScrolled={isScrolled}>
             Gallery
-          </Link>
-          <Link
-            href="/about"
-            className="font-alta transition-colors duration-300"
-            style={{ color: isScrolled ? "#B08968" : "white" }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = isScrolled ? "#B08968" : "white";
-            }}
-          >
+          </NavLink>
+          <NavLink href="/about" isScrolled={isScrolled}>
             About
-          </Link>
-          <Link
-            href="/contact"
-            className="font-alta transition-colors duration-300"
-            style={{ color: isScrolled ? "#B08968" : "white" }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = isScrolled ? "#B08968" : "white";
-            }}
-          >
+          </NavLink>
+          <NavLink href="/contact" isScrolled={isScrolled}>
             Contact
-          </Link>
+          </NavLink>
+
           <Link
             href="/booking"
-            className="font-alta px-5 py-2 rounded-md transition-colors duration-300"
-            style={{
-              backgroundColor: "#7F5539",
-              color: "white",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = "#9C6644";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = "#7F5539";
-            }}
+            className={`btn ${
+              isScrolled
+                ? "btn-primary hover:shadow"
+                : "bg-white bg-opacity-20 hover:bg-opacity-30 text-white hover:shadow"
+            } px-5 py-2 rounded-md transition-all duration-300`}
           >
             Book Now
           </Link>
@@ -137,12 +160,15 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden focus:outline-none transition-colors duration-300 p-2 ${
-            isScrolled ? "text-[#7F5539]" : "text-white"
+          className={`md:hidden focus:outline-none p-2 rounded-md transition-colors duration-300 ${
+            isScrolled
+              ? "text-elegant-mocha hover:bg-soft-blush hover:bg-opacity-20"
+              : "text-white hover:bg-white hover:bg-opacity-10"
           }`}
           aria-label="Toggle mobile menu"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
+          <span className="sr-only">Menu</span>
           {isMobileMenuOpen ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -178,102 +204,71 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`md:hidden absolute top-full left-0 w-full bg-white shadow-lg transition-transform duration-300 transform ${
-          isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
-        }`}
-      >
-        <div className="py-4 px-6 space-y-4">
-          <Link
-            href="/"
-            className="block font-alta transition-colors duration-300 py-2"
-            style={{ color: "#B08968" }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = "#B08968";
-            }}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="md:hidden absolute top-full left-0 w-full glass-effect shadow-lg overflow-hidden"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={mobileMenuVariants}
           >
-            Home
-          </Link>
-          <Link
-            href="/services"
-            className="block font-alta transition-colors duration-300 py-2"
-            style={{ color: "#B08968" }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = "#B08968";
-            }}
-          >
-            Services
-          </Link>
-          <Link
-            href="/gallery"
-            className="block font-alta transition-colors duration-300 py-2"
-            style={{ color: "#B08968" }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = "#B08968";
-            }}
-          >
-            Gallery
-          </Link>
-          <Link
-            href="/about"
-            className="block font-alta transition-colors duration-300 py-2"
-            style={{ color: "#B08968" }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = "#B08968";
-            }}
-          >
-            About
-          </Link>
-          <Link
-            href="/contact"
-            className="block font-alta transition-colors duration-300 py-2"
-            style={{ color: "#B08968" }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            onMouseOver={(e) => {
-              e.currentTarget.style.color = "#7F5539";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.color = "#B08968";
-            }}
-          >
-            Contact
-          </Link>
-          <Link
-            href="/booking"
-            className="block font-alta px-5 py-2 rounded-md transition-colors duration-300 text-center mt-4"
-            style={{
-              backgroundColor: "#7F5539",
-              color: "white",
-            }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = "#9C6644";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = "#7F5539";
-            }}
-          >
-            Book Now
-          </Link>
-        </div>
-      </div>
-    </header>
+            <div className="py-4 px-6 space-y-1">
+              <NavLink
+                href="/"
+                isScrolled={true}
+                isMobile={true}
+                onClick={closeMobileMenu}
+              >
+                Home
+              </NavLink>
+              <NavLink
+                href="/services"
+                isScrolled={true}
+                isMobile={true}
+                onClick={closeMobileMenu}
+              >
+                Services
+              </NavLink>
+              <NavLink
+                href="/gallery"
+                isScrolled={true}
+                isMobile={true}
+                onClick={closeMobileMenu}
+              >
+                Gallery
+              </NavLink>
+              <NavLink
+                href="/about"
+                isScrolled={true}
+                isMobile={true}
+                onClick={closeMobileMenu}
+              >
+                About
+              </NavLink>
+              <NavLink
+                href="/contact"
+                isScrolled={true}
+                isMobile={true}
+                onClick={closeMobileMenu}
+              >
+                Contact
+              </NavLink>
+
+              <div className="pt-3 pb-2">
+                <Link
+                  href="/booking"
+                  className="btn btn-primary w-full justify-center mt-2"
+                  onClick={closeMobileMenu}
+                >
+                  Book Now
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };
 

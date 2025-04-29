@@ -1,0 +1,73 @@
+[
+  {
+    "id": "gallery-1",
+    "beforeImage": "/images/gallery/image1.webp",
+    "afterImage": "/images/gallery/image3.webp",
+    "alt": "Eyebrow Transformation",
+    "category": "Brows",
+    "featured": true,
+    "serviceId": "brow-microblading"
+  },
+  {
+    "id": "gallery-2",
+    "beforeImage": "/images/gallery/image4.webp",
+    "afterImage": "/images/gallery/image7.webp",
+    "alt": "Lash Extension Enhancement",
+    "category": "Lashes",
+    "featured": true,
+    "serviceId": "volume-lashes-full"
+  },
+  {
+    "id": "gallery-3",
+    "beforeImage": "/images/gallery/image16.webp",
+    "afterImage": "/images/gallery/image19.webp",
+    "alt": "Facial Treatment Results",
+    "category": "Facials",
+    "featured": true,
+    "serviceId": "million-dollar-facial"
+  },
+  {
+    "id": "gallery-4",
+    "beforeImage": "/images/gallery/image13.webp",
+    "afterImage": "/images/gallery/image14.webp",
+    "alt": "Lip Blush Enhancement",
+    "category": "Lips",
+    "featured": false,
+    "serviceId": "lip-blush"
+  },
+  {
+    "id": "gallery-5",
+    "beforeImage": "/images/gallery/image5.webp",
+    "afterImage": "/images/gallery/image8.webp",
+    "alt": "Brow Lamination",
+    "category": "Brows",
+    "featured": false,
+    "serviceId": "brow-lamination"
+  },
+  {
+    "id": "gallery-6",
+    "beforeImage": "/images/gallery/image11.webp",
+    "afterImage": "/images/gallery/image12.webp",
+    "alt": "Dermaplaning Results",
+    "category": "Facials",
+    "featured": false,
+    "serviceId": "dermaplaning-facial"
+  },
+  {
+    "id": "gallery-7",
+    "beforeImage": "/images/gallery/image9.webp",
+    "afterImage": "/images/gallery/image10.webp",
+    "alt": "Eyebrow Shape Transformation",
+    "category": "Brows",
+    "featured": false,
+    "serviceId": "brow-microblading"
+  },
+  {
+    "id": "gallery-8",
+    "beforeImage": "/images/gallery/image15.webp",
+    "afterImage": "/images/gallery/image17.webp",
+    "alt": "Full Face Transformation",
+    "category": "General",
+    "featured": false
+  }
+]

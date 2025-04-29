@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -10,6 +11,11 @@ interface BeforeAfterSliderProps {
   height?: number;
   showLabels?: boolean;
   className?: string;
+  autoAnimateOnHover?: boolean;
+  initialPosition?: number;
+  labelStyle?: "minimal" | "standard" | "elegant";
+  onSlideComplete?: (value: number) => void;
+  aspectRatio?: "1:1" | "4:3" | "16:9" | "auto";
 }
 
 export default function BeforeAfterSlider({
@@ -19,65 +25,169 @@ export default function BeforeAfterSlider({
   height = 400,
   showLabels = false,
   className = "",
+  autoAnimateOnHover = true,
+  initialPosition = 50,
+  labelStyle = "standard",
+  onSlideComplete,
+  aspectRatio = "auto",
 }: BeforeAfterSliderProps) {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [sliderPosition, setSliderPosition] = useState(initialPosition);
   const [isDragging, setIsDragging] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Calculate aspect ratio for responsive sizing
+  const getAspectRatioStyle = () => {
+    switch (aspectRatio) {
+      case "1:1":
+        return { aspectRatio: "1 / 1" };
+      case "4:3":
+        return { aspectRatio: "4 / 3" };
+      case "16:9":
+        return { aspectRatio: "16 / 9" };
+      default:
+        return { height: `${height}px` };
+    }
+  };
+
+  // Cleanup any running animations on unmount
+  useEffect(() => {
+    return () => {
+      if (animationRef.current) {
+        clearTimeout(animationRef.current);
+      }
+    };
+  }, []);
+
+  // Notify when slide is complete
+  useEffect(() => {
+    if (onSlideComplete && !isDragging) {
+      onSlideComplete(sliderPosition);
+    }
+  }, [sliderPosition, isDragging, onSlideComplete]);
 
   // Handle slider change from input
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSliderPosition(Number(e.target.value));
   };
 
-  // Handle mouse/touch drag events
-  const handleMouseDown = () => setIsDragging(true);
-  const handleMouseUp = () => setIsDragging(false);
-  const handleMouseLeave = () => setIsDragging(false);
+  // Mouse/touch event handlers
+  const handleDragStart = () => setIsDragging(true);
+  const handleDragEnd = () => setIsDragging(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleDragMove = (
+    e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+  ) => {
     if (!isDragging || !containerRef.current) return;
 
     const rect = containerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
+
+    // Handle both mouse and touch events
+    let clientX: number;
+    if ("touches" in e) {
+      clientX = e.touches[0].clientX;
+    } else {
+      clientX = e.clientX;
+    }
+
+    const x = ((clientX - rect.left) / rect.width) * 100;
     setSliderPosition(Math.min(Math.max(x, 0), 100));
   };
 
-  // Auto-animate on hover for added luxury effect
+  // Handle hover animation
   const handleMouseEnter = () => {
-    // Animate slider to show transformation and then back
-    const timer1 = setTimeout(() => {
-      setSliderPosition(95);
+    setIsHovering(true);
 
-      const timer2 = setTimeout(() => {
-        setSliderPosition(50);
-      }, 1500);
+    if (autoAnimateOnHover) {
+      // Clear any existing animation
+      if (animationRef.current) {
+        clearTimeout(animationRef.current);
+      }
 
-      return () => clearTimeout(timer2);
-    }, 800);
+      // Set a sequence of animations
+      animationRef.current = setTimeout(() => {
+        // Animate to "after" state
+        setSliderPosition(95);
 
-    return () => clearTimeout(timer1);
+        // Then animate back to center
+        animationRef.current = setTimeout(() => {
+          setSliderPosition(initialPosition);
+        }, 1500);
+      }, 800);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setIsDragging(false);
+
+    // Clear animation if mouse leaves during animation
+    if (animationRef.current) {
+      clearTimeout(animationRef.current);
+    }
+  };
+
+  // Handle image loading complete
+  const handleImagesLoaded = () => {
+    setIsLoaded(true);
+  };
+
+  // Get label styles based on the selected style
+  const getLabelStyles = () => {
+    switch (labelStyle) {
+      case "minimal":
+        return "px-2 py-0.5 text-xs bg-black bg-opacity-30 rounded";
+      case "elegant":
+        return "px-4 py-1.5 text-sm bg-elegant-mocha text-white rounded-lg shadow-md";
+      default: // standard
+        return "px-3 py-1 text-sm bg-black bg-opacity-50 text-white rounded-full";
+    }
   };
 
   return (
-    <div
+    <motion.div
       ref={containerRef}
       className={`relative select-none rounded-lg overflow-hidden shadow-lg ${className}`}
-      style={{ height: `${height}px` }}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
+      style={getAspectRatioStyle()}
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: isLoaded ? 1 : 0,
+        transition: { duration: 0.5 },
+      }}
+      onMouseDown={handleDragStart}
+      onMouseUp={handleDragEnd}
       onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
+      onMouseMove={handleDragMove}
       onMouseEnter={handleMouseEnter}
-      onTouchStart={handleMouseDown}
-      onTouchEnd={handleMouseUp}
+      onTouchStart={handleDragStart}
+      onTouchEnd={handleDragEnd}
       onTouchCancel={handleMouseLeave}
+      onTouchMove={handleDragMove}
     >
+      {/* Loading state */}
+      <AnimatePresence>
+        {!isLoaded && (
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center bg-light-cream"
+            exit={{ opacity: 0 }}
+          >
+            <div className="w-12 h-12 border-4 border-elegant-mocha border-t-transparent rounded-full animate-spin"></div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* After Image (Full) */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={afterImage}
           alt={`After: ${alt}`}
-          className="w-full h-full object-cover"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
+          onLoad={handleImagesLoaded}
+          priority
         />
       </div>
 
@@ -86,16 +196,17 @@ export default function BeforeAfterSlider({
         className="absolute inset-0 overflow-hidden"
         style={{ width: `${sliderPosition}%` }}
       >
-        <img
+        <Image
           src={beforeImage}
           alt={`Before: ${alt}`}
-          className="w-full h-full object-cover"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
           style={{
-            width: containerRef.current
-              ? `${containerRef.current.offsetWidth}px`
-              : "100%",
             objectPosition: "left center",
           }}
+          onLoad={handleImagesLoaded}
+          priority
         />
       </div>
 
@@ -103,20 +214,20 @@ export default function BeforeAfterSlider({
       {showLabels && (
         <>
           <motion.div
-            className="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full"
+            className={`absolute top-4 left-4 ${getLabelStyles()}`}
             initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -10 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="font-alta text-sm">Before</span>
+            <span className="font-alta">Before</span>
           </motion.div>
           <motion.div
-            className="absolute top-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full"
+            className={`absolute top-4 right-4 ${getLabelStyles()}`}
             initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -10 }}
             transition={{ delay: 0.4 }}
           >
-            <span className="font-alta text-sm">After</span>
+            <span className="font-alta">After</span>
           </motion.div>
         </>
       )}
@@ -125,21 +236,30 @@ export default function BeforeAfterSlider({
       <div className="absolute inset-0 flex items-center pointer-events-none">
         <div className="relative w-full">
           {/* Slider Handle Line */}
-          <div
-            className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg"
+          <motion.div
+            className="absolute top-0 bottom-0 w-0.5 bg-white shadow-md"
             style={{ left: `${sliderPosition}%` }}
+            animate={{
+              boxShadow: isDragging
+                ? "0 0 8px rgba(255,255,255,0.8)"
+                : "0 0 4px rgba(0,0,0,0.2)",
+            }}
           />
 
           {/* Slider Handle */}
           <motion.div
-            className="absolute top-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center pointer-events-none"
+            className="absolute top-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center"
             style={{
               left: `${sliderPosition}%`,
-              transform: "translate(-50%, -50%)",
+              y: "-50%",
+              x: "-50%",
             }}
             animate={{
+              scale: isDragging ? 1.1 : 1,
               boxShadow: isDragging
                 ? "0 0 0 3px rgba(255,255,255,0.5), 0 4px 16px rgba(0,0,0,0.3)"
+                : isHovering
+                ? "0 4px 12px rgba(0,0,0,0.2)"
                 : "0 4px 8px rgba(0,0,0,0.15)",
             }}
           >
@@ -165,6 +285,7 @@ export default function BeforeAfterSlider({
             type="range"
             min="0"
             max="100"
+            step="0.1"
             value={sliderPosition}
             onChange={handleSliderChange}
             className="w-full h-full opacity-0 cursor-grab active:cursor-grabbing absolute inset-0"
@@ -174,15 +295,22 @@ export default function BeforeAfterSlider({
       </div>
 
       {/* Hint Text */}
-      <motion.div
-        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 px-3 py-1 rounded-full"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.7 }}
-        whileHover={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        <span className="font-alta text-xs text-white">Slide to reveal</span>
-      </motion.div>
-    </div>
+      <AnimatePresence>
+        {isLoaded && (
+          <motion.div
+            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 px-3 py-1 rounded-full"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 0.7, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            whileHover={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            <span className="font-alta text-xs text-white">
+              Slide to reveal
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }

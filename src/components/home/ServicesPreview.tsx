@@ -1,75 +1,49 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import GlassMorphicCard from "../shared/GlassMorphicCard";
 import FadeInSection from "../shared/FadeInSection";
-
-// Helper function to map service IDs to gallery images
-const getServiceImage = (serviceId: string): string => {
-  const imageMap: Record<string, string> = {
-    "brow-microblading": "/images/gallery/image1.webp",
-    "volume-lashes-full": "/images/gallery/image4.webp",
-    "million-dollar-facial": "/images/gallery/image16.webp",
-  };
-
-  return imageMap[serviceId] || "/images/gallery/Lookbook.webp"; // Fallback image
-};
-
-// Define service type
-interface Service {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  image: string;
-  category: string;
-  categoryId: string;
-}
-
-// Sample featured services - in real implementation, this would come from the JSON data
-const featuredServices = [
-  {
-    id: "brow-microblading",
-    name: "Signature Brows",
-    description:
-      "Precision-crafted semi-permanent brows tailored to your face structure.",
-    price: "£285",
-    image: "/images/services/brows.webp",
-    category: "Semi-Permanent Makeup",
-    categoryId: "semi-permanent-makeup",
-  },
-  {
-    id: "volume-lashes-full",
-    name: "Volume Lashes",
-    description:
-      "Luxurious, lightweight lash extensions for the perfect subtle glamour.",
-    price: "£65",
-    image: "/images/services/lashes.webp",
-    category: "Lashes & Brows",
-    categoryId: "lashes-brows",
-  },
-  {
-    id: "million-dollar-facial",
-    name: "Million Dollar Facial",
-    description:
-      "Comprehensive luxury treatment combining multiple techniques for radiant skin.",
-    price: "£100",
-    image: "/images/services/facial.webp",
-    category: "Facials",
-    categoryId: "facials",
-  },
-];
+import { Service } from "../../types";
+import serviceService from "../../services/serviceService";
+import galleryService from "../../services/galleryService";
 
 // Individual Service Card Component
 const ServiceCard = ({ service }: { service: Service }) => {
+  const [imageUrl, setImageUrl] = useState<string>(
+    "/images/gallery/Lookbook.webp"
+  ); // Default image
+
+  // Fetch the appropriate image when component mounts
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        // Try to get a gallery item associated with this service
+        const galleryItems = await galleryService.getGalleryItemsByServiceId(
+          service.id
+        );
+        if (galleryItems.length > 0) {
+          setImageUrl(galleryItems[0].afterImage); // Use the after image
+        } else {
+          // Use service imageUrl if available
+          setImageUrl(service.imageUrl || "/images/gallery/Lookbook.webp");
+        }
+      } catch (error) {
+        console.error("Error fetching service image:", error);
+        // Keep the default image on error
+      }
+    };
+
+    fetchImage();
+  }, [service.id, service.imageUrl]);
+
   return (
     <GlassMorphicCard intensity="light" className="h-full" hoverEffect={true}>
       {/* Service Image */}
       <div className="relative w-full h-64 overflow-hidden">
         <img
-          src={getServiceImage(service.id)}
+          src={imageUrl}
           alt={service.name}
           className="w-full h-full object-cover"
         />
@@ -77,7 +51,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
         {/* Category Label */}
         <div className="absolute top-4 left-4 bg-white bg-opacity-90 px-3 py-1 rounded-full">
           <span className="font-alta text-sm" style={{ color: "#7F5539" }}>
-            {service.category}
+            {service.categoryName}
           </span>
         </div>
       </div>
@@ -126,6 +100,29 @@ const ServiceCard = ({ service }: { service: Service }) => {
 };
 
 const ServicesPreview = () => {
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch featured services when component mounts
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setLoading(true);
+        const featuredServices = await serviceService.getFeaturedServices();
+        setServices(featuredServices);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching services:", err);
+        setError("Unable to load services. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
   return (
     <FadeInSection>
       <section
@@ -164,14 +161,36 @@ const ServicesPreview = () => {
             </p>
           </div>
 
+          {/* Loading and Error States */}
+          {loading && (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 border-4 border-elegant-mocha border-t-transparent rounded-full animate-spin mx-auto"></div>
+              <p className="mt-4 font-alta" style={{ color: "#7F5539" }}>
+                Loading services...
+              </p>
+            </div>
+          )}
+
+          {error && (
+            <div className="text-center py-12">
+              <p className="font-alta text-red-500">{error}</p>
+            </div>
+          )}
+
           {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
-            {featuredServices.map((service, index) => (
-              <FadeInSection key={service.id} delay={index * 0.1} distance={15}>
-                <ServiceCard service={service} />
-              </FadeInSection>
-            ))}
-          </div>
+          {!loading && !error && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+              {services.map((service, index) => (
+                <FadeInSection
+                  key={service.id}
+                  delay={index * 0.1}
+                  distance={15}
+                >
+                  <ServiceCard service={service} />
+                </FadeInSection>
+              ))}
+            </div>
+          )}
 
           {/* View All Services Link */}
           <div className="mt-16 text-center">

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "brow-microblading",
+    "name": "Signature Brows",
+    "description": "Precision-crafted semi-permanent brows tailored to your face structure. Iggy's signature technique creates hair-like strokes for a natural, elegant look that enhances your features.",
+    "price": "£285",
+    "category": "semi-permanent-makeup",
+    "categoryName": "Semi-Permanent Makeup",
+    "featured": true,
+    "imageUrl": "/images/gallery/image1.webp",
+    "duration": "2 hours"
+  },
+  {
+    "id": "volume-lashes-full",
+    "name": "Volume Lashes",
+    "description": "Luxurious, lightweight lash extensions for the perfect subtle glamour. Each lash is individually applied for a natural yet striking effect.",
+    "price": "£65",
+    "category": "lashes-brows",
+    "categoryName": "Lashes & Brows",
+    "featured": true,
+    "imageUrl": "/images/gallery/image4.webp",
+    "duration": "1 hour"
+  },
+  {
+    "id": "million-dollar-facial",
+    "name": "Million Dollar Facial",
+    "description": "Comprehensive luxury treatment combining multiple techniques for radiant skin. This signature facial includes deep cleansing, exfoliation, and custom serums for a transformative experience.",
+    "price": "£100",
+    "category": "facials",
+    "categoryName": "Facials",
+    "featured": true,
+    "imageUrl": "/images/gallery/image16.webp",
+    "duration": "75 minutes"
+  },
+  {
+    "id": "lip-blush",
+    "name": "Lip Blush",
+    "description": "Enhance your natural lip color with this semi-permanent technique, creating fuller-looking lips with a subtle wash of color. Iggy's precision approach ensures a natural finish.",
+    "price": "£250",
+    "category": "semi-permanent-makeup",
+    "categoryName": "Semi-Permanent Makeup",
+    "featured": false,
+    "imageUrl": "/images/gallery/image13.webp",
+    "duration": "2 hours"
+  },
+  {
+    "id": "brow-lamination",
+    "name": "Brow Lamination",
+    "description": "Reshape and set your brows for a fuller, more defined look that lasts. Perfect for taming unruly brows or creating a more polished appearance.",
+    "price": "£75",
+    "category": "lashes-brows",
+    "categoryName": "Lashes & Brows",
+    "featured": false,
+    "imageUrl": "/images/gallery/image5.webp",
+    "duration": "45 minutes"
+  },
+  {
+    "id": "dermaplaning-facial",
+    "name": "Dermaplaning Facial",
+    "description": "Expert exfoliation treatment that removes dead skin cells and fine facial hair for incredibly smooth, radiant skin. Includes a luxurious hydrating mask.",
+    "price": "£85",
+    "category": "facials",
+    "categoryName": "Facials",
+    "featured": false,
+    "imageUrl": "/images/gallery/image11.webp",
+    "duration": "60 minutes"
+  },
+  {
+    "id": "full-body-wax",
+    "name": "Full Body Wax",
+    "description": "Complete hair removal treatment using premium wax formulations for minimal discomfort and lasting results. Includes aftercare instructions.",
+    "price": "£150",
+    "category": "waxing",
+    "categoryName": "Waxing",
+    "featured": false,
+    "imageUrl": "/images/gallery/image7.webp",
+    "duration": "90 minutes"
+  }
+]

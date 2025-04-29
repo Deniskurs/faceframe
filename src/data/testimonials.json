@@ -1,0 +1,110 @@
+[
+  {
+    "id": "testimonial-1",
+    "quote": "So, so pleased with my eyelashes. I asked for the natural look, and that exactly what I got!! The salon is very friendly, made to feel welcome. I'll def be back",
+    "name": "Lesley E",
+    "date": "9th Nov 24",
+    "service_type": "Lash Extensions",
+    "featured": true,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-2",
+    "quote": "This is a great place. Iggy is friendly, professional and conscientious. I will be returning when I need more done. I would recommend this establishment to anyone.",
+    "name": "Carol W",
+    "date": "8th Aug 24",
+    "service_type": "General",
+    "featured": true,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-3",
+    "quote": "Simply the best! No other technician has managed to get my lashes looking so beautiful and natural. Iggy is a true professional and takes the time to understand what you want.",
+    "name": "Rebecca T",
+    "date": "14th Jul 24",
+    "service_type": "Lash Extensions",
+    "featured": false,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-4",
+    "quote": "After years of penciling in my brows, Iggy's microblading has been life-changing! They look so natural and perfectly shaped for my face. Worth every penny.",
+    "name": "Sophia M",
+    "date": "20th Jun 24",
+    "service_type": "Microblading",
+    "featured": false,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-5",
+    "quote": "This is my third time coming to Iggy for my brows and she smashes it every time! Her attention to detail is amazing, and immediately makes you feel so comfortable in her salon!",
+    "name": "Annabel P",
+    "date": "2nd Jun 24",
+    "service_type": "Brows",
+    "featured": true,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-6",
+    "quote": "The million dollar facial was worth every penny! My skin is glowing days later and Iggy's knowledge about skin care is incredibly impressive.",
+    "name": "Emma J",
+    "date": "17th May 24",
+    "service_type": "Facials",
+    "featured": false,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-7",
+    "quote": "I was nervous about getting my lips done but Iggy put me at ease immediately. The result is so subtle and beautiful, exactly what I wanted!",
+    "name": "Hannah L",
+    "date": "2nd Apr 24",
+    "service_type": "Lip Blush",
+    "featured": false,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-8",
+    "quote": "First time having a dermaplaning facial and I'm completely converted! My makeup is going on so much better and my skin feels incredible.",
+    "name": "Olivia S",
+    "date": "18th Mar 24",
+    "service_type": "Dermaplaning",
+    "featured": false,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-9",
+    "quote": "Iggy is truly an artist. The way she looked at my face and knew exactly what would suit me best was impressive. My brows have never looked better.",
+    "name": "Catherine D",
+    "date": "5th Mar 24",
+    "service_type": "Brow Lamination",
+    "featured": false,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-10",
+    "quote": "I am in love with my Ombre brows 😍 best choice I ever made booking with Iggy!",
+    "name": "Irene",
+    "date": "21st Feb 23",
+    "service_type": "Ombré Brows",
+    "featured": true,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-11",
+    "quote": "Honestly the best beauty treatment I've ever had. The care and precision Iggy puts into her work is evident. I've been receiving compliments non-stop!",
+    "name": "Victoria M",
+    "date": "10th Feb 23",
+    "service_type": "Semi-Permanent Makeup",
+    "featured": false,
+    "rating": 5
+  },
+  {
+    "id": "testimonial-12",
+    "quote": "I had microblading done with Iggy and recently went for waxing near where I live. The lady said she has never seen better job!",
+    "name": "Amelia",
+    "date": "16th Jan 23",
+    "service_type": "Microblading",
+    "featured": true,
+    "rating": 5
+  }
+]

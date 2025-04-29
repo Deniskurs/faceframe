@@ -1,0 +1,72 @@
+[
+  {
+    "id": "faq-1",
+    "question": "How long do semi-permanent brows last?",
+    "answer": "Our signature brow treatments typically last 12-18 months, depending on your skin type, lifestyle, and aftercare routine. We provide complimentary touch-ups within the first 6 weeks to ensure perfect results.",
+    "category": "semi-permanent-makeup",
+    "featured": true
+  },
+  {
+    "id": "faq-2",
+    "question": "Is the treatment painful?",
+    "answer": "Your comfort is our priority. We use premium numbing creams that make the experience surprisingly comfortable. Most clients describe the sensation as mild pressure rather than pain, and many even fall asleep during their treatments.",
+    "category": "general",
+    "featured": true
+  },
+  {
+    "id": "faq-3",
+    "question": "What's the healing process like?",
+    "answer": "Healing varies by treatment but generally takes 7-10 days. Initial color appears darker and bolder, then lightens as healing progresses. We provide a luxury aftercare kit and detailed instructions to ensure optimal results.",
+    "category": "semi-permanent-makeup",
+    "featured": true
+  },
+  {
+    "id": "faq-4",
+    "question": "How do I book an appointment?",
+    "answer": "Appointments can be booked directly through our website using the 'Book Now' button. We use the secure Simplybook.me platform, which allows you to select your preferred service, date, and time. You'll receive an immediate confirmation and a reminder as your appointment approaches.",
+    "category": "booking",
+    "featured": true
+  },
+  {
+    "id": "faq-5",
+    "question": "What is the cancellation policy?",
+    "answer": "We understand that plans change. We request at least 48 hours' notice for cancellations or rescheduling. Cancellations with less notice may incur a 50% charge of your service fee to cover the reserved time. No-shows without notice are subject to the full service fee.",
+    "category": "booking",
+    "featured": false
+  },
+  {
+    "id": "faq-6",
+    "question": "How long do eyelash extensions last?",
+    "answer": "Our premium eyelash extensions typically last for the full growth cycle of your natural lashes, about 6-8 weeks. To maintain a full look, we recommend touch-ups every 2-3 weeks as natural lashes shed and are replaced.",
+    "category": "lashes-brows",
+    "featured": false
+  },
+  {
+    "id": "faq-7",
+    "question": "Do I need a patch test before my treatment?",
+    "answer": "Yes, for most color treatments including brows, lashes, and lips, we require a patch test at least 48 hours before your appointment. This quick procedure helps ensure you won't have an adverse reaction to any of the products used.",
+    "category": "general",
+    "featured": false
+  },
+  {
+    "id": "faq-8",
+    "question": "What makes FaceFrame Beauty different from other salons?",
+    "answer": "FaceFrame Beauty was founded by Iggy, who trained with elite artists across Europe and has perfected her craft for over a decade. Every treatment is approached with meticulous attention to detail, focusing on enhancing natural beauty rather than masking it. We use exclusively premium products and maintain the highest standards of both skill and hygiene.",
+    "category": "general",
+    "featured": false
+  },
+  {
+    "id": "faq-9",
+    "question": "What is the Million Dollar Facial and what are its benefits?",
+    "answer": "The Million Dollar Facial is our signature luxury treatment that combines multiple techniques including deep cleansing, exfoliation, extraction, dermaplaning, and custom serums. Benefits include improved skin texture, reduced fine lines, enhanced product absorption, and a radiant complexion that lasts for weeks.",
+    "category": "facials",
+    "featured": false
+  },
+  {
+    "id": "faq-10",
+    "question": "How should I prepare for my appointment?",
+    "answer": "For most treatments, arrive with clean skin free of makeup. Avoid caffeine and alcohol before your appointment, as they can increase sensitivity. For semi-permanent makeup, avoid blood thinners like aspirin for 48 hours prior (if medically safe to do so). Specific preparation instructions will be provided when you book your service.",
+    "category": "general",
+    "featured": false
+  }
+]
