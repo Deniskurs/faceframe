@@ -333,14 +333,17 @@
     color: rgba(127, 85, 57, 0.7); /* For decorative elements only */
   }
 
-  /* Text on image utilities */
+  /* Enhanced text on image utilities with CHANEL-inspired treatments */
   .text-on-image {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   .text-on-dark {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4), 0 0 5px rgba(0, 0, 0, 0.1);
     font-weight: 400; /* Ensure text on dark backgrounds is always readable */
+    -webkit-font-smoothing: antialiased;
+    box-decoration-break: clone; /* For multi-line text */
+    letter-spacing: 0.01em; /* Subtle tightening for better readability */
   }
 
   /* Mobile typography optimizations */

@@ -25,7 +25,7 @@ export default function Home() {
       {/* About Section */}
       <AboutStrip
         founderName="Iggy"
-        founderImage="/images/gallery/image17.webp"
+        founderImage="/images/gallery/image22.webp"
         quote={founderQuote}
         paragraphs={founderParagraphs}
       />

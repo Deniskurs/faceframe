@@ -27,17 +27,17 @@ const NavLink = ({
   return (
     <Link
       href={href}
-      className={`font-alta text-xs relative group ${
-        isMobile ? "" : "mx-3 md:mx-4"
+      className={`font-alta text-sm relative group ${
+        isMobile ? "" : "mx-3 md:mx-5"
       }`}
       onClick={onClick}
     >
-      {/* Ultra-refined link text with enhanced tracking */}
+      {/* Refined readable link text with luxury tracking */}
       <span
-        className={`inline-block tracking-[0.35em] transition-all duration-700 font-extralight ${
+        className={`inline-block tracking-[0.12em] transition-all duration-700 font-normal ${
           isScrolled
-            ? "text-elegant-mocha group-hover:text-deep-bronze"
-            : "text-white group-hover:text-soft-blush drop-shadow-sm"
+            ? "text-luxury-primary group-hover:text-deep-bronze"
+            : "text-white group-hover:text-soft-blush text-on-dark"
         }`}
       >
         {children}
@@ -45,12 +45,12 @@ const NavLink = ({
 
       {/* CHANEL-inspired underline with luxury timing */}
       <motion.span
-        className={`absolute left-0 bottom-[-3px] h-[0.5px] ${
-          isScrolled ? "bg-elegant-mocha/70" : "bg-white/70"
+        className={`absolute left-0 bottom-[-3px] h-[1px] ${
+          isScrolled ? "bg-elegant-mocha/80" : "bg-white/80"
         }`}
         initial={{ width: "0%", left: "50%", opacity: 0 }}
-        whileHover={{ width: "100%", left: "0%", opacity: 0.6 }}
-        transition={{ duration: 0.8, ease: LUXURY_EASING }}
+        whileHover={{ width: "100%", left: "0%", opacity: 0.8 }}
+        transition={{ duration: 0.7, ease: LUXURY_EASING }}
       />
     </Link>
   );
@@ -76,13 +76,13 @@ const MobileNavLink = ({
     >
       <Link
         href={href}
-        className="font-alta text-[14px] tracking-[0.4em] uppercase font-extralight text-elegant-mocha block py-5 transition-colors duration-700"
+        className="font-alta text-base tracking-[0.15em] uppercase font-normal text-luxury-primary block py-5 transition-colors duration-700 hover:text-deep-bronze"
         onClick={onClick}
       >
         {children}
       </Link>
       <motion.div
-        className="h-[0.5px] w-full bg-soft-blush/30"
+        className="h-[1px] w-full bg-soft-blush/40"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 0.9, delay: 0.1, ease: LUXURY_EASING }}
@@ -95,14 +95,26 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Handle scroll effect
+  // Enhanced scroll effect with transition logic
   useEffect(() => {
     const handleScroll = () => {
+      // Use the same scroll threshold but trigger when scrolling past 20px
       setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Initial load state to enhance readability before transitioning
+  useEffect(() => {
+    // Start with a darker overlay for better text readability
+    const initialDarkerOverlay = setTimeout(() => {
+      // After 500ms, gradually transition to normal state
+      setIsScrolled(false);
+    }, 500);
+
+    return () => clearTimeout(initialDarkerOverlay);
   }, []);
 
   // Disable scroll when mobile menu is open for full-screen overlay
@@ -181,39 +193,55 @@ const Header = () => {
   return (
     <motion.header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${
-        isScrolled ? "py-2" : "py-4"
+        isScrolled ? "h-[60px] md:h-[64px]" : "h-[70px] md:h-[80px]"
       }`}
       initial="hidden"
       animate="visible"
       variants={headerVariants}
     >
-      {/* CHANEL-inspired more refined backdrop with subtle blur and gradient */}
+      {/* CHANEL-inspired premium backdrop with enhanced blur and refined gradient */}
       <div
-        className={`absolute inset-0 transition-all duration-700 backdrop-blur-[4px] ${
+        className={`absolute inset-0 transition-all duration-700 backdrop-blur-[6px] ${
           isScrolled
-            ? "bg-white/92 shadow-sm"
-            : "bg-gradient-to-b from-black/40 via-black/15 to-transparent"
+            ? "bg-white/95 shadow-md border-b border-elegant-mocha/10"
+            : "bg-gradient-to-b from-black/50 via-black/25 to-transparent"
         }`}
       />
 
-      {/* Ultra-thin horizontal separator line */}
+      {/* Refined horizontal separator line with increased thickness */}
       <motion.div
-        className={`absolute bottom-0 left-0 w-full h-[0.25px] ${
-          isScrolled ? "bg-elegant-mocha/20" : "bg-white/20"
+        className={`absolute bottom-0 left-0 w-full h-[1px] ${
+          isScrolled ? "bg-elegant-mocha/15" : "bg-white/15"
         }`}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASING }}
       />
 
-      {/* More precisely positioned corner accents (desktop only) */}
-      <div className="absolute top-6 left-6 w-4 h-[0.25px] bg-white/30 hidden md:block"></div>
-      <div className="absolute top-6 left-6 w-[0.25px] h-4 bg-white/30 hidden md:block"></div>
-      <div className="absolute bottom-6 right-6 w-4 h-[0.25px] bg-white/30 hidden md:block"></div>
-      <div className="absolute bottom-6 right-6 w-[0.25px] h-4 bg-white/30 hidden md:block"></div>
+      {/* Enhanced corner accents (desktop only) with better visibility and state transitions */}
+      <div
+        className={`absolute top-6 left-6 w-5 h-[1px] transition-colors duration-700 ${
+          isScrolled ? "bg-elegant-mocha/30" : "bg-white/40"
+        } hidden md:block`}
+      ></div>
+      <div
+        className={`absolute top-6 left-6 w-[1px] h-5 transition-colors duration-700 ${
+          isScrolled ? "bg-elegant-mocha/30" : "bg-white/40"
+        } hidden md:block`}
+      ></div>
+      <div
+        className={`absolute bottom-6 right-6 w-5 h-[1px] transition-colors duration-700 ${
+          isScrolled ? "bg-elegant-mocha/30" : "bg-white/40"
+        } hidden md:block`}
+      ></div>
+      <div
+        className={`absolute bottom-6 right-6 w-[1px] h-5 transition-colors duration-700 ${
+          isScrolled ? "bg-elegant-mocha/30" : "bg-white/40"
+        } hidden md:block`}
+      ></div>
 
-      {/* Golden ratio-inspired layout with centered container */}
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 flex items-center justify-between">
+      {/* Golden ratio-inspired layout with proper mobile-friendly alignment */}
+      <div className="max-w-[1400px] h-full mx-auto px-6 sm:px-8 flex items-center justify-between">
         {/* CHANEL-inspired centered two-part logo structure */}
         <motion.div
           className="relative z-10 flex items-center"
@@ -222,29 +250,41 @@ const Header = () => {
           transition={{ duration: 0.8, delay: 0.2, ease: LUXURY_EASING }}
         >
           <Link href="/" className="group flex items-center">
-            {/* Logo Image */}
-            <div className="w-9 h-9 overflow-hidden transition-all duration-700">
+            {/* Logo Image with scaled transitions */}
+            <div
+              className={`overflow-hidden transition-all duration-700 shadow-sm ${
+                isScrolled ? "w-8 h-8" : "w-10 h-10"
+              }`}
+            >
               <Image
                 src="/images/logo/IMG_0559.jpg"
                 alt="FaceFrame Beauty Logo"
-                width={36}
-                height={36}
-                className="w-full h-full object-cover rounded-[1px]"
+                width={40}
+                height={40}
+                className="w-full h-full object-cover rounded-[2px]"
               />
             </div>
 
-            {/* Logo Text with CHANEL-like spacing */}
-            <div className="ml-3">
+            {/* Logo Text with CHANEL-inspired elegant typography and scaled transitions */}
+            <div
+              className={`ml-3 transition-all duration-700 ${
+                isScrolled ? "ml-2.5" : "ml-3.5"
+              }`}
+            >
               <span
-                className={`font-alice text-base md:text-lg block tracking-[0.1em] transition-all duration-700 ${
-                  isScrolled ? "text-elegant-mocha" : "text-white"
+                className={`font-alice block tracking-[0.12em] transition-all duration-700 font-normal ${
+                  isScrolled
+                    ? "text-luxury-primary text-base md:text-lg"
+                    : "text-white text-on-dark text-lg md:text-xl"
                 }`}
               >
                 FACEFRAME
               </span>
               <span
-                className={`font-alice text-xs tracking-[0.05em] transition-all duration-700 ${
-                  isScrolled ? "text-elegant-mocha/80" : "text-white/80"
+                className={`font-alice tracking-[0.08em] transition-all duration-700 ${
+                  isScrolled
+                    ? "text-luxury-secondary text-[10px]"
+                    : "text-white/90 text-on-dark text-xs"
                 }`}
               >
                 BEAUTY
@@ -282,21 +322,21 @@ const Header = () => {
           {/* Ultra-refined CHANEL-inspired Book Now button */}
           <Link
             href="/booking"
-            className={`group relative font-alta tracking-[0.4em] text-[9px] uppercase inline-block overflow-hidden ${
+            className={`group relative font-alta tracking-[0.15em] text-xs uppercase inline-block overflow-hidden ${
               isScrolled
-                ? "text-elegant-mocha border-elegant-mocha/20"
-                : "text-white border-white/20"
-            } border px-6 py-[10px] transition-all duration-700`}
+                ? "text-elegant-mocha border-elegant-mocha/30"
+                : "text-white border-white/30"
+            } border px-6 py-3 transition-all duration-700`}
           >
             {/* Subtle vertical lines for CHANEL-inspired framing */}
             <div
-              className={`absolute top-2 left-2 w-[0.25px] h-3 ${
-                isScrolled ? "bg-elegant-mocha/20" : "bg-white/20"
+              className={`absolute top-2 left-2 w-[0.5px] h-3 ${
+                isScrolled ? "bg-elegant-mocha/30" : "bg-white/30"
               }`}
             ></div>
             <div
-              className={`absolute bottom-2 right-2 w-[0.25px] h-3 ${
-                isScrolled ? "bg-elegant-mocha/20" : "bg-white/20"
+              className={`absolute bottom-2 right-2 w-[0.5px] h-3 ${
+                isScrolled ? "bg-elegant-mocha/30" : "bg-white/30"
               }`}
             ></div>
 
@@ -304,55 +344,56 @@ const Header = () => {
             <motion.div
               className={`absolute inset-0 ${
                 isScrolled
-                  ? "bg-elegant-mocha/0 group-hover:bg-elegant-mocha/5"
-                  : "bg-white/0 group-hover:bg-white/5"
+                  ? "bg-elegant-mocha/0 group-hover:bg-elegant-mocha/10"
+                  : "bg-white/0 group-hover:bg-white/10"
               }`}
               initial={false}
-              transition={{ duration: 1, ease: LUXURY_EASING }}
+              transition={{ duration: 0.8, ease: LUXURY_EASING }}
             />
 
             {/* Button text with letterspacing */}
-            <span className="relative z-10">BOOK</span>
+            <span className="relative z-10 font-normal">BOOK</span>
 
             {/* Subtle bottom border animation with refined timing */}
             <motion.div
-              className={`absolute bottom-0 left-0 h-[0.25px] w-0 group-hover:w-full ${
-                isScrolled ? "bg-elegant-mocha/40" : "bg-white/40"
+              className={`absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full ${
+                isScrolled ? "bg-elegant-mocha/60" : "bg-white/60"
               }`}
-              transition={{ duration: 1, ease: LUXURY_EASING }}
+              transition={{ duration: 0.8, ease: LUXURY_EASING }}
             />
           </Link>
         </motion.nav>
 
-        {/* Perfectly aligned CHANEL-inspired hamburger button */}
+        {/* CHANEL-inspired luxury hamburger button with enhanced accessibility */}
         <button
-          className={`md:hidden relative z-[60] flex items-center justify-center w-12 h-12 focus:outline-none ${
-            isScrolled ? "text-elegant-mocha" : "text-white"
+          className={`md:hidden relative z-[60] flex items-center justify-center w-14 h-14 focus:outline-none focus:ring-1 focus:ring-elegant-mocha/40 rounded-sm ${
+            isScrolled ? "text-luxury-primary" : "text-white text-on-dark"
           }`}
           aria-label="Toggle mobile menu"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <span className="sr-only">Menu</span>
-          <div className="relative w-5 h-5 flex flex-col justify-center items-center transform transition-all duration-500">
+          <div className="relative w-6 h-6 flex flex-col justify-center items-center transform transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]">
+            {/* Enhanced hamburger lines with luxury transitions */}
             <span
-              className={`absolute h-[0.5px] w-5 transform transition-all duration-500 ease-in-out ${
+              className={`absolute h-[1px] w-6 transform transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${
                 isMobileMenuOpen
-                  ? "rotate-45 translate-y-0 bg-elegant-mocha"
-                  : "translate-y-[-4px] bg-current"
+                  ? "rotate-45 translate-y-0 bg-elegant-mocha/90 w-5"
+                  : "translate-y-[-5px] bg-current shadow-sm"
               }`}
             ></span>
             <span
-              className={`absolute h-[0.5px] w-5 transform transition-all duration-500 ease-in-out ${
+              className={`absolute h-[1px] w-4 transform transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${
                 isMobileMenuOpen
-                  ? "opacity-0 translate-x-2 bg-elegant-mocha"
-                  : "opacity-100 bg-current"
+                  ? "opacity-0 translate-x-3 bg-elegant-mocha/90"
+                  : "opacity-100 bg-current shadow-sm"
               }`}
             ></span>
             <span
-              className={`absolute h-[0.5px] w-5 transform transition-all duration-500 ease-in-out ${
+              className={`absolute h-[1px] w-6 transform transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${
                 isMobileMenuOpen
-                  ? "-rotate-45 translate-y-0 bg-elegant-mocha"
-                  : "translate-y-[4px] bg-current"
+                  ? "-rotate-45 translate-y-0 bg-elegant-mocha/90 w-5"
+                  : "translate-y-[5px] bg-current shadow-sm"
               }`}
             ></span>
           </div>
@@ -428,14 +469,18 @@ const Header = () => {
                 >
                   <Link
                     href="/booking"
-                    className="relative group overflow-hidden font-alta tracking-[0.3em] text-xs uppercase border border-elegant-mocha/30 text-elegant-mocha px-10 py-4 transition-all duration-700"
+                    className="relative group overflow-hidden font-alta tracking-[0.15em] text-base uppercase font-normal border border-elegant-mocha/40 text-luxury-primary px-10 py-4 transition-all duration-700"
                     onClick={closeMobileMenu}
                   >
+                    {/* Subtle vertical lines for CHANEL-inspired framing */}
+                    <div className="absolute top-2 left-2 w-[0.5px] h-3 bg-elegant-mocha/30"></div>
+                    <div className="absolute bottom-2 right-2 w-[0.5px] h-3 bg-elegant-mocha/30"></div>
+
                     {/* Button hover effect */}
                     <motion.div
-                      className="absolute inset-0 bg-elegant-mocha/0 group-hover:bg-elegant-mocha/5"
+                      className="absolute inset-0 bg-elegant-mocha/0 group-hover:bg-elegant-mocha/10"
                       initial={false}
-                      transition={{ duration: 0.7, ease: LUXURY_EASING }}
+                      transition={{ duration: 0.8, ease: LUXURY_EASING }}
                     />
 
                     {/* Button text */}
@@ -443,7 +488,7 @@ const Header = () => {
 
                     {/* Subtle bottom border animation */}
                     <motion.div
-                      className="absolute bottom-0 left-0 h-[0.5px] w-0 bg-elegant-mocha/40 group-hover:w-full"
+                      className="absolute bottom-0 left-0 h-[1px] w-0 bg-elegant-mocha/60 group-hover:w-full"
                       transition={{ duration: 0.8, ease: LUXURY_EASING }}
                     />
                   </Link>
