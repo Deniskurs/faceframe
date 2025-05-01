@@ -7,7 +7,16 @@ import React, {
   ReactNode,
   CSSProperties,
 } from "react";
-import { motion, useScroll, useTransform, MotionStyle } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  MotionStyle,
+  useSpring,
+} from "framer-motion";
+
+// CHANEL-inspired luxury easing curve
+const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
 
 interface ParallaxContainerProps {
   children: ReactNode;
@@ -20,11 +29,15 @@ interface ParallaxContainerProps {
   style?: CSSProperties;
   overflow?: "visible" | "hidden" | "clip";
   responsive?: boolean;
+  intensity?: "ultra-subtle" | "subtle" | "moderate" | "standard";
+  springEffect?: boolean;
+  offset?: ["start end", "end start"];
+  perspective?: boolean | number;
 }
 
 export default function ParallaxContainer({
   children,
-  speed = 0.2,
+  speed,
   direction = "up",
   className = "",
   scale = false,
@@ -33,7 +46,22 @@ export default function ParallaxContainer({
   style = {},
   overflow = "hidden",
   responsive = true,
+  intensity = "subtle",
+  springEffect = false,
+  offset = ["start end", "end start"],
+  perspective = false,
 }: ParallaxContainerProps) {
+  // Refined intensity levels for more subtle, CHANEL-like animations
+  const intensityMap = {
+    "ultra-subtle": 0.05,
+    subtle: 0.1,
+    moderate: 0.15,
+    standard: 0.2,
+  };
+
+  // Use the specified speed or the intensity-based speed
+  const effectiveSpeed = speed ?? intensityMap[intensity];
+
   // State to track if we should disable effects (on mobile)
   const [disableEffects, setDisableEffects] = useState(false);
 
@@ -55,46 +83,59 @@ export default function ParallaxContainer({
     // Cleanup
     return () => window.removeEventListener("resize", checkMobileView);
   }, [responsive]);
+
   const ref = useRef<HTMLDivElement>(null);
 
-  // Define scroll progress
+  // Define scroll progress with custom offset
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset,
   });
 
-  // Pre-define all transforms to avoid conditional hook calls
-  const yUp = useTransform(scrollYProgress, [0, 1], [`${speed * 100}%`, "0%"]);
+  // Fix for conditional hook warning - always call hooks, but only use the result when needed
+  const springY = useSpring(scrollYProgress, { stiffness: 50, damping: 20 });
+  const effectiveScrollY = springEffect ? springY : scrollYProgress;
+
+  // Pre-define all transforms with fixed easing
+  const yUp = useTransform(
+    effectiveScrollY,
+    [0, 1],
+    [`${effectiveSpeed * 100}%`, "0%"]
+  );
+
   const yDown = useTransform(
-    scrollYProgress,
+    effectiveScrollY,
     [0, 1],
-    ["0%", `${speed * 100}%`]
+    ["0%", `${effectiveSpeed * 100}%`]
   );
+
   const xLeft = useTransform(
-    scrollYProgress,
+    effectiveScrollY,
     [0, 1],
-    [`${speed * 100}%`, "0%"]
+    [`${effectiveSpeed * 100}%`, "0%"]
   );
+
   const xRight = useTransform(
-    scrollYProgress,
+    effectiveScrollY,
     [0, 1],
-    ["0%", `${speed * 100}%`]
+    ["0%", `${effectiveSpeed * 100}%`]
   );
 
-  // Scale, rotation and opacity transforms
+  // More refined scale, rotation and opacity transforms
   const scaleValue = useTransform(
-    scrollYProgress,
+    effectiveScrollY,
     [0, 1],
-    [typeof scale === "number" ? 1 - scale : 0.9, 1]
+    [typeof scale === "number" ? 1 - scale * 0.5 : 0.95, 1] // More subtle scaling
   );
 
-  const rotateValue = useTransform(scrollYProgress, [0, 1], [0, rotation]);
+  const rotateValue = useTransform(effectiveScrollY, [0, 1], [0, rotation]);
 
   const [opacityStart, opacityEnd] = Array.isArray(opacity)
     ? opacity
-    : [0.5, 1];
+    : [0.7, 1]; // More subtle opacity change
+
   const opacityValue = useTransform(
-    scrollYProgress,
+    effectiveScrollY,
     [0, 1],
     [opacityStart, opacityEnd]
   );
@@ -128,6 +169,16 @@ export default function ParallaxContainer({
     if (opacity !== false) {
       motionStyle.opacity = opacityValue;
     }
+
+    // Apply perspective if needed (CHANEL-inspired 3D effect)
+    if (perspective !== false) {
+      const perspectiveValue =
+        typeof perspective === "number" ? perspective : 1000;
+      motionStyle.perspective = perspectiveValue;
+      // Apply transform style using a more specific type
+      (motionStyle as Record<string, string | number>).transformStyle =
+        "preserve-3d";
+    }
   }
 
   // Define the overflow class based on the prop
@@ -144,7 +195,11 @@ export default function ParallaxContainer({
       className={`relative ${overflowClass} ${className}`}
       style={style}
     >
-      <motion.div style={motionStyle} className="w-full h-full">
+      <motion.div
+        style={motionStyle}
+        className="w-full h-full transition-all duration-700"
+        transition={{ duration: 0.7, ease: LUXURY_EASING }}
+      >
         {children}
       </motion.div>
     </motion.div>

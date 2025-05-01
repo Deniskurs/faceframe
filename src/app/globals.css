@@ -2,10 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font declarations */
+@font-face {
+  font-family: "Alta";
+  src: url("/fonts/Alta-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alta";
+  src: url("/fonts/Alta-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alta";
+  src: url("/fonts/Alta-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CHANEL-Dior Luxury Typography System */
 @layer base {
   html {
     scroll-behavior: smooth;
     @apply text-elegant-mocha;
+    font-size: 16px; /* Base font size */
   }
 
   body {
@@ -13,39 +40,73 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* More balanced letter-spacing for body text */
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+    color: rgba(127, 85, 57, 0.95); /* Slightly increased contrast */
   }
 
+  /* Typography System with balanced tracking */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-alice tracking-wide leading-tight;
+    @apply font-alice leading-tight;
+    letter-spacing: 0.1em; /* Reduced for better readability */
+    font-weight: 400; /* Increased weight for better legibility */
   }
 
+  /* Refined typographic scale with optimized spacing */
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl font-normal;
+    @apply text-3xl md:text-4xl lg:text-5xl;
+    letter-spacing: 0.12em; /* CHANEL-accurate tracking */
+    line-height: 1.3;
+    @apply mb-6;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl font-normal;
+    @apply text-2xl md:text-3xl lg:text-4xl;
+    letter-spacing: 0.1em;
+    line-height: 1.35;
+    @apply mb-5;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl font-normal;
+    @apply text-xl md:text-2xl;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    @apply mb-4;
   }
 
   h4 {
-    @apply text-xl md:text-2xl font-normal;
+    @apply text-lg md:text-xl;
+    letter-spacing: 0.07em;
+    line-height: 1.45;
+    @apply mb-3;
   }
 
+  /* Improved paragraph styling for readability */
   p {
-    @apply leading-relaxed font-alta;
+    @apply font-alta;
+    font-weight: 400; /* Standard weight for better readability */
+    letter-spacing: 0.02em; /* Reduced for better word shapes */
+    line-height: 1.7;
+    @apply mb-4 max-w-prose; /* Better paragraph flow */
+  }
+
+  /* Small text adjustments */
+  small,
+  .text-small {
+    font-size: 0.875rem; /* 14px - Equivalent to text-sm */
+    letter-spacing: 0.01em;
+    line-height: 1.5;
   }
 
   a {
-    @apply transition-colors duration-300;
+    @apply transition-all duration-700;
+    letter-spacing: 0.08em;
   }
 
   /* Focus states for accessibility */
@@ -83,64 +144,109 @@
 }
 
 @layer components {
-  /* Button component styles */
+  /* CHANEL-Inspired Button System */
   .btn {
-    @apply inline-flex items-center justify-center rounded-md text-center font-alta transition-all duration-300 transform;
+    @apply inline-flex items-center justify-center text-center font-alta uppercase;
+    letter-spacing: 0.15em; /* Reduced for better readability */
+    font-weight: 400; /* Improved legibility */
+    transition: all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    position: relative;
+    overflow: hidden;
   }
 
-  .btn:hover {
-    @apply scale-[1.02];
-  }
-
-  .btn:active {
-    @apply scale-[0.98];
-  }
-
+  /* Button Treatments */
   .btn-primary {
-    @apply bg-elegant-mocha text-white hover:bg-deep-bronze px-6 py-3 shadow-md hover:shadow-lg;
+    @apply bg-elegant-mocha text-white border border-elegant-mocha px-8 py-3;
+  }
+
+  .btn-primary:hover {
+    @apply bg-transparent text-elegant-mocha;
   }
 
   .btn-secondary {
-    @apply bg-warm-beige text-elegant-mocha hover:bg-soft-blush px-6 py-3 shadow-sm hover:shadow-md;
+    @apply bg-warm-beige text-elegant-mocha border border-warm-beige px-8 py-3;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-transparent;
   }
 
   .btn-outline {
-    @apply border-2 border-elegant-mocha text-elegant-mocha hover:bg-elegant-mocha hover:text-white px-6 py-[10px];
+    @apply border border-elegant-mocha text-elegant-mocha bg-transparent px-8 py-3;
   }
 
+  .btn-outline:hover {
+    @apply bg-elegant-mocha text-white;
+  }
+
+  /* Refined Button Sizing */
   .btn-sm {
-    @apply text-sm px-4 py-2;
+    @apply text-xs px-6 py-2;
+    letter-spacing: 0.15em;
   }
 
   .btn-lg {
-    @apply text-lg px-8 py-4;
+    @apply text-sm px-10 py-4;
+    letter-spacing: 0.25em;
   }
 
-  /* Containers */
+  /* Contextual Button Styles */
+  .btn-on-light {
+    @apply bg-elegant-mocha text-white border border-elegant-mocha;
+  }
+
+  .btn-on-light:hover {
+    @apply bg-transparent text-elegant-mocha;
+  }
+
+  .btn-on-dark {
+    @apply bg-white text-elegant-mocha border border-white;
+  }
+
+  .btn-on-dark:hover {
+    @apply bg-transparent text-white;
+  }
+
+  /* CHANEL-Inspired Layout System */
   .luxury-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-10;
   }
 
+  /* Golden Ratio Spacing (1:1.618) */
   .content-section {
-    @apply py-12 md:py-16 lg:py-24;
+    @apply py-16 md:py-24 lg:py-32;
   }
 
-  /* Card styles */
+  .content-section-sm {
+    @apply py-10 md:py-16;
+  }
+
+  /* Refined Card System */
   .luxury-card {
-    @apply bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-md overflow-hidden;
+    @apply bg-white border border-soft-blush/10 overflow-hidden;
+    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
-  /* Text effects */
+  .luxury-card:hover {
+    @apply border-elegant-mocha/20;
+    box-shadow: 0 10px 30px -15px rgba(127, 85, 57, 0.07);
+  }
+
+  /* Visual Effects */
   .text-shadow-sm {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   }
 
-  /* Glass effect */
+  /* CHANEL-Inspired Glass Effect */
   .glass-effect {
-    @apply bg-white bg-opacity-60 backdrop-blur-lg border border-white border-opacity-20 shadow-lg;
+    @apply backdrop-blur-sm bg-white/70 border border-white/10;
   }
 
-  /* Animation utility classes */
+  /* Sophisticated Animation System */
+  .transition-chanel {
+    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
   .fade-in {
     @apply animate-fade-in;
   }
@@ -149,22 +255,111 @@
     @apply animate-fade-up;
   }
 
-  .fade-right {
-    @apply animate-fade-right;
-  }
-
-  /* Elegant divider */
+  /* Elegant Divider System */
   .elegant-divider {
-    @apply h-px bg-gradient-to-r from-transparent via-warm-beige to-transparent my-8 md:my-12;
+    @apply h-[1px] my-12 md:my-20;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(176, 137, 104, 0.2) 50%,
+      transparent 100%
+    );
   }
 
-  /* Image styles */
-  .image-zoom-container {
-    @apply overflow-hidden rounded-md;
+  .elegant-divider-vertical {
+    @apply w-[1px] mx-6 h-full;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(176, 137, 104, 0.2) 50%,
+      transparent 100%
+    );
+  }
+
+  /* Refined Image Treatment */
+  .image-container {
+    @apply overflow-hidden;
   }
 
   .image-zoom {
-    @apply transition-transform duration-700 ease-in-out hover:scale-105;
+    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .image-zoom:hover {
+    transform: scale(1.03);
+  }
+
+  /* Section Title Styling */
+  .section-title {
+    @apply font-alice uppercase relative mb-16;
+    letter-spacing: 0.25em;
+  }
+
+  .section-title::after {
+    content: "";
+    @apply absolute left-0 bottom-0 h-[1px] w-12 bg-elegant-mocha mt-2;
+  }
+
+  /* Subtle Hover States */
+  .hover-lift {
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+      box-shadow 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px rgba(127, 85, 57, 0.1);
+  }
+
+  /* Improved text contrast utility classes (replaces opacity modifiers) */
+  .text-luxury-primary {
+    color: rgba(127, 85, 57, 1); /* Full opacity elegant-mocha */
+  }
+
+  .text-luxury-secondary {
+    color: rgba(127, 85, 57, 0.9); /* High contrast but slightly softer */
+  }
+
+  .text-luxury-subtle {
+    color: rgba(
+      127,
+      85,
+      57,
+      0.8
+    ); /* For secondary content, still very readable */
+  }
+
+  .text-luxury-muted {
+    color: rgba(127, 85, 57, 0.7); /* For decorative elements only */
+  }
+
+  /* Text on image utilities */
+  .text-on-image {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-on-dark {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 400; /* Ensure text on dark backgrounds is always readable */
+  }
+
+  /* Mobile typography optimizations */
+  @media (max-width: 640px) {
+    p {
+      letter-spacing: 0.01em; /* Tighter spacing for smaller screens */
+      line-height: 1.6; /* Slightly reduced line height for mobile */
+    }
+
+    h1,
+    h2,
+    h3 {
+      letter-spacing: 0.08em; /* Reduce letter-spacing further on mobile */
+    }
+
+    .luxury-paragraph {
+      font-size: 1rem; /* Ensure paragraphs are readable on mobile */
+      margin-bottom: 1rem; /* Proper spacing between paragraphs */
+    }
   }
 }
 
@@ -238,5 +433,14 @@
 
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Improved mobile text sizing */
+  html {
+    font-size: 15px; /* Slightly smaller base for better mobile fit */
+  }
+
+  .mobile-text-boost {
+    font-size: 1.05em; /* Boost critical content on mobile */
   }
 }

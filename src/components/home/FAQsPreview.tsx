@@ -7,6 +7,9 @@ import FadeInSection from "../shared/FadeInSection";
 import { FAQ } from "../../types";
 import faqService from "../../services/faqService";
 
+// CHANEL-inspired luxury easing curve
+const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
+
 interface AccordionItemProps {
   faq: FAQ;
   isOpen: boolean;
@@ -24,47 +27,34 @@ const AccordionItem = ({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="border border-soft-blush rounded-lg overflow-hidden"
-      style={{ borderColor: "#E6CCB2" }}
+      transition={{
+        duration: 0.7,
+        delay: index * 0.1,
+        ease: LUXURY_EASING,
+      }}
+      className={`border border-soft-blush/20 bg-white/80 overflow-hidden transition-all duration-700 mb-4`}
     >
-      {/* Question Header */}
+      {/* Question Header with refined styling */}
       <button
-        className={`w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none transition-colors duration-300 ${
-          isOpen
-            ? "bg-soft-blush bg-opacity-30"
-            : "hover:bg-soft-blush hover:bg-opacity-10"
-        }`}
+        className={`w-full px-8 py-5 text-left flex justify-between items-center focus:outline-none transition-all duration-700`}
         onClick={toggleAccordion}
         aria-expanded={isOpen}
-        style={{
-          backgroundColor: isOpen ? "rgba(230, 204, 178, 0.2)" : "transparent",
-        }}
       >
-        <span
-          className="font-alice text-lg md:text-xl"
-          style={{ color: "#7F5539" }}
-        >
+        <span className="font-alice text-base md:text-lg tracking-wide text-elegant-mocha pr-6">
           {faq.question}
         </span>
-        <span className="ml-4 flex-shrink-0 transition-transform duration-300 transform">
-          <svg
-            className={`w-6 h-6 transition-transform duration-300 ${
-              isOpen ? "rotate-45" : "rotate-0"
+
+        {/* Minimalist plus/minus */}
+        <div className="relative w-6 h-6 flex-shrink-0">
+          <div
+            className={`absolute top-[11px] w-6 h-[1px] bg-elegant-mocha transition-all duration-500`}
+          ></div>
+          <div
+            className={`absolute left-[11px] w-[1px] h-6 bg-elegant-mocha transition-all duration-500 ${
+              isOpen ? "opacity-0" : "opacity-100"
             }`}
-            style={{ color: "#7F5539" }}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            />
-          </svg>
-        </span>
+          ></div>
+        </div>
       </button>
 
       {/* Answer Panel with Animation */}
@@ -74,10 +64,11 @@ const AccordionItem = ({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+            transition={{ duration: 0.7, ease: LUXURY_EASING }}
           >
-            <div className="px-6 pb-4 pt-2">
-              <p className="font-alta" style={{ color: "#B08968" }}>
+            <div className="px-8 pb-6 pt-0">
+              <div className="h-[1px] w-full bg-soft-blush/20 mb-5"></div>
+              <p className="font-alta text-muted-sand text-sm tracking-wide leading-relaxed">
                 {faq.answer}
               </p>
             </div>
@@ -88,7 +79,11 @@ const AccordionItem = ({
   );
 };
 
-const FAQsPreview = () => {
+interface FAQsPreviewProps {
+  hideTitle?: boolean;
+}
+
+const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -122,44 +117,58 @@ const FAQsPreview = () => {
   };
 
   return (
-    <FadeInSection>
-      <section
-        className="py-16 md:py-20 px-4"
-        style={{ backgroundColor: "#EDE0D4" }}
-      >
+    <FadeInSection intensity="subtle">
+      <section className="py-24 md:py-32 px-6 bg-light-cream relative">
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <h2
-              className="font-alice text-3xl md:text-4xl mb-4"
-              style={{ color: "#7F5539" }}
-            >
-              Common Questions
-            </h2>
-            <p className="font-alta" style={{ color: "#B08968" }}>
-              Everything you need to know before your luxury treatment.
-            </p>
-          </div>
+          {!hideTitle && (
+            <div className="text-center mb-20">
+              <motion.h2
+                className="section-title inline-block relative font-alice text-2xl md:text-3xl tracking-[0.15em] text-elegant-mocha uppercase"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: LUXURY_EASING }}
+                viewport={{ once: true }}
+              >
+                FREQUENTLY ASKED
+                <span className="block h-[1px] w-10 mx-auto bg-elegant-mocha mt-4"></span>
+              </motion.h2>
 
-          {/* Loading State */}
+              <motion.p
+                className="font-alta text-muted-sand max-w-xl mx-auto mt-8 tracking-wide leading-relaxed"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASING }}
+                viewport={{ once: true }}
+              >
+                Essential information for your beauty journey with us
+              </motion.p>
+            </div>
+          )}
+
+          {/* Refined Loading State */}
           {loading && (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 border-4 border-elegant-mocha border-t-transparent rounded-full animate-spin mx-auto"></div>
-              <p className="mt-4 font-alta" style={{ color: "#7F5539" }}>
-                Loading...
+            <div className="text-center py-20">
+              <div className="relative w-12 h-12 mx-auto">
+                <div className="absolute inset-0 border border-elegant-mocha/30 border-t-elegant-mocha animate-spin"></div>
+              </div>
+              <p className="mt-6 font-alta text-xs tracking-wider uppercase text-elegant-mocha/70">
+                Loading questions
               </p>
             </div>
           )}
 
           {/* Error State */}
           {error && (
-            <div className="text-center py-12">
-              <p className="font-alta text-red-500">{error}</p>
+            <div className="text-center py-20">
+              <p className="font-alta text-sm tracking-wide text-deep-bronze">
+                {error}
+              </p>
             </div>
           )}
 
-          {/* FAQ Accordion */}
-          {!loading && !error && (
-            <div className="space-y-4">
+          {/* FAQ Accordion with refined spacing */}
+          {!loading && !error && faqs.length > 0 && (
+            <div className="space-y-6">
               {faqs.map((faq, index) => (
                 <AccordionItem
                   key={faq.id}
@@ -174,46 +183,28 @@ const FAQsPreview = () => {
 
           {/* Empty State */}
           {!loading && !error && faqs.length === 0 && (
-            <div className="text-center py-12">
-              <p className="font-alta" style={{ color: "#7F5539" }}>
-                No FAQs available at the moment.
+            <div className="text-center py-20 border border-soft-blush/10 bg-white">
+              <p className="font-alta text-sm tracking-wide text-elegant-mocha/70">
+                No questions available at the moment.
               </p>
             </div>
           )}
 
-          {/* View All Link */}
-          <div className="mt-10 text-center">
-            <Link href="/faq" className="inline-block">
-              <motion.span
-                className="font-alta text-lg border-b-2 pb-1 transition-colors duration-300"
-                style={{
-                  color: "#7F5539",
-                  borderColor: "#7F5539",
-                }}
-                whileHover={{
-                  x: 5,
-                  transition: { duration: 0.2 },
-                  borderColor: "#9C6644",
-                }}
-              >
-                View All Questions
-                <svg
-                  className="w-4 h-4 inline-block ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </motion.span>
+          {/* CHANEL-inspired minimal button */}
+          <motion.div
+            className="mt-24 text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
+            viewport={{ once: true }}
+          >
+            <Link
+              href="/faq"
+              className="font-alta tracking-[0.2em] text-sm uppercase text-elegant-mocha hover:text-deep-bronze border-b border-elegant-mocha/30 hover:border-deep-bronze pb-1 transition-all duration-700"
+            >
+              VIEW ALL QUESTIONS
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
     </FadeInSection>

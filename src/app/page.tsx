@@ -30,48 +30,45 @@ export default function Home() {
         paragraphs={founderParagraphs}
       />
 
-      {/* Decorative divider before services */}
-      <BrandedDivider
-        style="gradient"
-        height="sm"
-        text="PREMIUM SERVICES"
-        className="my-6 md:my-8"
-      />
+      {/* Decorative divider before services - refined spacing */}
+      <div className="py-12 md:py-20">
+        <BrandedDivider style="gradient" height="sm" text="PREMIUM SERVICES" />
+      </div>
 
       {/* Services preview section */}
-      <ServicesPreview />
+      <ServicesPreview hideTitle={true} />
 
-      {/* Decorative divider before gallery */}
-      <BrandedDivider
-        style="image"
-        height="md"
-        overlay={true}
-        overlayOpacity={0.3}
-        text="TRANSFORMATIONS"
-        className="my-6 md:my-8"
-        image="/images/gallery/image13.webp"
-        parallax={true}
-      />
+      {/* Decorative divider before gallery - refined spacing */}
+      <div className="py-12 md:py-20">
+        <BrandedDivider
+          style="image"
+          height="sm"
+          overlay={true}
+          overlayOpacity={0.3}
+          text="TRANSFORMATIONS"
+          image="/images/gallery/image13.webp"
+          parallax={true}
+        />
+      </div>
 
       {/* Gallery teaser section */}
-      <GalleryTeaser />
+      <GalleryTeaser hideTitle={true} />
 
-      {/* Decorative divider before testimonials */}
-      <BrandedDivider style="simple" className="my-6 md:my-12" />
+      {/* Decorative divider before testimonials - refined spacing */}
+      <div className="py-12 md:py-20">
+        <BrandedDivider style="simple" />
+      </div>
 
       {/* Testimonials section */}
       <TestimonialCarousel />
 
-      {/* Decorative divider before FAQs */}
-      <BrandedDivider
-        style="gradient"
-        height="sm"
-        text="COMMON QUESTIONS"
-        className="my-6 md:my-8"
-      />
+      {/* Decorative divider before FAQs - refined spacing */}
+      <div className="py-12 md:py-20">
+        <BrandedDivider style="gradient" height="sm" text="COMMON QUESTIONS" />
+      </div>
 
       {/* FAQs preview section */}
-      <FAQsPreview />
+      <FAQsPreview hideTitle={true} />
 
       {/* Final booking CTA */}
       <BookingCTA

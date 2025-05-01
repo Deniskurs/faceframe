@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import GlassMorphicCard from "../shared/GlassMorphicCard";
 import FadeInSection from "../shared/FadeInSection";
 import { Testimonial } from "../../types";
 import testimonialService from "../../services/testimonialService";
+
+// CHANEL-inspired luxury easing curve
+const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
 
 const TestimonialCarousel = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -35,13 +37,12 @@ const TestimonialCarousel = () => {
     fetchTestimonials();
   }, []);
 
-  // Handle automatic sliding
+  // Handle automatic sliding with refined timing
   useEffect(() => {
-    // Only start auto-sliding when we have testimonials and not paused
     if (testimonials.length > 0 && !isPaused && !loading) {
       intervalRef.current = setInterval(() => {
         setCurrent((prev) => (prev + 1) % testimonials.length);
-      }, 7000); // 7 seconds per testimonial - optimal time for reading
+      }, 7500); // Slightly longer for luxury pacing
     }
 
     return () => {
@@ -75,55 +76,45 @@ const TestimonialCarousel = () => {
     if (testimonials.length > 0) {
       intervalRef.current = setInterval(() => {
         setCurrent((prev) => (prev + 1) % testimonials.length);
-      }, 7000);
+      }, 7500);
     }
   };
 
-  // Star animation variants
-  const starContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const starVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.3 },
-    },
-  };
-
   return (
-    <FadeInSection>
-      <section className="py-12 md:py-16 px-4 relative overflow-hidden bg-white">
-        <div className="max-w-4xl mx-auto relative">
-          <h2
-            className="font-alice text-2xl md:text-4xl text-center mb-8 md:mb-12"
-            style={{ color: "#7F5539" }}
-          >
-            Client Experiences
-          </h2>
+    <FadeInSection intensity="subtle">
+      <section className="py-24 md:py-32 px-6 bg-light-cream relative overflow-hidden">
+        <div className="max-w-5xl mx-auto relative">
+          <div className="text-center mb-20">
+            <motion.h2
+              className="section-title inline-block relative font-alice text-2xl md:text-3xl tracking-[0.15em] text-elegant-mocha uppercase"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: LUXURY_EASING }}
+              viewport={{ once: true }}
+            >
+              CLIENT VOICES
+              <span className="block h-[1px] w-10 mx-auto bg-elegant-mocha mt-4"></span>
+            </motion.h2>
+          </div>
 
-          {/* Loading State */}
+          {/* Refined Loading State */}
           {loading && (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 border-4 border-elegant-mocha border-t-transparent rounded-full animate-spin mx-auto"></div>
-              <p className="mt-4 font-alta" style={{ color: "#7F5539" }}>
-                Loading testimonials...
+            <div className="text-center py-20">
+              <div className="relative w-12 h-12 mx-auto">
+                <div className="absolute inset-0 border border-elegant-mocha/30 border-t-elegant-mocha animate-spin"></div>
+              </div>
+              <p className="mt-6 font-alta text-xs tracking-wider uppercase text-elegant-mocha/70">
+                Loading testimonials
               </p>
             </div>
           )}
 
           {/* Error State */}
           {error && (
-            <div className="text-center py-12">
-              <p className="font-alta text-red-500">{error}</p>
+            <div className="text-center py-20">
+              <p className="font-alta text-sm tracking-wide text-deep-bronze">
+                {error}
+              </p>
             </div>
           )}
 
@@ -133,171 +124,115 @@ const TestimonialCarousel = () => {
               className="relative"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              onTouchStart={() => setIsPaused(true)}
-              onTouchEnd={() => setIsPaused(false)}
             >
               <AnimatePresence mode="wait">
-                <GlassMorphicCard
+                <motion.div
                   key={current}
-                  className="p-8 md:p-12"
-                  intensity="medium"
-                  hoverEffect={false}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.7, ease: LUXURY_EASING }}
+                  className="bg-white p-12 md:p-16 border border-soft-blush/10"
                 >
-                  {/* Quote Mark */}
-                  <div className="absolute top-6 left-8 opacity-15">
-                    <svg
-                      width="48"
-                      height="48"
-                      viewBox="0 0 24 24"
-                      fill="#7F5539"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M10,7L8,11H11V17H5V11L7,7H10M18,7L16,11H19V17H13V11L15,7H18Z" />
-                    </svg>
-                  </div>
-
-                  {/* Star Rating */}
-                  <motion.div
-                    className="flex mb-4 justify-center"
-                    variants={starContainerVariants}
-                    initial="hidden"
-                    animate="visible"
-                  >
-                    {[...Array(testimonials[current]?.rating || 5)].map(
-                      (_, i) => (
-                        <motion.span
+                  {/* Refined Quote Layout */}
+                  <div className="max-w-2xl mx-auto">
+                    {/* Elegant rating display */}
+                    <div className="mb-10 flex justify-center space-x-2">
+                      {[...Array(5)].map((_, i) => (
+                        <div
                           key={i}
-                          variants={starVariants}
-                          className="text-amber-500 mx-0.5"
-                        >
-                          ⭐
-                        </motion.span>
-                      )
-                    )}
-                  </motion.div>
+                          className={`w-2 h-2 rounded-full ${
+                            i < (testimonials[current]?.rating || 5)
+                              ? "bg-elegant-mocha"
+                              : "bg-soft-blush"
+                          }`}
+                        />
+                      ))}
+                    </div>
 
-                  {/* Quote */}
-                  <p
-                    className="text-center font-alta text-lg md:text-xl mb-6"
-                    style={{ color: "#7F5539" }}
-                  >
-                    &ldquo;{testimonials[current]?.quote}&rdquo;
-                  </p>
+                    {/* CHANEL-inspired decorative elements */}
+                    <div className="relative">
+                      <div className="absolute -top-6 left-0 h-[1px] w-10 bg-soft-blush/60"></div>
 
-                  {/* Client Info */}
-                  <div className="text-center">
-                    <p
-                      className="font-alice text-lg"
-                      style={{ color: "#B08968" }}
-                    >
-                      {testimonials[current]?.name}
-                      <span className="mx-1">·</span>
-                      <span
-                        className="text-sm font-alta"
-                        style={{ color: "#B08968" }}
-                      >
+                      {/* Quote Content */}
+                      <p className="font-alice text-lg md:text-xl text-elegant-mocha/90 text-center leading-relaxed tracking-wide italic mb-10">
+                        &ldquo;{testimonials[current]?.quote}&rdquo;
+                      </p>
+
+                      <div className="absolute -bottom-6 right-0 h-[1px] w-10 bg-soft-blush/60"></div>
+                    </div>
+
+                    {/* Client Info with refined typography */}
+                    <div className="mt-12 text-center">
+                      <p className="font-alta text-sm uppercase tracking-[0.15em] text-muted-sand mb-1">
+                        {testimonials[current]?.name}
+                      </p>
+                      <p className="font-alta text-xs tracking-wide text-muted-sand/80">
                         {testimonials[current]?.service_type}
-                      </span>
-                    </p>
-
-                    {/* Verified Badge */}
-                    <div className="flex items-center justify-center mt-2">
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        style={{ color: "#4CAF50" }}
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                      <span className="text-xs" style={{ color: "#B08968" }}>
-                        Verified Client
-                      </span>
+                      </p>
                     </div>
                   </div>
-                </GlassMorphicCard>
+                </motion.div>
               </AnimatePresence>
 
-              {/* Navigation Arrows - Only show when we have testimonials */}
+              {/* CHANEL-inspired minimal navigation */}
               {testimonials.length > 1 && (
                 <>
+                  {/* Minimalist navigation arrows */}
                   <button
-                    className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-2 md:translate-x-0 bg-white w-10 h-10 rounded-full shadow-md flex items-center justify-center focus:outline-none opacity-0 hover:opacity-100 transition-opacity duration-300 z-10"
+                    className="absolute top-1/2 -left-4 md:-left-8 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center focus:outline-none text-elegant-mocha/40 hover:text-elegant-mocha transition-colors duration-300"
                     onClick={handlePrev}
                     aria-label="Previous testimonial"
                   >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M15 19L8 12L15 5"
-                        stroke="#7F5539"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <div className="w-8 h-[1px] bg-current rotate-[135deg]"></div>
+                    <div className="w-8 h-[1px] bg-current rotate-45 -mt-[1px]"></div>
                   </button>
 
                   <button
-                    className="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-2 md:translate-x-0 bg-white w-10 h-10 rounded-full shadow-md flex items-center justify-center focus:outline-none opacity-0 hover:opacity-100 transition-opacity duration-300 z-10"
+                    className="absolute top-1/2 -right-4 md:-right-8 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center focus:outline-none text-elegant-mocha/40 hover:text-elegant-mocha transition-colors duration-300"
                     onClick={handleNext}
                     aria-label="Next testimonial"
                   >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9 5L16 12L9 19"
-                        stroke="#7F5539"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <div className="w-8 h-[1px] bg-current rotate-45"></div>
+                    <div className="w-8 h-[1px] bg-current rotate-[315deg] -mt-[1px]"></div>
                   </button>
-                </>
-              )}
 
-              {/* Dot Indicators - Only show when we have multiple testimonials */}
-              {testimonials.length > 1 && (
-                <div className="flex justify-center mt-8">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToSlide(index)}
-                      className={`mx-1 rounded-full transition-all duration-300 focus:outline-none ${
-                        current === index ? "w-4" : "w-2 h-2"
-                      }`}
-                      style={{
-                        backgroundColor:
-                          current === index ? "#7F5539" : "#DDB892",
-                        height: current === index ? "8px" : "8px",
-                      }}
-                      aria-label={`Go to testimonial ${index + 1}`}
-                    />
-                  ))}
-                </div>
+                  {/* Minimal dot indicators */}
+                  <div className="flex justify-center mt-12 space-x-4">
+                    {testimonials.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => goToSlide(index)}
+                        className="relative focus:outline-none group"
+                        aria-label={`Go to testimonial ${index + 1}`}
+                      >
+                        <div
+                          className={`w-10 h-[1px] bg-soft-blush transition-all duration-700 ${
+                            current === index
+                              ? "bg-elegant-mocha"
+                              : "group-hover:bg-elegant-mocha/50"
+                          }`}
+                        ></div>
+
+                        {current === index && (
+                          <motion.div
+                            className="absolute -top-1 left-0 w-2 h-2 bg-elegant-mocha rounded-full"
+                            layoutId="testimonialIndicator"
+                            transition={{ duration: 0.6, ease: LUXURY_EASING }}
+                          />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           )}
 
-          {/* Empty State - No testimonials */}
+          {/* Empty State - Refined presentation */}
           {!loading && !error && testimonials.length === 0 && (
-            <div className="text-center py-12">
-              <p className="font-alta" style={{ color: "#7F5539" }}>
+            <div className="text-center py-20 border border-soft-blush/10 bg-white">
+              <p className="font-alta text-sm tracking-wide text-elegant-mocha/70">
                 No testimonials available at the moment.
               </p>
             </div>

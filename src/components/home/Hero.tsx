@@ -3,179 +3,385 @@
 import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+import useParallaxEffect from "@/utils/animations/useParallaxEffect";
+import useTextAnimation from "@/utils/animations/useTextAnimation";
+import GlassMorphicCard from "../shared/GlassMorphicCard";
+
+// CHANEL-inspired luxury easing curves
+const LUXURY_EASING = [0.19, 1, 0.22, 1]; // Refined cubic-bezier
 
 const Hero = () => {
+  // Refs for various elements
   const heroRef = useRef<HTMLElement>(null);
-  const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
+  const backgroundRef = useRef<HTMLDivElement>(null);
 
-  // Parallax effect on mouse move
+  // Refined mouse position values for subtle spotlight effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springMouseX = useSpring(mouseX, { stiffness: 30, damping: 25 }); // More gentle spring physics
+  const springMouseY = useSpring(mouseY, { stiffness: 30, damping: 25 });
+
+  // Track mouse for spotlight effect
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!heroRef.current) return;
-
-      const { left, top, width, height } =
-        heroRef.current.getBoundingClientRect();
-      const x = (e.clientX - left) / width - 0.5;
-      const y = (e.clientY - top) / height - 0.5;
-
-      setMousePosition({ x, y });
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+  // More refined parallax effect
+  const { handleMouseMove } = useParallaxEffect(
+    backgroundRef as React.RefObject<HTMLElement>,
+    {
+      intensity: 5, // Even more subtle for a luxury feel
+      scale: true,
+      reverse: true,
+      easing: `cubic-bezier(${LUXURY_EASING.join(",")})`,
+    }
+  );
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  // Multi-layer scroll-based parallax effects
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -30]);
+
+  // Split title into two lines for more CHANEL-like presentation
+  const titleLine1Animation = useTextAnimation("F A C E F R A M E", {
+    type: "character",
+    staggerDelay: 0.1, // More deliberate reveal
+    delay: 0.7,
+    ease: LUXURY_EASING,
+  });
+
+  const titleLine2Animation = useTextAnimation("B E A U T Y", {
+    type: "character",
+    staggerDelay: 0.1,
+    delay: 0.9,
+    ease: LUXURY_EASING,
+  });
+
+  const subtitleAnimation = useTextAnimation("LUXURY BEAUTY EXPERIENCES", {
+    type: "word",
+    staggerDelay: 0.1,
+    delay: 1.7, // Longer delay for hierarchy
+    ease: LUXURY_EASING,
+  });
+
+  // Define proper types for animation variants
+  type AnimationVariants = {
+    hidden: { opacity: number; y?: number };
     visible: {
-      opacity: 1,
+      opacity: number;
+      y?: number;
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
+        staggerChildren?: number;
+        delayChildren?: number;
+        type?: string;
+        damping?: number;
+        stiffness?: number;
+      };
+    };
   };
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.19, 1.0, 0.22, 1.0],
-      },
-    },
+  // Extract the animation variants we need with proper typing
+  const line1Animation = titleLine1Animation as {
+    containerVariants?: AnimationVariants;
+    childVariants?: AnimationVariants;
+    letters?: string[];
+    isAnimating?: boolean;
+  };
+
+  const line2Animation = titleLine2Animation as {
+    containerVariants?: AnimationVariants;
+    childVariants?: AnimationVariants;
+    letters?: string[];
+    isAnimating?: boolean;
+  };
+
+  const wordAnimation = subtitleAnimation as {
+    containerVariants?: AnimationVariants;
+    childVariants?: AnimationVariants;
+    words?: string[];
+    isAnimating?: boolean;
   };
 
   return (
-    <section
+    <motion.section
       ref={heroRef}
       className="relative min-h-[100svh] w-full overflow-hidden flex items-center"
+      onMouseMove={handleMouseMove}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.2, ease: LUXURY_EASING }}
     >
-      {/* Background with subtle parallax effect */}
-      <div className="absolute inset-0 w-full h-full">
-        <div
-          className="w-full h-full"
-          style={{
-            position: "absolute",
-            transform: `scale(1.05) translate(${mousePosition.x * -15}px, ${
-              mousePosition.y * -15
-            }px)`,
-            transition: "transform 0.6s cubic-bezier(0.33, 1, 0.68, 1)",
-          }}
+      {/* Background Layer with enhanced gradients */}
+      <motion.div
+        className="absolute inset-0 w-full h-full"
+        style={{ y: backgroundY }}
+      >
+        <motion.div
+          ref={backgroundRef}
+          className="w-full h-full absolute"
+          style={{ scale: 1.05 }}
         >
           <Image
             src="/images/hero/image4.webp"
             alt="FaceFrame Beauty hero image"
             fill
             priority
-            quality={90}
+            quality={98}
+            sizes="100vw"
             className="object-cover object-center"
           />
-        </div>
 
-        {/* Gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/50"></div>
-      </div>
+          {/* Enhanced gradient overlays for deeper contrast */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-elegant-mocha/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40"></div>
+          <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-black/50 to-transparent"></div>
+        </motion.div>
+      </motion.div>
 
-      <div className="luxury-container relative z-10">
-        <div className="w-full md:w-3/5 px-4 md:px-0">
-          {/* Animated Heading */}
+      {/* CHANEL-inspired corner accents */}
+      <div className="absolute top-12 left-12 w-4 h-[0.5px] bg-white/30 hidden md:block"></div>
+      <div className="absolute top-12 left-12 w-[0.5px] h-4 bg-white/30 hidden md:block"></div>
+      <div className="absolute bottom-12 right-12 w-4 h-[0.5px] bg-white/30 hidden md:block"></div>
+      <div className="absolute bottom-12 right-12 w-[0.5px] h-4 bg-white/30 hidden md:block"></div>
+
+      {/* Subtle vignette effect */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none z-[5] opacity-35"
+        style={{
+          background: `radial-gradient(circle at ${springMouseX}px ${springMouseY}px, transparent 10%, rgba(0,0,0,0.7) 70%)`,
+        }}
+      />
+
+      {/* Textured overlay */}
+      <div className="absolute inset-0 z-[3] opacity-10 bg-[url('/images/hero/hero-background.svg')] bg-repeat"></div>
+
+      {/* Main Content Container */}
+      <motion.div
+        className="w-full relative z-10 h-full flex flex-col justify-center items-center px-6"
+        style={{ y: contentY }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, delay: 0.3, ease: LUXURY_EASING }}
+      >
+        <div className="w-full md:w-[75%] max-w-3xl text-center">
+          {/* CHANEL-inspired horizontal line */}
           <motion.div
-            className="mb-6"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.div variants={itemVariants} className="mb-2">
-              <h1 className="text-white">
-                <span className="block">FaceFrame Beauty</span>
-                <span className="text-soft-blush text-2xl md:text-3xl">
-                  Luxury Beauty Transformations
-                </span>
-              </h1>
-            </motion.div>
+            className="w-12 h-[0.5px] bg-white/60 mx-auto mb-16 md:mb-20"
+            initial={{ width: 0 }}
+            animate={{ width: 48 }}
+            transition={{ duration: 1.2, delay: 0.6, ease: LUXURY_EASING }}
+          />
 
+          {/* Ultra-minimal CHANEL-inspired heading structure */}
+          <div className="mb-28 md:mb-32">
+            {/* Main Heading split into two lines */}
+            <div className="mb-8">
+              {/* First line with increased letter spacing */}
+              <motion.h1
+                className="text-white tracking-[0.5em] uppercase text-2xl sm:text-3xl md:text-4xl font-extralight"
+                initial={{ opacity: 0, letterSpacing: "0.3em" }}
+                animate={{ opacity: 1, letterSpacing: "0.5em" }}
+                transition={{ duration: 2, delay: 0.5, ease: LUXURY_EASING }}
+              >
+                <motion.span
+                  className="inline-block"
+                  variants={line1Animation.containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {line1Animation.letters?.map(
+                    (letter: string, index: number) => (
+                      <motion.span
+                        key={`title1-${index}`}
+                        variants={line1Animation.childVariants}
+                        className="inline-block"
+                      >
+                        {letter === " " ? "\u00A0" : letter}
+                      </motion.span>
+                    )
+                  )}
+                </motion.span>
+              </motion.h1>
+
+              {/* Second line with increased letter spacing */}
+              <motion.h1
+                className="text-white tracking-[0.5em] uppercase text-2xl sm:text-3xl md:text-4xl font-extralight mt-3 md:mt-4"
+                initial={{ opacity: 0, letterSpacing: "0.3em" }}
+                animate={{ opacity: 1, letterSpacing: "0.5em" }}
+                transition={{ duration: 2, delay: 0.7, ease: LUXURY_EASING }}
+              >
+                <motion.span
+                  className="inline-block"
+                  variants={line2Animation.containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {line2Animation.letters?.map(
+                    (letter: string, index: number) => (
+                      <motion.span
+                        key={`title2-${index}`}
+                        variants={line2Animation.childVariants}
+                        className="inline-block"
+                      >
+                        {letter === " " ? "\u00A0" : letter}
+                      </motion.span>
+                    )
+                  )}
+                </motion.span>
+              </motion.h1>
+            </div>
+
+            {/* Refined separator with animation */}
+            <motion.div
+              className="h-[0.5px] w-20 bg-soft-blush/70 mx-auto my-10"
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 80, opacity: 0.7 }}
+              transition={{ duration: 1.2, delay: 1.6, ease: LUXURY_EASING }}
+            />
+
+            {/* Subtitle with refined tracking */}
+            <h2 className="text-soft-blush text-xs sm:text-sm md:text-base tracking-[0.3em] font-extralight">
+              <motion.span
+                className="inline-block"
+                variants={wordAnimation.containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {wordAnimation.words?.map((word: string, index: number) => (
+                  <motion.span
+                    key={`subtitle-${index}`}
+                    className="inline-block"
+                    variants={wordAnimation.childVariants}
+                    whileHover={{
+                      color: "#FFFFFF",
+                      transition: { duration: 0.4 },
+                    }}
+                  >
+                    {word}
+                    {index !== (wordAnimation.words?.length || 0) - 1 &&
+                      "\u00A0"}
+                  </motion.span>
+                ))}
+              </motion.span>
+            </h2>
+
+            {/* Description with more refined typography */}
             <motion.p
-              className="font-alta text-lg md:text-xl text-white mb-8 max-w-lg"
-              variants={itemVariants}
+              className="font-alta text-sm md:text-base text-white/80 mt-12 md:mt-16 max-w-lg mx-auto leading-relaxed tracking-wider"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 2, ease: LUXURY_EASING }}
             >
               London&apos;s premier destination for bespoke beauty
               transformations. Expert semi-permanent makeup, lashes, brows and
               luxury facials.
             </motion.p>
 
-            {/* CTA Button */}
-            <motion.div variants={itemVariants}>
-              <Link href="/booking" className="btn btn-lg btn-primary">
-                BOOK YOUR EXPERIENCE
+            {/* CHANEL-inspired CTA Button with refined hover effect */}
+            <motion.div
+              className="mt-16 md:mt-20"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 2.2, ease: LUXURY_EASING }}
+            >
+              <Link
+                href="/booking"
+                className="group relative font-alta tracking-[0.3em] text-[10px] sm:text-xs uppercase text-white px-14 py-5 inline-block border border-white/20 overflow-hidden"
+              >
+                {/* Button background with elegant hover effect */}
+                <motion.div
+                  className="absolute inset-0 bg-white/0 group-hover:bg-white/10"
+                  initial={false}
+                  transition={{ duration: 0.7, ease: LUXURY_EASING }}
+                />
+
+                {/* Button text with animation */}
+                <span className="relative z-10 group-hover:text-white transition-colors duration-700">
+                  BOOK YOUR APPOINTMENT
+                </span>
+
+                {/* Subtle bottom border animation */}
+                <motion.div
+                  className="absolute bottom-0 left-0 h-[1px] w-0 bg-soft-blush/60 group-hover:w-full"
+                  transition={{ duration: 0.8, ease: LUXURY_EASING }}
+                />
               </Link>
             </motion.div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Social Proof Badge */}
-      <motion.div
-        className="absolute bottom-24 right-8 md:right-16 bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20 shadow-lg rounded-lg px-6 py-4 hidden md:block"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-      >
-        <div className="text-white text-center">
-          <div className="flex items-center justify-center mb-1">
-            {[...Array(5)].map((_, i) => (
-              <svg
-                key={i}
-                className="w-4 h-4 text-yellow-400 mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
           </div>
-          <p className="text-xs font-alta">Rated 4.9/5 by over 200 clients</p>
         </div>
-      </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 0.6 }}
-      >
-        <p className="font-alta text-white text-sm mb-2">Discover</p>
+        {/* Social proof positioned to the side on larger screens */}
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-32 md:bottom-36 right-8 md:right-16 hidden md:block"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 2.6, ease: LUXURY_EASING }}
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="text-white"
-          >
-            <path
-              d="M12 4V20M12 20L18 14M12 20L6 14"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <GlassMorphicCard intensity="light" className="px-5 py-3">
+            <div className="text-white text-center">
+              <div className="flex items-center justify-center mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <motion.span
+                    key={i}
+                    className="text-soft-blush mx-0.5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      delay: 2.8 + i * 0.1,
+                      duration: 0.4,
+                      ease: LUXURY_EASING,
+                    }}
+                  >
+                    ★
+                  </motion.span>
+                ))}
+              </div>
+              <p className="text-[10px] font-alta tracking-[0.15em]">
+                TRUSTED BY LONDON&apos;S ELITE
+              </p>
+            </div>
+          </GlassMorphicCard>
+        </motion.div>
+
+        {/* Repositioned scroll indicator to be explicitly below all content */}
+        <motion.div
+          className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3, duration: 0.8, ease: LUXURY_EASING }}
+        >
+          <p className="font-alta text-white text-[10px] tracking-[0.25em] uppercase mb-3 opacity-70">
+            Discover
+          </p>
+          <motion.div
+            className="w-[0.5px] h-8 bg-white/50"
+            animate={{ scaleY: [0.3, 1, 0.3] }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
         </motion.div>
       </motion.div>
-    </section>
+    </motion.section>
   );
 };
 

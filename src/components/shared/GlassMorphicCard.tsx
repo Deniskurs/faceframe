@@ -3,9 +3,12 @@
 import React, { ReactNode } from "react";
 import { motion, MotionProps, Variants } from "framer-motion";
 
+// CHANEL-inspired luxury easing curve
+const LUXURY_EASING = [0.19, 1, 0.22, 1];
+
 interface GlassMorphicCardProps {
   children: ReactNode;
-  intensity?: "light" | "medium" | "strong";
+  intensity?: "ultra-light" | "light" | "medium" | "strong";
   className?: string;
   hoverEffect?: boolean;
   animateOnScroll?: boolean;
@@ -14,6 +17,7 @@ interface GlassMorphicCardProps {
   borderColor?: string;
   customAnimation?: MotionProps;
   delayAnimation?: number;
+  decorativeElement?: "corner-line" | "thin-border" | "none";
 }
 
 export default function GlassMorphicCard({
@@ -27,52 +31,65 @@ export default function GlassMorphicCard({
   borderColor,
   customAnimation,
   delayAnimation = 0,
+  decorativeElement = "none",
 }: GlassMorphicCardProps) {
-  // Intensity presets with improved shadows and opacities
+  // Ultra-refined intensity presets with CHANEL-inspired subtlety
   const intensityMap = {
+    "ultra-light": {
+      blur: "2px",
+      opacity: "0.98",
+      shadow: "0 1px 2px rgba(126, 85, 57, 0.02)",
+      border: "rgba(126, 85, 57, 0.03)",
+    },
     light: {
-      blur: "5px",
-      opacity: "0.92",
-      shadow: "0 4px 20px rgba(126, 85, 57, 0.07)",
+      blur: "4px",
+      opacity: "0.97",
+      shadow: "0 1px 3px rgba(126, 85, 57, 0.03)",
+      border: "rgba(126, 85, 57, 0.04)",
     },
     medium: {
-      blur: "10px",
-      opacity: "0.87",
-      shadow: "0 8px 32px rgba(126, 85, 57, 0.1)",
+      blur: "6px",
+      opacity: "0.95",
+      shadow: "0 1px 4px rgba(126, 85, 57, 0.04)",
+      border: "rgba(126, 85, 57, 0.06)",
     },
     strong: {
-      blur: "15px",
-      opacity: "0.82",
-      shadow: "0 12px 48px rgba(126, 85, 57, 0.15)",
+      blur: "8px",
+      opacity: "0.92",
+      shadow: "0 2px 6px rgba(126, 85, 57, 0.05)",
+      border: "rgba(126, 85, 57, 0.08)",
     },
   };
 
   const settings = intensityMap[intensity];
 
-  // Default animation variants
+  // CHANEL-inspired animation variants with refined timing
   const defaultVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.19, 1.0, 0.22, 1.0],
+        duration: 0.8,
+        ease: LUXURY_EASING,
         delay: delayAnimation,
       },
     },
   };
 
-  // Hover animation
+  // More subtle, refined hover animation
   const hoverAnimation = hoverEffect
     ? {
-        y: -8,
-        boxShadow: settings.shadow.replace("0.1", "0.15"),
-        transition: { duration: 0.3, ease: "easeOut" },
+        y: -5,
+        boxShadow: settings.shadow.replace(
+          /rgba\(126, 85, 57, ([\d.]+)\)/,
+          (_, opacity) => `rgba(126, 85, 57, ${parseFloat(opacity) * 1.5})`
+        ),
+        transition: { duration: 0.7, ease: LUXURY_EASING },
       }
     : undefined;
 
-  // Base style for the card
+  // Base style for the card with more refined defaults
   const cardStyle = {
     backgroundColor:
       backgroundColor || `rgba(237, 224, 212, ${settings.opacity})`,
@@ -80,9 +97,10 @@ export default function GlassMorphicCard({
     WebkitBackdropFilter: `blur(${settings.blur})`,
     border: borderColor
       ? `1px solid ${borderColor}`
-      : "1px solid rgba(255, 255, 255, 0.18)",
+      : `1px solid rgba(255, 255, 255, 0.12)`,
     boxShadow: settings.shadow,
-    transition: "box-shadow 0.3s ease, transform 0.3s ease",
+    transition: `all 0.7s cubic-bezier(${LUXURY_EASING.join(",")})`,
+    position: "relative" as const, // For decorative elements
   };
 
   // Combine props with defaults
@@ -90,7 +108,7 @@ export default function GlassMorphicCard({
     ...(animateOnScroll && {
       initial: "hidden",
       whileInView: "visible",
-      viewport: { once: true, margin: "-50px" },
+      viewport: { once: true, margin: "-30px" },
       variants: defaultVariants,
     }),
     whileHover: hoverAnimation,
@@ -99,11 +117,25 @@ export default function GlassMorphicCard({
 
   return (
     <motion.div
-      className={`rounded-lg overflow-hidden ${className}`}
+      className={`overflow-hidden ${className}`}
       style={cardStyle}
       {...motionProps}
       onClick={onClick}
     >
+      {/* Optional CHANEL-inspired decorative elements */}
+      {decorativeElement === "corner-line" && (
+        <>
+          <div className="absolute top-0 left-0 w-6 h-[1px] bg-soft-blush/40"></div>
+          <div className="absolute top-0 left-0 w-[1px] h-6 bg-soft-blush/40"></div>
+          <div className="absolute bottom-0 right-0 w-6 h-[1px] bg-soft-blush/40"></div>
+          <div className="absolute bottom-0 right-0 w-[1px] h-6 bg-soft-blush/40"></div>
+        </>
+      )}
+
+      {decorativeElement === "thin-border" && (
+        <div className="absolute inset-[3px] border border-soft-blush/20 pointer-events-none"></div>
+      )}
+
       {children}
     </motion.div>
   );

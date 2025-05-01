@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import FadeInSection from "../shared/FadeInSection";
-import ParallaxContainer from "../shared/ParallaxContainer";
-import GlassMorphicCard from "../shared/GlassMorphicCard";
+import { useInView } from "react-intersection-observer";
+
+// CHANEL-inspired ultra-premium luxury easing curve
+const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
 
 interface AboutStripProps {
   className?: string;
@@ -13,193 +15,568 @@ interface AboutStripProps {
   founderName?: string;
   quote?: string;
   paragraphs?: string[];
+  subtitle?: string;
 }
 
-const AboutStrip = ({
+const AboutStrip: React.FC<AboutStripProps> = ({
   className = "",
-  founderImage = "/images/gallery/image17.webp",
+  founderImage = "/images/gallery/image22.webp",
   founderName = "Iggy",
   quote = "Beauty is not about perfection. It's about enhancing your natural features with precision and care.",
+  subtitle = "FOUNDER & CREATIVE DIRECTOR",
   paragraphs = [
     "After training with elite artists across Europe and perfecting her craft for over a decade, Iggy established FaceFrame Beauty with a singular vision: to create a sanctuary where precision meets luxury.",
     "Each treatment at FaceFrame Beauty is approached with meticulous attention to detail, ensuring that every client leaves with results that enhance their natural beauty rather than masking it.",
   ],
-}: AboutStripProps) => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const [imageHovered, setImageHovered] = useState(false);
+}) => {
+  // Panel references with intersection observers
+  const [titleRef, titleInView] = useInView({ threshold: 0.5 });
+  const [imageRef, imageInView] = useInView({ threshold: 0.3 });
+  const [quoteRef, quoteInView] = useInView({ threshold: 0.5 });
+  const [storyRef, storyInView] = useInView({ threshold: 0.4 });
 
-  // Parallax effect for quote
+  // Content reveal control
+  const [isRevealed, setIsRevealed] = useState(false);
+  const [activeSection, setActiveSection] = useState(0);
+
+  // Parallax and scroll effects
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  const quoteY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const parallaxY1 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const parallaxY2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const parallaxY3 = useTransform(scrollYProgress, [0, 1], [0, -20]);
+
+  // Show section gradually on page load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsRevealed(true);
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Update active section based on scroll position
+  useEffect(() => {
+    if (titleInView) setActiveSection(0);
+    else if (imageInView) setActiveSection(1);
+    else if (quoteInView) setActiveSection(2);
+    else if (storyInView) setActiveSection(3);
+  }, [titleInView, imageInView, quoteInView, storyInView]);
 
   return (
-    <section
-      ref={sectionRef}
-      className={`py-16 md:py-24 px-4 bg-light-cream/20 overflow-hidden ${className}`}
+    <div
+      ref={containerRef}
+      className={`relative w-full overflow-hidden ${className}`}
     >
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center">
-          {/* Founder Image - Left Column */}
-          <div className="md:col-span-5 relative">
-            <FadeInSection direction="left" className="relative">
+      {/* ==================== SECTION 1: MAIN TITLE ==================== */}
+      <motion.section
+        ref={titleRef}
+        className="relative h-screen flex flex-col justify-center items-center px-4 sm:px-6 bg-light-cream"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isRevealed ? 1 : 0 }}
+        transition={{ duration: 1.8, ease: LUXURY_EASING }}
+      >
+        {/* Ultra-thin horizontal line */}
+        <motion.div
+          className="absolute top-1/2 left-0 w-full h-[0.1px] bg-elegant-mocha/10"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: isRevealed ? 1 : 0 }}
+          transition={{ duration: 1.4, delay: 0.5, ease: LUXURY_EASING }}
+        />
+
+        {/* Ultra-thin vertical line */}
+        <motion.div
+          className="absolute top-0 left-1/2 w-[0.1px] h-full bg-elegant-mocha/10"
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: isRevealed ? 1 : 0 }}
+          transition={{ duration: 1.4, delay: 0.7, ease: LUXURY_EASING }}
+        />
+
+        {/* CHANEL-inspired corner accents */}
+        <motion.div
+          className="absolute top-[12%] left-[12%] flex items-center justify-center"
+          initial={{ opacity: 0, x: -10, y: -10 }}
+          animate={{ opacity: isRevealed ? 0.8 : 0, x: 0, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.9, ease: LUXURY_EASING }}
+        >
+          <div className="w-4 h-[0.1px] bg-elegant-mocha/60"></div>
+          <div className="h-4 w-[0.1px] bg-elegant-mocha/60"></div>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-[12%] right-[12%] flex items-end justify-end"
+          initial={{ opacity: 0, x: 10, y: 10 }}
+          animate={{ opacity: isRevealed ? 0.8 : 0, x: 0, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.9, ease: LUXURY_EASING }}
+        >
+          <div className="w-4 h-[0.1px] bg-elegant-mocha/60"></div>
+          <div className="h-4 w-[0.1px] bg-elegant-mocha/60"></div>
+        </motion.div>
+
+        {/* Title */}
+        <div className="text-center max-w-xl mx-auto relative z-10">
+          <motion.div
+            className="overflow-hidden mb-2"
+            initial={{ y: 50 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1.4, ease: LUXURY_EASING }}
+          >
+            <motion.p
+              className="font-alta text-sm tracking-[0.4em] text-elegant-mocha/60 uppercase mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.1, ease: LUXURY_EASING }}
+            >
+              The Atelier
+            </motion.p>
+
+            <div className="overflow-hidden">
+              <motion.h2
+                className="font-alice text-3xl sm:text-4xl md:text-5xl tracking-[0.25em] text-elegant-mocha uppercase"
+                initial={{ y: 100 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1.4, delay: 0.3, ease: LUXURY_EASING }}
+              >
+                Our Story
+              </motion.h2>
+            </div>
+          </motion.div>
+
+          {/* Elegantly animated line */}
+          <motion.div
+            className="w-0 h-[0.1px] bg-elegant-mocha/40 mx-auto my-8"
+            animate={{ width: isRevealed ? "40%" : "0%" }}
+            transition={{ duration: 1.4, delay: 0.8, ease: LUXURY_EASING }}
+          />
+
+          {/* Scroll indicator */}
+          <motion.div
+            className="mt-10"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{
+              opacity: isRevealed ? [0.4, 1, 0.4] : 0,
+              y: isRevealed ? [0, 10, 0] : 10,
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: LUXURY_EASING,
+              delay: 1.5,
+              repeatDelay: 0.5,
+            }}
+          >
+            <svg
+              className="mx-auto"
+              width="16"
+              height="30"
+              viewBox="0 0 16 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 2L8 28M8 28L2 22M8 28L14 22"
+                stroke="#7F5539"
+                strokeOpacity="0.6"
+                strokeWidth="0.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ==================== SECTION 2: FOUNDER IMAGE ==================== */}
+      <motion.section
+        ref={imageRef}
+        className="min-h-screen flex items-center justify-center px-5 sm:px-6 py-10 bg-light-cream relative"
+      >
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute inset-0 opacity-[0.02]"
+            initial={{ backgroundSize: "120%" }}
+            animate={{ backgroundSize: imageInView ? "100%" : "120%" }}
+            transition={{ duration: 3, ease: LUXURY_EASING }}
+            style={{
+              backgroundImage: "url('/images/brand/IMG_5460.jpg')",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              filter: "blur(1px)",
+            }}
+          />
+        </div>
+
+        <div className="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center relative z-10">
+          <div className="md:col-span-7 relative">
+            <motion.div
+              className="relative overflow-hidden"
+              style={{ y: parallaxY1 }}
+            >
+              {/* Founder image with frame */}
               <motion.div
-                className="relative rounded-lg overflow-hidden shadow-xl"
-                ref={imageRef}
-                onMouseEnter={() => setImageHovered(true)}
-                onMouseLeave={() => setImageHovered(false)}
-                whileHover={{
-                  scale: 1.02,
-                  transition: { duration: 0.5, ease: [0.19, 1.0, 0.22, 1.0] },
+                className="relative"
+                initial={{ clipPath: "inset(10% 10% 10% 10%)" }}
+                animate={{
+                  clipPath: imageInView
+                    ? "inset(0% 0% 0% 0%)"
+                    : "inset(10% 10% 10% 10%)",
                 }}
+                transition={{ duration: 1.4, ease: LUXURY_EASING }}
               >
-                {/* Animated Image Container */}
+                <div className="relative border-[0.25px] border-soft-blush/20 overflow-hidden">
+                  <div className="aspect-[3/4] relative">
+                    <motion.div
+                      className="absolute inset-0 z-10 bg-elegant-mocha/10"
+                      initial={{ opacity: 0.7 }}
+                      animate={{ opacity: imageInView ? 0 : 0.7 }}
+                      transition={{ duration: 1.2, ease: LUXURY_EASING }}
+                    />
+
+                    <Image
+                      src={founderImage}
+                      alt={`${founderName} - FaceFrame Beauty Founder`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                      className="object-cover object-center z-0"
+                      priority
+                      quality={95}
+                    />
+                  </div>
+                </div>
+
+                {/* Corner accents */}
                 <motion.div
-                  className="w-full h-[400px] md:h-[600px] overflow-hidden relative"
-                  animate={{
-                    scale: imageHovered ? 1.04 : 1,
+                  className="absolute top-0 left-0 w-6 h-6 pointer-events-none"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: imageInView ? 1 : 0 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.6,
+                    ease: LUXURY_EASING,
                   }}
-                  transition={{ duration: 0.7, ease: [0.19, 1.0, 0.22, 1.0] }}
                 >
-                  <Image
-                    src={founderImage}
-                    alt={`${founderName} - FaceFrame Beauty Founder`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 40vw"
-                    className="object-cover object-center"
-                    priority
-                  />
-
-                  {/* Hover overlay with subtle gradient */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-elegant-mocha/30 to-transparent opacity-0"
-                    animate={{ opacity: imageHovered ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <div className="absolute top-3 left-0 w-4 h-[0.25px] bg-white/60"></div>
+                  <div className="absolute top-0 left-3 w-[0.25px] h-4 bg-white/60"></div>
                 </motion.div>
 
-                {/* Elegant Corner Accents */}
-                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-light-cream opacity-70"></div>
-                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-light-cream opacity-70"></div>
-
-                {/* Founder label */}
                 <motion.div
-                  className="absolute bottom-4 left-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.5 }}
-                  viewport={{ once: true }}
+                  className="absolute bottom-0 right-0 w-6 h-6 pointer-events-none"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: imageInView ? 1 : 0 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.7,
+                    ease: LUXURY_EASING,
+                  }}
                 >
-                  <GlassMorphicCard
-                    intensity="light"
-                    className="px-4 py-2"
-                    backgroundColor="rgba(255,255,255,0.15)"
-                  >
-                    <p className="font-alice text-white text-lg">
-                      {founderName}, Founder
-                    </p>
-                  </GlassMorphicCard>
+                  <div className="absolute bottom-3 right-0 w-4 h-[0.25px] bg-white/60"></div>
+                  <div className="absolute bottom-0 right-3 w-[0.25px] h-4 bg-white/60"></div>
+                </motion.div>
+
+                {/* Founder name and title */}
+                <motion.div
+                  className="absolute bottom-8 left-0 right-0 z-10"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{
+                    opacity: imageInView ? 1 : 0,
+                    y: imageInView ? 0 : 15,
+                  }}
+                  transition={{
+                    duration: 0.9,
+                    delay: 0.7,
+                    ease: LUXURY_EASING,
+                  }}
+                >
+                  <div className="mx-5 py-4 px-6 bg-black/80 backdrop-blur-sm border-[0.25px] border-white/20">
+                    <div className="text-center">
+                      <p className="font-alice text-white text-base tracking-[0.25em] mb-2">
+                        {founderName}
+                      </p>
+                      <p className="font-alta text-white/70 text-[10px] tracking-[0.5em]">
+                        {subtitle}
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
               </motion.div>
-            </FadeInSection>
+            </motion.div>
           </div>
 
-          {/* Founder Story - Right Column */}
-          <div className="md:col-span-7">
-            <FadeInSection direction="right" delay={0.2}>
-              <h2 className="font-alice text-3xl md:text-4xl text-elegant-mocha mb-8">
-                Our Founder&apos;s Vision
-              </h2>
-
-              {/* Brand Philosophy Quote */}
-              <ParallaxContainer
-                scale={false}
-                opacity={false}
-                responsive={true}
-              >
-                <motion.div className="mb-10 relative" style={{ y: quoteY }}>
-                  <motion.div
-                    className="absolute -left-8 top-0 text-6xl text-soft-blush/20 font-serif"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3, duration: 0.7 }}
-                    viewport={{ once: true }}
-                  >
-                    &ldquo;
-                  </motion.div>
-                  <blockquote className="font-alice text-2xl md:text-3xl text-muted-sand italic pl-6 border-l-2 border-warm-beige">
-                    {quote}
-                  </blockquote>
-                  <motion.div
-                    className="absolute -right-4 bottom-0 text-6xl text-soft-blush/20 font-serif"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5, duration: 0.7 }}
-                    viewport={{ once: true }}
-                  >
-                    &rdquo;
-                  </motion.div>
-                </motion.div>
-              </ParallaxContainer>
-
-              {/* Founder Story */}
-              <div className="font-alta text-muted-sand space-y-5">
-                {paragraphs.map((paragraph, index) => (
-                  <motion.p
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 + index * 0.2, duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className="leading-relaxed"
-                  >
-                    {paragraph}
-                  </motion.p>
-                ))}
-              </div>
-
-              {/* Signature */}
-              <motion.div
-                className="mt-10"
+          {/* Descriptive text */}
+          <motion.div
+            className="md:col-span-5 pl-0 md:pl-4"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: imageInView ? 1 : 0, x: imageInView ? 0 : 20 }}
+            transition={{ duration: 1, delay: 0.6, ease: LUXURY_EASING }}
+            style={{ y: parallaxY2 }}
+          >
+            <div className="py-6 pr-4">
+              <motion.h3
+                className="font-alice text-elegant-mocha/90 text-2xl sm:text-3xl tracking-[0.2em] uppercase mb-8"
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9, duration: 0.6 }}
-                viewport={{ once: true }}
+                animate={{
+                  opacity: imageInView ? 1 : 0,
+                  y: imageInView ? 0 : 20,
+                }}
+                transition={{ duration: 0.8, delay: 0.8, ease: LUXURY_EASING }}
               >
-                <motion.svg
-                  width="180"
-                  height="60"
-                  viewBox="0 0 180 60"
-                  className="text-elegant-mocha"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  whileInView={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 1.5, ease: "easeInOut" }}
-                  viewport={{ once: true }}
-                >
-                  {/* Animated signature path */}
-                  <motion.path
-                    d="M10,40 C20,20 40,10 60,30 C80,50 100,20 120,30 C140,40 160,20 170,30"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeWidth="2"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
-                  />
-                </motion.svg>
-                <p className="font-alice text-elegant-mocha mt-2">
-                  {founderName}, Founder
-                </p>
-              </motion.div>
-            </FadeInSection>
-          </div>
+                The Artist
+              </motion.h3>
+
+              <motion.div
+                className="w-10 h-[0.25px] bg-elegant-mocha/30 mb-8"
+                initial={{ width: 0 }}
+                animate={{ width: imageInView ? 40 : 0 }}
+                transition={{ duration: 1, delay: 1, ease: LUXURY_EASING }}
+              />
+
+              <motion.p
+                className="font-alta text-elegant-mocha/70 tracking-wide leading-relaxed text-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: imageInView ? 1 : 0 }}
+                transition={{ duration: 1, delay: 1.2, ease: LUXURY_EASING }}
+              >
+                After perfecting her craft across Europe&apos;s elite beauty
+                institutions, {founderName} established a new standard in beauty
+                artistry. Each precise movement reflects years of dedicated
+                expertise.
+              </motion.p>
+
+              <motion.div
+                className="w-6 h-[0.25px] bg-elegant-mocha/30 mt-8 ml-auto"
+                initial={{ width: 0 }}
+                animate={{ width: imageInView ? 24 : 0 }}
+                transition={{ duration: 0.8, delay: 1.4, ease: LUXURY_EASING }}
+              />
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ==================== SECTION 3: PHILOSOPHY QUOTE ==================== */}
+      <motion.section
+        ref={quoteRef}
+        className="h-screen flex items-center justify-center px-5 sm:px-6 bg-light-cream relative"
+      >
+        {/* Background grid lines */}
+        <motion.div
+          className="absolute h-full w-[0.25px] bg-elegant-mocha/5 left-1/3"
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: quoteInView ? 1 : 0 }}
+          transition={{ duration: 1.6, delay: 0.3, ease: LUXURY_EASING }}
+        />
+
+        <motion.div
+          className="absolute h-full w-[0.25px] bg-elegant-mocha/5 left-2/3"
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: quoteInView ? 1 : 0 }}
+          transition={{ duration: 1.6, delay: 0.5, ease: LUXURY_EASING }}
+        />
+
+        <motion.div
+          className="absolute w-full h-[0.25px] bg-elegant-mocha/5 top-1/3"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: quoteInView ? 1 : 0 }}
+          transition={{ duration: 1.6, delay: 0.3, ease: LUXURY_EASING }}
+        />
+
+        <motion.div
+          className="absolute w-full h-[0.25px] bg-elegant-mocha/5 top-2/3"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: quoteInView ? 1 : 0 }}
+          transition={{ duration: 1.6, delay: 0.5, ease: LUXURY_EASING }}
+        />
+
+        <div className="max-w-2xl mx-auto relative z-10">
+          {/* Quote display */}
+          <motion.div className="text-center px-6" style={{ y: parallaxY3 }}>
+            <motion.p
+              className="font-alta text-elegant-mocha/60 text-xs tracking-[0.4em] uppercase mb-16"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{
+                opacity: quoteInView ? 1 : 0,
+                y: quoteInView ? 0 : 10,
+              }}
+              transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
+            >
+              Our Philosophy
+            </motion.p>
+
+            {/* Quote with decorative elements */}
+            <div className="relative">
+              <motion.div
+                className="w-[0.25px] h-10 bg-elegant-mocha/30 mx-auto mb-10"
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: quoteInView ? 1 : 0 }}
+                transition={{ duration: 0.9, delay: 0.6, ease: LUXURY_EASING }}
+              />
+
+              <motion.div
+                className="absolute top-0 left-0 w-[1px] h-full bg-elegant-mocha/5"
+                initial={{ left: 0 }}
+                animate={{ left: quoteInView ? "calc(100% + 1px)" : 0 }}
+                transition={{ duration: 0.9, delay: 0.7, ease: LUXURY_EASING }}
+              />
+
+              <motion.blockquote
+                className="font-alice text-2xl sm:text-3xl md:text-4xl text-elegant-mocha/90 leading-relaxed tracking-wide italic"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: quoteInView ? 1 : 0 }}
+                transition={{ duration: 1.3, delay: 0.8, ease: LUXURY_EASING }}
+              >
+                {quote}
+              </motion.blockquote>
+
+              <motion.div
+                className="w-10 h-[0.25px] bg-elegant-mocha/30 mx-auto mt-10"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: quoteInView ? 1 : 0 }}
+                transition={{ duration: 0.9, delay: 1.1, ease: LUXURY_EASING }}
+              />
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ==================== SECTION 4: FOUNDER STORY ==================== */}
+      <motion.section
+        ref={storyRef}
+        className="min-h-screen flex items-center justify-center px-5 sm:px-6 py-16 bg-light-cream"
+      >
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            className="mb-10 inline-block"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: storyInView ? 1 : 0, y: storyInView ? 0 : 20 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASING }}
+          >
+            <h3 className="font-alice text-xl sm:text-2xl md:text-3xl tracking-[0.3em] text-elegant-mocha uppercase">
+              Our Vision
+            </h3>
+            <div className="w-12 h-[0.25px] bg-elegant-mocha/30 mt-4"></div>
+          </motion.div>
+
+          {/* Paragraphs with staggered reveal */}
+          <motion.div
+            className="font-alta text-elegant-mocha/70 space-y-6 mt-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: storyInView ? 1 : 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: LUXURY_EASING }}
+          >
+            {paragraphs.map((paragraph, index) => (
+              <motion.p
+                key={index}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{
+                  opacity: storyInView ? 1 : 0,
+                  y: storyInView ? 0 : 15,
+                }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.4 + index * 0.2,
+                  ease: LUXURY_EASING,
+                }}
+                className="leading-relaxed tracking-wide text-base md:text-lg"
+              >
+                {paragraph}
+              </motion.p>
+            ))}
+          </motion.div>
+
+          {/* Signature */}
+          <motion.div
+            className="mt-16 text-right"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: storyInView ? 1 : 0 }}
+            transition={{ duration: 0.7, delay: 0.8, ease: LUXURY_EASING }}
+          >
+            <motion.svg
+              width="180"
+              height="50"
+              viewBox="0 0 180 60"
+              className="ml-auto text-elegant-mocha/70"
+            >
+              {/* Animated signature */}
+              <motion.path
+                d="M10,40 C20,20 40,10 60,30 C80,50 100,20 120,30 C140,40 160,20 170,30"
+                stroke="currentColor"
+                fill="none"
+                strokeWidth="1.5"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{
+                  pathLength: storyInView ? 1 : 0,
+                  opacity: storyInView ? 0.8 : 0,
+                }}
+                transition={{
+                  duration: 2.5,
+                  ease: LUXURY_EASING,
+                  delay: 1.0,
+                }}
+              />
+            </motion.svg>
+            <p className="font-alice text-elegant-mocha/80 mt-3 tracking-[0.1em] text-sm text-right">
+              {founderName}
+            </p>
+          </motion.div>
+
+          {/* Booking CTA */}
+          <motion.div
+            className="mt-20 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: storyInView ? 1 : 0, y: storyInView ? 0 : 20 }}
+            transition={{ duration: 0.7, delay: 1.2, ease: LUXURY_EASING }}
+          >
+            <Link
+              href="/booking"
+              className="relative inline-block overflow-hidden group"
+            >
+              <div className="px-10 py-4 border border-elegant-mocha/20 group-hover:border-elegant-mocha/40 transition-all duration-700">
+                <span className="font-alta text-elegant-mocha/90 text-sm tracking-[0.3em] uppercase">
+                  Book Your Experience
+                </span>
+
+                <motion.div
+                  className="absolute bottom-0 left-0 h-[0.5px] w-0 bg-elegant-mocha/30 group-hover:w-full"
+                  transition={{ duration: 0.7, ease: LUXURY_EASING }}
+                />
+              </div>
+            </Link>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Stylized section indicators - right side */}
+      <div className="fixed right-4 top-1/2 -translate-y-1/2 h-[40%] z-30 hidden md:flex flex-col items-center">
+        <div className="relative w-[1px] h-full bg-elegant-mocha/10">
+          <motion.div
+            className="absolute w-[1px] bg-elegant-mocha/60"
+            style={{
+              height: `${(activeSection / 3) * 100}%`,
+              top: 0,
+            }}
+            transition={{ duration: 0.7, ease: LUXURY_EASING }}
+          />
+        </div>
+
+        {/* Section navigation dots */}
+        <div className="absolute inset-0 flex flex-col justify-between py-4">
+          {[0, 1, 2, 3].map((index) => (
+            <div
+              key={index}
+              className={`w-[3px] h-[3px] rounded-full transition-all duration-500 -ml-[1px] ${
+                activeSection === index
+                  ? "bg-elegant-mocha"
+                  : "bg-elegant-mocha/20"
+              }`}
+            />
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

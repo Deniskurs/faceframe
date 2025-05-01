@@ -149,7 +149,7 @@ export default function BeforeAfterSlider({
   return (
     <motion.div
       ref={containerRef}
-      className={`relative select-none rounded-lg overflow-hidden shadow-lg ${className}`}
+      className={`relative select-none overflow-hidden shadow-lg ${className}`}
       style={getAspectRatioStyle()}
       initial={{ opacity: 0 }}
       animate={{

@@ -30,11 +30,11 @@ export default function BrandedDivider({
   parallax = true,
   parallaxSpeed = 0.2,
 }: BrandedDividerProps) {
-  // Height classes
+  // Height classes - reduced for a more elegant, understated look
   const heightClasses = {
-    sm: "h-12 md:h-16",
-    md: "h-16 md:h-32",
-    lg: "h-24 md:h-40",
+    sm: "h-8 md:h-10",
+    md: "h-12 md:h-16",
+    lg: "h-16 md:h-24",
   };
 
   // Get overlay gradient based on color
@@ -101,7 +101,7 @@ export default function BrandedDivider({
         >
           {text && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <p className="font-alice text-white text-lg md:text-2xl">
+              <p className="font-alice text-white text-sm md:text-base tracking-widest uppercase border-b border-white/20 pb-1">
                 {text}
               </p>
             </div>
@@ -139,7 +139,7 @@ export default function BrandedDivider({
 
         {text && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <p className="font-alice text-white text-lg md:text-2xl drop-shadow-md">
+            <p className="font-alice text-white text-sm md:text-base tracking-widest uppercase border-b border-white/20 pb-1 drop-shadow-md">
               {text}
             </p>
           </div>

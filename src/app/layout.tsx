@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Alice, Raleway } from "next/font/google";
+import { Alice } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const alice = Alice({
@@ -9,10 +10,25 @@ const alice = Alice({
   variable: "--font-alice",
 });
 
-// Temporary fallback for Alta font until we get the actual font files
-const alta = Raleway({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+// Use the Alta font from local files
+const alta = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Alta-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Alta-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Alta-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+  ],
   display: "swap",
   variable: "--font-alta",
 });
@@ -30,7 +46,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${alice.variable} ${alta.variable} antialiased`}>
+      <body
+        className={`${alice.variable} ${alta.variable} antialiased`}
+        style={{ overscrollBehaviorX: "auto" }}
+        suppressHydrationWarning={true}
+      >
         {children}
       </body>
     </html>
