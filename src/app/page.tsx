@@ -25,7 +25,7 @@ export default function Home() {
       {/* About Section */}
       <AboutStrip
         founderName="Iggy"
-        founderImage="/images/gallery/image22.webp"
+        founderImage="/images/gallery/image25.webp"
         quote={founderQuote}
         paragraphs={founderParagraphs}
       />
@@ -72,7 +72,7 @@ export default function Home() {
 
       {/* Final booking CTA */}
       <BookingCTA
-        backgroundImage="/images/gallery/image14.webp"
+        backgroundImage="/images/brand/IMG_5461.webp"
         title="Reserve Your Beauty Experience"
         subtitle="Limited appointments available each week. Join London's elite clientele in experiencing the art of precise beauty enhancement."
         buttonText="SECURE YOUR APPOINTMENT"

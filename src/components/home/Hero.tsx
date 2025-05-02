@@ -193,12 +193,13 @@ const Hero = () => {
           <div className="mb-28 md:mb-32">
             {/* Main Heading split into two lines */}
             <div className="mb-8">
-              {/* First line with increased letter spacing */}
+              {/* First line with responsive letter spacing to prevent wrapping on iPhone */}
               <motion.h1
-                className="text-white tracking-[0.5em] uppercase text-2xl sm:text-3xl md:text-4xl font-extralight"
-                initial={{ opacity: 0, letterSpacing: "0.3em" }}
-                animate={{ opacity: 1, letterSpacing: "0.5em" }}
+                className="text-white tracking-[0.25em] sm:tracking-[0.35em] md:tracking-[0.5em] uppercase text-3xl sm:text-4xl md:text-5xl font-light"
+                initial={{ opacity: 0, letterSpacing: "0.15em" }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 2, delay: 0.5, ease: LUXURY_EASING }}
+                style={{ textShadow: "0 0 12px rgba(255,255,255,0.1)" }}
               >
                 <motion.span
                   className="inline-block"
@@ -222,9 +223,9 @@ const Hero = () => {
 
               {/* Second line with increased letter spacing */}
               <motion.h1
-                className="text-white tracking-[0.5em] uppercase text-2xl sm:text-3xl md:text-4xl font-extralight mt-3 md:mt-4"
-                initial={{ opacity: 0, letterSpacing: "0.3em" }}
-                animate={{ opacity: 1, letterSpacing: "0.5em" }}
+                className="text-white tracking-[0.25em] sm:tracking-[0.3em] md:tracking-[0.35em] uppercase text-2xl sm:text-3xl md:text-4xl font-extralight mt-1 md:mt-2"
+                initial={{ opacity: 0, letterSpacing: "0.2em" }}
+                animate={{ opacity: 1, letterSpacing: "0.25em" }}
                 transition={{ duration: 2, delay: 0.7, ease: LUXURY_EASING }}
               >
                 <motion.span

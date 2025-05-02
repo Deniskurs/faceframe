@@ -250,18 +250,19 @@ const Header = () => {
           transition={{ duration: 0.8, delay: 0.2, ease: LUXURY_EASING }}
         >
           <Link href="/" className="group flex items-center">
-            {/* Logo Image with scaled transitions */}
+            {/* Logo Image with scaled transitions - optimized for transparent logo */}
             <div
-              className={`overflow-hidden transition-all duration-700 shadow-sm ${
-                isScrolled ? "w-8 h-8" : "w-10 h-10"
+              className={`transition-all duration-700 ${
+                isScrolled ? "w-10 h-10" : "w-12 h-12"
               }`}
             >
               <Image
-                src="/images/logo/IMG_0559.jpg"
+                src="/images/logo/tl-brown.webp"
                 alt="FaceFrame Beauty Logo"
-                width={40}
-                height={40}
-                className="w-full h-full object-cover rounded-[2px]"
+                width={48}
+                height={48}
+                className="w-full h-full object-contain"
+                priority
               />
             </div>
 
