@@ -1,7 +1,7 @@
 import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
 import AboutStrip from "@/components/home/AboutStrip";
-import ServicesPreview from "@/components/home/ServicesPreview";
+import { ServicesPreview } from "@/components/home/services";
 import GalleryTeaser from "@/components/home/GalleryTeaser";
 import TestimonialCarousel from "@/components/home/TestimonialCarousel";
 import FAQsPreview from "@/components/home/FAQsPreview";

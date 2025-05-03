@@ -20,6 +20,15 @@ module.exports = {
         alice: ["var(--font-alice)", "serif"],
         alta: ["var(--font-alta)", "sans-serif"],
       },
+      keyframes: {
+        slideDown: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100%)" },
+        },
+      },
+      animation: {
+        "slide-down": "slideDown 1.5s ease-in-out infinite",
+      },
     },
   },
   plugins: [],

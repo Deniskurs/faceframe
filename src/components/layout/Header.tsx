@@ -218,27 +218,7 @@ const Header = () => {
         transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASING }}
       />
 
-      {/* Enhanced corner accents (desktop only) with better visibility and state transitions */}
-      <div
-        className={`absolute top-6 left-6 w-5 h-[1px] transition-colors duration-700 ${
-          isScrolled ? "bg-elegant-mocha/30" : "bg-white/40"
-        } hidden md:block`}
-      ></div>
-      <div
-        className={`absolute top-6 left-6 w-[1px] h-5 transition-colors duration-700 ${
-          isScrolled ? "bg-elegant-mocha/30" : "bg-white/40"
-        } hidden md:block`}
-      ></div>
-      <div
-        className={`absolute bottom-6 right-6 w-5 h-[1px] transition-colors duration-700 ${
-          isScrolled ? "bg-elegant-mocha/30" : "bg-white/40"
-        } hidden md:block`}
-      ></div>
-      <div
-        className={`absolute bottom-6 right-6 w-[1px] h-5 transition-colors duration-700 ${
-          isScrolled ? "bg-elegant-mocha/30" : "bg-white/40"
-        } hidden md:block`}
-      ></div>
+      {/* Corner accents removed as requested */}
 
       {/* Golden ratio-inspired layout with proper mobile-friendly alignment */}
       <div className="max-w-[1400px] h-full mx-auto px-6 sm:px-8 flex items-center justify-between">
