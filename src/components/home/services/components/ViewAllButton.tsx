@@ -1,49 +1,41 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { LUXURY_EASING } from "../types";
+import { LUXURY_EASING } from "../core/types";
 
 export function ViewAllButton() {
   return (
     <motion.div
-      className="mt-24 sm:mt-28 md:mt-32 lg:mt-36 text-center"
-      initial={{ opacity: 0, y: 15 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: LUXURY_EASING }}
+      className="mt-20 md:mt-28 text-center"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{
+        duration: 1.2,
+        ease: LUXURY_EASING,
+      }}
     >
       <Link
         href="/services"
-        className="group relative inline-block overflow-hidden"
+        className="group relative font-alta tracking-[0.3em] text-[10px] sm:text-xs uppercase text-elegant-mocha/90 px-14 py-5 inline-block border border-elegant-mocha/20 overflow-hidden"
       >
+        {/* Button background with elegant hover effect */}
         <motion.div
-          className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-[0.25px] h-4 bg-elegant-mocha/20 transition-all duration-700"
-          whileInView={{ height: [0, 16] }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.7,
-            delay: 0.2,
-            ease: LUXURY_EASING,
-          }}
+          className="absolute inset-0 bg-elegant-mocha/0 group-hover:bg-elegant-mocha/5"
+          initial={false}
+          transition={{ duration: 0.7, ease: LUXURY_EASING }}
         />
 
-        <div className="relative px-4 py-2">
-          <span className="font-alta uppercase tracking-[0.25em] text-elegant-mocha text-xs transition-colors duration-700 group-hover:text-deep-bronze">
-            VIEW COMPLETE COLLECTION
-          </span>
+        {/* Button text with animation */}
+        <span className="relative z-10 group-hover:text-elegant-mocha transition-colors duration-700">
+          View All Services
+        </span>
 
-          <motion.div className="absolute bottom-0 left-0 w-full h-[0.25px] bg-elegant-mocha/20 transform origin-left transition-transform duration-700 group-hover:scale-x-0" />
-          <motion.div className="absolute bottom-0 right-0 w-0 h-[0.25px] bg-deep-bronze/60 transform origin-right transition-all duration-700 group-hover:w-full" />
-
-          <div className="absolute -top-[1px] -left-[1px] w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity duration-700">
-            <div className="absolute top-0 left-0 w-0 h-[0.25px] bg-deep-bronze group-hover:w-2 transition-all duration-700 delay-100"></div>
-            <div className="absolute top-0 left-0 h-0 w-[0.25px] bg-deep-bronze group-hover:h-2 transition-all duration-700 delay-100"></div>
-          </div>
-          <div className="absolute -bottom-[1px] -right-[1px] w-2 h-2 opacity-0 group-hover:opacity-30 transition-opacity duration-700">
-            <div className="absolute bottom-0 right-0 w-0 h-[0.25px] bg-deep-bronze group-hover:w-2 transition-all duration-700 delay-100"></div>
-            <div className="absolute bottom-0 right-0 h-0 w-[0.25px] bg-deep-bronze group-hover:h-2 transition-all duration-700 delay-100"></div>
-          </div>
-        </div>
+        {/* Subtle bottom border animation */}
+        <motion.div
+          className="absolute bottom-0 left-0 h-[1px] w-0 bg-soft-blush/60 group-hover:w-full"
+          transition={{ duration: 0.8, ease: LUXURY_EASING }}
+        />
       </Link>
     </motion.div>
   );

@@ -1,0 +1,67 @@
+.embla {
+  --slide-spacing: 0.5rem;
+  --slide-size: 76.4%;
+  --slide-height: auto;
+  position: relative;
+  padding: 1.6rem 0;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  align-items: stretch; /* Ensure all slides stretch to the same height */
+  touch-action: pan-y;
+  margin-left: calc(var(--slide-spacing) * -1);
+  transition: height 0.2s;
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  position: relative;
+  height: 100%; /* Ensure slide takes full height */
+  display: flex; /* Enable flexbox for children */
+}
+
+/* Slide inner content wrapper - ensures consistent height */
+.embla__slide_inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex: 1 1 auto;
+}
+
+.embla__slide--luxury {
+  transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+.embla__slide--selected {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (min-width: 640px) {
+  .embla {
+    --slide-size: 70%;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.embla__container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.embla__container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

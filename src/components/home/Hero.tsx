@@ -10,7 +10,6 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import useParallaxEffect from "@/utils/animations/useParallaxEffect";
 import useTextAnimation from "@/utils/animations/useTextAnimation";
 import GlassMorphicCard from "../shared/GlassMorphicCard";
 
@@ -38,17 +37,6 @@ const Hero = () => {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
-
-  // More refined parallax effect
-  const { handleMouseMove } = useParallaxEffect(
-    backgroundRef as React.RefObject<HTMLElement>,
-    {
-      intensity: 5, // Even more subtle for a luxury feel
-      scale: true,
-      reverse: true,
-      easing: `cubic-bezier(${LUXURY_EASING.join(",")})`,
-    }
-  );
 
   // Multi-layer scroll-based parallax effects
   const { scrollYProgress } = useScroll({
@@ -123,7 +111,6 @@ const Hero = () => {
     <motion.section
       ref={heroRef}
       className="relative min-h-[100svh] w-full overflow-hidden flex items-center"
-      onMouseMove={handleMouseMove}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2, ease: LUXURY_EASING }}

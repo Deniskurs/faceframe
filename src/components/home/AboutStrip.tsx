@@ -141,7 +141,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
                 animate={{ y: 0 }}
                 transition={{ duration: 1.4, delay: 0.3, ease: LUXURY_EASING }}
               >
-                Our Story
+                The Story
               </motion.h2>
             </div>
           </motion.div>
@@ -279,7 +279,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
 
                 {/* Founder name and title */}
                 <motion.div
-                  className="absolute bottom-8 left-0 right-0 z-10"
+                  className="absolute bottom-8 left-0 right-0 z-10 flex justify-center"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{
                     opacity: imageInView ? 1 : 0,
@@ -291,12 +291,12 @@ const AboutStrip: React.FC<AboutStripProps> = ({
                     ease: LUXURY_EASING,
                   }}
                 >
-                  <div className="mx-5 py-4 px-6 bg-black/80 backdrop-blur-sm border-[0.25px] border-white/20">
-                    <div className="text-center">
-                      <p className="font-alice text-white text-base tracking-[0.25em] mb-2">
-                        {founderName}
-                      </p>
-                      <p className="font-alta text-white/70 text-[10px] tracking-[0.5em]">
+                  <div className="max-w-[90%] w-auto py-4 px-6 bg-black/80 backdrop-blur-sm border-[0.25px] border-white/20 flex flex-col items-center justify-center">
+                    <p className="font-alice text-white text-base tracking-[0.25em] mb-2 text-center">
+                      {founderName}
+                    </p>
+                    <div className="flex justify-center items-center w-full">
+                      <p className="font-alta text-white/70 text-[11px] sm:text-xs font-medium tracking-[0.25em] sm:tracking-[0.35em] md:tracking-[0.5em] text-center">
                         {subtitle}
                       </p>
                     </div>
@@ -394,17 +394,19 @@ const AboutStrip: React.FC<AboutStripProps> = ({
         <div className="max-w-2xl mx-auto relative z-10">
           {/* Quote display */}
           <motion.div className="text-center px-6" style={{ y: parallaxY3 }}>
-            <motion.p
-              className="font-alta text-elegant-mocha/60 text-xs tracking-[0.4em] uppercase mb-16"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{
-                opacity: quoteInView ? 1 : 0,
-                y: quoteInView ? 0 : 10,
-              }}
-              transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
-            >
-              Our Philosophy
-            </motion.p>
+            <motion.div className="w-full text-center">
+              <motion.p
+                className="font-alta text-elegant-mocha/60 text-xs tracking-[0.4em] uppercase mb-16 text-center inline-block"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{
+                  opacity: quoteInView ? 1 : 0,
+                  y: quoteInView ? 0 : 10,
+                }}
+                transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
+              >
+                Philosophy
+              </motion.p>
+            </motion.div>
 
             {/* Quote with decorative elements */}
             <div className="relative">
@@ -455,7 +457,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
             transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASING }}
           >
             <h3 className="font-alice text-xl sm:text-2xl md:text-3xl tracking-[0.3em] text-elegant-mocha uppercase">
-              Our Vision
+              Vision
             </h3>
             <div className="w-12 h-[0.25px] bg-elegant-mocha/30 mt-4"></div>
           </motion.div>
@@ -523,27 +525,34 @@ const AboutStrip: React.FC<AboutStripProps> = ({
             </p>
           </motion.div>
 
-          {/* Booking CTA */}
+          {/* Booking CTA - refined Chanel-inspired design */}
           <motion.div
-            className="mt-20 text-center"
+            className="mt-12 text-center mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: storyInView ? 1 : 0, y: storyInView ? 0 : 20 }}
             transition={{ duration: 0.7, delay: 1.2, ease: LUXURY_EASING }}
           >
             <Link
               href="/booking"
-              className="relative inline-block overflow-hidden group"
+              className="group relative font-alta tracking-[0.3em] text-[10px] sm:text-xs uppercase text-elegant-mocha/90 px-14 py-5 inline-block border border-elegant-mocha/20 overflow-hidden"
             >
-              <div className="px-10 py-4 border border-elegant-mocha/20 group-hover:border-elegant-mocha/40 transition-all duration-700">
-                <span className="font-alta text-elegant-mocha/90 text-sm tracking-[0.3em] uppercase">
-                  Book Your Experience
-                </span>
+              {/* Button background with elegant hover effect */}
+              <motion.div
+                className="absolute inset-0 bg-elegant-mocha/0 group-hover:bg-elegant-mocha/5"
+                initial={false}
+                transition={{ duration: 0.7, ease: LUXURY_EASING }}
+              />
 
-                <motion.div
-                  className="absolute bottom-0 left-0 h-[0.5px] w-0 bg-elegant-mocha/30 group-hover:w-full"
-                  transition={{ duration: 0.7, ease: LUXURY_EASING }}
-                />
-              </div>
+              {/* Button text with animation */}
+              <span className="relative z-10 group-hover:text-elegant-mocha transition-colors duration-700">
+                Book Your Experience
+              </span>
+
+              {/* Subtle bottom border animation */}
+              <motion.div
+                className="absolute bottom-0 left-0 h-[1px] w-0 bg-soft-blush/60 group-hover:w-full"
+                transition={{ duration: 0.8, ease: LUXURY_EASING }}
+              />
             </Link>
           </motion.div>
         </div>

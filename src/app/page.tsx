@@ -2,11 +2,13 @@ import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
 import AboutStrip from "@/components/home/AboutStrip";
 import { ServicesPreview } from "@/components/home/services";
-import GalleryTeaser from "@/components/home/GalleryTeaser";
+import ChanelTransformationsGallery from "@/components/home/transformations/ChanelTransformationsGallery";
 import TestimonialCarousel from "@/components/home/TestimonialCarousel";
 import FAQsPreview from "@/components/home/FAQsPreview";
 import BookingCTA from "@/components/home/BookingCTA";
 import BrandedDivider from "@/components/shared/BrandedDivider";
+import MinimalistSectionBreak from "@/components/shared/MinimalistSectionBreak";
+import SignatureTransition from "@/components/shared/SignatureTransition";
 
 export default function Home() {
   // Founder section content
@@ -30,29 +32,22 @@ export default function Home() {
         paragraphs={founderParagraphs}
       />
 
-      {/* Decorative divider before services - refined spacing */}
-      <div className="py-12 md:py-20">
-        <BrandedDivider style="gradient" height="sm" text="PREMIUM SERVICES" />
-      </div>
+      {/* Chanel/Dior-inspired luxury section transition */}
+      <MinimalistSectionBreak
+        variant="enhanced"
+        hasDecorativeElement={true}
+        hasSideElements={true}
+        hasGradientEdge={true}
+      />
 
-      {/* Services preview section */}
-      <ServicesPreview hideTitle={true} />
+      {/* Services preview section with premium luxury aesthetic */}
+      <ServicesPreview hideTitle={false} />
 
-      {/* Decorative divider before gallery - refined spacing */}
-      <div className="py-12 md:py-20">
-        <BrandedDivider
-          style="image"
-          height="sm"
-          overlay={true}
-          overlayOpacity={0.3}
-          text="TRANSFORMATIONS"
-          image="/images/gallery/image13.webp"
-          parallax={true}
-        />
-      </div>
+      {/* Signature floating element transition - Chanel-inspired */}
+      <SignatureTransition />
 
-      {/* Gallery teaser section */}
-      <GalleryTeaser hideTitle={true} />
+      {/* Extraordinary Chanel-inspired Transformations Gallery */}
+      <ChanelTransformationsGallery hideTitle={false} />
 
       {/* Decorative divider before testimonials - refined spacing */}
       <div className="py-12 md:py-20">

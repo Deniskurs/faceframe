@@ -1,1 +1,1 @@
-export { ServicesPreview } from "./ServicesPreview";
+export { ServicesPreview } from "./views/ServicesPreview";
