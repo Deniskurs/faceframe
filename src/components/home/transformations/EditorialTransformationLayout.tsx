@@ -1,0 +1,160 @@
+"use client";
+
+import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
+// Import only the animation hook we need
+import { useLuxuryReveal } from "../../../utils/animations/useLuxuryTransition";
+
+interface EditorialTransformationLayoutProps {
+  children: ReactNode;
+  title?: string;
+  subtitle?: string;
+  quote?: string;
+  quoteAuthor?: string;
+  className?: string;
+}
+
+/**
+ * A Chanel-inspired editorial layout for transformations
+ * Features asymmetrical design, refined typography, and luxury animation
+ */
+export default function EditorialTransformationLayout({
+  children,
+  title,
+  subtitle,
+  quote,
+  quoteAuthor,
+  className = "",
+}: EditorialTransformationLayoutProps) {
+  // Precise Chanel timing standards (1.8s standard)
+  const titleReveal = useLuxuryReveal<HTMLHeadingElement>({
+    direction: "up",
+    threshold: 0.1,
+    delay: 0.1,
+    duration: 1.8,
+    easingType: "elegant",
+  });
+
+  const subtitleReveal = useLuxuryReveal<HTMLParagraphElement>({
+    direction: "up",
+    threshold: 0.1,
+    delay: 0.2,
+    duration: 1.8,
+    easingType: "elegant",
+  });
+
+  const quoteReveal = useLuxuryReveal<HTMLDivElement>({
+    direction: "up",
+    threshold: 0.1,
+    delay: 0.3,
+    duration: 1.8,
+    easingType: "refined",
+  });
+
+  // Horizontal line with Chanel's exact timing (1.8s)
+  const lineReveal = useLuxuryReveal<HTMLDivElement>({
+    direction: "right",
+    threshold: 0.1,
+    delay: 0.1,
+    duration: 1.8,
+    easingType: "refined",
+  });
+
+  return (
+    <div className={`relative py-16 md:py-32 ${className}`}>
+      {/* Single refined horizontal accent line - Chanel-inspired restraint */}
+      <motion.div
+        ref={lineReveal.ref}
+        variants={lineReveal.variants}
+        initial={lineReveal.initial}
+        animate={lineReveal.animate}
+        className="absolute left-0 right-0 top-0 h-[0.5px] bg-elegant-mocha/10 mx-auto"
+      />
+
+      {/* Content container with refined editorial spacing using golden ratio */}
+      <div className="relative z-10 max-w-[1220px] mx-auto px-4 md:px-8">
+        {/* Editorial header with refined typography */}
+        {(title || subtitle) && (
+          <div className="mb-16 md:mb-24">
+            {/* Title with Chanel's exact typography specifications */}
+            {title && (
+              <motion.h2
+                ref={titleReveal.ref}
+                variants={titleReveal.variants}
+                initial={titleReveal.initial}
+                animate={titleReveal.animate}
+                className="font-alice text-[24px] md:text-[36px] tracking-[0.2em] text-elegant-mocha uppercase text-center font-light"
+              >
+                {title}
+                {/* Chanel-standard separator (1/8 container width) */}
+                <span className="relative block h-[0.5px] w-[12.5%] mx-auto bg-elegant-mocha/20 mt-12"></span>
+              </motion.h2>
+            )}
+
+            {/* Subtitle with Chanel's precise typography system */}
+            {subtitle && (
+              <motion.p
+                ref={subtitleReveal.ref}
+                variants={subtitleReveal.variants}
+                initial={subtitleReveal.initial}
+                animate={subtitleReveal.animate}
+                className="font-alta text-elegant-mocha/70 max-w-xl mx-auto mt-12 tracking-[0.12em] leading-[1.8] text-center text-[16px]"
+              >
+                {subtitle}
+              </motion.p>
+            )}
+          </div>
+        )}
+
+        {/* Refined quote section with emotional connector to transformations */}
+        {quote && (
+          <motion.div
+            ref={quoteReveal.ref}
+            variants={quoteReveal.variants}
+            initial={quoteReveal.initial}
+            animate={quoteReveal.animate}
+            className="mb-12 max-w-2xl mx-auto relative"
+          >
+            {/* Chanel's signature asymmetrical layout with left alignment */}
+            <div className="flex flex-col items-start pl-[8%] pr-[8%] md:pl-[12.5%] md:pr-0 pt-8 pb-6">
+              <blockquote className="font-alice text-[16px] md:text-[24px] text-elegant-mocha leading-[1.8] relative mb-8 tracking-[0.05em]">
+                <span className="block mb-6 w-12 h-[0.5px] bg-elegant-mocha/20"></span>
+                &ldquo;{quote}&rdquo;
+              </blockquote>
+
+              {quoteAuthor && (
+                <div className="mt-8">
+                  <p className="font-alta text-[12px] tracking-[0.2em] uppercase text-elegant-mocha/70">
+                    {quoteAuthor}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Visual connector - draws the eye from philosophy to transformations */}
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[0.5px] h-[120px] bg-elegant-mocha/10"
+              initial={{ scaleY: 0, transformOrigin: "top" }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.8, ease: "easeOut", delay: 0.6 }}
+            />
+
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 -bottom-8 opacity-20"
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 0.2, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 1.6 }}
+            >
+              <div className="h-4 w-4 rounded-full border-[0.5px] border-elegant-mocha/30"></div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* Main content area */}
+        <div>{children}</div>
+      </div>
+    </div>
+  );
+}

@@ -2,7 +2,7 @@ import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
 import AboutStrip from "@/components/home/AboutStrip";
 import { ServicesPreview } from "@/components/home/services";
-import ChanelTransformationsGallery from "@/components/home/transformations/ChanelTransformationsGallery";
+import LuxuryTransformationsGallery from "@/components/home/transformations/LuxuryTransformationsGallery";
 import TestimonialCarousel from "@/components/home/TestimonialCarousel";
 import FAQsPreview from "@/components/home/FAQsPreview";
 import BookingCTA from "@/components/home/BookingCTA";
@@ -47,7 +47,7 @@ export default function Home() {
       <SignatureTransition />
 
       {/* Extraordinary Chanel-inspired Transformations Gallery */}
-      <ChanelTransformationsGallery hideTitle={false} />
+      <LuxuryTransformationsGallery hideTitle={false} />
 
       {/* Decorative divider before testimonials - refined spacing */}
       <div className="py-12 md:py-20">

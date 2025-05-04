@@ -42,21 +42,23 @@ const ScrollProgressIndicator: React.FC<ScrollProgressIndicatorProps> = ({
   }, []);
 
   return (
-    <motion.div
-      className="fixed left-0 right-0 origin-left"
-      style={{
-        top: position === "top" ? 0 : "auto",
-        bottom: position === "bottom" ? 0 : "auto",
-        height,
-        background: color,
-        scaleX,
-        opacity: isVisible ? 1 : 0,
-        zIndex,
-      }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: isVisible ? 1 : 0 }}
-      transition={{ duration: 0.3 }}
-    />
+    <div className="relative" style={{ position: "relative", width: "100%" }}>
+      <motion.div
+        className="fixed left-0 right-0 origin-left"
+        style={{
+          top: position === "top" ? 0 : "auto",
+          bottom: position === "bottom" ? 0 : "auto",
+          height,
+          background: color,
+          scaleX,
+          opacity: isVisible ? 1 : 0,
+          zIndex,
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isVisible ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+      />
+    </div>
   );
 };
 

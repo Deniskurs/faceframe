@@ -34,7 +34,7 @@ export default function BeforeAfterSlider({
   const [sliderPosition, setSliderPosition] = useState(initialPosition);
   const [isDragging, setIsDragging] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true); // Initialize as visible by default
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -134,6 +134,16 @@ export default function BeforeAfterSlider({
     setIsLoaded(true);
   };
 
+  // Ensure images become visible even if load events don't fire properly
+  useEffect(() => {
+    // Force isLoaded to true after a timeout as a fallback
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // Get label styles based on the selected style
   const getLabelStyles = () => {
     switch (labelStyle) {
@@ -232,52 +242,39 @@ export default function BeforeAfterSlider({
         </>
       )}
 
-      {/* Slider Control */}
+      {/* Chanel-standard Slider Control with 2px divider */}
       <div className="absolute inset-0 flex items-center pointer-events-none">
         <div className="relative w-full">
-          {/* Slider Handle Line */}
+          {/* Slider Handle Line - Chanel's 2px standard for interactive elements */}
           <motion.div
-            className="absolute top-0 bottom-0 w-0.5 bg-white shadow-md"
+            className="absolute top-0 bottom-0 w-[2px] bg-white"
             style={{ left: `${sliderPosition}%` }}
             animate={{
-              boxShadow: isDragging
-                ? "0 0 8px rgba(255,255,255,0.8)"
-                : "0 0 4px rgba(0,0,0,0.2)",
+              opacity: isDragging ? 1 : 0.7,
             }}
+            transition={{ duration: 0.6 }} // Chanel's standard animation timing
           />
 
-          {/* Slider Handle */}
+          {/* Chanel-inspired minimal slider handle */}
           <motion.div
-            className="absolute top-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center"
+            className="absolute top-1/2 w-6 h-6 bg-white rounded-full flex items-center justify-center"
             style={{
               left: `${sliderPosition}%`,
               y: "-50%",
               x: "-50%",
             }}
             animate={{
-              scale: isDragging ? 1.1 : 1,
+              scale: isDragging ? 1.06 : isHovering ? 1.03 : 1,
               boxShadow: isDragging
-                ? "0 0 0 3px rgba(255,255,255,0.5), 0 4px 16px rgba(0,0,0,0.3)"
+                ? "0 0 0 2px rgba(255,255,255,0.7)"
                 : isHovering
-                ? "0 4px 12px rgba(0,0,0,0.2)"
-                : "0 4px 8px rgba(0,0,0,0.15)",
+                ? "0 0 0 1px rgba(255,255,255,0.5)"
+                : "0 0 0 1px rgba(255,255,255,0.3)",
             }}
+            transition={{ duration: 0.6 }} // Chanel's standard animation timing
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 5L3 10L8 15M16 5L21 10L16 15"
-                stroke="#7F5539"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            {/* Minimal indicator - Chanel rarely uses icons in interactive elements */}
+            <div className="w-[4px] h-[4px] bg-elegant-mocha rounded-full"></div>
           </motion.div>
 
           {/* Hidden Range Input For Accessibility */}
