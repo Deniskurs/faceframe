@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { useInView } from "framer-motion";
 import {
   proceduralVariation,
@@ -128,126 +129,129 @@ const ShaderImage: React.FC<ShaderImageProps> = ({
     }
   `;
 
-  // Initialize WebGL and shaders
-  const initGL = () => {
-    if (
-      !canvasRef.current ||
-      !textureRef.current ||
-      !textureRef.current.complete
-    )
-      return;
+  // Initialize WebGL and shaders - memoized with useCallback
+  const initGL = useCallback(
+    function initGL() {
+      if (
+        !canvasRef.current ||
+        !textureRef.current ||
+        !textureRef.current.complete
+      )
+        return;
 
-    const canvas = canvasRef.current;
-    const gl = canvas.getContext("webgl", {
-      alpha: true,
-      antialias: true,
-      premultipliedAlpha: false,
-    });
+      const canvas = canvasRef.current;
+      const gl = canvas.getContext("webgl", {
+        alpha: true,
+        antialias: true,
+        premultipliedAlpha: false,
+      });
 
-    if (!gl) {
-      console.error("WebGL not supported");
-      return;
-    }
+      if (!gl) {
+        console.error("WebGL not supported");
+        return;
+      }
 
-    glRef.current = gl;
+      glRef.current = gl;
 
-    // Compile shaders
-    const vertexShader = compileShader(
-      gl,
-      gl.VERTEX_SHADER,
-      vertexShaderSource
-    );
-    const fragmentShader = compileShader(
-      gl,
-      gl.FRAGMENT_SHADER,
-      fragmentShaderSource
-    );
+      // Compile shaders
+      const vertexShader = compileShader(
+        gl,
+        gl.VERTEX_SHADER,
+        vertexShaderSource
+      );
+      const fragmentShader = compileShader(
+        gl,
+        gl.FRAGMENT_SHADER,
+        fragmentShaderSource
+      );
 
-    if (!vertexShader || !fragmentShader) return;
+      if (!vertexShader || !fragmentShader) return;
 
-    // Create and link program
-    const program = gl.createProgram();
-    if (!program) return;
+      // Create and link program
+      const program = gl.createProgram();
+      if (!program) return;
 
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
 
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error("Could not link program", gl.getProgramInfoLog(program));
-      return;
-    }
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.error("Could not link program", gl.getProgramInfoLog(program));
+        return;
+      }
 
-    programRef.current = program;
+      programRef.current = program;
 
-    // Set up geometry - a quad that covers the canvas
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]),
-      gl.STATIC_DRAW
-    );
+      // Set up geometry - a quad that covers the canvas
+      const positionBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]),
+        gl.STATIC_DRAW
+      );
 
-    // Set up texture coordinates
-    const texCoordBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]),
-      gl.STATIC_DRAW
-    );
+      // Set up texture coordinates
+      const texCoordBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]),
+        gl.STATIC_DRAW
+      );
 
-    // Create and bind texture
-    const texture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, texture);
+      // Create and bind texture
+      const texture = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, texture);
 
-    // Set texture parameters
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      // Set texture parameters
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
-    // Upload image to texture
-    gl.texImage2D(
-      gl.TEXTURE_2D,
-      0,
-      gl.RGBA,
-      gl.RGBA,
-      gl.UNSIGNED_BYTE,
-      textureRef.current
-    );
+      // Upload image to texture
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        textureRef.current
+      );
 
-    // Prep for rendering
-    gl.useProgram(program);
+      // Prep for rendering
+      gl.useProgram(program);
 
-    // Lookup attribute locations
-    const positionLocation = gl.getAttribLocation(program, "a_position");
-    const texCoordLocation = gl.getAttribLocation(program, "a_texCoord");
+      // Lookup attribute locations
+      const positionLocation = gl.getAttribLocation(program, "a_position");
+      const texCoordLocation = gl.getAttribLocation(program, "a_texCoord");
 
-    // Bind position buffer and set attributes
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.enableVertexAttribArray(positionLocation);
-    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+      // Bind position buffer and set attributes
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.enableVertexAttribArray(positionLocation);
+      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-    // Bind texCoord buffer and set attributes
-    gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
-    gl.enableVertexAttribArray(texCoordLocation);
-    gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0);
+      // Bind texCoord buffer and set attributes
+      gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+      gl.enableVertexAttribArray(texCoordLocation);
+      gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0);
 
-    // Set canvas dimensions to match image with devicePixelRatio for retina
-    const dpr = window.devicePixelRatio || 1;
-    const displayWidth = Math.floor(canvas.clientWidth * dpr);
-    const displayHeight = Math.floor(canvas.clientHeight * dpr);
+      // Set canvas dimensions to match image with devicePixelRatio for retina
+      const dpr = window.devicePixelRatio || 1;
+      const displayWidth = Math.floor(canvas.clientWidth * dpr);
+      const displayHeight = Math.floor(canvas.clientHeight * dpr);
 
-    if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
-      canvas.width = displayWidth;
-      canvas.height = displayHeight;
-      gl.viewport(0, 0, displayWidth, displayHeight);
-    }
+      if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
+        canvas.width = displayWidth;
+        canvas.height = displayHeight;
+        gl.viewport(0, 0, displayWidth, displayHeight);
+      }
 
-    setCanvasInitialized(true);
-  };
+      setCanvasInitialized(true);
+    },
+    [vertexShaderSource, fragmentShaderSource, canvasRef, textureRef]
+  );
 
   // Compile individual shaders
   const compileShader = (
@@ -275,71 +279,83 @@ const ShaderImage: React.FC<ShaderImageProps> = ({
     return shader;
   };
 
-  // Animation loop for shader
-  const animate = () => {
-    if (!canvasRef.current || !glRef.current || !programRef.current) return;
+  // Animation loop for shader - memoized with useCallback
+  const animate = useCallback(
+    function animate() {
+      if (!canvasRef.current || !glRef.current || !programRef.current) return;
 
-    const gl = glRef.current;
-    const program = programRef.current;
+      const gl = glRef.current;
+      const program = programRef.current;
 
-    // Calculate time value for animations (adjusted with procedural variation)
-    timeRef.current += 0.003 * variationTiming;
-    const timeValue = timeRef.current;
+      // Calculate time value for animations (adjusted with procedural variation)
+      timeRef.current += 0.003 * variationTiming;
+      const timeValue = timeRef.current;
 
-    // Clear canvas and prepare for drawing
-    gl.clearColor(0, 0, 0, 0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
+      // Clear canvas and prepare for drawing
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
 
-    // Set uniforms
-    const timeLocation = gl.getUniformLocation(program, "u_time");
-    const intensityLocation = gl.getUniformLocation(program, "u_intensity");
-    const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
-    const variationLocation = gl.getUniformLocation(program, "u_variation");
-    const matrixLocation = gl.getUniformLocation(program, "u_matrix");
+      // Set uniforms
+      const timeLocation = gl.getUniformLocation(program, "u_time");
+      const intensityLocation = gl.getUniformLocation(program, "u_intensity");
+      const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+      const variationLocation = gl.getUniformLocation(program, "u_variation");
+      const matrixLocation = gl.getUniformLocation(program, "u_matrix");
 
-    // Calculate a silk-like motion path if in view
-    const [transX, transY] = isInView
-      ? silkMotionPath(Math.sin(timeValue * 0.5) * 0.5 + 0.5)
-      : [0, 0];
+      // Calculate a silk-like motion path if in view
+      const [transX, transY] = isInView
+        ? silkMotionPath(Math.sin(timeValue * 0.5) * 0.5 + 0.5)
+        : [0, 0];
 
-    // Create transformation matrix
-    // This is a simple 2D matrix: [a c e; b d f; 0 0 1]
-    // Where a,b,c,d control scaling/rotation and e,f control translation
-    const matrix = [
-      1.0,
-      0.0,
-      0.0, // a, b, e
-      0.0,
-      1.0,
-      0.0, // c, d, f
-    ];
+      // Create transformation matrix
+      // This is a simple 2D matrix: [a c e; b d f; 0 0 1]
+      // Where a,b,c,d control scaling/rotation and e,f control translation
+      const matrix = [
+        1.0,
+        0.0,
+        0.0, // a, b, e
+        0.0,
+        1.0,
+        0.0, // c, d, f
+      ];
 
-    // Apply subtle movement if in view
-    if (isInView) {
-      matrix[2] = transX * 0.01 * intensity; // e: translate x
-      matrix[5] = transY * 0.01 * intensity; // f: translate y
-    }
+      // Apply subtle movement if in view
+      if (isInView) {
+        matrix[2] = transX * 0.01 * intensity; // e: translate x
+        matrix[5] = transY * 0.01 * intensity; // f: translate y
+      }
 
-    gl.uniform1f(timeLocation, timeValue);
-    gl.uniform1f(intensityLocation, isInView ? intensity : 0);
-    gl.uniform2f(
-      resolutionLocation,
-      canvasRef.current.width,
-      canvasRef.current.height
-    );
-    gl.uniform2f(variationLocation, variationX, variationY);
-    gl.uniformMatrix3fv(matrixLocation, false, matrix);
+      gl.uniform1f(timeLocation, timeValue);
+      gl.uniform1f(intensityLocation, isInView ? intensity : 0);
+      gl.uniform2f(
+        resolutionLocation,
+        canvasRef.current.width,
+        canvasRef.current.height
+      );
+      gl.uniform2f(variationLocation, variationX, variationY);
+      gl.uniformMatrix3fv(matrixLocation, false, matrix);
 
-    // Draw
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
+      // Draw
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
 
-    // Continue animation loop
-    requestRef.current = requestAnimationFrame(animate);
-  };
+      // Continue animation loop
+      requestRef.current = requestAnimationFrame(animate);
+    },
+    [
+      intensity,
+      isInView,
+      variationTiming,
+      variationX,
+      variationY,
+      canvasRef,
+      glRef,
+      programRef,
+    ]
+  );
 
   // Handle image loading
   useEffect(() => {
-    const image = new Image();
+    const image = new window.Image();
     image.src = src;
     image.crossOrigin = "anonymous";
     image.onload = () => {
@@ -358,7 +374,7 @@ const ShaderImage: React.FC<ShaderImageProps> = ({
     if (imageLoaded && canvasRef.current) {
       initGL();
     }
-  }, [imageLoaded]);
+  }, [imageLoaded, initGL]);
 
   // Start/stop animation loop based on in-view status
   useEffect(() => {
@@ -374,7 +390,7 @@ const ShaderImage: React.FC<ShaderImageProps> = ({
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, [canvasInitialized, isInView]);
+  }, [canvasInitialized, isInView, animate]);
 
   // Resize handler
   useEffect(() => {
@@ -409,20 +425,22 @@ const ShaderImage: React.FC<ShaderImageProps> = ({
         aspectRatio: !height && width ? "auto" : undefined,
       }}
     >
-      {/* Fallback image for non-WebGL environments */}
-      <img
+      {/* Fallback image for non-WebGL environments - using Next.js Image */}
+      <Image
         src={src}
         alt={alt}
-        width={width}
-        height={height}
+        width={width || 1200}
+        height={height || 800}
         className={`absolute inset-0 w-full h-full object-cover opacity-0 ${
           !canvasInitialized ? "opacity-100" : ""
         }`}
         style={{
           transition: "opacity 0.5s ease-in-out",
           willChange: "opacity",
+          objectFit: "cover",
         }}
-        loading={priority ? "eager" : "lazy"}
+        priority={priority}
+        unoptimized={false}
       />
 
       {/* WebGL canvas for advanced effects */}

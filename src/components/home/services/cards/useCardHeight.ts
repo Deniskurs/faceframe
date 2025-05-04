@@ -5,7 +5,7 @@
  * Provides functionality to ensure consistent card heights
  */
 
-import { useState, useEffect, useRef, RefObject } from "react";
+import { useState, useEffect, useRef, RefObject, useCallback } from "react";
 
 /**
  * Interface for card height hook parameters
@@ -46,8 +46,8 @@ export function useCardHeight({
     };
   };
 
-  // Calculate and apply the maximum height across all cards
-  const equalizeHeights = () => {
+  // Calculate and apply the maximum height across all cards - memoized with useCallback
+  const equalizeHeights = useCallback(() => {
     if (!enabled || isProcessingRef.current || cardRefs.current.size === 0)
       return;
 
@@ -79,7 +79,7 @@ export function useCardHeight({
         isProcessingRef.current = false;
       }
     });
-  };
+  }, [enabled, minHeight]);
 
   // Observe container resize events
   const [containerSize] = useResizeObserver(containerRef);
@@ -91,14 +91,14 @@ export function useCardHeight({
     if (equalizeOnMount) {
       equalizeHeights();
     }
-  }, [enabled, equalizeOnMount]);
+  }, [enabled, equalizeOnMount, equalizeHeights]);
 
   // Equalize heights when container size changes
   useEffect(() => {
     if (!enabled || !equalizeOnResize) return;
 
     equalizeHeights();
-  }, [containerSize, enabled, equalizeOnResize]);
+  }, [containerSize, enabled, equalizeOnResize, equalizeHeights]);
 
   return {
     cardHeight,

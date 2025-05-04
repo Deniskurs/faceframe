@@ -5,7 +5,7 @@
  * Chanel/Dior inspired luxury card with fixed height and responsive design
  */
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
@@ -38,16 +38,22 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     }
   }, [registerRef]);
 
-  // Premium transition timings
-  const transitionBase = {
-    duration: 0.85,
-    ease: LUXURY_EASING,
-  };
+  // Premium transition timings - memoized to prevent recreation on each render
+  const transitionBase = useMemo(
+    () => ({
+      duration: 0.85,
+      ease: LUXURY_EASING,
+    }),
+    []
+  );
 
-  const subtleTransition = {
-    duration: 0.65,
-    ease: SUBTLE_EASE,
-  };
+  const subtleTransition = useMemo(
+    () => ({
+      duration: 0.65,
+      ease: SUBTLE_EASE,
+    }),
+    []
+  );
 
   // Initialize animations
   useEffect(() => {
@@ -86,7 +92,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         transition: subtleTransition,
       });
     }
-  }, [isActive, titleControls, contentControls, imageControls]);
+  }, [
+    isActive,
+    titleControls,
+    contentControls,
+    imageControls,
+    subtleTransition,
+    transitionBase,
+  ]);
 
   // Mouse parallax effect handler - Dior website inspired
   const handleMouseMove = (e: React.MouseEvent) => {

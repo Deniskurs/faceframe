@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 
 // Simple debounce implementation to avoid external dependencies
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
@@ -63,11 +62,14 @@ export function useOptimizedCarousel(options: CarouselOptions = {}) {
     scrollingRef.current = false;
   }, [activeIndex, containerWidth]);
 
-  // Debounced version to improve performance
-  const debouncedCalculateActiveIndex = useCallback(
-    debounce(calculateActiveIndex, debounceTime),
-    [calculateActiveIndex, debounceTime]
-  );
+  // Debounced version to improve performance with explicit dependencies
+  const debouncedCalculateActiveIndex = useCallback(() => {
+    const debouncedFn = debounce(() => {
+      calculateActiveIndex();
+    }, debounceTime);
+
+    debouncedFn();
+  }, [calculateActiveIndex, debounceTime]);
 
   // Navigate to a specific slide programmatically
   const navigateTo = useCallback(

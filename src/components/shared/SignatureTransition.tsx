@@ -3,23 +3,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-interface SignatureTransitionProps {
-  fromColor?: string;
-  toColor?: string;
-}
-
-export default function SignatureTransition({ 
-  fromColor = "white", 
-  toColor = "soft-blush/80" 
-}: SignatureTransitionProps) {
+export default function SignatureTransition(): React.ReactElement {
   return (
     <div className="relative h-32 md:h-40 overflow-hidden">
       {/* Gradient background transition with brand colors */}
       <div className="absolute inset-0 bg-gradient-to-b from-light-cream to-soft-blush/90"></div>
-      
+
       {/* Floating signature element */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.4, ease: [0.19, 1, 0.22, 1] }}

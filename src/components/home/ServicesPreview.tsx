@@ -135,13 +135,16 @@ const ServicesPreview: React.FC<ServicesPreviewProps> = ({
       }
     );
 
+    // Store a reference to cardRefs.current
+    const currentRefs = cardRefs.current;
+
     // Observe all card elements
-    cardRefs.current.forEach((card) => {
+    currentRefs.forEach((card) => {
       if (card) observer.observe(card);
     });
 
     return () => {
-      cardRefs.current.forEach((card) => {
+      currentRefs.forEach((card) => {
         if (card) observer.unobserve(card);
       });
     };

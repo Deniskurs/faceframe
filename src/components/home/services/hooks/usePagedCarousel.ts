@@ -176,7 +176,6 @@ export function usePagedCarousel(options: PagedCarouselOptions) {
     navigateTo,
     slideCount,
     swipeThreshold,
-    getSlideWidth,
     isAnimating,
   ]);
 
