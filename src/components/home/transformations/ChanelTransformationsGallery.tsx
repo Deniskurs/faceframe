@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import BeforeAfterSlider from "../../shared/BeforeAfterSlider";
 import { GalleryItem } from "../../../types";
 import galleryService from "../../../services/galleryService";
@@ -19,8 +19,6 @@ export default function ChanelTransformationsGallery({
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [activeImage, setActiveImage] = useState<GalleryItem | null>(null);
 
   // Fetch featured gallery items
   useEffect(() => {
@@ -40,18 +38,6 @@ export default function ChanelTransformationsGallery({
 
     fetchGalleryItems();
   }, []);
-
-  // Lightbox interactions
-  const openLightbox = (item: GalleryItem) => {
-    setActiveImage(item);
-    setLightboxOpen(true);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeLightbox = () => {
-    setLightboxOpen(false);
-    document.body.style.overflow = "";
-  };
 
   return (
     <section className="pt-20 pb-28 relative overflow-hidden bg-soft-blush">
@@ -166,8 +152,8 @@ export default function ChanelTransformationsGallery({
               transition={{ duration: 0.9, delay: 0.2, ease: LUXURY_EASING }}
             >
               <blockquote className="font-alice text-lg md:text-xl italic text-elegant-mocha/90 leading-relaxed">
-                &quot;True beauty enhancement is about precision, subtlety, and
-                respecting one&apos;s natural features.&quot;
+                &ldquo;True beauty enhancement is about precision, subtlety, and
+                respecting one&apos;s natural features.&rdquo;
               </blockquote>
               <p className="font-alta text-xs tracking-widest uppercase text-elegant-mocha/60 mt-4">
                 — FaceFrame Philosophy
@@ -183,7 +169,6 @@ export default function ChanelTransformationsGallery({
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.9, ease: LUXURY_EASING }}
-                onClick={() => galleryItems[0] && openLightbox(galleryItems[0])}
               >
                 {galleryItems[0] && (
                   <BeforeAfterSlider
@@ -191,6 +176,10 @@ export default function ChanelTransformationsGallery({
                     afterImage={galleryItems[0].afterImage}
                     alt={galleryItems[0].alt}
                     height={580}
+                    initialPosition={38} // Golden ratio position
+                    categoryLabel={galleryItems[0].category}
+                    showClientResult={true}
+                    clientResultText="Actual Client Result"
                   />
                 )}
 
@@ -199,27 +188,6 @@ export default function ChanelTransformationsGallery({
                 <div className="absolute top-4 left-4 w-[1px] h-6 bg-white/60"></div>
                 <div className="absolute bottom-4 right-4 w-6 h-[1px] bg-white/60"></div>
                 <div className="absolute bottom-4 right-4 w-[1px] h-6 bg-white/60"></div>
-
-                {/* Premium category display */}
-                {galleryItems[0] && (
-                  <div className="absolute top-6 left-6 px-6 py-2 bg-white/95">
-                    <span className="font-alta text-xs tracking-[0.12em] uppercase text-elegant-mocha">
-                      {galleryItems[0].category}
-                    </span>
-                  </div>
-                )}
-
-                {/* Refined client indicator */}
-                <motion.div
-                  className="absolute bottom-6 right-6 px-4 py-1 border border-white/20 backdrop-blur-sm"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                >
-                  <span className="font-alta text-xs tracking-[0.12em] uppercase text-white/80">
-                    Actual Client Result
-                  </span>
-                </motion.div>
               </motion.div>
             </div>
 
@@ -262,21 +230,17 @@ export default function ChanelTransformationsGallery({
                     delay: 0.1 * index,
                     ease: LUXURY_EASING,
                   }}
-                  onClick={() => openLightbox(item)}
                 >
                   <BeforeAfterSlider
                     beforeImage={item.beforeImage}
                     afterImage={item.afterImage}
                     alt={item.alt}
                     height={300}
+                    initialPosition={38} // Golden ratio position
+                    categoryLabel={item.category}
+                    showClientResult={true}
+                    clientResultText="Client Result"
                   />
-
-                  {/* Minimal category label */}
-                  <div className="absolute top-3 left-3 px-3 py-1 bg-white/90">
-                    <span className="font-alta text-[10px] tracking-[0.12em] uppercase text-elegant-mocha">
-                      {item.category}
-                    </span>
-                  </div>
                 </motion.div>
               ))}
             </div>
@@ -300,73 +264,7 @@ export default function ChanelTransformationsGallery({
         )}
       </div>
 
-      {/* Refined lightbox with Chanel-inspired aesthetic */}
-      <AnimatePresence>
-        {lightboxOpen && activeImage && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: LUXURY_EASING }}
-          >
-            <div className="relative w-full max-w-6xl p-8">
-              {/* Elegant close button */}
-              <button
-                className="absolute top-6 right-6 z-10 w-10 h-10 flex items-center justify-center border border-white/20 focus:outline-none group"
-                onClick={closeLightbox}
-              >
-                <div className="w-6 h-[1px] bg-white/60 absolute rotate-45 group-hover:bg-white/90 transition-all duration-500"></div>
-                <div className="w-6 h-[1px] bg-white/60 absolute -rotate-45 group-hover:bg-white/90 transition-all duration-500"></div>
-              </button>
-
-              {/* Title display with Chanel-inspired styling */}
-              <div className="text-center mb-12">
-                <motion.h3
-                  className="font-alice text-2xl tracking-[0.15em] text-white/90 uppercase"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: LUXURY_EASING }}
-                >
-                  {activeImage.category}
-                </motion.h3>
-                <motion.div
-                  className="h-[1px] w-16 bg-white/30 mx-auto mt-4"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.3,
-                    ease: LUXURY_EASING,
-                  }}
-                />
-              </div>
-
-              {/* Lightbox Content with Chanel-inspired border treatment */}
-              <motion.div
-                className="relative border border-white/20"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.9, delay: 0.2, ease: LUXURY_EASING }}
-              >
-                <BeforeAfterSlider
-                  beforeImage={activeImage.beforeImage}
-                  afterImage={activeImage.afterImage}
-                  alt={activeImage.alt}
-                  height={650}
-                  showLabels={true}
-                />
-
-                {/* Chanel-inspired decorative corners */}
-                <div className="absolute top-4 left-4 w-8 h-[1px] bg-white/40"></div>
-                <div className="absolute top-4 left-4 w-[1px] h-8 bg-white/40"></div>
-                <div className="absolute bottom-4 right-4 w-8 h-[1px] bg-white/40"></div>
-                <div className="absolute bottom-4 right-4 w-[1px] h-8 bg-white/40"></div>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* No lightbox needed */}
     </section>
   );
 }

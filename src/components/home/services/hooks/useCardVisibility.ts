@@ -16,6 +16,11 @@ export function useCardVisibility(
     }
     setActiveCategory(0);
 
+    // Store a reference to cardRefs.current to use in cleanup
+    // This addresses the React Hook exhaustive-deps warning about ref values changing
+    const currentCardRefs = cardRefs.current;
+    const currentCarouselRef = carouselRef.current;
+
     // Setup intersection observer for each card
     const observer = new IntersectionObserver(
       (entries) => {
@@ -31,26 +36,24 @@ export function useCardVisibility(
         }
       },
       {
-        root: carouselRef.current,
+        root: currentCarouselRef,
         threshold: [0.1, 0.5, 0.8],
         rootMargin: "0px",
       }
     );
 
-    // Store a reference to cardRefs.current to use in cleanup
-    const currentRefs = cardRefs.current;
-
     // Observe all card elements
-    currentRefs.forEach((card) => {
+    currentCardRefs.forEach((card) => {
       if (card) observer.observe(card);
     });
 
     return () => {
-      currentRefs.forEach((card) => {
+      // Use the captured reference in cleanup to avoid stale ref issues
+      currentCardRefs.forEach((card) => {
         if (card) observer.unobserve(card);
       });
     };
-  }, [carouselRef]);
+  }, [carouselRef]); // carouselRef is already properly listed as a dependency
 
   return { activeCategory, setActiveCategory, cardRefs };
 }

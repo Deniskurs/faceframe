@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { LUXURY_EASING } from "../home/services/core/types";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -16,6 +17,13 @@ interface BeforeAfterSliderProps {
   labelStyle?: "minimal" | "standard" | "elegant";
   onSlideComplete?: (value: number) => void;
   aspectRatio?: "1:1" | "4:3" | "16:9" | "auto";
+  categoryLabel?: string;
+  showClientResult?: boolean;
+  clientResultText?: string;
+  onDragStateChange?: (
+    isDragging: boolean,
+    wasDraggingRecently: boolean
+  ) => void;
 }
 
 export default function BeforeAfterSlider({
@@ -30,13 +38,24 @@ export default function BeforeAfterSlider({
   labelStyle = "standard",
   onSlideComplete,
   aspectRatio = "auto",
+  categoryLabel,
+  showClientResult = false,
+  clientResultText = "Real Client Result",
+  onDragStateChange,
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(initialPosition);
   const [isDragging, setIsDragging] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isLoaded, setIsLoaded] = useState(true); // Initialize as visible by default
+  const [wasRecentlyDragging, setWasRecentlyDragging] = useState(false);
+
+  // Reference for animation timeouts and slider container
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<NodeJS.Timeout | null>(null);
+  const dragTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Animation state
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Calculate aspect ratio for responsive sizing
   const getAspectRatioStyle = () => {
@@ -55,8 +74,11 @@ export default function BeforeAfterSlider({
   // Cleanup any running animations on unmount
   useEffect(() => {
     return () => {
-      if (animationRef.current) {
-        clearTimeout(animationRef.current);
+      if (dragTimeoutRef.current) {
+        clearTimeout(dragTimeoutRef.current);
+      }
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
       }
     };
   }, []);
@@ -74,8 +96,43 @@ export default function BeforeAfterSlider({
   };
 
   // Mouse/touch event handlers
-  const handleDragStart = () => setIsDragging(true);
-  const handleDragEnd = () => setIsDragging(false);
+  const handleDragStart = () => {
+    // Stop any running animations
+    if (isAnimating) {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+        hoverTimeoutRef.current = null;
+      }
+      setIsAnimating(false);
+    }
+
+    setIsDragging(true);
+    if (onDragStateChange) {
+      onDragStateChange(true, wasRecentlyDragging);
+    }
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    setWasRecentlyDragging(true);
+
+    // Clear any existing timeout
+    if (dragTimeoutRef.current) {
+      clearTimeout(dragTimeoutRef.current);
+    }
+
+    // Set a timeout to reset the wasRecentlyDragging state after 300ms
+    dragTimeoutRef.current = setTimeout(() => {
+      setWasRecentlyDragging(false);
+      if (onDragStateChange) {
+        onDragStateChange(false, false);
+      }
+    }, 300);
+
+    if (onDragStateChange) {
+      onDragStateChange(false, true);
+    }
+  };
 
   const handleDragMove = (
     e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
@@ -96,36 +153,57 @@ export default function BeforeAfterSlider({
     setSliderPosition(Math.min(Math.max(x, 0), 100));
   };
 
+  // Elegant Chanel-inspired hover animation using timeouts
+  // This is a simpler, more direct approach than the previous implementation
+  const runHoverAnimation = () => {
+    if (!autoAnimateOnHover || isDragging || isAnimating) return;
+
+    // Mark as animating to prevent re-triggering
+    setIsAnimating(true);
+
+    // Clear any existing animation timeouts
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+
+    // First stage - delay before starting animation (the "Chanel pause")
+    hoverTimeoutRef.current = setTimeout(() => {
+      // Second stage - gracefully animate to "after" position
+      setSliderPosition(95);
+
+      // Third stage - pause at "after" position
+      hoverTimeoutRef.current = setTimeout(() => {
+        // Fourth stage - elegantly return to original
+        setSliderPosition(initialPosition);
+
+        // Animation complete
+        hoverTimeoutRef.current = setTimeout(() => {
+          setIsAnimating(false);
+        }, 400);
+      }, 1500);
+    }, 800);
+  };
+
   // Handle hover animation
   const handleMouseEnter = () => {
     setIsHovering(true);
-
-    if (autoAnimateOnHover) {
-      // Clear any existing animation
-      if (animationRef.current) {
-        clearTimeout(animationRef.current);
-      }
-
-      // Set a sequence of animations
-      animationRef.current = setTimeout(() => {
-        // Animate to "after" state
-        setSliderPosition(95);
-
-        // Then animate back to center
-        animationRef.current = setTimeout(() => {
-          setSliderPosition(initialPosition);
-        }, 1500);
-      }, 800);
-    }
+    runHoverAnimation();
   };
 
   const handleMouseLeave = () => {
     setIsHovering(false);
     setIsDragging(false);
 
-    // Clear animation if mouse leaves during animation
-    if (animationRef.current) {
-      clearTimeout(animationRef.current);
+    // Stop any running animations
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setIsAnimating(false);
+
+    // Animate back to initial position if needed
+    if (Math.abs(sliderPosition - initialPosition) > 5) {
+      setSliderPosition(initialPosition);
     }
   };
 
@@ -156,25 +234,29 @@ export default function BeforeAfterSlider({
     }
   };
 
+  // Convert LUXURY_EASING array to cubic-bezier string for CSS transitions
+  const cubicBezier = `cubic-bezier(${LUXURY_EASING.join(",")})`;
+
   return (
     <motion.div
       ref={containerRef}
       className={`relative select-none overflow-hidden shadow-lg ${className}`}
-      style={getAspectRatioStyle()}
+      style={{
+        ...getAspectRatioStyle(),
+        cursor: isDragging ? "grabbing" : "pointer",
+      }}
       initial={{ opacity: 0 }}
       animate={{
         opacity: isLoaded ? 1 : 0,
         transition: { duration: 0.5 },
       }}
-      onMouseDown={handleDragStart}
       onMouseUp={handleDragEnd}
       onMouseLeave={handleMouseLeave}
-      onMouseMove={handleDragMove}
+      onMouseMove={isDragging ? handleDragMove : undefined}
       onMouseEnter={handleMouseEnter}
-      onTouchStart={handleDragStart}
       onTouchEnd={handleDragEnd}
       onTouchCancel={handleMouseLeave}
-      onTouchMove={handleDragMove}
+      onTouchMove={isDragging ? handleDragMove : undefined}
     >
       {/* Loading state */}
       <AnimatePresence>
@@ -189,36 +271,113 @@ export default function BeforeAfterSlider({
       </AnimatePresence>
 
       {/* After Image (Full) */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" style={{ pointerEvents: "none" }}>
         <Image
           src={afterImage}
           alt={`After: ${alt}`}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
+          className="object-cover select-none"
+          style={{
+            userSelect: "none",
+            WebkitUserSelect: "none" /* For Safari */,
+            MozUserSelect: "none" /* For Firefox */,
+            msUserSelect: "none" /* For IE/Edge */,
+          }}
+          draggable={false}
           onLoad={handleImagesLoaded}
           priority
         />
       </div>
 
-      {/* Before Image (Clipped) */}
-      <div
+      {/* Before Image (Clipped) with elegant transition */}
+      <motion.div
         className="absolute inset-0 overflow-hidden"
-        style={{ width: `${sliderPosition}%` }}
+        style={{
+          width: `${sliderPosition}%`,
+          pointerEvents: "none",
+          transition: isAnimating
+            ? `width 2s ${cubicBezier}`
+            : isDragging
+            ? "none"
+            : `width 0.6s ${cubicBezier}`,
+        }}
       >
         <Image
           src={beforeImage}
           alt={`Before: ${alt}`}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
+          className="object-cover select-none"
           style={{
             objectPosition: "left center",
+            userSelect: "none",
+            WebkitUserSelect: "none" /* For Safari */,
+            MozUserSelect: "none" /* For Firefox */,
+            msUserSelect: "none" /* For IE/Edge */,
           }}
+          draggable={false}
           onLoad={handleImagesLoaded}
           priority
         />
-      </div>
+      </motion.div>
+
+      {/* Premium Category Label with proper overlay */}
+      {categoryLabel && (
+        <motion.div
+          className="absolute top-[36px] left-[36px] z-30"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <div className="relative">
+            {/* Sophisticated backdrop for legibility */}
+            <div className="absolute inset-0 -m-1 bg-gradient-to-r from-black/50 to-transparent blur-[3px] rounded-sm"></div>
+
+            {/* Elegant label with proper spacing and letter tracking */}
+            <p className="font-alta text-[11px] tracking-[0.25em] uppercase text-white/95 relative px-2 py-1">
+              {categoryLabel}
+            </p>
+
+            {/* Subtle accent line */}
+            <motion.div
+              className="absolute bottom-[-4px] left-0 h-[0.5px] bg-white/40"
+              initial={{ width: 0 }}
+              animate={{ width: "60%" }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            />
+          </div>
+        </motion.div>
+      )}
+
+      {/* Client Result indicator with premium styling */}
+      {showClientResult && (
+        <motion.div
+          className="absolute bottom-[36px] right-[36px] z-30"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <div className="relative px-2 py-1">
+            {/* Elegant backdrop with directional gradient */}
+            <div className="absolute inset-0 -m-1 bg-gradient-to-l from-black/50 to-transparent blur-[3px] rounded-sm"></div>
+
+            {/* Horizontal alignment of bullet and text on the same baseline */}
+            <div className="relative flex items-baseline">
+              {/* Bullet point set exactly where it should be */}
+              <div className="w-[10px] h-[0.5px] bg-white/60 self-center mr-2"></div>
+
+              {/* Text with precise alignment - inline-block to maintain text metrics */}
+              <span
+                className="font-alta text-[10px] tracking-[0.2em] uppercase text-white/90 inline-block align-middle leading-[0.95]"
+                style={{ transform: "translateY(-0.5px)" }}
+              >
+                {clientResultText}
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       {/* Optional Labels */}
       {showLabels && (
@@ -243,38 +402,67 @@ export default function BeforeAfterSlider({
       )}
 
       {/* Chanel-standard Slider Control with 2px divider */}
-      <div className="absolute inset-0 flex items-center pointer-events-none">
-        <div className="relative w-full">
+      <div className="absolute inset-0 flex items-center">
+        <div className="relative w-full pointer-events-none">
           {/* Slider Handle Line - Chanel's 2px standard for interactive elements */}
           <motion.div
             className="absolute top-0 bottom-0 w-[2px] bg-white"
-            style={{ left: `${sliderPosition}%` }}
+            style={{
+              left: `${sliderPosition}%`,
+              transition: isAnimating
+                ? `left 2s ${cubicBezier}`
+                : isDragging
+                ? "none"
+                : `left 0.6s ${cubicBezier}`,
+            }}
             animate={{
               opacity: isDragging ? 1 : 0.7,
             }}
             transition={{ duration: 0.6 }} // Chanel's standard animation timing
           />
 
-          {/* Chanel-inspired minimal slider handle */}
+          {/* Enhanced interactive slider handle with improved grab area */}
           <motion.div
-            className="absolute top-1/2 w-6 h-6 bg-white rounded-full flex items-center justify-center"
+            className="absolute top-1/2 w-12 h-12 flex items-center justify-center z-10 pointer-events-auto"
             style={{
               left: `${sliderPosition}%`,
               y: "-50%",
               x: "-50%",
+              cursor: isDragging ? "grabbing" : "grab",
+              transition: isAnimating
+                ? `left 2s ${cubicBezier}`
+                : isDragging
+                ? "none"
+                : `left 0.6s ${cubicBezier}`,
             }}
-            animate={{
-              scale: isDragging ? 1.06 : isHovering ? 1.03 : 1,
-              boxShadow: isDragging
-                ? "0 0 0 2px rgba(255,255,255,0.7)"
-                : isHovering
-                ? "0 0 0 1px rgba(255,255,255,0.5)"
-                : "0 0 0 1px rgba(255,255,255,0.3)",
+            onMouseDown={(e) => {
+              e.stopPropagation();
+              handleDragStart();
             }}
-            transition={{ duration: 0.6 }} // Chanel's standard animation timing
+            onTouchStart={(e) => {
+              e.stopPropagation();
+              handleDragStart();
+            }}
           >
-            {/* Minimal indicator - Chanel rarely uses icons in interactive elements */}
-            <div className="w-[4px] h-[4px] bg-elegant-mocha rounded-full"></div>
+            {/* Visual handle component - refined with no square border */}
+            <motion.div
+              className="w-9 h-9 bg-white rounded-full flex items-center justify-center"
+              animate={{
+                scale: isDragging ? 1.08 : isHovering ? 1.04 : 1,
+                boxShadow: isDragging
+                  ? "0 0 15px rgba(0,0,0,0.3)"
+                  : isHovering
+                  ? "0 0 10px rgba(0,0,0,0.2)"
+                  : "0 0 5px rgba(0,0,0,0.15)",
+              }}
+              transition={{ duration: 0.4 }}
+            >
+              {/* Refined grab indicator lines - more minimal and elegant */}
+              <div className="flex flex-col justify-center items-center w-3 gap-[2px]">
+                <div className="h-[1px] w-full bg-elegant-mocha/80 rounded-full"></div>
+                <div className="h-[1px] w-full bg-elegant-mocha/80 rounded-full"></div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Hidden Range Input For Accessibility */}
@@ -290,24 +478,6 @@ export default function BeforeAfterSlider({
           />
         </div>
       </div>
-
-      {/* Hint Text */}
-      <AnimatePresence>
-        {isLoaded && (
-          <motion.div
-            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 px-3 py-1 rounded-full"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 0.7, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-          >
-            <span className="font-alta text-xs text-white">
-              Slide to reveal
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 }

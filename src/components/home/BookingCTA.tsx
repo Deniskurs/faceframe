@@ -1,15 +1,16 @@
 "use client";
 
 import React, { useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import FadeInSection from "../shared/FadeInSection";
 import useParallaxEffect from "@/utils/animations/useParallaxEffect";
 import useAnimateOnScroll from "@/utils/animations/useAnimateOnScroll";
-
-// CHANEL-inspired luxury easing curve
-const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
+import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import {
+  LUXURY_EASING,
+  standardViewport,
+} from "@/utils/animations/luxuryAnimations";
 
 interface BookingCTAProps {
   backgroundImage?: string;
@@ -125,20 +126,20 @@ const BookingCTA = ({
             {subtitle}
           </motion.p>
 
-          {/* CHANEL-inspired minimal button */}
+          {/* Standardized LuxuryButton component */}
           <motion.div
             className="mb-20"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: LUXURY_EASING }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3, ease: LUXURY_EASING }}
+            viewport={standardViewport}
           >
-            <Link
+            <LuxuryButton
               href={buttonLink}
-              className="font-alta tracking-[0.2em] text-sm uppercase bg-white/10 backdrop-blur-sm text-white px-10 py-3 hover:bg-white/20 inline-block border border-white/30 transition-all duration-700"
-            >
-              {buttonText}
-            </Link>
+              text={buttonText}
+              variant="primary"
+              size="large"
+            />
           </motion.div>
 
           {/* Minimal trust indicators with refined styling */}

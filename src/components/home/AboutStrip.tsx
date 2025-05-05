@@ -2,12 +2,10 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
-// CHANEL-inspired ultra-premium luxury easing curve
-const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
+import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 
 interface AboutStripProps {
   className?: string;
@@ -428,7 +426,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
                 className="font-alice text-2xl sm:text-3xl md:text-4xl text-elegant-mocha/90 leading-relaxed tracking-wide italic"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: quoteInView ? 1 : 0 }}
-                transition={{ duration: 1.3, delay: 0.8, ease: LUXURY_EASING }}
+                transition={{ duration: 0.7, delay: 0.3, ease: LUXURY_EASING }}
               >
                 {quote}
               </motion.blockquote>
@@ -525,35 +523,18 @@ const AboutStrip: React.FC<AboutStripProps> = ({
             </p>
           </motion.div>
 
-          {/* Booking CTA - refined Chanel-inspired design */}
+          {/* Standardized Booking CTA */}
           <motion.div
             className="mt-12 text-center mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: storyInView ? 1 : 0, y: storyInView ? 0 : 20 }}
             transition={{ duration: 0.7, delay: 1.2, ease: LUXURY_EASING }}
           >
-            <Link
+            <LuxuryButton
               href="/booking"
-              className="group relative font-alta tracking-[0.3em] text-[10px] sm:text-xs uppercase text-elegant-mocha/90 px-14 py-5 inline-block border border-elegant-mocha/20 overflow-hidden"
-            >
-              {/* Button background with elegant hover effect */}
-              <motion.div
-                className="absolute inset-0 bg-elegant-mocha/0 group-hover:bg-elegant-mocha/5"
-                initial={false}
-                transition={{ duration: 0.7, ease: LUXURY_EASING }}
-              />
-
-              {/* Button text with animation */}
-              <span className="relative z-10 group-hover:text-elegant-mocha transition-colors duration-700">
-                Book Your Experience
-              </span>
-
-              {/* Subtle bottom border animation */}
-              <motion.div
-                className="absolute bottom-0 left-0 h-[1px] w-0 bg-soft-blush/60 group-hover:w-full"
-                transition={{ duration: 0.8, ease: LUXURY_EASING }}
-              />
-            </Link>
+              text="BOOK YOUR EXPERIENCE"
+              variant="secondary"
+            />
           </motion.div>
         </div>
       </motion.section>

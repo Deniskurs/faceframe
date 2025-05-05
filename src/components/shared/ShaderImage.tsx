@@ -425,7 +425,7 @@ const ShaderImage: React.FC<ShaderImageProps> = ({
         aspectRatio: !height && width ? "auto" : undefined,
       }}
     >
-      {/* Fallback image for non-WebGL environments - using Next.js Image */}
+      {/* Fallback image for non-WebGL environments - using Next/Image to resolve LCP warning */}
       <Image
         src={src}
         alt={alt}

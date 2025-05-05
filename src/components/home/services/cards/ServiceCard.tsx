@@ -142,9 +142,9 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         y: 0,
         scale: isActive ? 1 : 0.98,
         transition: {
-          opacity: { duration: 0.9, ease: LUXURY_EASING, delay: index * 0.1 },
-          y: { duration: 1.1, ease: LUXURY_EASING, delay: index * 0.1 },
-          scale: { duration: 0.85, ease: LUXURY_EASING },
+          opacity: { duration: 0.6, ease: LUXURY_EASING, delay: index * 0.1 },
+          y: { duration: 0.6, ease: LUXURY_EASING, delay: index * 0.1 },
+          scale: { duration: 0.6, ease: LUXURY_EASING },
         },
       }}
       whileHover={{ scale: 1.01 }}

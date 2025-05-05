@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { LuxuryButton } from "@/components/shared/LuxuryButton";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -245,6 +246,19 @@ const Footer = () => {
 
         {/* Divider */}
         <div className="h-px bg-deep-bronze opacity-30 mb-8" />
+
+        {/* Booking CTA */}
+        <div className="text-center mb-12">
+          <h4 className="font-alice text-xl mb-6 text-soft-blush">
+            Ready to Experience Luxury Beauty?
+          </h4>
+          <LuxuryButton
+            href="/booking"
+            text="BOOK YOUR APPOINTMENT"
+            variant="primary"
+            size="large"
+          />
+        </div>
 
         {/* Footer Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center">

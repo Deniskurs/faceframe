@@ -1,15 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import FadeInSection from "../shared/FadeInSection";
 import BeforeAfterSlider from "../shared/BeforeAfterSlider";
 import { GalleryItem } from "../../types";
 import galleryService from "../../services/galleryService";
-
-// CHANEL-inspired luxury easing curve
-const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
+import { SectionTitle } from "@/components/shared/SectionTitle";
+import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 
 interface GalleryTeaserProps {
   hideTitle?: boolean;
@@ -58,28 +57,13 @@ const GalleryTeaser = ({ hideTitle = false }: GalleryTeaserProps) => {
       <section className="py-24 md:py-32 px-6 bg-soft-blush relative">
         <div className="max-w-6xl mx-auto">
           {!hideTitle && (
-            <div className="text-center mb-24">
-              <motion.h2
-                className="section-title inline-block relative font-alice text-2xl md:text-3xl tracking-[0.15em] text-elegant-mocha uppercase"
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: LUXURY_EASING }}
-                viewport={{ once: true }}
-              >
-                TRANSFORMATIONS
-                <span className="block h-[1px] w-10 mx-auto bg-elegant-mocha mt-4"></span>
-              </motion.h2>
-
-              <motion.p
-                className="font-alta text-muted-sand max-w-xl mx-auto mt-8 tracking-wide leading-relaxed"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASING }}
-                viewport={{ once: true }}
-              >
-                Witness the artistry and precision behind our signature beauty
-                enhancements through these remarkable client transformations.
-              </motion.p>
+            <div className="mb-24">
+              <SectionTitle
+                title="TRANSFORMATIONS"
+                subtitle="Witness the artistry and precision behind our signature beauty enhancements through these remarkable client transformations."
+                align="center"
+                variant="light"
+              />
             </div>
           )}
 
@@ -192,7 +176,7 @@ const GalleryTeaser = ({ hideTitle = false }: GalleryTeaserProps) => {
             </div>
           )}
 
-          {/* CHANEL-inspired minimal button */}
+          {/* Standardized button */}
           <motion.div
             className="mt-24 text-center"
             initial={{ opacity: 0 }}
@@ -200,12 +184,11 @@ const GalleryTeaser = ({ hideTitle = false }: GalleryTeaserProps) => {
             transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
             viewport={{ once: true }}
           >
-            <Link
+            <LuxuryButton
               href="/gallery"
-              className="font-alta tracking-[0.2em] text-sm uppercase text-elegant-mocha hover:text-deep-bronze border-b border-elegant-mocha/30 hover:border-deep-bronze pb-1 transition-all duration-700"
-            >
-              VIEW COMPLETE GALLERY
-            </Link>
+              text="VIEW COMPLETE GALLERY"
+              variant="text"
+            />
           </motion.div>
         </div>
 

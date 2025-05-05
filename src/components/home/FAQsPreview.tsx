@@ -1,14 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeInSection from "../shared/FadeInSection";
 import { FAQ } from "../../types";
 import faqService from "../../services/faqService";
-
-// CHANEL-inspired luxury easing curve
-const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
+import { SectionTitle } from "@/components/shared/SectionTitle";
+import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import {
+  LUXURY_EASING,
+  standardViewport,
+} from "@/utils/animations/luxuryAnimations";
 
 interface AccordionItemProps {
   faq: FAQ;
@@ -64,11 +66,11 @@ const AccordionItem = ({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.7, ease: LUXURY_EASING }}
+            transition={{ duration: 0.6, ease: LUXURY_EASING }}
           >
             <div className="px-8 pb-6 pt-0">
               <div className="h-[1px] w-full bg-soft-blush/20 mb-5"></div>
-              <p className="font-alta text-muted-sand text-sm tracking-wide leading-relaxed">
+              <p className="font-alta text-sm tracking-wide leading-relaxed text-muted-sand">
                 {faq.answer}
               </p>
             </div>
@@ -120,29 +122,14 @@ const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
     <FadeInSection intensity="subtle">
       <section className="py-24 md:py-32 px-6 bg-light-cream relative">
         <div className="max-w-3xl mx-auto">
+          {/* Standardized section title */}
           {!hideTitle && (
-            <div className="text-center mb-20">
-              <motion.h2
-                className="section-title inline-block relative font-alice text-2xl md:text-3xl tracking-[0.15em] text-elegant-mocha uppercase"
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: LUXURY_EASING }}
-                viewport={{ once: true }}
-              >
-                FREQUENTLY ASKED
-                <span className="block h-[1px] w-10 mx-auto bg-elegant-mocha mt-4"></span>
-              </motion.h2>
-
-              <motion.p
-                className="font-alta text-muted-sand max-w-xl mx-auto mt-8 tracking-wide leading-relaxed"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASING }}
-                viewport={{ once: true }}
-              >
-                Essential information for your beauty journey with us
-              </motion.p>
-            </div>
+            <SectionTitle
+              title="QUESTIONS"
+              subtitle="Essential Information"
+              align="center"
+              variant="dark"
+            />
           )}
 
           {/* Refined Loading State */}
@@ -190,20 +177,19 @@ const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
             </div>
           )}
 
-          {/* CHANEL-inspired minimal button */}
+          {/* Standardized button using LuxuryButton */}
           <motion.div
             className="mt-24 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
-            viewport={{ once: true }}
+            viewport={standardViewport}
           >
-            <Link
+            <LuxuryButton
               href="/faq"
-              className="font-alta tracking-[0.2em] text-sm uppercase text-elegant-mocha hover:text-deep-bronze border-b border-elegant-mocha/30 hover:border-deep-bronze pb-1 transition-all duration-700"
-            >
-              VIEW ALL QUESTIONS
-            </Link>
+              text="VIEW ALL QUESTIONS"
+              variant="secondary"
+            />
           </motion.div>
         </div>
       </section>

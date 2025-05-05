@@ -3,12 +3,10 @@ import Hero from "@/components/home/Hero";
 import AboutStrip from "@/components/home/AboutStrip";
 import { ServicesPreview } from "@/components/home/services";
 import LuxuryTransformationsGallery from "@/components/home/transformations/LuxuryTransformationsGallery";
-import TestimonialCarousel from "@/components/home/TestimonialCarousel";
+import LuxuryClientVoices from "@/components/home/client-voices/LuxuryClientVoices";
 import FAQsPreview from "@/components/home/FAQsPreview";
 import BookingCTA from "@/components/home/BookingCTA";
-import BrandedDivider from "@/components/shared/BrandedDivider";
 import MinimalistSectionBreak from "@/components/shared/MinimalistSectionBreak";
-import SignatureTransition from "@/components/shared/SignatureTransition";
 
 export default function Home() {
   // Founder section content
@@ -43,27 +41,14 @@ export default function Home() {
       {/* Services preview section with premium luxury aesthetic */}
       <ServicesPreview hideTitle={false} />
 
-      {/* Signature floating element transition - Chanel-inspired */}
-      <SignatureTransition />
-
       {/* Extraordinary Chanel-inspired Transformations Gallery */}
       <LuxuryTransformationsGallery hideTitle={false} />
 
-      {/* Decorative divider before testimonials - refined spacing */}
-      <div className="py-12 md:py-20">
-        <BrandedDivider style="simple" />
-      </div>
-
-      {/* Testimonials section */}
-      <TestimonialCarousel />
-
-      {/* Decorative divider before FAQs - refined spacing */}
-      <div className="py-12 md:py-20">
-        <BrandedDivider style="gradient" height="sm" text="COMMON QUESTIONS" />
-      </div>
+      {/* Extraordinary Chanel-inspired Client Voices */}
+      <LuxuryClientVoices hideTitle={false} />
 
       {/* FAQs preview section */}
-      <FAQsPreview hideTitle={true} />
+      <FAQsPreview hideTitle={false} />
 
       {/* Final booking CTA */}
       <BookingCTA

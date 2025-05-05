@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import {
   motion,
@@ -12,9 +11,8 @@ import {
 } from "framer-motion";
 import useTextAnimation from "@/utils/animations/useTextAnimation";
 import GlassMorphicCard from "../shared/GlassMorphicCard";
-
-// CHANEL-inspired luxury easing curves
-const LUXURY_EASING = [0.19, 1, 0.22, 1]; // Refined cubic-bezier
+import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 
 const Hero = () => {
   // Refs for various elements
@@ -52,21 +50,21 @@ const Hero = () => {
     type: "character",
     staggerDelay: 0.1, // More deliberate reveal
     delay: 0.7,
-    ease: LUXURY_EASING,
+    ease: [...LUXURY_EASING], // Convert readonly array to regular array
   });
 
   const titleLine2Animation = useTextAnimation("B E A U T Y", {
     type: "character",
     staggerDelay: 0.1,
     delay: 0.9,
-    ease: LUXURY_EASING,
+    ease: [...LUXURY_EASING], // Convert readonly array to regular array
   });
 
   const subtitleAnimation = useTextAnimation("LUXURY BEAUTY EXPERIENCES", {
     type: "word",
     staggerDelay: 0.1,
     delay: 1.7, // Longer delay for hierarchy
-    ease: LUXURY_EASING,
+    ease: [...LUXURY_EASING], // Convert readonly array to regular array
   });
 
   // Define proper types for animation variants
@@ -282,35 +280,19 @@ const Hero = () => {
               luxury facials.
             </motion.p>
 
-            {/* CHANEL-inspired CTA Button with refined hover effect */}
+            {/* Standardized CTA Button */}
             <motion.div
               className="mt-16 md:mt-20"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 2.2, ease: LUXURY_EASING }}
             >
-              <Link
+              <LuxuryButton
                 href="/booking"
-                className="group relative font-alta tracking-[0.3em] text-[10px] sm:text-xs uppercase text-white px-14 py-5 inline-block border border-white/20 overflow-hidden"
-              >
-                {/* Button background with elegant hover effect */}
-                <motion.div
-                  className="absolute inset-0 bg-white/0 group-hover:bg-white/10"
-                  initial={false}
-                  transition={{ duration: 0.7, ease: LUXURY_EASING }}
-                />
-
-                {/* Button text with animation */}
-                <span className="relative z-10 group-hover:text-white transition-colors duration-700">
-                  BOOK YOUR APPOINTMENT
-                </span>
-
-                {/* Subtle bottom border animation */}
-                <motion.div
-                  className="absolute bottom-0 left-0 h-[1px] w-0 bg-soft-blush/60 group-hover:w-full"
-                  transition={{ duration: 0.8, ease: LUXURY_EASING }}
-                />
-              </Link>
+                text="BOOK YOUR APPOINTMENT"
+                variant="primary"
+                size="large"
+              />
             </motion.div>
           </div>
         </div>

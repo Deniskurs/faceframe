@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import BeforeAfterSlider from "../../shared/BeforeAfterSlider";
 import { GalleryItem } from "../../../types";
 import galleryService from "../../../services/galleryService";
 import EditorialTransformationLayout from "./EditorialTransformationLayout";
 import { luxuryEasing } from "../../../utils/animations/luxurySpacing";
+import { standardViewport } from "@/utils/animations/luxuryAnimations";
+import { LuxuryButton } from "@/components/shared/LuxuryButton";
 import {
   useLuxuryReveal,
   useLuxuryStaggerEffect,
@@ -22,8 +24,6 @@ export default function LuxuryTransformationsGallery({
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [activeImage, setActiveImage] = useState<GalleryItem | null>(null);
 
   // Animation hooks
   const gridItemsEffect = useLuxuryStaggerEffect<HTMLDivElement>({
@@ -59,18 +59,6 @@ export default function LuxuryTransformationsGallery({
 
     fetchGalleryItems();
   }, []);
-
-  // Lightbox interactions
-  const openLightbox = (item: GalleryItem) => {
-    setActiveImage(item);
-    setLightboxOpen(true);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeLightbox = () => {
-    setLightboxOpen(false);
-    document.body.style.overflow = "";
-  };
 
   // Editorial quote configuration
   const philosophyQuote =
@@ -171,9 +159,6 @@ export default function LuxuryTransformationsGallery({
                   whileInView="visible"
                   viewport={{ once: true }}
                   className="relative overflow-hidden mx-auto"
-                  onClick={() =>
-                    galleryItems[0] && openLightbox(galleryItems[0])
-                  }
                 >
                   {/* Feature breathing effect - mimicking gentle inhale/exhale */}
                   <motion.div
@@ -193,7 +178,7 @@ export default function LuxuryTransformationsGallery({
                     }}
                   />
 
-                  {/* Featured transformation slider */}
+                  {/* Featured transformation slider with integrated category labels */}
                   {galleryItems[0] && (
                     <BeforeAfterSlider
                       beforeImage={galleryItems[0].beforeImage}
@@ -203,36 +188,10 @@ export default function LuxuryTransformationsGallery({
                       initialPosition={38} // Golden ratio (62/38) for slider position
                       labelStyle="elegant"
                       autoAnimateOnHover={true}
+                      categoryLabel={galleryItems[0].category}
+                      showClientResult={true}
+                      clientResultText="Real Client Result"
                     />
-                  )}
-
-                  {/* Integrated category and client verification */}
-                  {galleryItems[0] && (
-                    <>
-                      <div className="absolute top-[36px] left-[36px] flex flex-col items-start">
-                        <motion.p
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1.2, delay: 1.3 }}
-                          className="font-alta text-[12px] tracking-[0.2em] uppercase text-white"
-                        >
-                          {galleryItems[0].category}
-                        </motion.p>
-                      </div>
-
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.2, delay: 1.8 }}
-                        className="absolute bottom-[36px] right-[36px]"
-                      >
-                        <p className="font-alta text-[10px] tracking-[0.2em] uppercase text-white/70">
-                          Real Client Result
-                        </p>
-                      </motion.div>
-                    </>
                   )}
                 </motion.div>
               </div>
@@ -267,8 +226,8 @@ export default function LuxuryTransformationsGallery({
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{
-                          duration: 1.8,
-                          delay: 0.2 + i * 0.2,
+                          duration: 0.7,
+                          delay: 0.2 + i * 0.1,
                           ease: luxuryEasing.elegant,
                         }}
                       >
@@ -304,10 +263,9 @@ export default function LuxuryTransformationsGallery({
                   {galleryItems.slice(1).map((item, index) => (
                     <motion.div
                       key={item.id}
-                      className="relative overflow-hidden group cursor-pointer"
+                      className="relative overflow-hidden group"
                       variants={gridItemsEffect.childVariants}
                       custom={index}
-                      onClick={() => openLightbox(item)}
                       whileHover={{
                         scale: 1.01,
                         transition: {
@@ -331,163 +289,39 @@ export default function LuxuryTransformationsGallery({
                         height={360}
                         initialPosition={38} // Golden ratio position (62/38)
                         autoAnimateOnHover={true}
+                        categoryLabel={item.category}
+                        showClientResult={true}
+                        clientResultText="Client Result"
                       />
-
-                      {/* Left-aligned category with elegant hover state */}
-                      <motion.div
-                        className="absolute top-[24px] left-[24px] z-20"
-                        initial={{ opacity: 0.9 }}
-                        whileHover={{ opacity: 1, x: 2 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <p className="font-alta text-[12px] tracking-[0.2em] uppercase text-white">
-                          {item.category}
-                        </p>
-                      </motion.div>
-
-                      {/* Client indicator appears on hover - Chanel's reveal technique */}
-                      <motion.div
-                        className="absolute bottom-[24px] right-[24px] z-20"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                      >
-                        <p className="font-alta text-[10px] tracking-[0.2em] uppercase text-white/70">
-                          Client Result
-                        </p>
-                      </motion.div>
                     </motion.div>
                   ))}
                 </motion.div>
               </div>
 
-              {/* Chanel-precise gallery button with perfect proportions */}
+              {/* Standardized "Discover All" button using LuxuryButton */}
               <motion.div
                 className="mt-36 text-center"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
+                viewport={standardViewport}
                 transition={{
-                  duration: 1.2,
-                  delay: 1.0,
+                  duration: 0.6,
+                  delay: 0.3,
                   ease: luxuryEasing.refined,
                 }}
               >
-                <a
+                <LuxuryButton
                   href="/gallery"
-                  className="inline-block relative px-16 py-4 group"
-                >
-                  {/* Button background with true Chanel hover effect */}
-                  <span className="absolute inset-0 border-[0.5px] border-elegant-mocha/30 transition-all duration-600 group-hover:border-elegant-mocha/50"></span>
-
-                  {/* Subtle hover visual indicator */}
-                  <motion.span
-                    className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-0 h-[0.5px] bg-elegant-mocha/20"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: "calc(100% - 48px)" }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                  />
-
-                  {/* Chanel-standard button typography */}
-                  <span className="font-alta tracking-[0.2em] text-[12px] uppercase text-elegant-mocha/70 group-hover:text-elegant-mocha/90 transition-colors duration-600">
-                    Discover All
-                  </span>
-                </a>
+                  text="DISCOVER ALL"
+                  variant="secondary"
+                />
               </motion.div>
             </div>
           )}
         </EditorialTransformationLayout>
       </div>
 
-      {/* Premium luxury lightbox with Chanel-inspired aesthetic */}
-      <AnimatePresence>
-        {lightboxOpen && activeImage && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: luxuryEasing.elegant }}
-          >
-            <div className="relative w-full max-w-6xl p-8">
-              {/* Elegant close button with Chanel-inspired styling */}
-              <button
-                className="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center border border-white/30 focus:outline-none group"
-                onClick={closeLightbox}
-              >
-                <div className="w-6 h-[0.5px] bg-white/60 absolute rotate-45 group-hover:bg-white/90 transition-all duration-500"></div>
-                <div className="w-6 h-[0.5px] bg-white/60 absolute -rotate-45 group-hover:bg-white/90 transition-all duration-500"></div>
-              </button>
-
-              {/* Refined title display with editorial styling */}
-              <div className="text-center mb-12">
-                <motion.div
-                  className="inline-block relative mb-3"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6, ease: luxuryEasing.elegant }}
-                >
-                  <span className="inline-block w-8 h-[0.5px] bg-white/30 mr-4 align-middle"></span>
-                  <span className="font-alta text-xs tracking-widest uppercase text-white/70">
-                    Transformation
-                  </span>
-                  <span className="inline-block w-8 h-[0.5px] bg-white/30 ml-4 align-middle"></span>
-                </motion.div>
-
-                <motion.h3
-                  className="font-alice text-2xl tracking-luxury text-white/90 uppercase"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: 0.1,
-                    ease: luxuryEasing.elegant,
-                  }}
-                >
-                  {activeImage.category}
-                </motion.h3>
-                <motion.div
-                  className="h-[0.5px] w-16 bg-white/30 mx-auto mt-4"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.4,
-                    ease: luxuryEasing.refined,
-                  }}
-                />
-              </div>
-
-              {/* Premium Lightbox Content with refined styling */}
-              <motion.div
-                className="relative border border-white/20"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                  duration: 0.9,
-                  delay: 0.3,
-                  ease: luxuryEasing.elegant,
-                }}
-              >
-                <BeforeAfterSlider
-                  beforeImage={activeImage.beforeImage}
-                  afterImage={activeImage.afterImage}
-                  alt={activeImage.alt}
-                  height={650}
-                  showLabels={true}
-                  labelStyle="elegant"
-                  initialPosition={42} // Golden ratio position
-                />
-
-                {/* Single, intentional accent for Chanel-like restraint */}
-                <div className="absolute top-5 left-5 w-10 h-[0.5px] bg-white/40"></div>
-              </motion.div>
-
-              {/* No pagination - true Chanel restraint */}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* No lightbox needed */}
     </section>
   );
 }
