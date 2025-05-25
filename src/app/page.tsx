@@ -6,7 +6,6 @@ import LuxuryTransformationsGallery from "@/components/home/transformations/Luxu
 import LuxuryClientVoices from "@/components/home/client-voices/LuxuryClientVoices";
 import FAQsPreview from "@/components/home/FAQsPreview";
 import BookingCTA from "@/components/home/BookingCTA";
-import MinimalistSectionBreak from "@/components/shared/MinimalistSectionBreak";
 
 export default function Home() {
   // Founder section content
@@ -30,13 +29,7 @@ export default function Home() {
         paragraphs={founderParagraphs}
       />
 
-      {/* Chanel/Dior-inspired luxury section transition */}
-      <MinimalistSectionBreak
-        variant="enhanced"
-        hasDecorativeElement={true}
-        hasSideElements={true}
-        hasGradientEdge={true}
-      />
+      {/* Direct transition to services section */}
 
       {/* Services preview section with premium luxury aesthetic */}
       <ServicesPreview hideTitle={false} />

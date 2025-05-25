@@ -11,7 +11,8 @@ import {
 } from "framer-motion";
 import useTextAnimation from "@/utils/animations/useTextAnimation";
 import GlassMorphicCard from "../shared/GlassMorphicCard";
-import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
+import LuxuryTextBackdrop from "@/components/shared/LuxuryTextBackdrop";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 
 const Hero = () => {
@@ -60,7 +61,7 @@ const Hero = () => {
     ease: [...LUXURY_EASING], // Convert readonly array to regular array
   });
 
-  const subtitleAnimation = useTextAnimation("LUXURY BEAUTY EXPERIENCES", {
+  const subtitleAnimation = useTextAnimation("SIGNATURE BEAUTY EXPERIENCES", {
     type: "word",
     staggerDelay: 0.1,
     delay: 1.7, // Longer delay for hierarchy
@@ -178,60 +179,92 @@ const Hero = () => {
           <div className="mb-28 md:mb-32">
             {/* Main Heading split into two lines */}
             <div className="mb-8">
-              {/* First line with responsive letter spacing to prevent wrapping on iPhone */}
-              <motion.h1
-                className="text-white tracking-[0.25em] sm:tracking-[0.35em] md:tracking-[0.5em] uppercase text-3xl sm:text-4xl md:text-5xl font-light"
-                initial={{ opacity: 0, letterSpacing: "0.15em" }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 2, delay: 0.5, ease: LUXURY_EASING }}
-                style={{ textShadow: "0 0 12px rgba(255,255,255,0.1)" }}
-              >
-                <motion.span
-                  className="inline-block"
-                  variants={line1Animation.containerVariants}
-                  initial="hidden"
-                  animate="visible"
+              {/* Chanel-inspired controlled width container to prevent wrapping */}
+              <div className="overflow-hidden w-full">
+                {/* FACEFRAME title with fixed width constraints */}
+                <motion.h1
+                  className="uppercase text-white hero-heading alice-text whitespace-nowrap mx-auto"
+                  style={{
+                    width: "fit-content",
+                    fontSize: "clamp(1.75rem, 5vw, 3.5rem)",
+                    fontWeight: 325,
+                    letterSpacing: "0.25em",
+                    textRendering: "geometricPrecision",
+                    WebkitFontSmoothing: "antialiased",
+                    MozOsxFontSmoothing: "grayscale",
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 2, delay: 0.5, ease: LUXURY_EASING }}
                 >
-                  {line1Animation.letters?.map(
-                    (letter: string, index: number) => (
-                      <motion.span
-                        key={`title1-${index}`}
-                        variants={line1Animation.childVariants}
-                        className="inline-block"
-                      >
-                        {letter === " " ? "\u00A0" : letter}
-                      </motion.span>
-                    )
-                  )}
-                </motion.span>
-              </motion.h1>
+                  <motion.span
+                    className="inline-block"
+                    variants={line1Animation.containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {line1Animation.letters?.map(
+                      (letter: string, index: number) => (
+                        <LuxuryTextBackdrop
+                          key={`title1-${index}`}
+                          intensity="strong"
+                          isHeading={true}
+                        >
+                          <motion.span
+                            variants={line1Animation.childVariants}
+                            className="inline-block hero-heading-ios"
+                          >
+                            {letter === " " ? "\u00A0" : letter}
+                          </motion.span>
+                        </LuxuryTextBackdrop>
+                      )
+                    )}
+                  </motion.span>
+                </motion.h1>
+              </div>
 
-              {/* Second line with increased letter spacing */}
-              <motion.h1
-                className="text-white tracking-[0.25em] sm:tracking-[0.3em] md:tracking-[0.35em] uppercase text-2xl sm:text-3xl md:text-4xl font-extralight mt-1 md:mt-2"
-                initial={{ opacity: 0, letterSpacing: "0.2em" }}
-                animate={{ opacity: 1, letterSpacing: "0.25em" }}
-                transition={{ duration: 2, delay: 0.7, ease: LUXURY_EASING }}
-              >
-                <motion.span
-                  className="inline-block"
-                  variants={line2Animation.containerVariants}
-                  initial="hidden"
-                  animate="visible"
+              {/* BEAUTY title with fixed width constraints */}
+              <div className="overflow-hidden w-full mt-1">
+                <motion.h1
+                  className="uppercase text-white hero-heading alice-text whitespace-nowrap mx-auto"
+                  style={{
+                    width: "fit-content",
+                    fontSize: "clamp(1.5rem, 4vw, 2.75rem)",
+                    fontWeight: 325,
+                    letterSpacing: "0.25em",
+                    textRendering: "geometricPrecision",
+                    WebkitFontSmoothing: "antialiased",
+                    MozOsxFontSmoothing: "grayscale",
+                  }}
+                  initial={{ opacity: 0, letterSpacing: "0.2em" }}
+                  animate={{ opacity: 1, letterSpacing: "0.25em" }}
+                  transition={{ duration: 2, delay: 0.7, ease: LUXURY_EASING }}
                 >
-                  {line2Animation.letters?.map(
-                    (letter: string, index: number) => (
-                      <motion.span
-                        key={`title2-${index}`}
-                        variants={line2Animation.childVariants}
-                        className="inline-block"
-                      >
-                        {letter === " " ? "\u00A0" : letter}
-                      </motion.span>
-                    )
-                  )}
-                </motion.span>
-              </motion.h1>
+                  <motion.span
+                    className="inline-block"
+                    variants={line2Animation.containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {line2Animation.letters?.map(
+                      (letter: string, index: number) => (
+                        <LuxuryTextBackdrop
+                          key={`title2-${index}`}
+                          intensity="strong"
+                          isHeading={true}
+                        >
+                          <motion.span
+                            variants={line2Animation.childVariants}
+                            className="inline-block hero-heading-ios"
+                          >
+                            {letter === " " ? "\u00A0" : letter}
+                          </motion.span>
+                        </LuxuryTextBackdrop>
+                      )
+                    )}
+                  </motion.span>
+                </motion.h1>
+              </div>
             </div>
 
             {/* Refined separator with animation */}
@@ -242,56 +275,129 @@ const Hero = () => {
               transition={{ duration: 1.2, delay: 1.6, ease: LUXURY_EASING }}
             />
 
-            {/* Subtitle with refined tracking */}
-            <h2 className="text-soft-blush text-xs sm:text-sm md:text-base tracking-[0.3em] font-extralight">
-              <motion.span
-                className="inline-block"
-                variants={wordAnimation.containerVariants}
-                initial="hidden"
-                animate="visible"
+            {/* Subtitle with Chanel-like controlled width */}
+            <div className="overflow-hidden w-full mt-6 md:mt-8">
+              <h2
+                className="text-soft-blush alice-text text-on-dark mx-auto letter-spacing-elegant"
+                style={{
+                  width: "fit-content",
+                  fontSize: "clamp(1.1rem, 2.5vw, 2rem)",
+                  fontWeight: 325,
+                  letterSpacing: "0.18em",
+                  textShadow: "0 0.5px 2px rgba(0,0,0,0.25)",
+                  textRendering: "geometricPrecision",
+                  WebkitFontSmoothing: "antialiased",
+                  MozOsxFontSmoothing: "grayscale",
+                }}
               >
-                {wordAnimation.words?.map((word: string, index: number) => (
-                  <motion.span
-                    key={`subtitle-${index}`}
-                    className="inline-block"
-                    variants={wordAnimation.childVariants}
-                    whileHover={{
-                      color: "#FFFFFF",
-                      transition: { duration: 0.4 },
-                    }}
-                  >
-                    {word}
-                    {index !== (wordAnimation.words?.length || 0) - 1 &&
-                      "\u00A0"}
-                  </motion.span>
-                ))}
-              </motion.span>
-            </h2>
+                <motion.span
+                  className="inline-block"
+                  variants={wordAnimation.containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {wordAnimation.words?.map((word: string, index: number) => (
+                    <motion.span
+                      key={`subtitle-${index}`}
+                      className="inline-block enhanced-text-contrast"
+                      variants={wordAnimation.childVariants}
+                      whileHover={{
+                        color: "#FFFFFF",
+                        transition: { duration: 0.4 },
+                      }}
+                    >
+                      {word}
+                      {index !== (wordAnimation.words?.length || 0) - 1 &&
+                        "\u00A0"}
+                    </motion.span>
+                  ))}
+                </motion.span>
+              </h2>
+            </div>
 
-            {/* Description with more refined typography */}
-            <motion.p
-              className="font-alta text-sm md:text-base text-white/80 mt-12 md:mt-16 max-w-lg mx-auto leading-relaxed tracking-wider"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 2, ease: LUXURY_EASING }}
-            >
-              London&apos;s premier destination for bespoke beauty
-              transformations. Expert semi-permanent makeup, lashes, brows and
-              luxury facials.
-            </motion.p>
+            {/* Chanel-inspired description with perfect visual hierarchy */}
+            <div className="mt-12 md:mt-16 mx-auto px-2 py-0.5 hero-description-container">
+              {/* Subtle elegant separator line */}
+              <motion.div
+                className="h-[0.5px] w-8 bg-white/50 mx-auto mb-9"
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: 32, opacity: 0.5 }}
+                transition={{ duration: 1, delay: 1.9, ease: LUXURY_EASING }}
+              />
 
-            {/* Standardized CTA Button */}
+              {/* Primary statement - brand positioning with enhanced typography */}
+              <motion.p
+                className="text-center text-white font-alta hero-description"
+                style={{
+                  fontSize: "clamp(0.9rem, 1.5vw, 1.1rem)",
+                  letterSpacing: "0.06em",
+                  lineHeight: 1.4,
+                  fontWeight: 400,
+                  textShadow:
+                    "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
+                  maxWidth: "min(28rem, 90%)",
+                  margin: "0 auto",
+                  paddingBottom: "0.1em",
+                  WebkitFontSmoothing: "antialiased",
+                  MozOsxFontSmoothing: "grayscale",
+                }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.9, ease: LUXURY_EASING }}
+              >
+                London&apos;s premier destination for bespoke beauty
+                transformations.
+              </motion.p>
+
+              {/* Decorative center dot - Chanel-inspired separator with golden ratio spacing */}
+              <div className="flex justify-center my-5">
+                <div className="w-1 h-1 rounded-full bg-soft-blush/80 opacity-90"></div>
+              </div>
+
+              {/* Secondary details with increased contrast and refined typography */}
+              <motion.p
+                className="text-center text-white/95 font-alta hero-description"
+                style={{
+                  fontSize: "clamp(0.85rem, 1.3vw, 1rem)",
+                  letterSpacing: "0.05em",
+                  lineHeight: 1.38,
+                  maxWidth: "min(28rem, 90%)",
+                  margin: "0 auto",
+                  paddingTop: "0.1em",
+                  fontWeight: 400,
+                  textShadow:
+                    "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
+                  WebkitFontSmoothing: "antialiased",
+                  MozOsxFontSmoothing: "grayscale",
+                }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 2.1, ease: LUXURY_EASING }}
+              >
+                Expert semi-permanent makeup, lashes, brows and luxury facials.
+              </motion.p>
+            </div>
+
+            {/* Dual Booking Path CTA Buttons with golden ratio spacing */}
             <motion.div
-              className="mt-16 md:mt-20"
+              className="mt-16 md:mt-[calc(1.618rem*10)] flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 2.2, ease: LUXURY_EASING }}
             >
-              <LuxuryButton
-                href="/booking"
-                text="BOOK YOUR APPOINTMENT"
-                variant="primary"
-                size="large"
+              <LuxuryShadcnButton
+                href="/services"
+                text="BOOK SERVICE DIRECTLY"
+                luxuryVariant="elegant"
+                luxuryTheme="transparent"
+                luxurySize="large"
+              />
+              <LuxuryShadcnButton
+                href="/consultation"
+                text="FREE CONSULTATION"
+                luxuryVariant="outline"
+                luxuryTheme="transparent"
+                luxurySize="large"
               />
             </motion.div>
           </div>

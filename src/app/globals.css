@@ -141,6 +141,59 @@
   button {
     @apply transition-all duration-300 font-alta;
   }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
 }
 
 @layer components {
@@ -439,6 +492,118 @@
   }
 }
 
+/* Specific iOS device optimizations - modeled after Chanel's approach to iOS */
+@supports (-webkit-touch-callout: none) {
+  /* iOS-specific CSS */
+  h1,
+  h2,
+  h3,
+  .font-alice {
+    /* Enhanced letter-spacing for iOS devices with higher pixel density */
+    letter-spacing: calc(
+      0.1em + 0.01em
+    ); /* Slight boost to compensate for iOS rendering */
+
+    /* iOS font weight adjustment */
+    font-weight: 400;
+
+    /* Enable subpixel antialiasing for iOS */
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+
+  /* Fix for letter spacing in hero headings on iOS */
+  .hero-heading-ios {
+    /* Specific fix for the exact issue in the screenshot */
+    letter-spacing: 0.22em !important;
+    font-weight: 350 !important;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.15),
+      0 1px 2px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Text contrast enhancement for iOS */
+  .text-on-image,
+  .text-on-dark {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Enhanced description text legibility for iOS */
+  .hero-description {
+    font-weight: 400 !important;
+    letter-spacing: 0.05em !important;
+    text-shadow: 0 0.5px 1.5px rgba(0, 0, 0, 0.25), 0 0 3px rgba(0, 0, 0, 0.15) !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+
+  /* Container optimization for iOS */
+  .hero-description-container {
+    padding: 0.3rem 0.1rem !important;
+  }
+
+  /* Enhanced navbar text legibility for iOS */
+  .navbar-link {
+    font-weight: 400 !important;
+    letter-spacing: 0.12em !important;
+    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 0 3px rgba(0, 0, 0, 0.1) !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+
+  /* Enhanced logo text legibility for iOS */
+  .navbar-logo-text {
+    font-weight: 400 !important;
+    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 0 3px rgba(0, 0, 0, 0.1) !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+}
+
+/* High DPI screens (Retina/iPhone Pro models) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Specific optimizations for high pixel density screens */
+  .font-light,
+  .font-extralight {
+    /* Prevent ultra-thin fonts from disappearing on high-DPI screens */
+    font-weight: 350;
+  }
+
+  /* Improved text rendering on high pixel density screens */
+  .hero-heading,
+  .alice-text {
+    text-rendering: geometricPrecision;
+  }
+
+  /* Added contrast for text on dark backgrounds on high-DPI screens */
+  .text-on-dark {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Enhanced hero description for high-DPI devices */
+  .hero-description {
+    font-weight: 400;
+    /* Multi-layered text shadow for perfect legibility */
+    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.25), 0 0 3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Enhanced navbar text rendering for high-DPI screens */
+  .navbar-link {
+    font-weight: 400;
+    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 0 3px rgba(0, 0, 0, 0.1);
+    text-rendering: geometricPrecision;
+  }
+
+  /* Enhanced navbar logo text for high-DPI screens */
+  .navbar-logo-text {
+    font-weight: 400;
+    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 0 2px rgba(0, 0, 0, 0.1);
+    text-rendering: geometricPrecision;
+  }
+
+  /* Custom text selection colors for luxury feel */
+  ::selection {
+    background: rgba(127, 85, 57, 0.2);
+    color: #fff;
+    text-shadow: none;
+  }
+}
+
 /* Utility class for hiding scrollbars across all screen sizes */
 @layer utilities {
   .scrollbar-hide {
@@ -457,5 +622,103 @@
 
   .mobile-text-boost {
     font-size: 1.05em; /* Boost critical content on mobile */
+  }
+
+  /* LUXURY TEXT SYSTEM - Chanel-inspired Typography */
+  .luxury-text-responsive {
+    /* Cross-browser consistency */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Fine typography adjustments for better legibility */
+  .luxury-text-backdrop {
+    isolation: isolate;
+    z-index: 0;
+  }
+
+  /* Enhanced text contrast system - ensures optimal legibility across devices */
+  .enhanced-text-contrast {
+    /* Multi-layered text shadow for perfect legibility on any background */
+    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 0 4px rgba(0, 0, 0, 0.1);
+    /* Ensure consistent weight rendering */
+    font-weight: 325;
+    /* Advanced text rendering - improves legibility on all devices */
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Calibrated font weights - normalized across devices */
+  .font-weight-premium-light {
+    font-weight: 325; /* Calibrated between light and regular for consistent display */
+  }
+
+  .font-weight-premium-regular {
+    font-weight: 400; /* Standardized regular weight */
+  }
+
+  .font-weight-premium-medium {
+    font-weight: 450; /* Calibrated medium weight for consistency */
+  }
+
+  /* Letter spacing normalized for Alice font */
+  .letter-spacing-chanel {
+    letter-spacing: 0.22em; /* Perfect balance for wider characters */
+  }
+
+  .letter-spacing-chanel-expanded {
+    letter-spacing: 0.25em; /* Expanded spacing for primary headings */
+  }
+
+  .letter-spacing-elegant {
+    letter-spacing: 0.18em; /* Subtly refined spacing */
+  }
+}
+
+/* Advanced Typography Optimizations - Cross-Device Consistency */
+.heading-premium {
+  /* Creates a subtle backdrop effect behind the text */
+  position: relative;
+  isolation: isolate;
+}
+
+.heading-premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: -0.4rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  opacity: 0;
+  z-index: -1;
+  border-radius: 2px;
+  backdrop-filter: blur(1px);
+  transition: opacity 0.3s ease;
+}
+
+.heading-premium:hover::before {
+  opacity: 0.92;
+}
+
+/* Chanel-inspired letter spacing adjustments for consistent readability */
+.alice-text {
+  /* Fine-tuned tracking for premium feel */
+  font-kerning: normal;
+  font-feature-settings: "kern", "liga", "calt", "pnum";
+  text-rendering: optimizeLegibility;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

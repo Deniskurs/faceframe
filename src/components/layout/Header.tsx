@@ -4,6 +4,7 @@ import React, { useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 
 // CHANEL-inspired luxury easing curves (same as hero for consistency)
 const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
@@ -34,11 +35,19 @@ const NavLink = ({
     >
       {/* Refined readable link text with luxury tracking */}
       <span
-        className={`inline-block tracking-[0.12em] transition-all duration-700 font-normal ${
+        className={`inline-block tracking-[0.12em] transition-all duration-700 font-normal navbar-link ${
           isScrolled
             ? "text-luxury-primary group-hover:text-deep-bronze"
             : "text-white group-hover:text-soft-blush text-on-dark"
         }`}
+        style={{
+          textShadow: isScrolled
+            ? "none"
+            : "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
+          fontWeight: 400,
+          WebkitFontSmoothing: "antialiased",
+          MozOsxFontSmoothing: "grayscale",
+        }}
       >
         {children}
       </span>
@@ -246,27 +255,43 @@ const Header = () => {
               />
             </div>
 
-            {/* Logo Text with CHANEL-inspired elegant typography and scaled transitions */}
+            {/* Logo Text with CHANEL-inspired elegant typography and enhanced contrast */}
             <div
               className={`ml-3 transition-all duration-700 ${
                 isScrolled ? "ml-2.5" : "ml-3.5"
               }`}
             >
               <span
-                className={`font-alice block tracking-[0.12em] transition-all duration-700 font-normal ${
+                className={`font-alice block tracking-[0.12em] transition-all duration-700 font-normal navbar-logo-text ${
                   isScrolled
                     ? "text-luxury-primary text-base md:text-lg"
                     : "text-white text-on-dark text-lg md:text-xl"
                 }`}
+                style={{
+                  textShadow: isScrolled
+                    ? "0 0.5px 0.5px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.02)"
+                    : "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
+                  fontWeight: 400,
+                  WebkitFontSmoothing: "antialiased",
+                  MozOsxFontSmoothing: "grayscale",
+                }}
               >
                 FACEFRAME
               </span>
               <span
-                className={`font-alice tracking-[0.08em] transition-all duration-700 ${
+                className={`font-alice tracking-[0.08em] transition-all duration-700 navbar-logo-text ${
                   isScrolled
                     ? "text-luxury-secondary text-[10px]"
                     : "text-white/90 text-on-dark text-xs"
                 }`}
+                style={{
+                  textShadow: isScrolled
+                    ? "0 0.5px 0.5px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.02)"
+                    : "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
+                  fontWeight: 400,
+                  WebkitFontSmoothing: "antialiased",
+                  MozOsxFontSmoothing: "grayscale",
+                }}
               >
                 BEAUTY
               </span>
@@ -301,48 +326,13 @@ const Header = () => {
           </div>
 
           {/* Ultra-refined CHANEL-inspired Book Now button */}
-          <Link
+          <LuxuryShadcnButton
             href="/booking"
-            className={`group relative font-alta tracking-[0.15em] text-xs uppercase inline-block overflow-hidden ${
-              isScrolled
-                ? "text-elegant-mocha border-elegant-mocha/30"
-                : "text-white border-white/30"
-            } border px-6 py-3 transition-all duration-700`}
-          >
-            {/* Subtle vertical lines for CHANEL-inspired framing */}
-            <div
-              className={`absolute top-2 left-2 w-[0.5px] h-3 ${
-                isScrolled ? "bg-elegant-mocha/30" : "bg-white/30"
-              }`}
-            ></div>
-            <div
-              className={`absolute bottom-2 right-2 w-[0.5px] h-3 ${
-                isScrolled ? "bg-elegant-mocha/30" : "bg-white/30"
-              }`}
-            ></div>
-
-            {/* Button background with more elegant hover effect */}
-            <motion.div
-              className={`absolute inset-0 ${
-                isScrolled
-                  ? "bg-elegant-mocha/0 group-hover:bg-elegant-mocha/10"
-                  : "bg-white/0 group-hover:bg-white/10"
-              }`}
-              initial={false}
-              transition={{ duration: 0.8, ease: LUXURY_EASING }}
-            />
-
-            {/* Button text with letterspacing */}
-            <span className="relative z-10 font-normal">BOOK</span>
-
-            {/* Subtle bottom border animation with refined timing */}
-            <motion.div
-              className={`absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full ${
-                isScrolled ? "bg-elegant-mocha/60" : "bg-white/60"
-              }`}
-              transition={{ duration: 0.8, ease: LUXURY_EASING }}
-            />
-          </Link>
+            text="BOOK"
+            luxuryVariant="outline"
+            luxuryTheme={isScrolled ? "light" : "transparent"}
+            luxurySize="small"
+          />
         </motion.nav>
 
         {/* CHANEL-inspired luxury hamburger button with enhanced accessibility */}
@@ -448,31 +438,15 @@ const Header = () => {
                   className="mt-16 flex justify-center"
                   variants={navLinkVariants}
                 >
-                  <Link
+                  <LuxuryShadcnButton
                     href="/booking"
-                    className="relative group overflow-hidden font-alta tracking-[0.15em] text-base uppercase font-normal border border-elegant-mocha/40 text-luxury-primary px-10 py-4 transition-all duration-700"
+                    text="BOOK AN APPOINTMENT"
+                    luxuryVariant="outline"
+                    luxuryTheme="light"
+                    luxurySize="large"
+                    className="min-w-[250px]"
                     onClick={closeMobileMenu}
-                  >
-                    {/* Subtle vertical lines for CHANEL-inspired framing */}
-                    <div className="absolute top-2 left-2 w-[0.5px] h-3 bg-elegant-mocha/30"></div>
-                    <div className="absolute bottom-2 right-2 w-[0.5px] h-3 bg-elegant-mocha/30"></div>
-
-                    {/* Button hover effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-elegant-mocha/0 group-hover:bg-elegant-mocha/10"
-                      initial={false}
-                      transition={{ duration: 0.8, ease: LUXURY_EASING }}
-                    />
-
-                    {/* Button text */}
-                    <span className="relative z-10">BOOK AN APPOINTMENT</span>
-
-                    {/* Subtle bottom border animation */}
-                    <motion.div
-                      className="absolute bottom-0 left-0 h-[1px] w-0 bg-elegant-mocha/60 group-hover:w-full"
-                      transition={{ duration: 0.8, ease: LUXURY_EASING }}
-                    />
-                  </Link>
+                  />
                 </motion.div>
 
                 {/* Contact details with refined typography */}

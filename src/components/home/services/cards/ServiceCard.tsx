@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
 import { ServiceCategory, LUXURY_EASING, SUBTLE_EASE } from "../core/types";
+import LuxuryTextBackdrop from "@/components/shared/LuxuryTextBackdrop";
 
 export interface ServiceCardProps {
   category: ServiceCategory;
@@ -180,21 +181,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           transition={{ duration: 1.1, ease: LUXURY_EASING }}
         />
 
-        {/* L-shaped corner accent (top left) - Chanel signature */}
-        <div className="absolute top-0 left-0 z-10 pointer-events-none">
-          <motion.div
-            className="w-[50px] h-[0.25px] bg-black/5"
-            initial={{ scaleX: 0, transformOrigin: "left" }}
-            animate={{ scaleX: isActive ? 1 : 0 }}
-            transition={{ ...transitionBase, delay: 0.1 }}
-          />
-          <motion.div
-            className="w-[0.25px] h-[50px] bg-black/5"
-            initial={{ scaleY: 0, transformOrigin: "top" }}
-            animate={{ scaleY: isActive ? 1 : 0 }}
-            transition={{ ...transitionBase, delay: 0.15 }}
-          />
-        </div>
+        {/* Removing corner decorative elements for cleaner, more Chanel-inspired aesthetics */}
 
         {/* Premium Image Container - Fixed aspect ratio */}
         <div className="relative w-full pb-[65%] overflow-hidden flex-shrink-0">
@@ -238,107 +225,147 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                 "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 70%, transparent 100%)",
             }}
           >
-            {/* Main premium title with perfect letter spacing */}
+            {/* Main premium title with enhanced readability */}
             <motion.h3
               className="font-alta text-white text-xl tracking-[0.35em] uppercase leading-relaxed"
               animate={{ y: isHovered ? -2 : 0 }}
               transition={{ duration: 0.8, ease: LUXURY_EASING }}
             >
-              {category.title}
+              <LuxuryTextBackdrop intensity="medium" isHeading={true}>
+                {category.title}
+              </LuxuryTextBackdrop>
             </motion.h3>
           </motion.div>
         </div>
 
         {/* Content section with refined spacing - flex layout for consistent height */}
         <motion.div
-          className="flex flex-col px-8 py-8 flex-grow"
+          className="flex flex-col px-4 sm:px-6 md:px-8 py-6 sm:py-8 flex-grow"
           animate={contentControls}
-          style={{ minHeight: "280px" }} /* Ensure minimum content height */
+          style={{ minHeight: "240px" }} /* Minimum content height */
         >
-          {/* Elegant description with premium typography and consistent height */}
-          <p className="font-alta text-elegant-mocha/75 text-[15px] tracking-[0.03em] leading-[1.8] mb-8 line-clamp-3">
+          {/* Editorial-style description with enhanced typographic refinement */}
+          <p className="font-alta text-elegant-mocha/90 text-[13px] sm:text-[14px] tracking-[0.04em] leading-[1.8] sm:leading-[1.9] mb-7 sm:mb-9 line-clamp-3 font-light">
             {category.description}
           </p>
 
           {/* Premium features - grouped together without justify-between */}
-          <div className="mb-8 flex-grow">
-            {/* Features container - keeps bullet points together */}
-            <div className="space-y-6">
-              {/* Feature with Dior-style line detail - consistently visible */}
-              <div className="relative pl-8">
-                <motion.div
-                  className="absolute left-0 top-[0.65em] h-[0.5px] bg-deep-bronze/80"
-                  initial={{ width: 20 }}
-                  animate={{ width: 22 }}
-                  transition={{ duration: 0.8, ease: LUXURY_EASING }}
-                />
-                <p className="font-alta text-elegant-mocha/85 text-[13px] tracking-[0.05em] leading-[1.4]">
-                  {category.exclusivity}
-                </p>
+          <div className="mb-6 sm:mb-8 flex-grow">
+            {/* Features container - keeps bullet points together with improved mobile spacing */}
+            <div className="space-y-4 sm:space-y-6">
+              {/* Feature with precisely positioned Chanel-style dash - using inline-flex for perfect alignment */}
+              <div className="relative mt-[2px] mb-[6px]">
+                <div className="flex">
+                  <div className="relative w-[8px] sm:w-[10px] flex-shrink-0 mr-[10px] sm:mr-[14px]">
+                    <motion.div
+                      className="absolute top-[0.52em] left-0 h-[0.25px] bg-deep-bronze/60"
+                      style={{ top: "calc(0.52em + 0.5px)" }}
+                      initial={{ width: 8 }}
+                      animate={{ width: isHovered ? 12 : 10 }}
+                      transition={{ duration: 1.1, ease: LUXURY_EASING }}
+                    />
+                  </div>
+                  <p className="font-alta text-elegant-mocha/90 text-[11px] sm:text-[12px] tracking-[0.07em] leading-[1.6] font-light">
+                    {category.exclusivity}
+                  </p>
+                </div>
               </div>
 
-              {/* Feature with staggered animation - consistently visible */}
-              <div className="relative pl-8">
-                <motion.div
-                  className="absolute left-0 top-[0.65em] h-[0.5px] bg-deep-bronze/80"
-                  initial={{ width: 20 }}
-                  animate={{ width: 22 }}
-                  transition={{
-                    duration: 0.8,
-                    ease: LUXURY_EASING,
-                    delay: 0.05,
-                  }}
-                />
-                <p className="font-alta text-elegant-mocha/85 text-[13px] tracking-[0.05em] leading-[1.4]">
-                  {category.result}
-                </p>
+              {/* Feature with meticulously positioned dash - absolute precision measurement */}
+              <div className="relative mt-[2px] mb-[6px]">
+                <div className="flex">
+                  <div className="relative w-[8px] sm:w-[10px] flex-shrink-0 mr-[10px] sm:mr-[14px]">
+                    <motion.div
+                      className="absolute top-[0.52em] left-0 h-[0.25px] bg-deep-bronze/60"
+                      style={{ top: "calc(0.52em + 0.5px)" }}
+                      initial={{ width: 8 }}
+                      animate={{ width: isHovered ? 12 : 10 }}
+                      transition={{
+                        duration: 1.1,
+                        ease: LUXURY_EASING,
+                        delay: 0.05,
+                      }}
+                    />
+                  </div>
+                  <p className="font-alta text-elegant-mocha/90 text-[11px] sm:text-[12px] tracking-[0.07em] leading-[1.6] font-light">
+                    {category.result}
+                  </p>
+                </div>
+              </div>
+
+              {/* Availability indicator - precise dash positioning for Chanel elegance */}
+              <div className="relative mt-[10px] sm:mt-[12px]">
+                <div className="flex">
+                  <div className="relative w-[8px] sm:w-[10px] flex-shrink-0 mr-[10px] sm:mr-[14px]">
+                    <motion.div
+                      className="absolute top-[0.49em] left-0 h-[0.25px] bg-deep-bronze/50"
+                      style={{ top: "calc(0.49em + 0.5px)" }}
+                      initial={{ width: 6 }}
+                      animate={{ width: isHovered ? 10 : 8 }}
+                      transition={{
+                        duration: 1.1,
+                        ease: LUXURY_EASING,
+                        delay: 0.1,
+                      }}
+                    />
+                  </div>
+                  <motion.p
+                    className="font-alta text-elegant-mocha/75 text-[10px] sm:text-[11px] tracking-[0.07em] leading-[1.6] italic font-light"
+                    animate={{
+                      opacity: isHovered ? 0.9 : 0.75,
+                    }}
+                    transition={{ duration: 1.1, ease: LUXURY_EASING }}
+                  >
+                    Limited appointments available this month
+                  </motion.p>
+                </div>
               </div>
             </div>
 
             {/* Add flex-grow div to push the button to the bottom */}
-            <div className="flex-grow mt-8"></div>
+            <div className="flex-grow mt-6 sm:mt-8"></div>
           </div>
 
-          {/* Premium call-to-action with CHANEL-inspired hover effects */}
+          {/* Refined Chanel-inspired call-to-action with minimalist design */}
           <Link
             href={`/services/${category.id}`}
-            className="group relative font-alta tracking-[0.3em] text-[10px] sm:text-xs uppercase text-elegant-mocha/90 px-10 py-4 inline-block border border-elegant-mocha/20 overflow-hidden text-center w-full mt-auto"
+            className="group relative font-alta tracking-[0.25em] sm:tracking-[0.35em] text-[10px] sm:text-[11px] uppercase text-elegant-mocha/90 px-5 sm:px-8 py-[14px] inline-block overflow-hidden text-center w-full mt-auto"
+            aria-label={`Explore ${category.title} service details`}
+            style={{ letterSpacing: "0.35em" }}
           >
-            {/* Button background with elegant hover effect */}
+            {/* Ultra-thin button border - Chanel signature minimalism */}
+            <div className="absolute inset-0 border border-elegant-mocha/15"></div>
+
+            {/* Subtle hover background */}
             <motion.div
-              className="absolute inset-0 bg-elegant-mocha/0 group-hover:bg-elegant-mocha/5"
+              className="absolute inset-0 bg-elegant-mocha/0 group-hover:bg-elegant-mocha/3 active:bg-elegant-mocha/5"
               initial={false}
-              transition={{ duration: 0.7, ease: LUXURY_EASING }}
+              transition={{ duration: 1.2, ease: LUXURY_EASING }}
             />
 
-            {/* Button text with animation */}
-            <span className="relative z-10 group-hover:text-elegant-mocha transition-colors duration-700">
-              Explore Service
-            </span>
+            {/* Button text - Chanel-inspired precision */}
+            <motion.span
+              className="relative z-10 group-hover:text-elegant-mocha transition-colors duration-900 whitespace-nowrap font-light"
+              animate={{
+                letterSpacing: isHovered ? "0.38em" : "0.35em",
+                opacity: isHovered ? 0.95 : 0.9,
+              }}
+              transition={{ duration: 0.9, ease: LUXURY_EASING }}
+            >
+              Discover
+            </motion.span>
 
-            {/* Subtle bottom border animation */}
+            {/* Ultra-minimalist bottom accent - Chanel inspired */}
             <motion.div
-              className="absolute bottom-0 left-0 h-[1px] w-0 bg-soft-blush/60 group-hover:w-full"
-              transition={{ duration: 0.8, ease: LUXURY_EASING }}
+              className="absolute bottom-0 left-0 right-0 h-[0.5px] bg-elegant-mocha/25 origin-center scale-x-0 group-hover:scale-x-100"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: isHovered ? 0.3 : 0 }}
+              transition={{ duration: 1.2, ease: LUXURY_EASING }}
             />
           </Link>
         </motion.div>
 
-        {/* L-shaped corner accent (bottom right) - Chanel signature */}
-        <div className="absolute bottom-0 right-0 z-10 pointer-events-none">
-          <motion.div
-            className="absolute bottom-0 right-0 w-[50px] h-[0.25px] bg-black/5"
-            initial={{ scaleX: 0, transformOrigin: "right" }}
-            animate={{ scaleX: isActive ? 1 : 0 }}
-            transition={{ ...transitionBase, delay: 0.1 }}
-          />
-          <motion.div
-            className="absolute bottom-0 right-0 w-[0.25px] h-[50px] bg-black/5"
-            initial={{ scaleY: 0, transformOrigin: "bottom" }}
-            animate={{ scaleY: isActive ? 1 : 0 }}
-            transition={{ ...transitionBase, delay: 0.15 }}
-          />
-        </div>
+        {/* Removed bottom right corner accent for cleaner, Chanel-inspired minimalism */}
       </div>
     </motion.div>
   );

@@ -13,11 +13,10 @@ import Image from "next/image";
 // Luxury brands use specific easing curves for silky-smooth animations
 const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
 
-// Services data organized by category with luxury focus
+// Services data organized by category with direct links to service categories
 const FEATURED_CATEGORIES = [
   {
     id: "semi-permanent-makeup",
-    title: "Artistry",
     subtitle: "Semi-Permanent Makeup",
     description:
       "Precision techniques that enhance your natural beauty with lasting elegance",
@@ -28,7 +27,6 @@ const FEATURED_CATEGORIES = [
   },
   {
     id: "lashes-brows",
-    title: "Frame",
     subtitle: "Lashes & Brows",
     description:
       "Expert enhancements that define your features with subtle sophistication",
@@ -39,7 +37,6 @@ const FEATURED_CATEGORIES = [
   },
   {
     id: "facials",
-    title: "Renewal",
     subtitle: "Luxury Facials",
     description:
       "Transformative treatments that reveal your skin's natural radiance",
@@ -324,7 +321,7 @@ const ServicesPreview: React.FC<ServicesPreviewProps> = ({
 
                     <div className="absolute bottom-7 sm:bottom-9 left-7 sm:left-9 right-7 sm:right-9">
                       <h3 className="font-alice text-white text-3xl sm:text-4xl lg:text-5xl tracking-[0.15em]">
-                        {FEATURED_CATEGORIES[activeCategory].title}
+                        {FEATURED_CATEGORIES[activeCategory].subtitle}
                       </h3>
                     </div>
                   </motion.div>
@@ -486,7 +483,7 @@ const ServicesPreview: React.FC<ServicesPreviewProps> = ({
                             </span>
                           </div>
                           <h3 className="font-alice text-white text-2xl sm:text-3xl tracking-[0.12em]">
-                            {category.title}
+                            {category.subtitle}
                           </h3>
                         </div>
                       </motion.div>

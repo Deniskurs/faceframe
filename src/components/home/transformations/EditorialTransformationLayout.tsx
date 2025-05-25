@@ -131,24 +131,7 @@ export default function EditorialTransformationLayout({
               )}
             </div>
 
-            {/* Visual connector - draws the eye from philosophy to transformations */}
-            <motion.div
-              className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[0.5px] h-[120px] bg-elegant-mocha/10"
-              initial={{ scaleY: 0, transformOrigin: "top" }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.8, ease: "easeOut", delay: 0.6 }}
-            />
-
-            <motion.div
-              className="absolute left-1/2 -translate-x-1/2 -bottom-8 opacity-20"
-              initial={{ opacity: 0, y: -10 }}
-              whileInView={{ opacity: 0.2, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 1.6 }}
-            >
-              <div className="h-4 w-4 rounded-full border-[0.5px] border-elegant-mocha/30"></div>
-            </motion.div>
+            {/* Clean space - Chanel-inspired minimalism */}
           </motion.div>
         )}
 

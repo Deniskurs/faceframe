@@ -69,13 +69,7 @@ export function DesktopServicesView({
         </div>
       )}
 
-      {/* Ultra-premium horizontal accent line */}
-      <motion.div
-        className="w-full max-w-[90px] h-[0.25px] bg-elegant-mocha/15 mx-auto mb-16"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: isInView ? 1 : 0 }}
-        transition={{ duration: 1.2, ease: LUXURY_EASING, delay: 0.2 }}
-      />
+      {/* Clean space - true to Chanel's minimalist aesthetic */}
 
       {/* Refined Service Cards Grid with golden-ratio inspired spacing */}
       <div
@@ -115,24 +109,8 @@ export function DesktopServicesView({
         ))}
       </div>
 
-      {/* Enhanced separator line with premium gradient - Dior inspired */}
-      <motion.div
-        className="mt-20 md:mt-24 w-full h-[0.25px]"
-        style={{
-          background:
-            "linear-gradient(to right, transparent, rgba(127, 85, 57, 0.1) 50%, transparent 100%)",
-        }}
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={{
-          scaleX: isVisible ? 1 : 0,
-          opacity: isVisible ? 0.8 : 0,
-        }}
-        transition={{
-          duration: 1.5,
-          delay: 0.8,
-          ease: LUXURY_EASING,
-        }}
-      />
+      {/* Clean negative space instead of separator - Chanel's signature restraint */}
+      <div className="mt-20 md:mt-24"></div>
 
       {/* View All Services Button with Chanel-inspired styling */}
       <motion.div

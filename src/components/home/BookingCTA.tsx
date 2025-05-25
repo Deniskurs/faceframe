@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import FadeInSection from "../shared/FadeInSection";
 import useParallaxEffect from "@/utils/animations/useParallaxEffect";
 import useAnimateOnScroll from "@/utils/animations/useAnimateOnScroll";
-import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import {
   LUXURY_EASING,
   standardViewport,
@@ -126,19 +126,27 @@ const BookingCTA = ({
             {subtitle}
           </motion.p>
 
-          {/* Standardized LuxuryButton component */}
+          {/* Dual Booking Path Options */}
           <motion.div
-            className="mb-20"
+            className="mb-20 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3, ease: LUXURY_EASING }}
             viewport={standardViewport}
           >
-            <LuxuryButton
-              href={buttonLink}
-              text={buttonText}
-              variant="primary"
-              size="large"
+            <LuxuryShadcnButton
+              href={buttonLink || "/services"}
+              text={buttonText || "BOOK SERVICE DIRECTLY"}
+              luxuryVariant="elegant"
+              luxuryTheme="transparent"
+              luxurySize="large"
+            />
+            <LuxuryShadcnButton
+              href="/consultation"
+              text="FREE CONSULTATION"
+              luxuryVariant="outline"
+              luxuryTheme="transparent"
+              luxurySize="large"
             />
           </motion.div>
 

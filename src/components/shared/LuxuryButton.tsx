@@ -38,7 +38,7 @@ export function LuxuryButton({
     primary:
       "bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20",
     secondary:
-      "group relative border border-elegant-mocha/20 text-elegant-mocha/90 hover:text-elegant-mocha overflow-hidden",
+      "group relative bg-white/15 backdrop-blur-[1px] border-2 border-white/30 text-white hover:bg-white/20 hover:text-white overflow-hidden shadow-sm",
     text: "text-elegant-mocha hover:text-deep-bronze border-b border-elegant-mocha/30 hover:border-deep-bronze",
   };
 
@@ -85,13 +85,17 @@ export function LuxuryButton({
       {includeHoverEffect && (
         <>
           <motion.div
-            className="absolute inset-0 bg-elegant-mocha/0 group-hover:bg-elegant-mocha/5"
+            className="absolute inset-0 bg-white/0 group-hover:bg-white/25"
             initial={false}
             transition={{ duration: 0.7, ease: LUXURY_EASING }}
           />
           <motion.div
-            className="absolute bottom-0 left-0 h-[1px] w-0 bg-soft-blush/60 group-hover:w-full"
+            className="absolute bottom-0 left-0 h-[1px] w-0 bg-white/70 group-hover:w-full"
             transition={{ duration: 0.8, ease: LUXURY_EASING }}
+          />
+          <motion.div
+            className="absolute top-0 right-0 h-[1px] w-0 bg-white/70 group-hover:w-full"
+            transition={{ duration: 0.8, delay: 0.1, ease: LUXURY_EASING }}
           />
         </>
       )}

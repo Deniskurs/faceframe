@@ -229,13 +229,7 @@ export function MobileServicesView({
         </svg>
       </motion.div>
 
-      {/* Ultra-premium decorative line at top of carousel */}
-      <motion.div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-[0.25px] bg-elegant-mocha/20 opacity-70 hidden md:block"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: isInView ? 1 : 0 }}
-        transition={{ duration: 1.2, ease: LUXURY_EASING, delay: 0.2 }}
-      />
+      {/* Clean negative space - Chanel-inspired minimalism */}
 
       {/* Premium Luxury Carousel with refined edge-to-edge design */}
       <motion.div
@@ -361,13 +355,8 @@ export function MobileServicesView({
         </motion.button>
       </motion.div>
 
-      {/* Ultra-fine separator line at bottom - Dior inspired */}
-      <motion.div
-        className="w-full max-w-[120px] h-[0.25px] bg-elegant-mocha/10 mx-auto mt-16"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: isInView ? 1 : 0 }}
-        transition={{ duration: 1.2, ease: LUXURY_EASING, delay: 0.4 }}
-      />
+      {/* Clean negative space - classic Chanel restraint */}
+      <div className="mt-16"></div>
 
       {/* View All Services Button with Chanel-inspired styling */}
       <motion.div

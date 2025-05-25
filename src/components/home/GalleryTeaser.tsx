@@ -7,7 +7,7 @@ import BeforeAfterSlider from "../shared/BeforeAfterSlider";
 import { GalleryItem } from "../../types";
 import galleryService from "../../services/galleryService";
 import { SectionTitle } from "@/components/shared/SectionTitle";
-import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 
 interface GalleryTeaserProps {
@@ -184,10 +184,11 @@ const GalleryTeaser = ({ hideTitle = false }: GalleryTeaserProps) => {
             transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
             viewport={{ once: true }}
           >
-            <LuxuryButton
+            <LuxuryShadcnButton
               href="/gallery"
               text="VIEW COMPLETE GALLERY"
-              variant="text"
+              luxuryVariant="text"
+              luxuryTheme="light"
             />
           </motion.div>
         </div>

@@ -8,7 +8,7 @@ import galleryService from "../../../services/galleryService";
 import EditorialTransformationLayout from "./EditorialTransformationLayout";
 import { luxuryEasing } from "../../../utils/animations/luxurySpacing";
 import { standardViewport } from "@/utils/animations/luxuryAnimations";
-import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import {
   useLuxuryReveal,
   useLuxuryStaggerEffect,
@@ -85,14 +85,7 @@ export default function LuxuryTransformationsGallery({
         <div className="absolute inset-0 bg-gradient-to-b from-soft-blush/0 via-soft-blush/5 to-soft-blush/0"></div>
       </motion.div>
 
-      {/* Chanel-inspired fine accent line */}
-      <motion.div
-        className="absolute top-40 left-0 right-0 h-[0.25px] bg-elegant-mocha/10"
-        initial={{ scaleX: 0, transformOrigin: "left" }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 2.5, ease: luxuryEasing.refined }}
-      />
+      {/* Clean, unobstructed space - Chanel-inspired minimalism */}
 
       <div className="container mx-auto px-4 sm:px-8 relative">
         {/* Section Content with Editorial Layout */}
@@ -310,10 +303,12 @@ export default function LuxuryTransformationsGallery({
                   ease: luxuryEasing.refined,
                 }}
               >
-                <LuxuryButton
+                <LuxuryShadcnButton
                   href="/gallery"
                   text="DISCOVER ALL"
-                  variant="secondary"
+                  luxuryVariant="outline"
+                  luxuryTheme="light"
+                  luxurySize="medium"
                 />
               </motion.div>
             </div>

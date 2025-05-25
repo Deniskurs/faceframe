@@ -6,7 +6,7 @@ import FadeInSection from "../shared/FadeInSection";
 import { FAQ } from "../../types";
 import faqService from "../../services/faqService";
 import { SectionTitle } from "@/components/shared/SectionTitle";
-import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import {
   LUXURY_EASING,
   standardViewport,
@@ -185,10 +185,12 @@ const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
             transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
             viewport={standardViewport}
           >
-            <LuxuryButton
+            <LuxuryShadcnButton
               href="/faq"
               text="VIEW ALL QUESTIONS"
-              variant="secondary"
+              luxuryVariant="outline"
+              luxuryTheme="light"
+              luxurySize="medium"
             />
           </motion.div>
         </div>

@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 
 interface AboutStripProps {
@@ -78,42 +78,13 @@ const AboutStrip: React.FC<AboutStripProps> = ({
         animate={{ opacity: isRevealed ? 1 : 0 }}
         transition={{ duration: 1.8, ease: LUXURY_EASING }}
       >
-        {/* Ultra-thin horizontal line */}
+        {/* Clean, refined horizontal line - Chanel-inspired minimalism */}
         <motion.div
           className="absolute top-1/2 left-0 w-full h-[0.1px] bg-elegant-mocha/10"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: isRevealed ? 1 : 0 }}
           transition={{ duration: 1.4, delay: 0.5, ease: LUXURY_EASING }}
         />
-
-        {/* Ultra-thin vertical line */}
-        <motion.div
-          className="absolute top-0 left-1/2 w-[0.1px] h-full bg-elegant-mocha/10"
-          initial={{ scaleY: 0 }}
-          animate={{ scaleY: isRevealed ? 1 : 0 }}
-          transition={{ duration: 1.4, delay: 0.7, ease: LUXURY_EASING }}
-        />
-
-        {/* CHANEL-inspired corner accents */}
-        <motion.div
-          className="absolute top-[12%] left-[12%] flex items-center justify-center"
-          initial={{ opacity: 0, x: -10, y: -10 }}
-          animate={{ opacity: isRevealed ? 0.8 : 0, x: 0, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.9, ease: LUXURY_EASING }}
-        >
-          <div className="w-4 h-[0.1px] bg-elegant-mocha/60"></div>
-          <div className="h-4 w-[0.1px] bg-elegant-mocha/60"></div>
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-[12%] right-[12%] flex items-end justify-end"
-          initial={{ opacity: 0, x: 10, y: 10 }}
-          animate={{ opacity: isRevealed ? 0.8 : 0, x: 0, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.9, ease: LUXURY_EASING }}
-        >
-          <div className="w-4 h-[0.1px] bg-elegant-mocha/60"></div>
-          <div className="h-4 w-[0.1px] bg-elegant-mocha/60"></div>
-        </motion.div>
 
         {/* Title */}
         <div className="text-center max-w-xl mx-auto relative z-10">
@@ -246,34 +217,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
                   </div>
                 </div>
 
-                {/* Corner accents */}
-                <motion.div
-                  className="absolute top-0 left-0 w-6 h-6 pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: imageInView ? 1 : 0 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.6,
-                    ease: LUXURY_EASING,
-                  }}
-                >
-                  <div className="absolute top-3 left-0 w-4 h-[0.25px] bg-white/60"></div>
-                  <div className="absolute top-0 left-3 w-[0.25px] h-4 bg-white/60"></div>
-                </motion.div>
-
-                <motion.div
-                  className="absolute bottom-0 right-0 w-6 h-6 pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: imageInView ? 1 : 0 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.7,
-                    ease: LUXURY_EASING,
-                  }}
-                >
-                  <div className="absolute bottom-3 right-0 w-4 h-[0.25px] bg-white/60"></div>
-                  <div className="absolute bottom-0 right-3 w-[0.25px] h-4 bg-white/60"></div>
-                </motion.div>
+                {/* Clean, refined frame - Chanel-inspired minimalism */}
 
                 {/* Founder name and title */}
                 <motion.div
@@ -360,34 +304,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
         ref={quoteRef}
         className="h-screen flex items-center justify-center px-5 sm:px-6 bg-light-cream relative"
       >
-        {/* Background grid lines */}
-        <motion.div
-          className="absolute h-full w-[0.25px] bg-elegant-mocha/5 left-1/3"
-          initial={{ scaleY: 0 }}
-          animate={{ scaleY: quoteInView ? 1 : 0 }}
-          transition={{ duration: 1.6, delay: 0.3, ease: LUXURY_EASING }}
-        />
-
-        <motion.div
-          className="absolute h-full w-[0.25px] bg-elegant-mocha/5 left-2/3"
-          initial={{ scaleY: 0 }}
-          animate={{ scaleY: quoteInView ? 1 : 0 }}
-          transition={{ duration: 1.6, delay: 0.5, ease: LUXURY_EASING }}
-        />
-
-        <motion.div
-          className="absolute w-full h-[0.25px] bg-elegant-mocha/5 top-1/3"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: quoteInView ? 1 : 0 }}
-          transition={{ duration: 1.6, delay: 0.3, ease: LUXURY_EASING }}
-        />
-
-        <motion.div
-          className="absolute w-full h-[0.25px] bg-elegant-mocha/5 top-2/3"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: quoteInView ? 1 : 0 }}
-          transition={{ duration: 1.6, delay: 0.5, ease: LUXURY_EASING }}
-        />
+        {/* Simplified design - removed grid lines for cleaner Chanel-esque aesthetic */}
 
         <div className="max-w-2xl mx-auto relative z-10">
           {/* Quote display */}
@@ -406,20 +323,13 @@ const AboutStrip: React.FC<AboutStripProps> = ({
               </motion.p>
             </motion.div>
 
-            {/* Quote with decorative elements */}
+            {/* Quote with refined minimal styling - Chanel-inspired simplicity */}
             <div className="relative">
               <motion.div
-                className="w-[0.25px] h-10 bg-elegant-mocha/30 mx-auto mb-10"
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: quoteInView ? 1 : 0 }}
+                className="w-16 h-[0.25px] bg-elegant-mocha/30 mx-auto mb-10"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: quoteInView ? 1 : 0 }}
                 transition={{ duration: 0.9, delay: 0.6, ease: LUXURY_EASING }}
-              />
-
-              <motion.div
-                className="absolute top-0 left-0 w-[1px] h-full bg-elegant-mocha/5"
-                initial={{ left: 0 }}
-                animate={{ left: quoteInView ? "calc(100% + 1px)" : 0 }}
-                transition={{ duration: 0.9, delay: 0.7, ease: LUXURY_EASING }}
               />
 
               <motion.blockquote
@@ -530,10 +440,12 @@ const AboutStrip: React.FC<AboutStripProps> = ({
             animate={{ opacity: storyInView ? 1 : 0, y: storyInView ? 0 : 20 }}
             transition={{ duration: 0.7, delay: 1.2, ease: LUXURY_EASING }}
           >
-            <LuxuryButton
+            <LuxuryShadcnButton
               href="/booking"
               text="BOOK YOUR EXPERIENCE"
-              variant="secondary"
+              luxuryVariant="outline"
+              luxuryTheme="light"
+              luxurySize="medium"
             />
           </motion.div>
         </div>

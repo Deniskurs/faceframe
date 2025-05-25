@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -252,11 +252,12 @@ const Footer = () => {
           <h4 className="font-alice text-xl mb-6 text-soft-blush">
             Ready to Experience Luxury Beauty?
           </h4>
-          <LuxuryButton
+          <LuxuryShadcnButton
             href="/booking"
             text="BOOK YOUR APPOINTMENT"
-            variant="primary"
-            size="large"
+            luxuryVariant="elegant"
+            luxuryTheme="transparent"
+            luxurySize="large"
           />
         </div>
 

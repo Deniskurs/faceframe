@@ -4,7 +4,7 @@ import {
   LUXURY_EASING,
   standardViewport,
 } from "@/utils/animations/luxuryAnimations";
-import { LuxuryButton } from "@/components/shared/LuxuryButton";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 
 export function ViewAllButton() {
   return (
@@ -18,10 +18,12 @@ export function ViewAllButton() {
         ease: LUXURY_EASING,
       }}
     >
-      <LuxuryButton
+      <LuxuryShadcnButton
         href="/services"
         text="VIEW ALL SERVICES"
-        variant="secondary"
+        luxuryVariant="outline"
+        luxuryTheme="light"
+        luxurySize="medium"
       />
     </motion.div>
   );
