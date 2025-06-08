@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -34,10 +34,6 @@ const IggyPage = () => {
     threshold: 0.1,
     triggerOnce: true,
   });
-  const [editorialRef, editorialInView] = useInView({
-    threshold: 0.05,
-    triggerOnce: true,
-  });
   const [manifestoRef, manifestoInView] = useInView({
     threshold: 0.2,
     triggerOnce: true,
@@ -50,20 +46,22 @@ const IggyPage = () => {
   // Enhanced whisper animation with more sophisticated timing
   const [displayText, setDisplayText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const cursorTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isActiveRef = useRef(false);
 
-  const whisperWords = [
-    "breathe",
-    "softness",
-    "stillness",
-    "grace",
-    "light",
-    "presence",
-    "authenticity",
-  ];
+  const whisperWords = useMemo(
+    () => [
+      "breathe",
+      "softness",
+      "stillness",
+      "grace",
+      "light",
+      "presence",
+      "authenticity",
+    ],
+    []
+  );
 
   // Refined cursor animation
   useEffect(() => {
@@ -127,7 +125,6 @@ const IggyPage = () => {
             );
           } else {
             wordIndex = (wordIndex + 1) % whisperWords.length;
-            setCurrentWordIndex(wordIndex);
             animationTimeoutRef.current = setTimeout(runAnimationCycle, 1200);
           }
         };
@@ -146,7 +143,7 @@ const IggyPage = () => {
         clearTimeout(animationTimeoutRef.current);
       }
     };
-  }, [heroInView]);
+  }, [heroInView, whisperWords]);
 
   return (
     <Layout>
@@ -621,7 +618,9 @@ const IggyPage = () => {
             transition={{ duration: 2.5, ease: LUXURY_EASING }}
           >
             <motion.h3 className="font-alice text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-elegant-mocha/95 tracking-[0.05em] leading-tight space-y-8 mb-24">
-              Not to <span className="text-elegant-mocha/60">"fix"</span> you.
+              Not to{" "}
+              <span className="text-elegant-mocha/60">&ldquo;fix&rdquo;</span>{" "}
+              you.
               <br />
               Not to <span className="text-elegant-mocha/60">cover you up</span>
               .
@@ -672,7 +671,7 @@ const IggyPage = () => {
               <blockquote className="space-y-16 lg:space-y-24">
                 <div className="space-y-12 lg:space-y-16">
                   <p className="font-alice text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-elegant-mocha/95 leading-tight tracking-wide italic">
-                    "When you lie down on my table,
+                    &ldquo;When you lie down on my table,
                     <br />
                     <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-elegant-mocha/70">
                       the world gets quiet.
@@ -681,7 +680,7 @@ const IggyPage = () => {
                   <p className="font-alice text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-elegant-mocha/95 leading-tight tracking-wide italic">
                     The noise drops away.
                     <br />
-                    And for a little while... it's just{" "}
+                    And for a little while... it&apos;s just{" "}
                     <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
                       you
                     </span>
@@ -689,18 +688,18 @@ const IggyPage = () => {
                   </p>
                   <p className="font-alta text-lg sm:text-xl md:text-2xl lg:text-3xl text-elegant-mocha/80 leading-relaxed tracking-wide not-italic max-w-3xl mx-auto">
                     Being cared for. Without asking. Without earning it. Without
-                    performing."
+                    performing.&rdquo;
                   </p>
                 </div>
               </blockquote>
 
               <div className="space-y-16 lg:space-y-24">
                 <p className="font-alice text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-elegant-mocha/95 leading-tight tracking-wide">
-                  This isn't just about lashes, brows, or skin...
+                  This isn&apos;t just about lashes, brows, or skin...
                 </p>
 
                 <p className="font-alta text-elegant-mocha/80 text-xl sm:text-2xl lg:text-3xl leading-relaxed tracking-wide">
-                  though I've spent over{" "}
+                  though I&apos;ve spent over{" "}
                   <span className="font-alice text-2xl sm:text-3xl lg:text-4xl italic text-elegant-mocha/95">
                     12 years
                   </span>{" "}

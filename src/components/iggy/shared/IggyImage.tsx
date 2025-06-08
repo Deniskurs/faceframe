@@ -143,10 +143,10 @@ const IggyImage: React.FC<IggyImageProps> = ({
     >
       {/* Main Image */}
       {fill ? (
-        <Image {...imageProps} />
+        <Image {...imageProps} alt={alt} />
       ) : (
         <div className={getAspectRatioClass()}>
-          <Image {...imageProps} fill />
+          <Image {...imageProps} fill alt={alt} />
         </div>
       )}
 
