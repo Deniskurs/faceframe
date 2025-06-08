@@ -84,7 +84,7 @@ export default function LuxuryClientVoices({
   );
 
   return (
-    <section className="py-32 md:py-40 relative overflow-hidden bg-gradient-to-b from-soft-cream to-white">
+    <section className="py-32 md:py-40 relative overflow-hidden">
       {/* Subtle texture overlay - Chanel inspired */}
       <div className="absolute inset-0 bg-[url('/images/brand/IMG_5460.webp')] opacity-[0.02] mix-blend-overlay"></div>
 
