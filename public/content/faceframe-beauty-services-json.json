@@ -1,0 +1,423 @@
+{
+  "serviceCategories": [
+    {
+      "id": "semi-permanent-makeup",
+      "name": "Semi-Permanent Makeup",
+      "description": "Expert semi-permanent makeup treatments by Iggy using advanced techniques and premium pigments for natural-looking, long-lasting results.",
+      "services": [
+        {
+          "id": "consultation",
+          "name": "Free Consultation & Patch Test",
+          "price": "£0.00",
+          "description": "In this appointments we will examine your skin if it is suitable for Semi-Permanent Brow procedure, discuss expectations and what it is possible to achieve, we will do colour match, allergy skin patch test aswell as getting answers to all your questions.",
+          "duration": "30 minutes",
+          "featured": false
+        },
+        {
+          "id": "beauty-spots",
+          "name": "Beauty Spots",
+          "price": "£35.00",
+          "priceNote": "price from",
+          "description": "Beauty spot can be located on the face, shoulder, neck or breast or anywhere on the body. A beauty mark tattoo is a small dark (the tone of colour brown can be chosen) artificial spot applied as an adornment with permanent cosmetics. Usually applied with makeup artificial beauty marks have been fashionable for years and correctly placed can enhance your features. Freckles and beauty marks will eventually fade away entirely.",
+          "duration": "30 minutes",
+          "featured": false
+        },
+        {
+          "id": "freckles",
+          "name": "Freckles",
+          "price": "£70.00",
+          "priceNote": "price from",
+          "description": "Semi-permanent makeup freckles are a new trend becoming more popular by the minute. We add the freckles in natural positions in the centre of your face depending on your features or wherever is wanted. Freckle tattoos are considered semi-permanent and can last anywhere from 1-3 years, depending on several factors such as ink color used, the depth of ink deposit, your exposure to UV, your general health and how well you take care of them. Freckles and beauty spots will eventually fade away entirely.",
+          "duration": "45 minutes",
+          "featured": false
+        },
+        {
+          "id": "brow-microblading",
+          "name": "Brow Microblading",
+          "price": "£285.00",
+          "description": "Microblading is a semi-permanent technique for enhancing the appearance of the eyebrows, in which pigment is implanted into the skin in fine, short strokes resembling hair, using a hand tool with a blade formed of tiny needles. Shape and style is adapted to every client individually following their face features, skin and preferences. In the price included: • Free consultation and a patch test • Initial procedure • Touch up in 5-8 weeks • After care kit • Complimentary Brow wax. NOTE: please book consultation and a patch test appointment first.",
+          "duration": "2 hours",
+          "featured": true,
+          "note": "Please book consultation and a patch test appointment first"
+        },
+        {
+          "id": "ombre-brows",
+          "name": "Ombré Brows",
+          "price": "£285.00",
+          "description": "Ombre powder brows are a semi-permanent make up treatment that uses either a digital machine to insert tiny dots of pigment into the skin. It creates a more shaded effect, rather than the crisp hair strokes that are often associated with microblading. Shape and style is adapted to every client individually following their face features, skin and preferences. In the price included: • Free consultation and a patch test • Initial procedure • Touch up in 5-8 weeks • After care kit • Complimentary Brow wax. NOTE: please book consultation and a patch test appointment first.",
+          "duration": "2 hours",
+          "featured": true,
+          "note": "Please book consultation and a patch test appointment first"
+        },
+        {
+          "id": "combination-brows",
+          "name": "Combination Brows",
+          "price": "£295.00",
+          "description": "The Combination Brows is a treatment that combines hair stroke simulation with a mist of colour using shading techniques with digital machine. Combining microblading with ombre powder together creates a more defined looking brow than just hairstrokes alone. Shape and style is adapted to every client individually following their face features, skin and preferences. In the price included: • Free consultation and a patch test • Initial procedure • Touch up in 5-8 weeks • After care kit • Complimentary Brow wax. NOTE: please book consultation and a patch test appointment first.",
+          "duration": "2-3 hours",
+          "featured": true,
+          "note": "Please book consultation and a patch test appointment first"
+        },
+        {
+          "id": "spmu-boost-6-months",
+          "name": "SPMU Brow Colour Boost - Up to 6 Months",
+          "price": "£85.00",
+          "description": "Color Boost is a touch-up procedure for people who have already received permanent makeup and want to refresh or enhance the color. The procedure involves adding more pigment to the existing tattoo to make it more vibrant or to correct any fading that may have occurred over time. NOTE: If you have your brows previously done by different artist - please contact with pictures before booking.",
+          "duration": "1 hour",
+          "featured": false,
+          "note": "If you have your brows previously done by different artist - please contact with pictures before booking"
+        },
+        {
+          "id": "spmu-boost-9-months",
+          "name": "SPMU Brow Colour Boost - 6 to 9 Months",
+          "price": "£100.00",
+          "description": "Color Boost is a touch-up procedure for people who have already received permanent makeup and want to refresh or enhance the color. The procedure involves adding more pigment to the existing tattoo to make it more vibrant or to correct any fading that may have occurred over time. NOTE: If you have your brows previously done by different artist - please contact with pictures before booking.",
+          "duration": "1 hour",
+          "featured": false,
+          "note": "If you have your brows previously done by different artist - please contact with pictures before booking"
+        },
+        {
+          "id": "spmu-boost-12-months",
+          "name": "SPMU Brow Colour Boost - 9 to 12 Months",
+          "price": "£120.00",
+          "description": "Color Boost is a touch-up procedure for people who have already received permanent makeup and want to refresh or enhance the color. The procedure involves adding more pigment to the existing tattoo to make it more vibrant or to correct any fading that may have occurred over time. NOTE: If you have your brows previously done by different artist - please contact with pictures before booking.",
+          "duration": "1.5 hours",
+          "featured": false,
+          "note": "If you have your brows previously done by different artist - please contact with pictures before booking"
+        },
+        {
+          "id": "spmu-boost-16-months",
+          "name": "SPMU Brow Colour Boost - 12 to 16 Months",
+          "price": "£135.00",
+          "description": "Color Boost is a touch-up procedure for people who have already received permanent makeup and want to refresh or enhance the color. The procedure involves adding more pigment to the existing tattoo to make it more vibrant or to correct any fading that may have occurred over time. NOTE: If you have your brows previously done by different artist - please contact with pictures before booking.",
+          "duration": "1.5 hours",
+          "featured": false,
+          "note": "If you have your brows previously done by different artist - please contact with pictures before booking"
+        },
+        {
+          "id": "spmu-boost-over-16-months",
+          "name": "SPMU Brow Colour Boost - Over 16 Months",
+          "price": "£150.00",
+          "priceNote": "price from",
+          "description": "Color Boost is a touch-up procedure for people who have already received permanent makeup and want to refresh or enhance the color. The procedure involves adding more pigment to the existing tattoo to make it more vibrant or to correct any fading that may have occurred over time. NOTE: If you have your brows previously done by different artist - please contact with pictures before booking.",
+          "duration": "2 hours",
+          "featured": false,
+          "note": "If you have your brows previously done by different artist - please contact with pictures before booking"
+        },
+        {
+          "id": "saline-removal",
+          "name": "Saline Tattoo Removal",
+          "price": "£50.00",
+          "description": "CONSULTATION is required prior booking this treatment. Saline SPMU brow removal is a method used to remove or lighten semi-permanent makeup (SPMU) pigments from the skin. It involves using a saline solution, often containing salt and other natural ingredients, which is tattooed or microneedled into the treated area. The saline solution lifts the pigment out of the skin by creating a scab over the treated area. As the scab heals and falls off, it takes some of the pigment with it. Multiple sessions may be required for complete removal, depending on the depth and type of pigment used. This method is a gentler alternative to laser removal and is often preferred for sensitive areas like the brows.",
+          "duration": "45 minutes",
+          "featured": false,
+          "note": "Consultation is required prior booking this treatment"
+        },
+        {
+          "id": "saline-removal-3",
+          "name": "Saline Tattoo Removal 3 Sessions",
+          "price": "£130.00",
+          "description": "CONSULTATION is required prior booking this treatment. Saline SPMU brow removal is a method used to remove or lighten semi-permanent makeup (SPMU) pigments from the skin. It involves using a saline solution, often containing salt and other natural ingredients, which is tattooed or microneedled into the treated area. The saline solution lifts the pigment out of the skin by creating a scab over the treated area. As the scab heals and falls off, it takes some of the pigment with it. Multiple sessions may be required for complete removal, depending on the depth and type of pigment used. This method is a gentler alternative to laser removal and is often preferred for sensitive areas like the brows.",
+          "duration": "45 minutes per session",
+          "featured": false,
+          "note": "Consultation is required prior booking this treatment"
+        },
+        {
+          "id": "saline-removal-6",
+          "name": "Saline Tattoo Removal 6 Sessions",
+          "price": "£260.00",
+          "description": "CONSULTATION is required prior booking this treatment. Saline SPMU brow removal is a method used to remove or lighten semi-permanent makeup (SPMU) pigments from the skin. It involves using a saline solution, often containing salt and other natural ingredients, which is tattooed or microneedled into the treated area. The saline solution lifts the pigment out of the skin by creating a scab over the treated area. As the scab heals and falls off, it takes some of the pigment with it. Multiple sessions may be required for complete removal, depending on the depth and type of pigment used. This method is a gentler alternative to laser removal and is often preferred for sensitive areas like the brows.",
+          "duration": "45 minutes per session",
+          "featured": false,
+          "note": "Consultation is required prior booking this treatment"
+        }
+      ]
+    },
+    {
+      "id": "lashes-brows",
+      "name": "Lashes & Brows",
+      "description": "Transform your eyes with our premium lash and brow treatments, from tinting and lifting to luxurious extensions customized to your eye shape.",
+      "services": [
+        {
+          "id": "eyebrow-shaping",
+          "name": "Eyebrow Shaping",
+          "price": "£10.00",
+          "description": "Waxing, tweezing and if needed trimming techniques are used to create perfectly tidy and shaped brows.",
+          "duration": "15 minutes",
+          "featured": false
+        },
+        {
+          "id": "men-eyebrow",
+          "name": "Men Eyebrow",
+          "price": "£10.00",
+          "description": "Shaping, tidying up brows using wax, tweezers and scissors to give neat and masculine look.",
+          "duration": "15 minutes",
+          "featured": false
+        },
+        {
+          "id": "eyebrow-tint",
+          "name": "Eyebrow Tint",
+          "price": "£10.00",
+          "description": "A tint to give the brow hairs and skin a colour and depth. The easy way to naturally enhance and deepen brows.",
+          "duration": "15 minutes",
+          "featured": false
+        },
+        {
+          "id": "lash-tint",
+          "name": "Lash Tint",
+          "price": "£12.00",
+          "description": "Lash tint adds depth, colour and shine to the lashes, enhancing the eye.",
+          "duration": "20 minutes",
+          "featured": false
+        },
+        {
+          "id": "eyebrow-wax-tint",
+          "name": "Eyebrow Wax & Tint",
+          "price": "£18.00",
+          "description": "A combination of our eyebrow wax, tint & tidy treatments.",
+          "duration": "25 minutes",
+          "featured": false
+        },
+        {
+          "id": "lash-eyebrow-tint",
+          "name": "Lash & Eyebrow Tint",
+          "price": "£20.00",
+          "description": "A tint to darken the brow and lash hairs.",
+          "duration": "30 minutes",
+          "featured": false
+        },
+        {
+          "id": "lash-eyebrow-tint-wax",
+          "name": "Lash Tint, Eyebrow Tint & Wax",
+          "price": "£28.00",
+          "description": "A combination of our lash tint, eyebrow tint & eyebrow wax treatments.",
+          "duration": "40 minutes",
+          "featured": false
+        },
+        {
+          "id": "lash-lift-tint",
+          "name": "Lash Lift & Tint",
+          "price": "£45.00",
+          "description": "A lash lift curls your natural lashes at the root, creating the appearance of longer, thicker lashes. Lash tint adds depth, colour and shine to the lashes. NOTE: please arrive without eye makeup",
+          "duration": "45 minutes",
+          "featured": true,
+          "note": "Please arrive without eye makeup"
+        },
+        {
+          "id": "classic-lashes-full",
+          "name": "Classic Lash Extensions Full Set",
+          "price": "£55.00",
+          "description": "Individual lash extensions are meticulously added to each natural lash hair for a fuller, longer look and darker lash line. Style and shape are adjusted individually to clients eye shape and preference. NOTE: please arrive without eye make up",
+          "duration": "1.5 hours",
+          "featured": true,
+          "note": "Please arrive without eye makeup"
+        },
+        {
+          "id": "classic-lashes-2-weeks",
+          "name": "Classic Lash Extensions - 2 Weeks Infill",
+          "price": "£30.00",
+          "description": "In this appointment old and outgrown Individual lash extensions are removed and new lashes are applied to fill in where previously applied lash extensions have shed. NOTE: please arrive with washed lashes",
+          "duration": "45 minutes",
+          "featured": false,
+          "note": "Please arrive with washed lashes"
+        },
+        {
+          "id": "classic-lashes-2-3-weeks",
+          "name": "Classic Lash Extensions - 2-3 Weeks Infill",
+          "price": "£35.00",
+          "description": "In this appointment old and outgrown Individual lash extensions are removed and new lashes are applied to fill in where previously applied lash extensions have shed. NOTE: please arrive with washed lashes",
+          "duration": "1 hour",
+          "featured": false,
+          "note": "Please arrive with washed lashes"
+        },
+        {
+          "id": "classic-lashes-3-weeks",
+          "name": "Classic Lash Extensions - 3 Weeks Infill",
+          "price": "£40.00",
+          "description": "In this appointment old and outgrown Individual lash extensions are removed and new lashes are applied to fill in where previously applied lash extensions have shed. NOTE: please arrive with washed lashes",
+          "duration": "1 hour",
+          "featured": false,
+          "note": "Please arrive with washed lashes"
+        },
+        {
+          "id": "hybrid-lashes-full",
+          "name": "Hybrid Lash Extensions New Set",
+          "price": "£60.00",
+          "description": "Individual and fanning lash extensions are meticulously added to each natural lash for a fuller, longer look and darker lash line. Style and shape are adjusted individually to clients eye shape and preference. NOTE: please arrive without eye make up",
+          "duration": "1.5 hours",
+          "featured": true,
+          "note": "Please arrive without eye makeup"
+        },
+        {
+          "id": "hybrid-lashes-2-weeks",
+          "name": "Hybrid Lash Extensions - 2 Weeks Infill",
+          "price": "£35.00",
+          "description": "In this appointment old and outgrown lash extensions are removed and new lashes are applied to fill in where previously applied lash extensions have shed. NOTE: please arrive with washed lashes",
+          "duration": "45 minutes",
+          "featured": false,
+          "note": "Please arrive with washed lashes"
+        },
+        {
+          "id": "hybrid-lashes-2-3-weeks",
+          "name": "Hybrid Lash Extensions - 2-3 Weeks Infill",
+          "price": "£40.00",
+          "description": "In this appointment old and outgrown lash extensions are removed and new lashes are applied to fill in where previously applied lash extensions have shed. NOTE: please arrive with washed lashes",
+          "duration": "1 hour",
+          "featured": false,
+          "note": "Please arrive with washed lashes"
+        },
+        {
+          "id": "hybrid-lashes-3-weeks",
+          "name": "Hybrid Lash Extensions - 3 Weeks Infill",
+          "price": "£45.00",
+          "description": "In this appointment old and outgrown lash extensions are removed and new lashes are applied to fill in where previously applied lash extensions have shed. NOTE: please arrive with washed lashes",
+          "duration": "1 hour",
+          "featured": false,
+          "note": "Please arrive with washed lashes"
+        },
+        {
+          "id": "volume-lashes-full",
+          "name": "Volume Lash Extensions New Set",
+          "price": "£65.00",
+          "description": "Individual and hand made fanning lash extensions are meticulously added to each natural lash for a fuller, longer look and darker lash line. Style and shape are adjusted individually to clients eye shape and preference. NOTE: please arrive without eye make up",
+          "duration": "2 hours",
+          "featured": true,
+          "note": "Please arrive without eye makeup"
+        },
+        {
+          "id": "volume-lashes-2-weeks",
+          "name": "Volume Lash Extensions - 2 Weeks Infill",
+          "price": "£40.00",
+          "description": "In this appointment old and outgrown lash extensions are removed and new lashes are applied to fill in where previously applied lash extensions have shed. NOTE: please arrive with washed lashes",
+          "duration": "1 hour",
+          "featured": false,
+          "note": "Please arrive with washed lashes"
+        },
+        {
+          "id": "volume-lashes-2-3-weeks",
+          "name": "Volume Lash Extensions - 2-3 Weeks Infill",
+          "price": "£45.00",
+          "description": "In this appointment old and outgrown lash extensions are removed and new lashes are applied to fill in where previously applied lash extensions have shed. NOTE: please arrive with washed lashes",
+          "duration": "1 hour",
+          "featured": false,
+          "note": "Please arrive with washed lashes"
+        },
+        {
+          "id": "volume-lashes-3-weeks",
+          "name": "Volume Lash Extensions - 3 Weeks Infill",
+          "price": "£50.00",
+          "description": "In this appointment old and outgrown lash extensions are removed and new lashes are applied to fill in where previously applied lash extensions have shed. NOTE: please arrive with washed lashes",
+          "duration": "1.5 hours",
+          "featured": false,
+          "note": "Please arrive with washed lashes"
+        },
+        {
+          "id": "lash-extension-removal",
+          "name": "Lash Extension Removal",
+          "price": "£15.00",
+          "description": "Professional removal of eyelash extensions without damage to the natural lashes, following a lash bath.",
+          "duration": "20 minutes",
+          "featured": false
+        }
+      ]
+    },
+    {
+      "id": "facials",
+      "name": "Facials",
+      "description": "Indulge in our luxurious facial treatments tailored to your skin's unique needs, delivered with expert precision and premium products.",
+      "services": [
+        {
+          "id": "mens-facial",
+          "name": "Men's Facial",
+          "price": "£65.00",
+          "description": "The Men's Facial is a revitalizing treatment tailored specifically for men's skin, targeting issues like clogged pores, rough texture, and irritation from shaving. This facial includes a deep cleanse, exfoliation to remove dead skin cells, and a soothing mask to reduce redness and inflammation. It's designed to hydrate, smooth, and refresh the skin, addressing common concerns such as ingrown hairs and environmental stress. Ideal for all skin types, this treatment leaves the face feeling clean, energized, and healthier-looking. Perfect for men who want a straightforward yet effective skincare experience.",
+          "duration": "1 hour",
+          "featured": true
+        },
+        {
+          "id": "deep-cleansing",
+          "name": "Deep Cleansing",
+          "price": "£65.00",
+          "description": "A deep cleansing facial is a thorough skin treatment designed to remove impurities, toxins, and dead skin cells from the face. It typically involves cleansing, exfoliation, steam, extractions, and a mask suited to each individual skin needs, leaving the skin refreshed, clear, and rejuvenated. Ideal for congested skin, this facial helps to unclog pores, reduce breakouts, and improve overall skin texture and tone. It can be the starter facial to set a treatment plan and prepare your skin for more advanced facials.",
+          "duration": "1 hour",
+          "featured": true
+        },
+        {
+          "id": "dermaplaning",
+          "name": "Dermaplaning",
+          "price": "£60.00",
+          "description": "Dermaplaning is a manual exfoliation procedure that gently abrades the dead layers of the skin using a surgical blade. The procedure aims to increase the absorption of skincare products and diminish fine lines and wrinkles. The treatment creates a healthy glow and a radiant complexion. Dermaplane aims to make your skins surface smooth, youthful and radiant. It is also used to remove \"peach fuzz\" the short soft vellus nonterminal hair from your face. Perfect for clients with congested, dry and dull skin. For those requiring a deep exfoliation. Not suitable for those with active breakouts",
+          "duration": "45 minutes",
+          "featured": true,
+          "note": "Not suitable for those with active breakouts"
+        },
+        {
+          "id": "microneedling",
+          "name": "Microneedling",
+          "price": "£70.00",
+          "description": "Microneedling is a treatment used on the face & body specifically targeting acne scarring, pore size and fine lines & wrinkles. The act of Microneedling creates multiple superficial puncture wounds, releasing growth factors that stimulate the fibroblasts creating new collagen and elastin. The aim of the treatment is to traumatise the skin without collateral damage to the epidermis and healthy tissue. The recovery is rapid with very little downtime, residual pain or discomfort. Microneedling increases the availability of cell nutrients and helps to strengthen the collagen in vessel walls and connective tissue. It increases the density of the epidermis lessening the appearance of broken capillaries. BENEFITS: • Minimises fine lines and wrinkles • Improves acne scarring • Minimises pore size • Improves texture and tone • Rejuvenates the skin • Encourages the production of collagen. Not suitable for clients with active breakouts.",
+          "duration": "1 hour",
+          "featured": true,
+          "note": "Not suitable for clients with active breakouts"
+        },
+        {
+          "id": "million-dollar-facial",
+          "name": "Million Dollar Facial",
+          "price": "£100.00",
+          "description": "Million Dollar Facial is a luxurious facial where science meets indulgence. Working the skin from the outside in, it has been designed to deeply exfoliate dead skin cells, remove non-terminal hair, flush toxins, increase cell turnover and stimulate collagen production. Our Million-dollar facial treatment is a 10-step unique protocol which combines dermaplaning, skin needling and lymphatic drainage massage to leave clients looking and feeling a million dollars. This facial will help to target pigmentation, fine lines, wrinkles, dull skin and scarring. Combats and reduces signs of aging revealing a smooth and more even toned complexion. Not suitable for clients with active breakouts.",
+          "duration": "1.5 hours",
+          "featured": true,
+          "note": "Not suitable for clients with active breakouts"
+        },
+        {
+          "id": "immaculate-peel",
+          "name": "Immaculate Peel",
+          "price": "£55.00",
+          "description": "A chemical peel enhances and smoothens the texture of the skin. It is an effective treatment for facial blemishes, wrinkles and uneven pigmentation, problematic skin and pustules. They exfoliate the outer layers of dead skin, revealing a new skin layer with improved tone, texture and colour. It is designed to give near immediate results without the downtime often associated with chemical peels. Immaculate Peels have been developed to support improvements to problematic, inflamed, irritated oily or spot prone skin types to help calm, heal and restore a more-healthy calm appearance. CONCERNS: • Active breakouts, blackheads, comedones, rough texture and enlarged pores • Photodamaged skin, acne scarring, pigmentation, dull skin, fine lines • Aging skin, loss of elasticity, pigmentation, age spots, dry skin, oxative stress (lifestyle & pollution), fine lines & wrinkles. BENEFITS OF CHEMICAL PEELS: • One of the most popular non-invasive treatments available. • No downtime, no peeling. • Speedy treatment. • Powerful antioxidant & antimicrobial properties. Can help: • Fine lines, • Uneven skin tone and texture, • Pigmentation and photodamage.",
+          "duration": "45 minutes",
+          "featured": false
+        },
+        {
+          "id": "pregnacare-facial",
+          "name": "PregnaCare Facial",
+          "price": "£55.00",
+          "description": "The Pampering Cleansing & Hydrating Facial for Pregnant Women is a gentle, nourishing treatment designed to address the unique skincare needs of expectant mothers. This facial uses pregnancy-safe products to deeply cleanse, hydrate, and soothe sensitive skin without any harsh chemicals. It includes a gentle cleanse, light exfoliation, pore cleanse, calming mask, and a hydrating serum to restore moisture, leaving skin soft, glowing, and refreshed. Perfect for relieving dryness, sensitivity, and hormonal skin changes, this facial is a safe, relaxing escape for moms-to-be looking for a radiant, healthy complexion.",
+          "duration": "45 minutes",
+          "featured": false
+        },
+        {
+          "id": "million-dollar-miracle-mask",
+          "name": "Million Dollar Miracle Mask",
+          "price": "£55.00",
+          "description": "Million Dollar Miracle Mask is a ground breaking facial mask packed with clinically proven ingredients. Leaving skin tighter, firmer and brighter. The formula stimulates plasma into the deeper levels of the skin in order to enhance cellular renewal. Using the latest in peptide technology, this Miracle Mask has the unique ability to create micro circulation, promote collagen and detoxify skin. By helping to promote keratinocytes, collagen and elastin, the skin can remove impurities and provide a youthful appearance. Treatment can be combined with Dermaplaning. Suitable for all skin types. Perfect to have 72 hours before a special occasion. Leaves skin tighter, firmer and brighter.",
+          "duration": "45 minutes",
+          "featured": false
+        },
+        {
+          "id": "back-cleansing",
+          "name": "Back Cleansing",
+          "price": "£60.00",
+          "description": "A back cleansing facial is a targeted treatment that focuses on deep cleaning the skin on the back, an area prone to breakouts, clogged pores, and uneven texture. This facial typically includes cleansing, exfoliation, steam, and extractions to remove impurities and excess oil, followed by a soothing mask to hydrate and calm the skin. It helps to clear acne, reduce blemishes, and leave the back smooth and refreshed. Ideal for those with back acne or anyone looking to improve the appearance of their skin in hard-to-reach areas.",
+          "duration": "45 minutes",
+          "featured": false
+        },
+        {
+          "id": "facial-add-on",
+          "name": "Add On",
+          "price": "£20.00",
+          "description": "Add on is an additional premium treatment to be added with facials like Dermaplaning, Immaculate Peel, Million Dollar Miracle Mask.",
+          "duration": "15 minutes",
+          "featured": false
+        },
+        {
+          "id": "skin-boosters",
+          "name": "Add on to Microneedling: Skin Boosters",
+          "price": "£40.00",
+          "description": "Enhance your microneedling treatment with Exosomes, Polynucleotides, Collagen for superior skin rejuvenation. Exosomes boost skin repair and collagen production, accelerate healing, and are excellent for reducing pigmentation and inflammation, leaving your skin radiant and even-toned. Polynucleotides promote deep cellular regeneration, improving skin texture, hydration, and elasticity. These advanced add-ons amplify the benefits of microneedling, delivering exceptional, long-lasting results. Collagen- reduce the appearance of wrinkles, purify the skin.",
+          "duration": "15 minutes",
+          "featured": false
+        }
+      ]
+    }
+  ]
+}

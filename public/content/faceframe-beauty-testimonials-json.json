@@ -1,0 +1,164 @@
+{
+  "testimonials": [
+    {
+      "id": "testimonial-1",
+      "quote": "So, so pleased with my eyelashes. I asked for the natural look, and that exactly what I got!! The salon is very friendly, made to feel welcome. I'll def be back",
+      "name": "Lesley E",
+      "date": "9th Nov 24",
+      "service_type": "Lash Extensions",
+      "featured": true
+    },
+    {
+      "id": "testimonial-2",
+      "quote": "This is a great place. Iggy is friendly, professional and conscientious. I will be returning when I need more done. I would recommend this establishment to anyone.",
+      "name": "Carol W",
+      "date": "8th Aug 24",
+      "service_type": "General",
+      "featured": true
+    },
+    {
+      "id": "testimonial-3",
+      "quote": "This is a great place. It's clean and tidy. Iggy is polite, friendly and professional. I would recommend this to everyone.",
+      "name": "Carol W",
+      "date": "11th Jul 24",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-4",
+      "quote": "I was impressed by Iggy. She has a friendly, polite and professional manner. The room was well equipped and very clean. I would happily recommend her services to friends and relatives.",
+      "name": "Carol W",
+      "date": "1st Jul 24",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-5",
+      "quote": "This is my third time coming to Iggy for my brows and she smashes it every time! Her attention to detail is amazing, and immediately makes you feel so comfortable in her salon!",
+      "name": "Annabel P",
+      "date": "2nd Jun 24",
+      "service_type": "Brows",
+      "featured": true
+    },
+    {
+      "id": "testimonial-6",
+      "quote": "I had an amazing experience with Iggy! She were highly skilled and knowledgeable, and made me feel completely at ease throughout my treatment. The results were fantastic, and I couldn't be happier with how I look and feel.",
+      "name": "Sophia W",
+      "date": "22nd Feb 24",
+      "service_type": "General",
+      "featured": true
+    },
+    {
+      "id": "testimonial-7",
+      "quote": "I only get my lashes done with Iggy! Never fails to deliver. Always provides high standard service 👌🙌",
+      "name": "Agne",
+      "date": "13th Feb 24",
+      "service_type": "Lash Extensions",
+      "featured": true
+    },
+    {
+      "id": "testimonial-8",
+      "quote": "Would never go to anyone else! Iggy is truly is the best of the best, if you want good vibes and a great experience she is the one!",
+      "name": "Lucas W",
+      "date": "12th Feb 24",
+      "service_type": "General",
+      "featured": true
+    },
+    {
+      "id": "testimonial-9",
+      "quote": "Iggys attention to detail is special. Makes me feel at easy, I have no worries when I'm in her hands 🙌",
+      "name": "Sophie A",
+      "date": "7th Feb 24",
+      "service_type": "General",
+      "featured": true
+    },
+    {
+      "id": "testimonial-10",
+      "quote": "I am in love with my Ombre brows 😍 best choice I ever made booking with Iggy!",
+      "name": "Irene",
+      "date": "21st Feb 23",
+      "service_type": "Ombré Brows",
+      "featured": true
+    },
+    {
+      "id": "testimonial-11",
+      "quote": "Thank you for making me feel good! U have magic hands and a very kind souls ❤️ see you soon",
+      "name": "Gabriella",
+      "date": "11th Feb 23",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-12",
+      "quote": "I had microblading done with Iggy d recently went for waxing near where I live. The lady said she has never seen better job!",
+      "name": "Amelia",
+      "date": "16th Jan 23",
+      "service_type": "Microblading",
+      "featured": true
+    },
+    {
+      "id": "testimonial-13",
+      "quote": "",
+      "name": "Erin A",
+      "date": "29th Jan 25",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-14",
+      "quote": "",
+      "name": "Iwona K",
+      "date": "23rd Jan 25",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-15",
+      "quote": "",
+      "name": "Leonor A",
+      "date": "8th Oct 24",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-16",
+      "quote": "",
+      "name": "Iwona K",
+      "date": "4th Jul 24",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-17",
+      "quote": "",
+      "name": "Lisa H",
+      "date": "26th Jun 24",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-18",
+      "quote": "",
+      "name": "Dian",
+      "date": "18th Jun 24",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-19",
+      "quote": "",
+      "name": "Charlie",
+      "date": "7th Jun 24",
+      "service_type": "General",
+      "featured": false
+    },
+    {
+      "id": "testimonial-20",
+      "quote": "",
+      "name": "Zoe A",
+      "date": "28th May 24",
+      "service_type": "General",
+      "featured": false
+    }
+  ]
+}

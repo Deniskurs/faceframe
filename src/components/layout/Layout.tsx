@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import ScrollProgressIndicator from "../shared/ScrollProgressIndicator";
 import CursorEffect from "../shared/CursorEffect";
 import useSmoothScroll from "@/utils/animations/useSmoothScroll";
 
@@ -33,9 +32,6 @@ const Layout = ({ children }: LayoutProps) => {
         backgroundColor="rgba(127, 85, 57, 0.05)"
         size={26}
       />
-
-      {/* Scroll progress indicator */}
-      <ScrollProgressIndicator color="#7F5539" height={3} position="top" />
 
       <Header />
 

@@ -10,7 +10,6 @@ import {
   useSpring,
 } from "framer-motion";
 import useTextAnimation from "@/utils/animations/useTextAnimation";
-import GlassMorphicCard from "../shared/GlassMorphicCard";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import LuxuryTextBackdrop from "@/components/shared/LuxuryTextBackdrop";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
@@ -402,39 +401,6 @@ const Hero = () => {
             </motion.div>
           </div>
         </div>
-
-        {/* Social proof positioned to the side on larger screens */}
-        <motion.div
-          className="absolute bottom-32 md:bottom-36 right-8 md:right-16 hidden md:block"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.6, ease: LUXURY_EASING }}
-        >
-          <GlassMorphicCard intensity="light" className="px-5 py-3">
-            <div className="text-white text-center">
-              <div className="flex items-center justify-center mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <motion.span
-                    key={i}
-                    className="text-soft-blush mx-0.5"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      delay: 2.8 + i * 0.1,
-                      duration: 0.4,
-                      ease: LUXURY_EASING,
-                    }}
-                  >
-                    ★
-                  </motion.span>
-                ))}
-              </div>
-              <p className="text-[10px] font-alta tracking-[0.15em]">
-                TRUSTED BY LONDON&apos;S ELITE
-              </p>
-            </div>
-          </GlassMorphicCard>
-        </motion.div>
 
         {/* Repositioned scroll indicator to be explicitly below all content */}
         <motion.div

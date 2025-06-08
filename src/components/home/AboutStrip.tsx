@@ -28,14 +28,12 @@ const AboutStrip: React.FC<AboutStripProps> = ({
   ],
 }) => {
   // Panel references with intersection observers
-  const [titleRef, titleInView] = useInView({ threshold: 0.5 });
   const [imageRef, imageInView] = useInView({ threshold: 0.3 });
   const [quoteRef, quoteInView] = useInView({ threshold: 0.5 });
   const [storyRef, storyInView] = useInView({ threshold: 0.4 });
 
   // Content reveal control
   const [isRevealed, setIsRevealed] = useState(false);
-  const [activeSection, setActiveSection] = useState(0);
 
   // Parallax and scroll effects
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,14 +55,6 @@ const AboutStrip: React.FC<AboutStripProps> = ({
     return () => clearTimeout(timer);
   }, []);
 
-  // Update active section based on scroll position
-  useEffect(() => {
-    if (titleInView) setActiveSection(0);
-    else if (imageInView) setActiveSection(1);
-    else if (quoteInView) setActiveSection(2);
-    else if (storyInView) setActiveSection(3);
-  }, [titleInView, imageInView, quoteInView, storyInView]);
-
   return (
     <div
       ref={containerRef}
@@ -72,7 +62,6 @@ const AboutStrip: React.FC<AboutStripProps> = ({
     >
       {/* ==================== SECTION 1: MAIN TITLE ==================== */}
       <motion.section
-        ref={titleRef}
         className="relative h-screen flex flex-col justify-center items-center px-4 sm:px-6 bg-light-cream"
         initial={{ opacity: 0 }}
         animate={{ opacity: isRevealed ? 1 : 0 }}
@@ -443,41 +432,13 @@ const AboutStrip: React.FC<AboutStripProps> = ({
             <LuxuryShadcnButton
               href="/booking"
               text="BOOK YOUR EXPERIENCE"
-              luxuryVariant="outline"
-              luxuryTheme="light"
-              luxurySize="medium"
+              luxuryVariant="elegant"
+              luxuryTheme="transparent"
+              luxurySize="large"
             />
           </motion.div>
         </div>
       </motion.section>
-
-      {/* Stylized section indicators - right side */}
-      <div className="fixed right-4 top-1/2 -translate-y-1/2 h-[40%] z-30 hidden md:flex flex-col items-center">
-        <div className="relative w-[1px] h-full bg-elegant-mocha/10">
-          <motion.div
-            className="absolute w-[1px] bg-elegant-mocha/60"
-            style={{
-              height: `${(activeSection / 3) * 100}%`,
-              top: 0,
-            }}
-            transition={{ duration: 0.7, ease: LUXURY_EASING }}
-          />
-        </div>
-
-        {/* Section navigation dots */}
-        <div className="absolute inset-0 flex flex-col justify-between py-4">
-          {[0, 1, 2, 3].map((index) => (
-            <div
-              key={index}
-              className={`w-[3px] h-[3px] rounded-full transition-all duration-500 -ml-[1px] ${
-                activeSection === index
-                  ? "bg-elegant-mocha"
-                  : "bg-elegant-mocha/20"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
     </div>
   );
 };

@@ -4,7 +4,6 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import FadeInSection from "../shared/FadeInSection";
-import useParallaxEffect from "@/utils/animations/useParallaxEffect";
 import useAnimateOnScroll from "@/utils/animations/useAnimateOnScroll";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import {
@@ -48,17 +47,6 @@ const BookingCTA = ({
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
-  // More subtle parallax effect for the background image
-  const { handleMouseMove } = useParallaxEffect(
-    imageRef as unknown as React.RefObject<HTMLElement>,
-    {
-      intensity: 5, // Reduced for a more refined, subtle effect
-      scale: true,
-      reverse: false,
-      easing: `cubic-bezier(${LUXURY_EASING.join(",")})`,
-    }
-  );
-
   // Use animate on scroll hook
   useAnimateOnScroll(sectionRef as unknown as React.RefObject<HTMLElement>, {
     threshold: 0.1,
@@ -70,7 +58,6 @@ const BookingCTA = ({
       <motion.section
         ref={sectionRef}
         className={`relative py-28 md:py-36 overflow-hidden ${className}`}
-        onMouseMove={handleMouseMove}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: LUXURY_EASING }}
