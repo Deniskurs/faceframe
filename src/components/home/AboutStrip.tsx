@@ -433,7 +433,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
               href="/booking"
               text="BOOK YOUR EXPERIENCE"
               luxuryVariant="elegant"
-              luxuryTheme="transparent"
+              luxuryTheme="dark"
               luxurySize="large"
             />
           </motion.div>

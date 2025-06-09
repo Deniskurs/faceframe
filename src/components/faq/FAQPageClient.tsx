@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { FAQSection } from "./FAQSection";
+import { AskQuestionSection } from "./AskQuestionSection";
 import { FAQ } from "@/types";
 
 interface FAQPageClientProps {
@@ -49,7 +50,7 @@ export const FAQPageClient: React.FC<FAQPageClientProps> = ({
               }}
             >
               <LuxuryShadcnButton
-                href="/consultation"
+                href="#ask-ai-question"
                 text="STILL HAVE QUESTIONS?"
                 luxuryVariant="outline"
                 luxuryTheme="light"
@@ -75,6 +76,9 @@ export const FAQPageClient: React.FC<FAQPageClientProps> = ({
           </div>
         </div>
       </section>
+
+      {/* Ask Question Section */}
+      <AskQuestionSection />
 
       {/* Contact CTA */}
       <section className="bg-elegant-mocha py-16 md:py-20">
