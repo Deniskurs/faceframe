@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scrolling for anchor links */
+/* Disable native smooth scrolling to prevent conflicts with Lenis */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* Font declarations */
@@ -35,7 +35,7 @@ html {
 /* CHANEL-Dior Luxury Typography System */
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     @apply text-elegant-mocha;
     font-size: 16px; /* Base font size */
   }

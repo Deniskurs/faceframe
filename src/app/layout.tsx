@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Alice } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import LenisProvider from "@/components/layout/LenisProvider";
 
 const alice = Alice({
   weight: ["400"],
@@ -51,7 +52,9 @@ export default function RootLayout({
         style={{ overscrollBehaviorX: "auto" }}
         suppressHydrationWarning={true}
       >
-        {children}
+        <LenisProvider>
+          {children}
+        </LenisProvider>
       </body>
     </html>
   );

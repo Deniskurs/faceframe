@@ -317,7 +317,7 @@ const Header = () => {
             <NavLink href="/gallery" isScrolled={isScrolled}>
               GALLERY
             </NavLink>
-            <NavLink href="/about" isScrolled={isScrolled}>
+            <NavLink href="/iggy" isScrolled={isScrolled}>
               ABOUT
             </NavLink>
             <NavLink href="/contact" isScrolled={isScrolled}>
@@ -421,7 +421,7 @@ const Header = () => {
                   </motion.div>
 
                   <motion.div variants={navLinkVariants}>
-                    <MobileNavLink href="/about" onClick={closeMobileMenu}>
+                    <MobileNavLink href="/iggy" onClick={closeMobileMenu}>
                       ABOUT
                     </MobileNavLink>
                   </motion.div>

@@ -111,7 +111,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/about"
+                  href="/iggy"
                   className="font-alta transition-colors hover:text-soft-blush"
                 >
                   About
