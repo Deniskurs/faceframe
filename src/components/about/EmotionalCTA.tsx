@@ -31,7 +31,7 @@ export default function EmotionalCTA() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen overflow-hidden bg-white">
+    <section ref={containerRef} className="min-h-screen bg-white relative overflow-hidden">
       
 
       {/* Animated decorative elements with dopamine-inducing reveals */}
@@ -78,7 +78,7 @@ export default function EmotionalCTA() {
           className="grid place-items-center relative"
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={standardViewport}
+          viewport={{ ...standardViewport, once: true }}
           transition={{ duration: 1.2, ease: LUXURY_EASING }}
         >
           {headlineLines.map((line, lineIndex) => (
@@ -119,7 +119,7 @@ export default function EmotionalCTA() {
             className="h-[1px] w-16 bg-elegant-mocha/40 mx-auto mt-12 relative"
             initial={{ width: 0, opacity: 0 }}
             whileInView={{ width: 64, opacity: 1 }}
-            viewport={standardViewport}
+            viewport={{ ...standardViewport, once: true }}
             transition={{ duration: 1.5, delay: 1.5, ease: LUXURY_EASING }}
           >
             <motion.div
@@ -142,7 +142,7 @@ export default function EmotionalCTA() {
               key={lineIndex}
               initial={{ opacity: 0, y: 20, scale: 0.98 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={standardViewport}
+              viewport={{ ...standardViewport, once: true }}
               transition={{ 
                 delay: 0.5 + (lineIndex * 0.15),
                 duration: 0.9,
@@ -150,7 +150,7 @@ export default function EmotionalCTA() {
               }}
               whileHover={{ scale: 1.01, transition: { duration: 0.3 } }}
             >
-              <p className="font-alta text-base md:text-lg text-elegant-mocha/70 leading-elegant tracking-wide text-balance text-center">
+              <p className="font-alta text-base md:text-lg text-elegant-mocha/70 leading-loose tracking-wide text-balance text-center">
                 {line.split(" ").map((word, wordIndex) => (
                   <motion.span
                     key={wordIndex}
@@ -176,7 +176,7 @@ export default function EmotionalCTA() {
           className="grid place-items-center relative"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={standardViewport}
+          viewport={{ ...standardViewport, once: true }}
           transition={{ duration: 1, delay: 1.2, ease: LUXURY_EASING }}
         >
           {/* Glowing background effect */}
@@ -272,7 +272,7 @@ export default function EmotionalCTA() {
           className="grid place-items-center"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={standardViewport}
+          viewport={{ ...standardViewport, once: true }}
           transition={{ duration: 1.2, delay: 2, ease: LUXURY_EASING }}
         >
           <motion.p
