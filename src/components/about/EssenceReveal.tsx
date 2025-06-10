@@ -65,7 +65,7 @@ export default function EssenceReveal() {
   return (
     <section 
       ref={containerRef} 
-      className="py-24 md:py-32 bg-light-cream relative overflow-hidden"
+      className="pt-24 pb-32 md:pt-32 md:pb-40 bg-light-cream relative overflow-hidden"
     >
       {/* Subtle background texture */}
       <motion.div 
@@ -84,7 +84,7 @@ export default function EssenceReveal() {
               key={blockIndex}
               initial={{ opacity: 0, y: 20, scale: 0.98 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ ...standardViewport, margin: "-100px" }}
+              viewport={{ ...standardViewport, margin: "-100px", once: true }}
               transition={{ 
                 delay: blockIndex * 0.1,
                 duration: block.emphasis === "emotional" || block.emphasis === "opening" || block.emphasis === "closing" ? 1.2 : 0.8,

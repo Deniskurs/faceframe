@@ -45,7 +45,7 @@ export default function SacredPromise() {
   return (
     <section 
       ref={containerRef} 
-      className="min-h-screen bg-light-cream relative overflow-hidden"
+      className="pt-24 pb-32 md:pt-32 md:pb-40 bg-light-cream relative overflow-hidden"
     >
       {/* Subtle background texture */}
       <motion.div 
@@ -53,21 +53,18 @@ export default function SacredPromise() {
         style={{ y: backgroundY }}
       />
 
-      {/* Professional Grid-Based Layout System */}
-      <div className="absolute inset-0 grid grid-rows-[1fr_auto_1fr] place-items-center px-6 sm:px-8 lg:px-12">
+      {/* Main Content Container */}
+      <div className="max-w-xl mx-auto px-4 relative z-10 pt-16">
         
-        {/* Top spacer for perfect vertical centering */}
-        <div></div>
-        
-        {/* Main Content Grid - Perfectly Centered */}
-        <div className="w-full max-w-2xl grid gap-12 sm:gap-16 lg:gap-20 place-items-center text-center">
+        {/* Content with Proper Vertical Rhythm */}
+        <div className="space-y-20">
         
         {/* 1. Opening Stillness */}
         <motion.div
-          className="grid gap-4 place-items-center"
+          className="text-center space-y-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ ...standardViewport, margin: "-100px" }}
+          viewport={{ ...standardViewport, margin: "-100px", once: true }}
           transition={{ duration: 1, ease: LUXURY_EASING }}
         >
           {sacredMoments.openingStillness.map((line, index) => (
@@ -146,10 +143,10 @@ export default function SacredPromise() {
 
         {/* 2. The Promise */}
         <motion.div
-          className="grid gap-4 place-items-center"
+          className="text-center space-y-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ ...standardViewport, margin: "-100px" }}
+          viewport={{ ...standardViewport, margin: "-100px", once: true }}
           transition={{ delay: 0.2, duration: 1, ease: LUXURY_EASING }}
         >
           {sacredMoments.thePromise.map((line, index) => (
@@ -188,10 +185,10 @@ export default function SacredPromise() {
 
         {/* 3. The Experience */}
         <motion.div
-          className="grid gap-4 place-items-center"
+          className="text-center space-y-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ ...standardViewport, margin: "-100px" }}
+          viewport={{ ...standardViewport, margin: "-100px", once: true }}
           transition={{ delay: 0.4, duration: 1, ease: LUXURY_EASING }}
         >
           {sacredMoments.theExperience.map((line, index) => (
@@ -231,10 +228,10 @@ export default function SacredPromise() {
 
         {/* 4. The Revelation */}
         <motion.div
-          className="grid gap-4 place-items-center"
+          className="text-center space-y-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ ...standardViewport, margin: "-100px" }}
+          viewport={{ ...standardViewport, margin: "-100px", once: true }}
           transition={{ delay: 0.6, duration: 1, ease: LUXURY_EASING }}
         >
           {sacredMoments.theRevelation.map((line, index) => (
@@ -317,7 +314,7 @@ export default function SacredPromise() {
 
         {/* IGGY Signature with delayed reveal */}
         <motion.div
-          className="grid gap-4 place-items-center"
+          className="text-center space-y-4"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={standardViewport}
@@ -353,10 +350,6 @@ export default function SacredPromise() {
         </motion.div>
 
         </div>
-
-        {/* Bottom spacer for perfect vertical centering */}
-        <div></div>
-
       </div>
     </section>
   );

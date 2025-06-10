@@ -37,7 +37,7 @@ export default function TransformationManifesto() {
   return (
     <section 
       ref={containerRef} 
-      className="min-h-screen flex items-center justify-center py-24 md:py-32 bg-white relative overflow-hidden"
+      className="pt-24 pb-32 md:pt-32 md:pb-40 bg-white relative overflow-hidden"
     >
       {/* Subtle decorative elements */}
       <motion.div 
@@ -55,7 +55,7 @@ export default function TransformationManifesto() {
         transition={{ duration: 2, delay: 0.7, ease: LUXURY_EASING }}
       />
 
-      <div className="max-w-xl mx-auto px-4 relative z-10">
+      <div className="max-w-xl mx-auto px-4 relative z-10 pt-16">
         
 
         {/* 1. Letting Go - What this is NOT about */}
@@ -63,7 +63,7 @@ export default function TransformationManifesto() {
           className="mb-16 space-y-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ ...standardViewport, margin: "-100px" }}
+          viewport={{ ...standardViewport, margin: "-100px", once: true }}
           transition={{ duration: 1, ease: LUXURY_EASING }}
         >
           {emotionalJourney.lettingGo.map((line, index) => (
@@ -104,7 +104,7 @@ export default function TransformationManifesto() {
           className="mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ ...standardViewport, margin: "-100px" }}
+          viewport={{ ...standardViewport, margin: "-100px", once: true }}
           transition={{ delay: 0.3, duration: 1, ease: LUXURY_EASING }}
         >
           {emotionalJourney.returningHome.map((line, index) => (
