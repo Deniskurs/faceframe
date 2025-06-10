@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { LUXURY_EASING } from "@/components/home/services/core/types";
+import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 import { cn } from "@/lib/utils";
 import LuxuryTextBackdrop from "@/components/shared/LuxuryTextBackdrop";
 import { type VariantProps } from "class-variance-authority";

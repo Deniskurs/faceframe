@@ -52,9 +52,7 @@ export default function RootLayout({
         style={{ overscrollBehaviorX: "auto" }}
         suppressHydrationWarning={true}
       >
-        <LenisProvider>
-          {children}
-        </LenisProvider>
+        <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
   );
