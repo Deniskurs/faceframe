@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { LUXURY_EASING, standardViewport } from "@/utils/animations/luxuryAnimations";
 import { useRef, useState } from "react";
@@ -23,12 +23,12 @@ export default function EmotionalCTA() {
   const containerRef = useRef<HTMLElement>(null);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start end", "end start"]
+  // });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  // const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   return (
     <section ref={containerRef} className="min-h-screen bg-white relative overflow-hidden">
@@ -207,27 +207,10 @@ export default function EmotionalCTA() {
               whileTap={{ scale: 0.98 }}
             >
               <LuxuryShadcnButton
-                href="/services"
-                text="BOOK YOUR CONSULTATION"
-                luxuryVariant="elegant"
-                luxuryTheme="dark"
-                luxurySize="large"
-              />
-            </motion.div>
-            
-            <motion.div
-              whileHover={{ 
-                scale: 1.05,
-                y: -5,
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <LuxuryShadcnButton
                 href="/consultation"
                 text="FREE CONSULTATION"
-                luxuryVariant="outline"
-                luxuryTheme="light"
+                luxuryVariant="elegant"
+                luxuryTheme="dark"
                 luxurySize="large"
               />
             </motion.div>

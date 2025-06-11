@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { LUXURY_EASING, standardViewport } from "@/utils/animations/luxuryAnimations";
 import { useRef } from "react";
 
@@ -27,12 +27,12 @@ const emotionalJourney = {
 export default function TransformationManifesto() {
   const containerRef = useRef<HTMLElement>(null);
   
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start end", "end start"]
+  // });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -20]);
+  // const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -20]);
 
   return (
     <section 

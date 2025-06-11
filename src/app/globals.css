@@ -116,7 +116,9 @@ html {
 
   /* Focus states for accessibility */
   *:focus-visible {
-    @apply outline-none ring-2 ring-elegant-mocha ring-opacity-50;
+    outline: none;
+    box-shadow: 0 0 0 2px var(--elegant-mocha);
+    opacity: 0.5;
   }
 
   /* Subtle scroll bar styling */
@@ -125,28 +127,43 @@ html {
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-light-cream;
+    background-color: var(--light-cream);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-warm-beige rounded-full;
+    background-color: var(--warm-beige);
+    @apply rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-elegant-mocha;
+    background-color: var(--elegant-mocha);
   }
 
   /* Form elements refinement */
   input,
   textarea,
   select {
-    @apply font-alta rounded-md border-soft-blush focus:border-elegant-mocha focus:ring-1 focus:ring-elegant-mocha transition-all duration-300 bg-white bg-opacity-90 px-4 py-2;
+    @apply font-alta rounded-md transition-all duration-300 bg-white bg-opacity-90 px-4 py-2;
+    border: 1px solid var(--soft-blush);
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--elegant-mocha);
+    box-shadow: 0 0 0 1px var(--elegant-mocha);
   }
 
   button {
     @apply transition-all duration-300 font-alta;
   }
   :root {
+    --light-cream: #EDE0D4;
+    --soft-blush: #E6CCB2;
+    --warm-beige: #DDB892;
+    --muted-sand: #B08968;
+    --elegant-mocha: #7F5539;
+    --deep-bronze: #9C6644;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -214,15 +231,21 @@ html {
 
   /* Button Treatments */
   .btn-primary {
-    @apply bg-elegant-mocha text-white border border-elegant-mocha px-8 py-3;
+    background-color: var(--elegant-mocha);
+    @apply text-white px-8 py-3;
+    border: 1px solid var(--elegant-mocha);
   }
 
   .btn-primary:hover {
-    @apply bg-transparent text-elegant-mocha;
+    @apply bg-transparent;
+    color: var(--elegant-mocha);
   }
 
   .btn-secondary {
-    @apply bg-warm-beige text-elegant-mocha border border-warm-beige px-8 py-3;
+    background-color: var(--warm-beige);
+    color: var(--elegant-mocha);
+    @apply px-8 py-3;
+    border: 1px solid var(--warm-beige);
   }
 
   .btn-secondary:hover {
@@ -230,11 +253,14 @@ html {
   }
 
   .btn-outline {
-    @apply border border-elegant-mocha text-elegant-mocha bg-transparent px-8 py-3;
+    @apply bg-transparent px-8 py-3;
+    border: 1px solid var(--elegant-mocha);
+    color: var(--elegant-mocha);
   }
 
   .btn-outline:hover {
-    @apply bg-elegant-mocha text-white;
+    background-color: var(--elegant-mocha);
+    @apply text-white;
   }
 
   /* Refined Button Sizing */
@@ -250,15 +276,19 @@ html {
 
   /* Contextual Button Styles */
   .btn-on-light {
-    @apply bg-elegant-mocha text-white border border-elegant-mocha;
+    background-color: var(--elegant-mocha);
+    @apply text-white;
+    border: 1px solid var(--elegant-mocha);
   }
 
   .btn-on-light:hover {
-    @apply bg-transparent text-elegant-mocha;
+    @apply bg-transparent;
+    color: var(--elegant-mocha);
   }
 
   .btn-on-dark {
-    @apply bg-white text-elegant-mocha border border-white;
+    @apply bg-white border border-white;
+    color: var(--elegant-mocha);
   }
 
   .btn-on-dark:hover {
@@ -281,12 +311,13 @@ html {
 
   /* Refined Card System */
   .luxury-card {
-    @apply bg-white border border-soft-blush/10 overflow-hidden;
+    @apply bg-white overflow-hidden;
+    border: 1px solid rgba(230, 204, 178, 0.1);
     transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .luxury-card:hover {
-    @apply border-elegant-mocha/20;
+    border-color: rgba(127, 85, 57, 0.2);
     box-shadow: 0 10px 30px -15px rgba(127, 85, 57, 0.07);
   }
 
@@ -355,7 +386,8 @@ html {
 
   .section-title::after {
     content: "";
-    @apply absolute left-0 bottom-0 h-[1px] w-12 bg-elegant-mocha mt-2;
+    @apply absolute left-0 bottom-0 h-[1px] w-12 mt-2;
+    background-color: var(--elegant-mocha);
   }
 
   /* Subtle Hover States */
