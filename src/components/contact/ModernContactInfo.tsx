@@ -2,24 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { LUXURY_EASING, animationDurations, sequenceTimings } from "@/utils/animations/luxuryAnimations";
+import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 import { SectionTitle } from "@/components/shared/SectionTitle";
 
 const ModernContactInfo = () => {
-  const locations = [
-    {
-      id: "salon",
-      name: "Studio Salon",
-      address: "London, E2",
-      type: "Main Studio"
-    },
-    {
-      id: "home", 
-      name: "Home Studio",
-      address: "London, E3", 
-      type: "Private Studio"
-    }
-  ];
 
   const contactMethods = [
     {

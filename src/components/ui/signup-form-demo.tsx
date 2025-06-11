@@ -33,7 +33,7 @@ export default function ContactForm() {
   });
 
   // Validation functions
-  const validateName = (name: string, fieldName: "firstName" | "lastName") => {
+  const validateName = (name: string) => {
     if (!name.trim()) {
       return "";
     }
@@ -125,7 +125,7 @@ export default function ContactForm() {
     // Real-time validation
     let error = "";
     if (name === "firstName" || name === "lastName") {
-      error = validateName(value, name as "firstName" | "lastName");
+      error = validateName(value);
     } else if (name === "email") {
       error = validateEmail(value);
     }
@@ -168,8 +168,8 @@ export default function ContactForm() {
 
     // Validate all fields before submission
     const errors = {
-      firstName: validateName(formData.firstName, "firstName"),
-      lastName: validateName(formData.lastName, "lastName"),
+      firstName: validateName(formData.firstName),
+      lastName: validateName(formData.lastName),
       email: validateEmail(formData.email),
       phone: validatePhoneNumber(formData.phone),
     };
@@ -257,13 +257,7 @@ export default function ContactForm() {
         message: "",
       });
     } catch (error) {
-      console.error("EmailJS Full Error:", error);
-      console.error("Error details:", {
-        message: error?.message,
-        text: error?.text,
-        status: error?.status,
-        name: error?.name
-      });
+      console.error("EmailJS Error:", error);
       setSubmitError(
         "Failed to send message. Please try again or contact us directly."
       );
@@ -438,7 +432,7 @@ export default function ContactForm() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8, ease: LUXURY_EASING }}
           >
-            Let&apos;s Connect
+            Let&rsquo;s Connect
           </motion.h2>
 
           <motion.div
@@ -827,7 +821,7 @@ export default function ContactForm() {
                 transition={{ duration: 0.3, ease: LUXURY_EASING }}
               >
                 <p className="font-alta text-sm text-green-600 tracking-refined text-center">
-                  Message sent successfully! We'll respond within 24 hours.
+                  Message sent successfully! We&rsquo;ll respond within 24 hours.
                 </p>
               </motion.div>
             )}
