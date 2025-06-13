@@ -38,12 +38,12 @@ const NavLink = ({
         className={`inline-block tracking-[0.12em] transition-all duration-700 font-normal navbar-link ${
           isScrolled
             ? "text-luxury-primary group-hover:text-deep-bronze"
-            : "text-white group-hover:text-soft-blush text-on-dark"
+            : "text-luxury-primary group-hover:text-deep-bronze"
         }`}
         style={{
           textShadow: isScrolled
             ? "none"
-            : "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
+            : "none",
           fontWeight: 400,
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
@@ -55,7 +55,7 @@ const NavLink = ({
       {/* CHANEL-inspired underline with luxury timing */}
       <motion.span
         className={`absolute left-0 bottom-[-3px] h-[1px] ${
-          isScrolled ? "bg-elegant-mocha/80" : "bg-white/80"
+          isScrolled ? "bg-elegant-mocha/80" : "bg-elegant-mocha/80"
         }`}
         initial={{ width: "0%", left: "50%", opacity: 0 }}
         whileHover={{ width: "100%", left: "0%", opacity: 0.8 }}
@@ -213,14 +213,14 @@ const Header = () => {
         className={`absolute inset-0 transition-all duration-700 backdrop-blur-[6px] ${
           isScrolled
             ? "bg-white/95 shadow-md border-b border-elegant-mocha/10"
-            : "bg-gradient-to-b from-black/50 via-black/25 to-transparent"
+            : "bg-white/95 shadow-md border-b border-elegant-mocha/10"
         }`}
       />
 
       {/* Refined horizontal separator line with increased thickness */}
       <motion.div
         className={`absolute bottom-0 left-0 w-full h-[1px] ${
-          isScrolled ? "bg-elegant-mocha/15" : "bg-white/15"
+          isScrolled ? "bg-elegant-mocha/15" : "bg-elegant-mocha/15"
         }`}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
@@ -265,12 +265,12 @@ const Header = () => {
                 className={`font-alice block tracking-[0.12em] transition-all duration-700 font-normal navbar-logo-text ${
                   isScrolled
                     ? "text-luxury-primary text-base md:text-lg"
-                    : "text-white text-on-dark text-lg md:text-xl"
+                    : "text-luxury-primary text-lg md:text-xl"
                 }`}
                 style={{
                   textShadow: isScrolled
                     ? "0 0.5px 0.5px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.02)"
-                    : "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
+                    : "0 0.5px 0.5px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.02)",
                   fontWeight: 400,
                   WebkitFontSmoothing: "antialiased",
                   MozOsxFontSmoothing: "grayscale",
@@ -282,12 +282,12 @@ const Header = () => {
                 className={`font-alice tracking-[0.08em] transition-all duration-700 navbar-logo-text ${
                   isScrolled
                     ? "text-luxury-secondary text-[10px]"
-                    : "text-white/90 text-on-dark text-xs"
+                    : "text-luxury-secondary text-xs"
                 }`}
                 style={{
                   textShadow: isScrolled
                     ? "0 0.5px 0.5px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.02)"
-                    : "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
+                    : "0 0.5px 0.5px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.02)",
                   fontWeight: 400,
                   WebkitFontSmoothing: "antialiased",
                   MozOsxFontSmoothing: "grayscale",
@@ -320,6 +320,9 @@ const Header = () => {
             <NavLink href="/about" isScrolled={isScrolled}>
               ABOUT
             </NavLink>
+            <NavLink href="/faq" isScrolled={isScrolled}>
+              FAQ
+            </NavLink>
             <NavLink href="/contact" isScrolled={isScrolled}>
               CONTACT
             </NavLink>
@@ -330,7 +333,7 @@ const Header = () => {
             href="/booking"
             text="BOOK"
             luxuryVariant="outline"
-            luxuryTheme={isScrolled ? "light" : "transparent"}
+            luxuryTheme={isScrolled ? "light" : "light"}
             luxurySize="small"
           />
         </motion.nav>
@@ -338,7 +341,7 @@ const Header = () => {
         {/* CHANEL-inspired luxury hamburger button with enhanced accessibility */}
         <button
           className={`md:hidden relative z-[60] flex items-center justify-center w-14 h-14 focus:outline-none focus:ring-1 focus:ring-elegant-mocha/40 rounded-sm ${
-            isScrolled ? "text-luxury-primary" : "text-white text-on-dark"
+            isScrolled ? "text-luxury-primary" : "text-luxury-primary"
           }`}
           aria-label="Toggle mobile menu"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -423,6 +426,12 @@ const Header = () => {
                   <motion.div variants={navLinkVariants}>
                     <MobileNavLink href="/about" onClick={closeMobileMenu}>
                       ABOUT
+                    </MobileNavLink>
+                  </motion.div>
+
+                  <motion.div variants={navLinkVariants}>
+                    <MobileNavLink href="/faq" onClick={closeMobileMenu}>
+                      FAQ
                     </MobileNavLink>
                   </motion.div>
 

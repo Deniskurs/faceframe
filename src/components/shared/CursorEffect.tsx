@@ -43,7 +43,7 @@ const CursorEffect: React.FC<CursorEffectProps> = ({
     <>
       {/* Main Cursor Circle */}
       <motion.div
-        className="pointer-events-none fixed z-50 rounded-full"
+        className="pointer-events-none fixed z-[9999] rounded-full"
         style={{
           left: 0,
           top: 0,
@@ -72,7 +72,7 @@ const CursorEffect: React.FC<CursorEffectProps> = ({
 
       {/* Small Dot for Precise Cursor Center */}
       <motion.div
-        className="pointer-events-none fixed z-50 rounded-full"
+        className="pointer-events-none fixed z-[9999] rounded-full"
         style={{
           left: 0,
           top: 0,

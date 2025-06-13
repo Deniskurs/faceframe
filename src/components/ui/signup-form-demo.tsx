@@ -201,20 +201,26 @@ export default function ContactForm() {
       const autoReplyTemplateId =
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_0ut5e7c";
       const businessTemplateId =
-        process.env.NEXT_PUBLIC_EMAILJS_BUSINESS_TEMPLATE_ID || "template_pwwlrrd";
+        process.env.NEXT_PUBLIC_EMAILJS_BUSINESS_TEMPLATE_ID ||
+        "template_pwwlrrd";
       const publicKey =
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "DYk4lOm4x_ia_stx2";
 
-      console.log("EmailJS Config:", { serviceId, autoReplyTemplateId, businessTemplateId, publicKey });
+      console.log("EmailJS Config:", {
+        serviceId,
+        autoReplyTemplateId,
+        businessTemplateId,
+        publicKey,
+      });
 
       // Prepare template parameters - matching your EmailJS templates exactly
       const templateParams = {
         email: formData.email, // ✅ Matches {{email}} in your EmailJS template "To Email" field
-        from_name: `${formData.firstName} ${formData.lastName}`, // ✅ Matches {{from_name}} 
+        from_name: `${formData.firstName} ${formData.lastName}`, // ✅ Matches {{from_name}}
         phone: formData.phone || "Not provided",
-        service_interest: formData.serviceInterest || "Not specified", 
+        service_interest: formData.serviceInterest || "Not specified",
         preferred_time: formData.preferredTime || "Not specified",
-        message: formData.message || "No additional message"
+        message: formData.message || "No additional message",
       };
 
       console.log("Template Params:", templateParams);
@@ -222,11 +228,11 @@ export default function ContactForm() {
       // Send auto-reply to client
       console.log("Sending auto-reply to client...");
       const autoReplyResult = await emailjs.send(
-        serviceId, 
-        autoReplyTemplateId, 
+        serviceId,
+        autoReplyTemplateId,
         templateParams,
         {
-          publicKey: publicKey
+          publicKey: publicKey,
         }
       );
       console.log("Auto-reply sent:", autoReplyResult);
@@ -234,11 +240,11 @@ export default function ContactForm() {
       // Send business notification to you
       console.log("Sending business notification...");
       const businessResult = await emailjs.send(
-        serviceId, 
-        businessTemplateId, 
+        serviceId,
+        businessTemplateId,
         templateParams,
         {
-          publicKey: publicKey
+          publicKey: publicKey,
         }
       );
       console.log("Business notification sent:", businessResult);
@@ -488,6 +494,7 @@ export default function ContactForm() {
                     onFocus={() => setFocusedField("firstName")}
                     onBlur={() => setFocusedField(null)}
                     required
+                    disableHoverEffect={true}
                     className="w-full h-12 px-0 py-4 bg-transparent border-0 border-b border-elegant-mocha/20 focus:border-elegant-mocha/50 rounded-none outline-none font-alta text-elegant-mocha placeholder:text-elegant-mocha/30 transition-all duration-500 focus:ring-0 focus:ring-transparent focus:shadow-none"
                   />
                   <motion.div
@@ -535,6 +542,7 @@ export default function ContactForm() {
                     onFocus={() => setFocusedField("lastName")}
                     onBlur={() => setFocusedField(null)}
                     required
+                    disableHoverEffect={true}
                     className="w-full h-12 px-0 py-4 bg-transparent border-0 border-b border-elegant-mocha/20 focus:border-elegant-mocha/50 rounded-none outline-none font-alta text-elegant-mocha placeholder:text-elegant-mocha/30 transition-all duration-500 focus:ring-0 focus:ring-transparent focus:shadow-none"
                   />
                   <motion.div
@@ -594,6 +602,7 @@ export default function ContactForm() {
                     onFocus={() => setFocusedField("email")}
                     onBlur={() => setFocusedField(null)}
                     required
+                    disableHoverEffect={true}
                     className="w-full h-12 px-0 py-4 bg-transparent border-0 border-b border-elegant-mocha/20 focus:border-elegant-mocha/50 rounded-none outline-none font-alta text-elegant-mocha placeholder:text-elegant-mocha/30 transition-all duration-500 focus:ring-0 focus:ring-transparent focus:shadow-none"
                   />
                   <motion.div
@@ -821,7 +830,8 @@ export default function ContactForm() {
                 transition={{ duration: 0.3, ease: LUXURY_EASING }}
               >
                 <p className="font-alta text-sm text-green-600 tracking-refined text-center">
-                  Message sent successfully! We&rsquo;ll respond within 24 hours.
+                  Message sent successfully! We&rsquo;ll respond within 24
+                  hours.
                 </p>
               </motion.div>
             )}

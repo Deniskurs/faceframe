@@ -17,17 +17,17 @@ import { type VariantProps } from "class-variance-authority";
 // Custom LUXURY variants to override shadcn defaults
 const LUXURY_VARIANTS = {
   elegant: {
-    dark: "bg-elegant-mocha text-white border border-elegant-mocha shadow-sm",
+    dark: "bg-elegant-mocha text-white border border-elegant-mocha shadow-sm hover:bg-deep-bronze hover:border-deep-bronze",
     light:
-      "bg-light-cream text-elegant-mocha border-2 border-elegant-mocha/40 shadow-sm",
+      "bg-light-cream text-elegant-mocha border-2 border-elegant-mocha/40 shadow-sm hover:bg-elegant-mocha hover:text-white",
     transparent:
-      "bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20",
+      "bg-white/15 backdrop-blur-sm text-white border border-white/40 hover:bg-white/25 hover:border-white/60 shadow-lg",
   },
   outline: {
-    dark: "border border-white/30 text-white hover:bg-white/10",
+    dark: "border border-white/30 text-white hover:bg-white/10 hover:border-white/50",
     light:
-      "border border-elegant-mocha/20 text-elegant-mocha/90 hover:text-elegant-mocha",
-    transparent: "border border-white/20 text-white/90 hover:bg-white/5",
+      "border border-elegant-mocha/30 text-elegant-mocha hover:bg-elegant-mocha hover:text-white",
+    transparent: "border border-white/40 text-white hover:bg-white/10 hover:border-white/60",
   },
   text: {
     dark: "text-white hover:text-white/80 border-b border-white/30 hover:border-white",
@@ -40,9 +40,9 @@ const LUXURY_VARIANTS = {
 
 // Custom size classes with Alta font and tracking
 const LUXURY_SIZES = {
-  small: "py-3 px-6 text-xs sm:py-3 sm:px-9",
-  medium: "py-4 px-8 text-[11px] sm:py-4 sm:px-12 sm:text-sm",
-  large: "py-4 px-8 text-[11px] sm:py-5 sm:px-16 sm:text-base",
+  small: "py-3 px-6 text-xs sm:py-3 sm:px-8",
+  medium: "py-3 px-6 text-xs sm:py-4 sm:px-10 sm:text-sm",
+  large: "py-4 px-8 text-sm sm:py-5 sm:px-12 sm:text-base",
 };
 
 export interface LuxuryShadcnButtonProps
@@ -95,7 +95,7 @@ export function LuxuryShadcnButton({
   const luxuryClasses = cn(
     LUXURY_VARIANTS[luxuryVariant][luxuryTheme],
     LUXURY_SIZES[luxurySize],
-    "font-alta tracking-[0.3em] uppercase relative overflow-hidden group whitespace-nowrap",
+    "font-alta tracking-[0.25em] uppercase relative overflow-hidden group whitespace-nowrap inline-flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
     className
   );
 
@@ -119,7 +119,7 @@ export function LuxuryShadcnButton({
       <motion.span
         className="relative z-20"
         animate={{
-          letterSpacing: isHovered ? "0.32em" : "0.3em",
+          letterSpacing: isHovered ? "0.28em" : "0.25em",
         }}
         transition={{ duration: 0.8, ease: LUXURY_EASING }}
       >

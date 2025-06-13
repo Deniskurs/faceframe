@@ -115,26 +115,32 @@ const BookingCTA = ({
 
           {/* Dual Booking Path Options */}
           <motion.div
-            className="mb-20 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6"
+            className="mb-20 flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8 w-full max-w-2xl mx-auto px-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3, ease: LUXURY_EASING }}
             viewport={standardViewport}
           >
-            <LuxuryShadcnButton
-              href={buttonLink || "/services"}
-              text={buttonText || "BOOK SERVICE DIRECTLY"}
-              luxuryVariant="elegant"
-              luxuryTheme="transparent"
-              luxurySize="large"
-            />
-            <LuxuryShadcnButton
-              href="/consultation"
-              text="FREE CONSULTATION"
-              luxuryVariant="outline"
-              luxuryTheme="transparent"
-              luxurySize="large"
-            />
+            <div className="w-full lg:w-auto">
+              <LuxuryShadcnButton
+                href="/booking"
+                text="BOOK NOW"
+                luxuryVariant="elegant"
+                luxuryTheme="transparent"
+                luxurySize="large"
+                className="w-full lg:w-auto min-w-[200px] justify-center"
+              />
+            </div>
+            <div className="w-full lg:w-auto">
+              <LuxuryShadcnButton
+                href="/services"
+                text="VIEW SERVICES"
+                luxuryVariant="outline"
+                luxuryTheme="transparent"
+                luxurySize="large"
+                className="w-full lg:w-auto min-w-[200px] justify-center"
+              />
+            </div>
           </motion.div>
 
           {/* Minimal trust indicators with refined styling */}

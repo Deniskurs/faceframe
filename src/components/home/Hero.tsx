@@ -377,27 +377,33 @@ const Hero = () => {
               </motion.p>
             </div>
 
-            {/* Dual Booking Path CTA Buttons with golden ratio spacing */}
+            {/* Dual Booking Path CTA Buttons with responsive spacing */}
             <motion.div
-              className="mt-16 md:mt-[calc(1.618rem*10)] flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6"
+              className="mt-12 md:mt-16 lg:mt-20 flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8 w-full max-w-2xl mx-auto px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 2.2, ease: LUXURY_EASING }}
             >
-              <LuxuryShadcnButton
-                href="/services"
-                text="BOOK SERVICE DIRECTLY"
-                luxuryVariant="elegant"
-                luxuryTheme="transparent"
-                luxurySize="large"
-              />
-              <LuxuryShadcnButton
-                href="/consultation"
-                text="FREE CONSULTATION"
-                luxuryVariant="outline"
-                luxuryTheme="transparent"
-                luxurySize="large"
-              />
+              <div className="w-full lg:w-auto">
+                <LuxuryShadcnButton
+                  href="/booking"
+                  text="BOOK NOW"
+                  luxuryVariant="elegant"
+                  luxuryTheme="transparent"
+                  luxurySize="large"
+                  className="w-full lg:w-auto min-w-[200px] justify-center"
+                />
+              </div>
+              <div className="w-full lg:w-auto">
+                <LuxuryShadcnButton
+                  href="/services"
+                  text="VIEW SERVICES"
+                  luxuryVariant="outline"
+                  luxuryTheme="transparent"
+                  luxurySize="large"
+                  className="w-full lg:w-auto min-w-[200px] justify-center"
+                />
+              </div>
             </motion.div>
           </div>
         </div>

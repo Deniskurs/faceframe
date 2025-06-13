@@ -194,26 +194,50 @@ export default function EmotionalCTA() {
           />
           
           <div 
-            className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 relative z-10"
+            className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8 w-full max-w-2xl mx-auto px-4 relative z-10"
             onMouseEnter={() => setIsButtonHovered(true)}
             onMouseLeave={() => setIsButtonHovered(false)}
           >
-            <motion.div
-              whileHover={{ 
-                scale: 1.05,
-                y: -5,
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <LuxuryShadcnButton
-                href="/consultation"
-                text="FREE CONSULTATION"
-                luxuryVariant="elegant"
-                luxuryTheme="dark"
-                luxurySize="large"
-              />
-            </motion.div>
+            <div className="w-full lg:w-auto">
+              <motion.div
+                whileHover={{ 
+                  scale: 1.05,
+                  y: -5,
+                  transition: { duration: 0.3 }
+                }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full"
+              >
+                <LuxuryShadcnButton
+                  href="/booking"
+                  text="BOOK NOW"
+                  luxuryVariant="elegant"
+                  luxuryTheme="light"
+                  luxurySize="large"
+                  className="w-full lg:w-auto min-w-[200px] justify-center"
+                />
+              </motion.div>
+            </div>
+            <div className="w-full lg:w-auto">
+              <motion.div
+                whileHover={{ 
+                  scale: 1.05,
+                  y: -5,
+                  transition: { duration: 0.3 }
+                }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full"
+              >
+                <LuxuryShadcnButton
+                  href="/services"
+                  text="VIEW SERVICES"
+                  luxuryVariant="outline"
+                  luxuryTheme="light"
+                  luxurySize="large"
+                  className="w-full lg:w-auto min-w-[200px] justify-center"
+                />
+              </motion.div>
+            </div>
           </div>
           
           {/* Magnetic attraction particles */}

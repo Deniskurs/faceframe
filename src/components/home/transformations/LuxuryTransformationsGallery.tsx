@@ -9,6 +9,7 @@ import EditorialTransformationLayout from "./EditorialTransformationLayout";
 import { luxuryEasing } from "../../../utils/animations/luxurySpacing";
 import { standardViewport } from "@/utils/animations/luxuryAnimations";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
+import { SectionTitle } from "@/components/shared/SectionTitle";
 import {
   useLuxuryReveal,
   useLuxuryStaggerEffect,
@@ -189,50 +190,123 @@ export default function LuxuryTransformationsGallery({
                 </motion.div>
               </div>
 
-              {/* Core values with Chanel's asymmetrical layout */}
-              <div className="flex pl-[8%] mb-48">
-                <div className="flex flex-col max-w-sm">
-                  <h3 className="font-alice text-[16px] tracking-[0.2em] text-elegant-mocha uppercase mb-8">
-                    OUR APPROACH
-                  </h3>
+              {/* Our Approach - Refined horizontal layout with luxury styling */}
+              <div className="mb-48 relative">
+                {/* Section wrapper with consistent max-width */}
+                <div className="max-w-[1020px] mx-auto px-4">
+                  {/* Section title with refined positioning */}
+                  <motion.div
+                    className="text-center mb-20"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: luxuryEasing.elegant }}
+                  >
+                    <h3 className="font-alice text-[18px] md:text-[20px] tracking-[0.25em] text-elegant-mocha uppercase mb-4">
+                      OUR APPROACH
+                    </h3>
+                    {/* Signature accent line */}
+                    <motion.div
+                      className="w-16 h-[1px] bg-elegant-mocha/30 mx-auto"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: 64 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 0.3 }}
+                    />
+                  </motion.div>
 
-                  {/* Chanel's signature 24px vertical rhythm */}
-                  <div className="flex flex-col gap-24">
+                  {/* Responsive grid layout with equal height rows */}
+                  <motion.div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 md:grid-rows-1"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={{
+                      hidden: {},
+                      visible: {
+                        transition: {
+                          staggerChildren: 0.15,
+                        },
+                      },
+                    }}
+                  >
                     {[
                       {
                         name: "PRECISION",
-                        desc: "Every detail meticulously crafted",
+                        desc: "Every detail meticulously crafted with surgical precision and artistic vision",
+                        number: "01",
                       },
                       {
                         name: "BALANCE",
-                        desc: "Enhancing natural features harmoniously",
+                        desc: "Enhancing natural features harmoniously while preserving individual character",
+                        number: "02",
                       },
                       {
                         name: "REFINEMENT",
-                        desc: "Subtle transformations, extraordinary results",
+                        desc: "Subtle transformations that deliver extraordinary, confidence-enhancing results",
+                        number: "03",
                       },
                     ].map((value, i) => (
                       <motion.div
                         key={value.name}
-                        className="relative"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 0.7,
-                          delay: 0.2 + i * 0.1,
-                          ease: luxuryEasing.elegant,
+                        className="relative group text-center md:text-left"
+                        variants={{
+                          hidden: { opacity: 0, y: 30 },
+                          visible: {
+                            opacity: 1,
+                            y: 0,
+                            transition: {
+                              duration: 0.8,
+                              ease: luxuryEasing.elegant,
+                            },
+                          },
                         }}
                       >
-                        <h4 className="font-alta text-[12px] tracking-[0.2em] text-elegant-mocha relative mb-2">
-                          {value.name}
-                        </h4>
-                        <p className="font-alta text-elegant-mocha/70 text-[12px] tracking-[0.05em] max-w-[240px]">
-                          {value.desc}
-                        </p>
+                        {/* Elegant card-like container with natural height matching */}
+                        <div className="relative p-6 md:p-8 h-full flex flex-col bg-gradient-to-b from-white/40 to-white/20 backdrop-blur-sm border border-elegant-mocha/8 hover:border-elegant-mocha/15 transition-all duration-700">
+                          {/* Number indicator - luxury detail */}
+                          <div className="absolute top-6 right-6 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
+                            <span className="font-alice text-4xl text-elegant-mocha">
+                              {value.number}
+                            </span>
+                          </div>
+
+                          {/* Content with proper hierarchy and flex layout */}
+                          <div className="relative z-10 flex flex-col flex-grow">
+                            {/* Main title */}
+                            <h4 className="font-alta text-[14px] md:text-[15px] tracking-[0.2em] text-elegant-mocha uppercase mb-4 relative">
+                              {value.name}
+                              {/* Subtle underline accent */}
+                              <motion.div
+                                className="absolute bottom-[-8px] left-0 md:left-0 mx-auto md:mx-0 h-[0.5px] bg-elegant-mocha/40"
+                                initial={{ width: 0 }}
+                                whileInView={{ width: "40px" }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
+                              />
+                            </h4>
+
+                            {/* Description with improved typography - grows to fill space */}
+                            <p className="font-alta text-elegant-mocha/75 text-[13px] leading-relaxed tracking-[0.02em] flex-grow">
+                              {value.desc}
+                            </p>
+                          </div>
+
+                          {/* Subtle hover effect overlay */}
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-br from-soft-blush/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                            initial={false}
+                          />
+                        </div>
+
+                        {/* Decorative element - appears on hover */}
+                        <motion.div
+                          className="absolute -bottom-2 left-1/2 md:left-8 transform -translate-x-1/2 md:translate-x-0 w-2 h-2 bg-elegant-mocha/20 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500"
+                          initial={false}
+                        />
                       </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </div>
               </div>
 

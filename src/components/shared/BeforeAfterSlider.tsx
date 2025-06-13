@@ -48,11 +48,14 @@ export default function BeforeAfterSlider({
   const [isHovering, setIsHovering] = useState(false);
   const [isLoaded, setIsLoaded] = useState(true); // Initialize as visible by default
   const [wasRecentlyDragging, setWasRecentlyDragging] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false); // Track if animation has run
+  const [showInteractionHint, setShowInteractionHint] = useState(false);
 
   // Reference for animation timeouts and slider container
   const containerRef = useRef<HTMLDivElement>(null);
   const dragTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hintTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Animation state
   const [isAnimating, setIsAnimating] = useState(false);
@@ -80,6 +83,9 @@ export default function BeforeAfterSlider({
       if (hoverTimeoutRef.current) {
         clearTimeout(hoverTimeoutRef.current);
       }
+      if (hintTimeoutRef.current) {
+        clearTimeout(hintTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -104,6 +110,12 @@ export default function BeforeAfterSlider({
         hoverTimeoutRef.current = null;
       }
       setIsAnimating(false);
+    }
+
+    // Hide interaction hint when user starts interacting
+    setShowInteractionHint(false);
+    if (hintTimeoutRef.current) {
+      clearTimeout(hintTimeoutRef.current);
     }
 
     setIsDragging(true);
@@ -153,35 +165,42 @@ export default function BeforeAfterSlider({
     setSliderPosition(Math.min(Math.max(x, 0), 100));
   };
 
-  // Elegant Chanel-inspired hover animation using timeouts
-  // This is a simpler, more direct approach than the previous implementation
+  // Improved UX: One-time subtle animation with better interaction cues
   const runHoverAnimation = () => {
-    if (!autoAnimateOnHover || isDragging || isAnimating) return;
+    if (!autoAnimateOnHover || isDragging || isAnimating || hasAnimated) return;
 
     // Mark as animating to prevent re-triggering
     setIsAnimating(true);
+    setHasAnimated(true);
 
     // Clear any existing animation timeouts
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
 
-    // First stage - delay before starting animation (the "Chanel pause")
+    // Shorter, more subtle animation
     hoverTimeoutRef.current = setTimeout(() => {
-      // Second stage - gracefully animate to "after" position
-      setSliderPosition(95);
+      // Quick peek at the "after" position (reduced from 95 to 75)
+      setSliderPosition(75);
 
-      // Third stage - pause at "after" position
+      // Shorter pause (reduced from 1500ms to 800ms)
       hoverTimeoutRef.current = setTimeout(() => {
-        // Fourth stage - elegantly return to original
+        // Return to initial position
         setSliderPosition(initialPosition);
 
         // Animation complete
         hoverTimeoutRef.current = setTimeout(() => {
           setIsAnimating(false);
-        }, 400);
-      }, 1500);
-    }, 800);
+          // Show interaction hint after animation
+          setShowInteractionHint(true);
+          
+          // Hide hint after 3 seconds
+          hintTimeoutRef.current = setTimeout(() => {
+            setShowInteractionHint(false);
+          }, 3000);
+        }, 300);
+      }, 800);
+    }, 300);
   };
 
   // Handle hover animation
@@ -194,16 +213,18 @@ export default function BeforeAfterSlider({
     setIsHovering(false);
     setIsDragging(false);
 
-    // Stop any running animations
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current);
-      hoverTimeoutRef.current = null;
-    }
-    setIsAnimating(false);
+    // Only stop animations if user hasn't started interacting
+    if (!wasRecentlyDragging) {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+        hoverTimeoutRef.current = null;
+      }
+      setIsAnimating(false);
 
-    // Animate back to initial position if needed
-    if (Math.abs(sliderPosition - initialPosition) > 5) {
-      setSliderPosition(initialPosition);
+      // Only animate back to initial position if user hasn't interacted
+      if (!hasAnimated && Math.abs(sliderPosition - initialPosition) > 5) {
+        setSliderPosition(initialPosition);
+      }
     }
   };
 
@@ -464,6 +485,74 @@ export default function BeforeAfterSlider({
               </div>
             </motion.div>
           </motion.div>
+
+          {/* Elegant Interaction Cue - Chanel-inspired minimal design */}
+          <AnimatePresence>
+            {showInteractionHint && !isDragging && (
+              <motion.div
+                className="absolute top-1/2 pointer-events-none z-20"
+                style={{
+                  left: `${sliderPosition}%`,
+                  transform: "translate(-50%, -130%)",
+                }}
+                initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                transition={{ 
+                  duration: 0.6, 
+                  ease: [0.25, 0.46, 0.45, 0.94] // Luxury easing
+                }}
+              >
+                {/* Sophisticated backdrop with gradient overlay */}
+                <div className="relative">
+                  {/* Main container with refined styling */}
+                  <div className="relative px-4 py-2 bg-gradient-to-b from-white/95 to-white/90 backdrop-blur-md">
+                    {/* Subtle border enhancement */}
+                    <div className="absolute inset-0 border border-elegant-mocha/10 rounded-sm"></div>
+                    
+                    {/* Content with proper typography hierarchy */}
+                    <div className="relative flex items-center justify-center">
+                      {/* Refined drag icon - more minimal */}
+                      <div className="flex items-center gap-1 mr-2">
+                        <div className="w-[3px] h-[3px] bg-elegant-mocha/40 rounded-full"></div>
+                        <div className="w-[6px] h-[1px] bg-elegant-mocha/60"></div>
+                        <div className="w-[3px] h-[3px] bg-elegant-mocha/40 rounded-full"></div>
+                      </div>
+                      
+                      {/* Typography matching the luxury brand standards */}
+                      <span className="font-alta text-[10px] tracking-[0.15em] uppercase text-elegant-mocha/80 leading-none">
+                        Drag to Compare
+                      </span>
+                    </div>
+                    
+                    {/* Subtle accent line - Chanel signature detail */}
+                    <motion.div
+                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-[0.5px] bg-elegant-mocha/20"
+                      initial={{ width: 0 }}
+                      animate={{ width: "60%" }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                    />
+                  </div>
+                  
+                  {/* Elegant pointing indicator - more refined than arrow */}
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1">
+                    <motion.div
+                      className="w-[1px] h-3 bg-gradient-to-b from-elegant-mocha/20 to-transparent"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 12, opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 0.4 }}
+                    />
+                    <motion.div
+                      className="absolute top-3 left-1/2 transform -translate-x-1/2 w-[2px] h-[2px] bg-elegant-mocha/30 rounded-full"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 0.6 }}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Hidden Range Input For Accessibility */}
           <input

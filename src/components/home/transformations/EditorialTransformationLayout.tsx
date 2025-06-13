@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 // Import only the animation hook we need
 import { useLuxuryReveal } from "../../../utils/animations/useLuxuryTransition";
+import { SectionTitle } from "../../shared/SectionTitle";
 
 interface EditorialTransformationLayoutProps {
   children: ReactNode;
@@ -73,37 +74,27 @@ export default function EditorialTransformationLayout({
 
       {/* Content container with refined editorial spacing using golden ratio */}
       <div className="relative z-10 max-w-[1220px] mx-auto px-4 md:px-8">
-        {/* Editorial header with refined typography */}
-        {(title || subtitle) && (
-          <div className="mb-16 md:mb-24">
-            {/* Title with Chanel's exact typography specifications */}
-            {title && (
-              <motion.h2
-                ref={titleReveal.ref}
-                variants={titleReveal.variants}
-                initial={titleReveal.initial}
-                animate={titleReveal.animate}
-                className="font-alice text-[24px] md:text-[36px] tracking-[0.2em] text-elegant-mocha uppercase text-center font-light"
-              >
-                {title}
-                {/* Chanel-standard separator (1/8 container width) */}
-                <span className="relative block h-[0.5px] w-[12.5%] mx-auto bg-elegant-mocha/20 mt-12"></span>
-              </motion.h2>
-            )}
+        {/* Standardized section title matching homepage consistency */}
+        {title && (
+          <SectionTitle
+            title={title}
+            subtitle="Results"
+            align="center"
+            variant="dark"
+          />
+        )}
 
-            {/* Subtitle with Chanel's precise typography system */}
-            {subtitle && (
-              <motion.p
-                ref={subtitleReveal.ref}
-                variants={subtitleReveal.variants}
-                initial={subtitleReveal.initial}
-                animate={subtitleReveal.animate}
-                className="font-alta text-elegant-mocha/70 max-w-xl mx-auto mt-12 tracking-[0.12em] leading-[1.8] text-center text-[16px]"
-              >
-                {subtitle}
-              </motion.p>
-            )}
-          </div>
+        {/* Custom subtitle for longer description */}
+        {subtitle && (
+          <motion.p
+            ref={subtitleReveal.ref}
+            variants={subtitleReveal.variants}
+            initial={subtitleReveal.initial}
+            animate={subtitleReveal.animate}
+            className="font-alta text-elegant-mocha/70 max-w-xl mx-auto -mt-8 mb-16 tracking-[0.12em] leading-[1.8] text-center text-[16px]"
+          >
+            {subtitle}
+          </motion.p>
         )}
 
         {/* Refined quote section with emotional connector to transformations */}
