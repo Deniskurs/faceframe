@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { LUXURY_EASING, standardViewport } from "@/utils/animations/luxuryAnimations";
 import { useRef } from "react";
 
-// Three emotional groupings for scroll pacing
+// Clean emotional journey structure
 const emotionalJourney = {
   lettingGo: [
     "Not to 'fix' you.",
@@ -27,234 +27,174 @@ const emotionalJourney = {
 export default function TransformationManifesto() {
   const containerRef = useRef<HTMLElement>(null);
   
-  // const { scrollYProgress } = useScroll({
-  //   target: containerRef,
-  //   offset: ["start end", "end start"]
-  // });
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
-  // const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -20]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   return (
     <section 
       ref={containerRef} 
-      className="pt-24 pb-32 md:pt-32 md:pb-40 bg-white relative overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-b from-white via-white to-light-cream/30 overflow-hidden"
     >
-      {/* Subtle decorative elements */}
+      {/* Background Architecture */}
       <motion.div 
-        className="absolute top-12 left-12 w-[1px] h-16 bg-elegant-mocha/5 hidden md:block"
-        initial={{ height: 0, opacity: 0 }}
-        whileInView={{ height: 64, opacity: 0.05 }}
-        viewport={standardViewport}
-        transition={{ duration: 2, delay: 0.5, ease: LUXURY_EASING }}
-      />
-      <motion.div 
-        className="absolute bottom-12 right-12 w-[1px] h-16 bg-elegant-mocha/5 hidden md:block"
-        initial={{ height: 0, opacity: 0 }}
-        whileInView={{ height: 64, opacity: 0.05 }}
-        viewport={standardViewport}
-        transition={{ duration: 2, delay: 0.7, ease: LUXURY_EASING }}
+        className="absolute inset-0 opacity-[0.015] bg-[url('/images/hero/hero-background.svg')] bg-repeat"
+        style={{ y: backgroundY }}
       />
 
-      <div className="max-w-xl mx-auto px-4 relative z-10 pt-16">
-        
-
-        {/* 1. Letting Go - What this is NOT about */}
-        <motion.div
-          className="mb-16 space-y-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ ...standardViewport, margin: "-100px", once: true }}
-          transition={{ duration: 1, ease: LUXURY_EASING }}
+      {/* Minimal Geometric Elements */}
+      <div className="absolute inset-0">
+        <motion.div 
+          className="absolute top-20 left-20 hidden xl:block"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={standardViewport}
+          transition={{ duration: 2, delay: 0.3, ease: LUXURY_EASING }}
         >
-          {emotionalJourney.lettingGo.map((line, index) => (
+          <div className="w-16 h-[0.5px] bg-elegant-mocha/20"></div>
+          <div className="w-[0.5px] h-16 bg-elegant-mocha/20"></div>
+        </motion.div>
+        
+        <motion.div 
+          className="absolute bottom-20 right-20 hidden xl:block"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={standardViewport}
+          transition={{ duration: 2, delay: 0.5, ease: LUXURY_EASING }}
+        >
+          <div className="w-16 h-[0.5px] bg-elegant-mocha/20 ml-auto"></div>
+          <div className="w-[0.5px] h-16 bg-elegant-mocha/20 ml-auto"></div>
+        </motion.div>
+      </div>
+
+      {/* Clean Content Container */}
+      <div className="flex items-center justify-center min-h-screen py-24">
+        <div className="w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="space-y-24">
+            
+            {/* Letting Go Section */}
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 15 }}
+              className="text-center space-y-12"
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ 
-                delay: index * 0.2,
-                duration: 0.8,
-                ease: LUXURY_EASING
-              }}
-              className="text-center"
+              viewport={standardViewport}
+              transition={{ duration: 1.2, ease: LUXURY_EASING }}
             >
-              <p className="font-alice text-base md:text-lg text-elegant-mocha/70 text-balance text-center leading-loose tracking-wide italic">
-                {line.split(" ").map((word, wordIndex) => (
-                  <motion.span
-                    key={wordIndex}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{
-                      delay: (index * 0.2) + (wordIndex * 0.06),
-                      duration: 0.5,
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.3, ease: LUXURY_EASING }}
+              >
+                <div className="w-16 h-px bg-elegant-mocha/25 mx-auto mb-8"></div>
+                <h3 className="font-alice text-sm tracking-[0.25em] uppercase text-elegant-mocha/60 font-light">
+                  Release
+                </h3>
+              </motion.div>
+              
+              <div className="space-y-8 max-w-3xl mx-auto">
+                {emotionalJourney.lettingGo.map((line, index) => (
+                  <motion.p
+                    key={index}
+                    className="font-alice text-base md:text-lg lg:text-xl text-elegant-mocha/70 leading-relaxed tracking-wide italic py-2"
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      delay: 0.5 + (index * 0.1),
+                      duration: 0.8,
                       ease: LUXURY_EASING
                     }}
-                    className="inline-block mr-1"
                   >
-                    {word}
-                  </motion.span>
+                    {line}
+                  </motion.p>
                 ))}
-              </p>
+              </div>
             </motion.div>
-          ))}
-        </motion.div>
 
-        {/* 2. Returning Home - What this IS about */}
-        <motion.div
-          className="mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ ...standardViewport, margin: "-100px", once: true }}
-          transition={{ delay: 0.3, duration: 1, ease: LUXURY_EASING }}
-        >
-          {emotionalJourney.returningHome.map((line, index) => (
+            {/* Returning Home Section */}
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 15, scale: 0.98 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                delay: index * 0.15,
-                duration: index === 0 ? 1.2 : 0.8, // Special timing for the key line
-                ease: LUXURY_EASING
-              }}
-              className={`text-center ${index === 0 ? 'mb-6' : 'mb-4'}`}
+              className="text-center space-y-12"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={standardViewport}
+              transition={{ delay: 0.2, duration: 1.2, ease: LUXURY_EASING }}
             >
-              {index === 0 ? (
-                // Special emphasis for "This is about bringing you back to yourself"
-                <motion.div
-                  className="relative"
-                  whileInView={{
-                    scale: [1, 1.02, 1],
-                    textShadow: [
-                      "0 0 0px rgba(183, 161, 147, 0)",
-                      "0 0 8px rgba(183, 161, 147, 0.1)",
-                      "0 0 0px rgba(183, 161, 147, 0)"
-                    ]
-                  }}
-                  transition={{ duration: 3, ease: LUXURY_EASING }}
-                >
-                  <p className="font-alice text-xl md:text-2xl text-elegant-mocha/90 text-balance text-center leading-loose tracking-wide font-semibold">
-                    {line.split(" ").map((word, wordIndex) => (
-                      <motion.span
-                        key={wordIndex}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{
-                          delay: 0.3 + (wordIndex * 0.1),
-                          duration: 0.8,
-                          ease: LUXURY_EASING
-                        }}
-                        className="inline-block mr-1"
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </p>
-                </motion.div>
-              ) : (
-                // Regular "Back to..." lines
-                <p className="font-alta text-lg md:text-xl text-elegant-mocha/75 text-balance text-center leading-loose tracking-wide font-light">
-                  {line.split(" ").map((word, wordIndex) => (
-                    <motion.span
-                      key={wordIndex}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{
-                        delay: (index * 0.15) + (wordIndex * 0.05),
-                        duration: 0.6,
-                        ease: LUXURY_EASING
-                      }}
-                      className="inline-block mr-1"
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </p>
-              )}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.4, ease: LUXURY_EASING }}
+              >
+                <div className="w-20 h-px bg-soft-blush/30 mx-auto mb-8"></div>
+                <h3 className="font-alice text-sm tracking-[0.25em] uppercase text-elegant-mocha/70 font-medium">
+                  Return
+                </h3>
+              </motion.div>
+              
+              <div className="space-y-10 max-w-4xl mx-auto">
+                {emotionalJourney.returningHome.map((line, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      delay: 0.6 + (index * 0.1),
+                      duration: 0.8,
+                      ease: LUXURY_EASING
+                    }}
+                  >
+                    {index === 0 ? (
+                      <div className="bg-gradient-to-br from-white/50 to-light-cream/20 rounded-xl p-10 lg:p-12 border border-elegant-mocha/5 my-8">
+                        <p className="font-alice text-xl md:text-2xl lg:text-3xl text-elegant-mocha/95 leading-relaxed tracking-wide font-medium">
+                          {line}
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="font-alta text-lg md:text-xl lg:text-2xl text-elegant-mocha/80 leading-relaxed tracking-wide font-light py-1">
+                        {line}
+                      </p>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
-          ))}
-        </motion.div>
 
-        {/* 3. Revelation - The sacred journey mantra */}
-        <motion.div
-          className="mt-16"
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ ...standardViewport, margin: "-50px" }}
-          transition={{ delay: 0.5, duration: 1.5, ease: LUXURY_EASING }}
-        >
-          <motion.div 
-            className="relative bg-white/20 backdrop-blur-sm rounded-2xl p-8 border border-elegant-mocha/5"
-            whileHover={{ 
-              scale: 1.01,
-              transition: { duration: 0.4 }
-            }}
-          >
-            <p className="font-alice text-lg md:text-xl text-elegant-mocha/85 text-balance text-center leading-loose tracking-wide italic">
-              {emotionalJourney.revelation[0].split(" ").map((word, wordIndex) => (
-                <motion.span
-                  key={wordIndex}
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: 0.8 + (wordIndex * 0.06),
-                    duration: 0.7,
-                    ease: LUXURY_EASING
-                  }}
-                  className="inline-block mx-1"
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </p>
-            
-            {/* Subtle glow effect for the mantra */}
+            {/* Sacred Revelation */}
             <motion.div
-              className="absolute inset-0 rounded-2xl bg-soft-blush/2"
-              animate={{ opacity: [0, 0.3, 0] }}
-              transition={{ 
-                duration: 5, 
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 3
-              }}
-            />
-          </motion.div>
-        </motion.div>
+              className="text-center space-y-12"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={standardViewport}
+              transition={{ delay: 0.4, duration: 1.2, ease: LUXURY_EASING }}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.6, ease: LUXURY_EASING }}
+              >
+                <div className="w-24 h-px bg-elegant-mocha/25 mx-auto mb-10"></div>
+                <h3 className="font-alice text-sm tracking-[0.3em] uppercase text-elegant-mocha/70 font-medium">
+                  Sacred Journey
+                </h3>
+              </motion.div>
+              
+              <motion.div
+                className="bg-gradient-to-br from-white/40 to-light-cream/20 rounded-2xl p-12 lg:p-16 xl:p-20 border border-elegant-mocha/8 max-w-5xl mx-auto"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.2, delay: 0.8, ease: LUXURY_EASING }}
+              >
+                <p className="font-alice text-lg md:text-xl lg:text-2xl xl:text-3xl text-elegant-mocha/90 leading-relaxed tracking-wide italic">
+                  {emotionalJourney.revelation[0]}
+                </p>
+              </motion.div>
+            </motion.div>
 
-        {/* Closing ornament */}
-        <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={standardViewport}
-          transition={{ duration: 1.2, delay: 0.5, ease: LUXURY_EASING }}
-        >
-          <motion.div 
-            className="w-1.5 h-1.5 rounded-full bg-soft-blush/50 mx-auto relative"
-            animate={{ 
-              scale: [1, 1.4, 1],
-              opacity: [0.5, 1, 0.5]
-            }}
-            transition={{ 
-              duration: 4, 
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <motion.div
-              className="absolute inset-0 rounded-full bg-soft-blush/20 blur-sm"
-              animate={{ scale: [1, 3, 1] }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </motion.div>
-        </motion.div>
-
+          </div>
+        </div>
       </div>
+
     </section>
   );
 }

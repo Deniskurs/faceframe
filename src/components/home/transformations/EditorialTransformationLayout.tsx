@@ -28,13 +28,13 @@ export default function EditorialTransformationLayout({
   className = "",
 }: EditorialTransformationLayoutProps) {
   // Precise Chanel timing standards (1.8s standard)
-  const titleReveal = useLuxuryReveal<HTMLHeadingElement>({
-    direction: "up",
-    threshold: 0.1,
-    delay: 0.1,
-    duration: 1.8,
-    easingType: "elegant",
-  });
+  // const titleReveal = useLuxuryReveal<HTMLHeadingElement>({
+  //   direction: "up",
+  //   threshold: 0.1,
+  //   delay: 0.1,
+  //   duration: 1.8,
+  //   easingType: "elegant",
+  // });
 
   const subtitleReveal = useLuxuryReveal<HTMLParagraphElement>({
     direction: "up",

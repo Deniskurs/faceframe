@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 import { useRef, useState, useEffect } from "react";
 
@@ -26,6 +26,7 @@ export default function IGGYHero() {
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const [showCursor, setShowCursor] = useState(true);
+  const [isInitialLoadComplete, setIsInitialLoadComplete] = useState(false);
 
   // Typewriter effect for whisper words
   useEffect(() => {
@@ -64,6 +65,15 @@ export default function IGGYHero() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Track when initial load animation completes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsInitialLoadComplete(true);
+    }, 6000); // After all initial animations complete
+
+    return () => clearTimeout(timer);
+  }, []);
   
   // Optimized parallax effect for floating words with smoothing
   const { scrollYProgress } = useScroll({
@@ -84,6 +94,9 @@ export default function IGGYHero() {
     { clamp: true }
   );
 
+  // Only apply scroll effects after initial load
+  const scrollY = isInitialLoadComplete ? parallaxY : 0;
+
   return (
     <motion.section 
       ref={containerRef}
@@ -99,14 +112,19 @@ export default function IGGYHero() {
           className="absolute pointer-events-none select-none"
           initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
           animate={{ 
-            opacity: 0.08, 
+            opacity: isInitialLoadComplete ? fadeOut : 0.15, 
             scale: 1,
             rotate: index % 2 === 0 ? 2 : -2
           }}
           transition={{ 
             delay: accent.delay, 
-            duration: 2,
+            duration: 3,
             ease: LUXURY_EASING,
+            opacity: {
+              delay: accent.delay,
+              duration: 4,
+              ease: LUXURY_EASING
+            },
             rotate: {
               duration: 12,
               repeat: Infinity,
@@ -117,12 +135,11 @@ export default function IGGYHero() {
           style={{
             left: accent.x,
             top: accent.y,
-            y: parallaxY,
-            opacity: fadeOut,
+            y: scrollY,
             willChange: "transform, opacity"
           }}
         >
-          <span className="font-alice text-4xl md:text-6xl lg:text-7xl text-elegant-mocha tracking-[0.3em] font-light">
+          <span className="font-alice text-4xl md:text-6xl lg:text-7xl text-elegant-mocha/60 tracking-[0.3em] font-light">
             {accent.word}
           </span>
         </motion.div>

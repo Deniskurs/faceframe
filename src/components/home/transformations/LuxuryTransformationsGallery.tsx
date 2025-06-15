@@ -9,7 +9,7 @@ import EditorialTransformationLayout from "./EditorialTransformationLayout";
 import { luxuryEasing } from "../../../utils/animations/luxurySpacing";
 import { standardViewport } from "@/utils/animations/luxuryAnimations";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
-import { SectionTitle } from "@/components/shared/SectionTitle";
+// import { SectionTitle } from "@/components/shared/SectionTitle";
 import {
   useLuxuryReveal,
   useLuxuryStaggerEffect,

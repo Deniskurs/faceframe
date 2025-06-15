@@ -24,8 +24,8 @@ const BookingCTA = ({
   backgroundImage = "/images/gallery/image14.webp",
   title = "BOOK YOUR APPOINTMENT",
   subtitle = "Limited appointments available. Join our exclusive clientele to experience precision beauty artistry.",
-  buttonText = "SCHEDULE NOW",
-  buttonLink = "/booking",
+  // buttonText = "SCHEDULE NOW",
+  // buttonLink = "/booking",
   className = "",
 }: BookingCTAProps) => {
   // Refined, minimal trust indicators with CHANEL-inspired aesthetics
