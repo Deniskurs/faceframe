@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 import { useRef, useState, useEffect } from "react";
 
@@ -112,7 +112,7 @@ export default function IGGYHero() {
           className="absolute pointer-events-none select-none"
           initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
           animate={{ 
-            opacity: isInitialLoadComplete ? fadeOut : 0.15, 
+            opacity: 0.15, 
             scale: 1,
             rotate: index % 2 === 0 ? 2 : -2
           }}
@@ -136,6 +136,7 @@ export default function IGGYHero() {
             left: accent.x,
             top: accent.y,
             y: scrollY,
+            opacity: isInitialLoadComplete ? fadeOut : undefined,
             willChange: "transform, opacity"
           }}
         >
