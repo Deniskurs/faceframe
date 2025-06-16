@@ -172,15 +172,12 @@ export default function IGGYHero() {
         transition={{ duration: 1.5, delay: 1.6, ease: LUXURY_EASING }}
       />
 
-      {/* Professional Grid-Based Layout System */}
-      <div className="absolute inset-0 grid grid-rows-[1fr_auto_1fr] place-items-center px-6 sm:px-8 lg:px-12">
+      {/* Meticulous Grid-Based Layout System */}
+      <div className="absolute inset-0 flex items-center justify-center px-6 sm:px-8 lg:px-12">
         
-        {/* Top spacer for perfect vertical centering */}
-        <div></div>
-        
-        {/* Main Content Grid - Perfectly Centered */}
+        {/* Main Content Container - Perfect Center Alignment */}
         <motion.div
-          className="w-full max-w-4xl grid grid-rows-[auto_auto_auto_auto] gap-12 sm:gap-16 lg:gap-20 place-items-center text-center"
+          className="w-full max-w-4xl flex flex-col items-center justify-center gap-12 sm:gap-16 lg:gap-20 text-center"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.8, delay: 0.3, ease: LUXURY_EASING }}
@@ -208,7 +205,7 @@ export default function IGGYHero() {
           </motion.div>
 
           {/* 2. Main Title */}
-          <motion.div className="grid gap-8 place-items-center">
+          <motion.div className="flex flex-col items-center justify-center gap-8 w-full">
             <motion.h1
               className="uppercase text-elegant-mocha font-alice tracking-[0.25em] font-light text-center"
               style={{
@@ -279,12 +276,12 @@ export default function IGGYHero() {
 
           {/* 3. Typewriter Words */}
           <motion.div 
-            className="min-h-[6rem] grid place-items-center"
+            className="min-h-[6rem] flex items-center justify-center w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3.2, duration: 1.5, ease: LUXURY_EASING }}
           >
-            <div className="text-center">
+            <div className="text-center w-full flex items-center justify-center">
               <span 
                 className="font-alta text-elegant-mocha/70 tracking-[0.25em] uppercase font-light text-balance text-pretty"
                 style={{
@@ -344,9 +341,6 @@ export default function IGGYHero() {
           </motion.div>
 
         </motion.div>
-
-        {/* Bottom spacer for perfect vertical centering */}
-        <div></div>
 
       </div>
     </motion.section>

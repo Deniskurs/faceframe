@@ -78,31 +78,32 @@ export default function SacredPromise() {
         </motion.div>
       </div>
 
-      {/* Clean Content Container */}
+      {/* Clean Content Container - Meticulous Alignment */}
       <div className="flex items-center justify-center min-h-screen py-24">
         <div className="w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="space-y-24">
+          <div className="flex flex-col items-center justify-center gap-24 w-full">
                 
             {/* Opening Stillness */}
             <motion.div
-              className="text-center space-y-12"
+              className="flex flex-col items-center justify-center gap-12 text-center w-full"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={standardViewport}
               transition={{ duration: 1.2, ease: LUXURY_EASING }}
             >
               <motion.div
+                className="flex flex-col items-center justify-center gap-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3, ease: LUXURY_EASING }}
               >
-                <div className="w-16 h-px bg-soft-blush/30 mx-auto mb-8"></div>
+                <div className="w-16 h-px bg-soft-blush/30"></div>
                 <h3 className="font-alice text-sm tracking-[0.3em] uppercase text-elegant-mocha/60 font-light">
                   Sacred Stillness
                 </h3>
               </motion.div>
               
-              <div className="space-y-10 max-w-3xl mx-auto">
+              <div className="flex flex-col items-center justify-center gap-10 max-w-3xl w-full">
                 {sacredMoments.openingStillness.map((line, index) => (
                   <motion.div
                     key={index}
@@ -132,24 +133,25 @@ export default function SacredPromise() {
 
             {/* The Sacred Promise */}
             <motion.div
-              className="text-center space-y-12"
+              className="flex flex-col items-center justify-center gap-12 text-center w-full"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={standardViewport}
               transition={{ delay: 0.2, duration: 1.2, ease: LUXURY_EASING }}
             >
               <motion.div
+                className="flex flex-col items-center justify-center gap-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.4, ease: LUXURY_EASING }}
               >
-                <div className="w-20 h-px bg-elegant-mocha/25 mx-auto mb-8"></div>
+                <div className="w-20 h-px bg-elegant-mocha/25"></div>
                 <h3 className="font-alice text-sm tracking-[0.3em] uppercase text-elegant-mocha/70 font-medium">
                   Sacred Promise
                 </h3>
               </motion.div>
               
-              <div className="space-y-10 max-w-4xl mx-auto">
+              <div className="flex flex-col items-center justify-center gap-10 max-w-4xl w-full">
                 {sacredMoments.thePromise.map((line, index) => (
                   <motion.p
                     key={index}
@@ -173,24 +175,25 @@ export default function SacredPromise() {
 
             {/* The Sacred Experience */}
             <motion.div
-              className="text-center space-y-12"
+              className="flex flex-col items-center justify-center gap-12 text-center w-full"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={standardViewport}
               transition={{ delay: 0.3, duration: 1.2, ease: LUXURY_EASING }}
             >
               <motion.div
+                className="flex flex-col items-center justify-center gap-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5, ease: LUXURY_EASING }}
               >
-                <div className="w-24 h-px bg-soft-blush/30 mx-auto mb-8"></div>
+                <div className="w-24 h-px bg-soft-blush/30"></div>
                 <h3 className="font-alice text-sm tracking-[0.3em] uppercase text-elegant-mocha/70 font-medium">
                   Sacred Experience
                 </h3>
               </motion.div>
               
-              <div className="space-y-8 max-w-4xl mx-auto">
+              <div className="flex flex-col items-center justify-center gap-8 max-w-4xl w-full">
                 {sacredMoments.theExperience.map((line, index) => (
                   <motion.p
                     key={index}
@@ -214,13 +217,13 @@ export default function SacredPromise() {
 
             {/* The Sacred Revelation */}
             <motion.div
-              className="text-center space-y-12"
+              className="flex flex-col items-center justify-center gap-12 text-center w-full"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={standardViewport}
               transition={{ delay: 0.4, duration: 1.2, ease: LUXURY_EASING }}
             >
-              <div className="space-y-12">
+              <div className="flex flex-col items-center justify-center gap-12 w-full">
                 {sacredMoments.theRevelation.map((line, index) => (
                   <motion.div
                     key={index}
@@ -235,12 +238,12 @@ export default function SacredPromise() {
                     {index === 3 ? (
                       <div className="bg-gradient-to-br from-white/50 to-light-cream/20 rounded-2xl p-12 lg:p-20 border border-elegant-mocha/8 mt-20">
                         <motion.div
-                          className="mb-12"
+                          className="flex flex-col items-center justify-center gap-8 mb-12"
                           initial={{ opacity: 0, y: 15 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           transition={{ duration: 1, delay: 0.8, ease: LUXURY_EASING }}
                         >
-                          <div className="w-24 h-px bg-elegant-mocha/30 mx-auto mb-8"></div>
+                          <div className="w-24 h-px bg-elegant-mocha/30"></div>
                           <h3 className="font-alice text-sm tracking-[0.35em] uppercase text-elegant-mocha/70 font-medium">
                             Sacred Covenant
                           </h3>

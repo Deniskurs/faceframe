@@ -63,31 +63,32 @@ export default function EmotionalCTA() {
         </motion.div>
       </div>
 
-      {/* Clean Content Architecture */}
+      {/* Clean Content Architecture - Meticulous Alignment */}
       <div className="flex items-center justify-center min-h-screen py-24">
         <div className="w-full max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="space-y-20 text-center">
+          <div className="flex flex-col items-center justify-center gap-20 text-center w-full">
                 
             {/* Clean Headline Section */}
             <motion.div
-              className="space-y-16"
+              className="flex flex-col items-center justify-center gap-16 w-full"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={standardViewport}
               transition={{ duration: 1.2, ease: LUXURY_EASING }}
             >
               <motion.div
+                className="flex flex-col items-center justify-center gap-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3, ease: LUXURY_EASING }}
               >
-                <div className="w-12 h-px bg-elegant-mocha/20 mx-auto mb-8"></div>
+                <div className="w-12 h-px bg-elegant-mocha/20"></div>
                 <h3 className="font-alice text-sm tracking-[0.4em] uppercase text-elegant-mocha/60 font-light">
                   Invitation
                 </h3>
               </motion.div>
               
-              <div className="space-y-6">
+              <div className="flex flex-col items-center justify-center gap-6 w-full">
                 {headlineLines.map((line, lineIndex) => (
                   <motion.h1
                     key={lineIndex}
@@ -117,24 +118,25 @@ export default function EmotionalCTA() {
 
             {/* Clean Description Section */}
             <motion.div
-              className="space-y-12 py-8"
+              className="flex flex-col items-center justify-center gap-12 py-8 w-full"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={standardViewport}
               transition={{ delay: 0.2, duration: 1.2, ease: LUXURY_EASING }}
             >
               <motion.div
+                className="flex flex-col items-center justify-center gap-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.4, ease: LUXURY_EASING }}
               >
-                <div className="w-12 h-px bg-soft-blush/30 mx-auto mb-8"></div>
+                <div className="w-12 h-px bg-soft-blush/30"></div>
                 <h3 className="font-alice text-sm tracking-[0.4em] uppercase text-elegant-mocha/60 font-light">
                   Reflection
                 </h3>
               </motion.div>
               
-              <div className="space-y-8 max-w-3xl mx-auto">
+              <div className="flex flex-col items-center justify-center gap-8 max-w-3xl w-full">
                 {descriptionLines.map((line, lineIndex) => (
                   <motion.p
                     key={lineIndex}
@@ -155,26 +157,26 @@ export default function EmotionalCTA() {
 
             {/* Clean CTA Section */}
             <motion.div
-              className="space-y-16 pt-12"
+              className="flex flex-col items-center justify-center gap-16 pt-12 w-full"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={standardViewport}
               transition={{ delay: 0.4, duration: 1.2, ease: LUXURY_EASING }}
             >
               <motion.div
-                className="text-center"
+                className="flex flex-col items-center justify-center gap-8 text-center"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.6, ease: LUXURY_EASING }}
               >
-                <div className="w-20 h-px bg-elegant-mocha/20 mx-auto mb-8"></div>
+                <div className="w-20 h-px bg-elegant-mocha/20"></div>
                 <h3 className="font-alice text-sm tracking-[0.4em] uppercase text-elegant-mocha/60 font-medium">
                   Begin Your Journey
                 </h3>
               </motion.div>
               
               <motion.div
-                className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 max-w-2xl mx-auto"
+                className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 max-w-2xl w-full"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.8, ease: LUXURY_EASING }}
@@ -208,7 +210,7 @@ export default function EmotionalCTA() {
               </motion.div>
 
               <motion.div
-                className="text-center pt-8"
+                className="flex items-center justify-center text-center pt-8 w-full"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 1.2, delay: 1.2, ease: LUXURY_EASING }}

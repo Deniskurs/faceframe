@@ -101,10 +101,10 @@ export default function EssenceReveal() {
         </motion.div>
       </div>
 
-      {/* Clean Content Container */}
+      {/* Clean Content Container - Meticulous Centering */}
       <div className="flex items-center justify-center min-h-screen py-24">
         <div className="w-full max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="space-y-20 text-center">
+          <div className="flex flex-col items-center justify-center gap-20 text-center w-full">
             {narrativeBlocks.map((block, blockIndex) => (
               <motion.div
                 key={blockIndex}
@@ -138,7 +138,7 @@ export default function EssenceReveal() {
                     </p>
                   </motion.div>
                 ) : block.emphasis === "emotional" ? (
-                  <div className="space-y-8 py-4">
+                  <div className="flex flex-col items-center justify-center gap-8 py-4 w-full">
                     {block.lines.map((line, lineIndex) => (
                       <motion.p
                         key={lineIndex}
@@ -156,7 +156,7 @@ export default function EssenceReveal() {
                     ))}
                   </div>
                 ) : (
-                  <div className="space-y-6 py-4">
+                  <div className="flex flex-col items-center justify-center gap-6 py-4 w-full">
                     {block.lines.map((line, lineIndex) => (
                       <motion.p 
                         key={lineIndex}
