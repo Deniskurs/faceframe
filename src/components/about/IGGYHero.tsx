@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 import { useRef, useState, useEffect } from "react";
 
@@ -13,12 +13,6 @@ const whisperWords = [
   "presence"
 ];
 
-const floatingAccents = [
-  { word: "grace", x: "15%", y: "20%", delay: 3.5 },
-  { word: "light", x: "85%", y: "30%", delay: 4.2 },
-  { word: "stillness", x: "10%", y: "75%", delay: 5.1 },
-  { word: "presence", x: "90%", y: "80%", delay: 5.8 }
-];
 
 export default function IGGYHero() {
   const containerRef = useRef<HTMLElement>(null);
@@ -26,8 +20,6 @@ export default function IGGYHero() {
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const [showCursor, setShowCursor] = useState(true);
-  const [isInitialLoadComplete, setIsInitialLoadComplete] = useState(false);
-
   // Typewriter effect for whisper words
   useEffect(() => {
     const currentWord = whisperWords[currentWordIndex];
@@ -66,36 +58,6 @@ export default function IGGYHero() {
     return () => clearInterval(interval);
   }, []);
 
-  // Track when initial load animation completes
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsInitialLoadComplete(true);
-    }, 6000); // After all initial animations complete
-
-    return () => clearTimeout(timer);
-  }, []);
-  
-  // Optimized parallax effect for floating words with smoothing
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  const parallaxY = useTransform(
-    scrollYProgress, 
-    [0, 1], 
-    [0, -50],
-    { clamp: true }
-  );
-  const fadeOut = useTransform(
-    scrollYProgress, 
-    [0, 0.2, 0.4], 
-    [1, 0.7, 0],
-    { clamp: true }
-  );
-
-  // Only apply scroll effects after initial load
-  const scrollY = isInitialLoadComplete ? parallaxY : 0;
 
   return (
     <motion.section 
@@ -105,46 +67,6 @@ export default function IGGYHero() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 1.8, ease: LUXURY_EASING }}
     >
-      {/* Floating Background Accent Words */}
-      {floatingAccents.map((accent, index) => (
-        <motion.div
-          key={accent.word}
-          className="absolute pointer-events-none select-none"
-          initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-          animate={{ 
-            opacity: 0.15, 
-            scale: 1,
-            rotate: index % 2 === 0 ? 2 : -2
-          }}
-          transition={{ 
-            delay: accent.delay, 
-            duration: 3,
-            ease: LUXURY_EASING,
-            opacity: {
-              delay: accent.delay,
-              duration: 4,
-              ease: LUXURY_EASING
-            },
-            rotate: {
-              duration: 12,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{
-            left: accent.x,
-            top: accent.y,
-            y: scrollY,
-            opacity: isInitialLoadComplete ? fadeOut : undefined,
-            willChange: "transform, opacity"
-          }}
-        >
-          <span className="font-alice text-4xl md:text-6xl lg:text-7xl text-elegant-mocha/60 tracking-[0.3em] font-light">
-            {accent.word}
-          </span>
-        </motion.div>
-      ))}
 
       {/* Animated corner accents */}
       <motion.div 

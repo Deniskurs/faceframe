@@ -1,7 +1,10 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { LUXURY_EASING, standardViewport } from "@/utils/animations/luxuryAnimations";
+import {
+  LUXURY_EASING,
+  standardViewport,
+} from "@/utils/animations/luxuryAnimations";
 import { useRef } from "react";
 
 // Clean emotional journey structure
@@ -10,44 +13,44 @@ const emotionalJourney = {
     "Not to 'fix' you.",
     "Not to cover you up.",
     "This is not about changing who you are.",
-    "This is not about perfection or pretense."
+    "This is not about perfection or pretense.",
   ],
   returningHome: [
     "This is about bringing you back to yourself.",
     "Back to your softness",
-    "Back to your stillness", 
+    "Back to your stillness",
     "Back to your authenticity",
-    "Back to feeling at ease in your skin"
+    "Back to feeling at ease in your skin",
   ],
   revelation: [
-    "Every session is a sacred journey of self-discovery, where makeup becomes the bridge between who you've always been and who you're ready to become."
-  ]
+    "Every session is a sacred journey of self-discovery, where natural beautification becomes the bridge between who you've always been and who you're ready to become.",
+  ],
 };
 
 export default function TransformationManifesto() {
   const containerRef = useRef<HTMLElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   return (
-    <section 
-      ref={containerRef} 
+    <section
+      ref={containerRef}
       className="relative min-h-screen bg-gradient-to-b from-white via-white to-light-cream/30 overflow-hidden"
     >
       {/* Background Architecture */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 opacity-[0.015] bg-[url('/images/hero/hero-background.svg')] bg-repeat"
         style={{ y: backgroundY }}
       />
 
       {/* Minimal Geometric Elements */}
       <div className="absolute inset-0">
-        <motion.div 
+        <motion.div
           className="absolute top-20 left-20 hidden xl:block"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -57,8 +60,8 @@ export default function TransformationManifesto() {
           <div className="w-16 h-[0.5px] bg-elegant-mocha/20"></div>
           <div className="w-[0.5px] h-16 bg-elegant-mocha/20"></div>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           className="absolute bottom-20 right-20 hidden xl:block"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -74,7 +77,6 @@ export default function TransformationManifesto() {
       <div className="flex items-center justify-center min-h-screen py-24">
         <div className="w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex flex-col items-center justify-center gap-24 w-full">
-            
             {/* Letting Go Section */}
             <motion.div
               className="flex flex-col items-center justify-center gap-12 text-center w-full"
@@ -94,7 +96,7 @@ export default function TransformationManifesto() {
                   Release
                 </h3>
               </motion.div>
-              
+
               <div className="flex flex-col items-center justify-center gap-8 max-w-3xl w-full">
                 {emotionalJourney.lettingGo.map((line, index) => (
                   <motion.p
@@ -102,10 +104,10 @@ export default function TransformationManifesto() {
                     className="font-alice text-base md:text-lg lg:text-xl text-elegant-mocha/70 leading-relaxed tracking-wide italic py-2"
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      delay: 0.5 + (index * 0.1),
+                    transition={{
+                      delay: 0.5 + index * 0.1,
                       duration: 0.8,
-                      ease: LUXURY_EASING
+                      ease: LUXURY_EASING,
                     }}
                   >
                     {line}
@@ -133,17 +135,17 @@ export default function TransformationManifesto() {
                   Return
                 </h3>
               </motion.div>
-              
+
               <div className="flex flex-col items-center justify-center gap-10 max-w-4xl w-full">
                 {emotionalJourney.returningHome.map((line, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      delay: 0.6 + (index * 0.1),
+                    transition={{
+                      delay: 0.6 + index * 0.1,
                       duration: 0.8,
-                      ease: LUXURY_EASING
+                      ease: LUXURY_EASING,
                     }}
                   >
                     {index === 0 ? (
@@ -181,7 +183,7 @@ export default function TransformationManifesto() {
                   Sacred Journey
                 </h3>
               </motion.div>
-              
+
               <motion.div
                 className="bg-gradient-to-br from-white/40 to-light-cream/20 rounded-2xl p-12 lg:p-16 xl:p-20 border border-elegant-mocha/8 max-w-5xl w-full flex items-center justify-center"
                 initial={{ opacity: 0, y: 30 }}
@@ -193,11 +195,9 @@ export default function TransformationManifesto() {
                 </p>
               </motion.div>
             </motion.div>
-
           </div>
         </div>
       </div>
-
     </section>
   );
 }
