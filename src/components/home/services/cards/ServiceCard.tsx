@@ -244,8 +244,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           animate={contentControls}
           style={{ minHeight: "240px" }} /* Minimum content height */
         >
-          {/* Editorial-style description with enhanced typographic refinement */}
-          <p className="font-alta text-elegant-mocha/90 text-[13px] sm:text-[14px] tracking-[0.04em] leading-[1.8] sm:leading-[1.9] mb-7 sm:mb-9 line-clamp-3 font-light">
+          {/* Editorial-style description with Chanel-grade typography */}
+          <p className="font-alta text-[#2C1810] text-[14px] sm:text-[15px] tracking-[0.04em] leading-[1.85] mb-7 sm:mb-9 line-clamp-3 font-medium">
             {category.description}
           </p>
 
@@ -253,30 +253,30 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           <div className="mb-6 sm:mb-8 flex-grow">
             {/* Features container - keeps bullet points together with improved mobile spacing */}
             <div className="space-y-4 sm:space-y-6">
-              {/* Feature with precisely positioned Chanel-style dash - using inline-flex for perfect alignment */}
+              {/* Feature with precisely positioned Chanel-style dash */}
               <div className="relative mt-[2px] mb-[6px]">
                 <div className="flex">
                   <div className="relative w-[8px] sm:w-[10px] flex-shrink-0 mr-[10px] sm:mr-[14px]">
                     <motion.div
-                      className="absolute top-[0.52em] left-0 h-[0.25px] bg-deep-bronze/60"
+                      className="absolute top-[0.52em] left-0 h-[0.25px] bg-deep-bronze"
                       style={{ top: "calc(0.52em + 0.5px)" }}
                       initial={{ width: 8 }}
                       animate={{ width: isHovered ? 12 : 10 }}
                       transition={{ duration: 1.1, ease: LUXURY_EASING }}
                     />
                   </div>
-                  <p className="font-alta text-elegant-mocha/90 text-[11px] sm:text-[12px] tracking-[0.07em] leading-[1.6] font-light">
+                  <p className="font-alta text-[#3D2817] text-[12px] sm:text-[13px] tracking-[0.06em] leading-[1.6] font-medium">
                     {category.exclusivity}
                   </p>
                 </div>
               </div>
 
-              {/* Feature with meticulously positioned dash - absolute precision measurement */}
+              {/* Feature with meticulously positioned dash */}
               <div className="relative mt-[2px] mb-[6px]">
                 <div className="flex">
                   <div className="relative w-[8px] sm:w-[10px] flex-shrink-0 mr-[10px] sm:mr-[14px]">
                     <motion.div
-                      className="absolute top-[0.52em] left-0 h-[0.25px] bg-deep-bronze/60"
+                      className="absolute top-[0.52em] left-0 h-[0.25px] bg-deep-bronze"
                       style={{ top: "calc(0.52em + 0.5px)" }}
                       initial={{ width: 8 }}
                       animate={{ width: isHovered ? 12 : 10 }}
@@ -287,13 +287,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                       }}
                     />
                   </div>
-                  <p className="font-alta text-elegant-mocha/90 text-[11px] sm:text-[12px] tracking-[0.07em] leading-[1.6] font-light">
+                  <p className="font-alta text-[#3D2817] text-[12px] sm:text-[13px] tracking-[0.06em] leading-[1.6] font-medium">
                     {category.result}
                   </p>
                 </div>
               </div>
 
-              {/* Availability indicator - precise dash positioning for Chanel elegance */}
+              {/* Availability indicator */}
               <div className="relative mt-[10px] sm:mt-[12px]">
                 <div className="flex">
                   <div className="relative w-[8px] sm:w-[10px] flex-shrink-0 mr-[10px] sm:mr-[14px]">
@@ -310,7 +310,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                     />
                   </div>
                   <motion.p
-                    className="font-alta text-elegant-mocha/75 text-[10px] sm:text-[11px] tracking-[0.07em] leading-[1.6] italic font-light"
+                    className="font-alta text-[#5D4037] text-[11px] sm:text-[12px] tracking-[0.06em] leading-[1.6] italic font-medium"
                     animate={{
                       opacity: isHovered ? 0.9 : 0.75,
                     }}
@@ -326,15 +326,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             <div className="flex-grow mt-6 sm:mt-8"></div>
           </div>
 
-          {/* Refined Chanel-inspired call-to-action with minimalist design */}
+          {/* Refined Chanel-inspired call-to-action */}
           <Link
             href={`/services/${category.id}`}
-            className="group relative font-alta tracking-[0.25em] sm:tracking-[0.35em] text-[10px] sm:text-[11px] uppercase text-elegant-mocha/90 px-5 sm:px-8 py-[14px] inline-block overflow-hidden text-center w-full mt-auto"
+            className="group relative font-alta text-[#2C1810] tracking-[0.35em] text-[11px] uppercase px-6 sm:px-8 py-[15px] inline-block overflow-hidden text-center w-full mt-auto font-medium"
             aria-label={`Explore ${category.title} service details`}
-            style={{ letterSpacing: "0.35em" }}
           >
-            {/* Ultra-thin button border - Chanel signature minimalism */}
-            <div className="absolute inset-0 border border-elegant-mocha/15"></div>
+            {/* Ultra-thin button border */}
+            <div className="absolute inset-0 border border-elegant-mocha/20"></div>
 
             {/* Subtle hover background */}
             <motion.div
@@ -343,19 +342,19 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
               transition={{ duration: 1.2, ease: LUXURY_EASING }}
             />
 
-            {/* Button text - Chanel-inspired precision */}
+            {/* Button text */}
             <motion.span
-              className="relative z-10 group-hover:text-elegant-mocha transition-colors duration-900 whitespace-nowrap font-light"
+              className="relative z-10 group-hover:text-elegant-mocha transition-colors duration-900 whitespace-nowrap"
               animate={{
                 letterSpacing: isHovered ? "0.38em" : "0.35em",
-                opacity: isHovered ? 0.95 : 0.9,
+                opacity: isHovered ? 0.95 : 1,
               }}
               transition={{ duration: 0.9, ease: LUXURY_EASING }}
             >
               Discover
             </motion.span>
 
-            {/* Ultra-minimalist bottom accent - Chanel inspired */}
+            {/* Ultra-minimalist bottom accent */}
             <motion.div
               className="absolute bottom-0 left-0 right-0 h-[0.5px] bg-elegant-mocha/25 origin-center scale-x-0 group-hover:scale-x-100"
               initial={{ scaleX: 0 }}

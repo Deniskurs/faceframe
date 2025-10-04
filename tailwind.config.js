@@ -16,6 +16,12 @@ module.exports = {
   			'muted-sand': '#B08968',
   			'elegant-mocha': '#7F5539',
   			'deep-bronze': '#9C6644',
+  			'silver-bronze': '#A8988B',
+  			'rose-gold': '#C9A88A',
+  			'luxe-gold': '#D4AF37',
+  			'warm-taupe': '#8B7968',
+  			'cool-mocha': '#6B5D52',
+  			'deep-noir': '#2C2420',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

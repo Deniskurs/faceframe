@@ -109,7 +109,6 @@ export default function EditorialTransformationLayout({
             {/* Chanel's signature asymmetrical layout with left alignment */}
             <div className="flex flex-col items-start pl-[8%] pr-[8%] md:pl-[12.5%] md:pr-0 pt-8 pb-6">
               <blockquote className="font-alice text-[16px] md:text-[24px] text-elegant-mocha leading-[1.8] relative mb-8 tracking-[0.05em]">
-                <span className="block mb-6 w-12 h-[0.5px] bg-elegant-mocha/20"></span>
                 &ldquo;{quote}&rdquo;
               </blockquote>
 

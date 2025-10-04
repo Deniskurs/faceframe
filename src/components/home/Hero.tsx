@@ -60,7 +60,7 @@ const Hero = () => {
     ease: [...LUXURY_EASING], // Convert readonly array to regular array
   });
 
-  const subtitleAnimation = useTextAnimation("SIGNATURE BEAUTY EXPERIENCES", {
+  const subtitleAnimation = useTextAnimation("WHERE ARTISTRY MEETS PERMANENCE", {
     type: "word",
     staggerDelay: 0.1,
     delay: 1.7, // Longer delay for hierarchy
@@ -140,11 +140,25 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* CHANEL-inspired corner accents */}
-      <div className="absolute top-12 left-12 w-4 h-[0.5px] bg-white/30 hidden md:block"></div>
-      <div className="absolute top-12 left-12 w-[0.5px] h-4 bg-white/30 hidden md:block"></div>
-      <div className="absolute bottom-12 right-12 w-4 h-[0.5px] bg-white/30 hidden md:block"></div>
-      <div className="absolute bottom-12 right-12 w-[0.5px] h-4 bg-white/30 hidden md:block"></div>
+      {/* CHANEL-inspired corner accents - Extended for stronger presence */}
+      <motion.div
+        className="absolute top-12 left-12 hidden md:block"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, delay: 0.8, ease: LUXURY_EASING }}
+      >
+        <div className="w-12 h-[0.5px] bg-white/30"></div>
+        <div className="w-[0.5px] h-12 bg-white/30"></div>
+      </motion.div>
+      <motion.div
+        className="absolute bottom-12 right-12 hidden md:block"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, delay: 1.0, ease: LUXURY_EASING }}
+      >
+        <div className="w-12 h-[0.5px] bg-white/30 ml-auto"></div>
+        <div className="w-[0.5px] h-12 bg-white/30 ml-auto"></div>
+      </motion.div>
 
       {/* Subtle vignette effect */}
       <motion.div
@@ -166,14 +180,6 @@ const Hero = () => {
         transition={{ duration: 1.5, delay: 0.3, ease: LUXURY_EASING }}
       >
         <div className="w-full md:w-[75%] max-w-3xl text-center">
-          {/* CHANEL-inspired horizontal line */}
-          <motion.div
-            className="w-12 h-[0.5px] bg-white/60 mx-auto mb-16 md:mb-20"
-            initial={{ width: 0 }}
-            animate={{ width: 48 }}
-            transition={{ duration: 1.2, delay: 0.6, ease: LUXURY_EASING }}
-          />
-
           {/* Ultra-minimal CHANEL-inspired heading structure */}
           <div className="mb-28 md:mb-32">
             {/* Main Heading split into two lines */}
@@ -266,16 +272,16 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Refined separator with animation */}
+            {/* Refined separator with animation - Fibonacci spacing (48px) */}
             <motion.div
-              className="h-[0.5px] w-20 bg-soft-blush/70 mx-auto my-10"
+              className="h-[0.5px] w-20 bg-soft-blush/70 mx-auto mt-12 mb-8"
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: 80, opacity: 0.7 }}
               transition={{ duration: 1.2, delay: 1.6, ease: LUXURY_EASING }}
             />
 
             {/* Subtitle with Chanel-like controlled width */}
-            <div className="overflow-hidden w-full mt-6 md:mt-8">
+            <div className="overflow-hidden w-full">
               <h2
                 className="text-soft-blush alice-text text-on-dark mx-auto letter-spacing-elegant"
                 style={{
@@ -314,80 +320,63 @@ const Hero = () => {
               </h2>
             </div>
 
-            {/* Chanel-inspired description with perfect visual hierarchy */}
-            <div className="mt-12 md:mt-16 mx-auto px-2 py-0.5 hero-description-container">
-              {/* Subtle elegant separator line */}
-              <motion.div
-                className="h-[0.5px] w-8 bg-white/50 mx-auto mb-9"
-                initial={{ width: 0, opacity: 0 }}
-                animate={{ width: 32, opacity: 0.5 }}
-                transition={{ duration: 1, delay: 1.9, ease: LUXURY_EASING }}
-              />
-
-              {/* Primary statement - brand positioning with enhanced typography */}
+            {/* Chanel-inspired description - single refined statement */}
+            <div className="mt-16 mx-auto">
+              {/* Single consolidated description with refined readability */}
               <motion.p
                 className="text-center text-white font-alta hero-description"
                 style={{
-                  fontSize: "clamp(0.9rem, 1.5vw, 1.1rem)",
+                  fontSize: "clamp(0.95rem, 1.5vw, 1.15rem)",
                   letterSpacing: "0.06em",
-                  lineHeight: 1.4,
+                  lineHeight: 1.5,
                   fontWeight: 400,
                   textShadow:
-                    "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
-                  maxWidth: "min(28rem, 90%)",
+                    "0 1px 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.2)",
+                  WebkitTextStroke: "0.2px rgba(255,255,255,0.2)",
+                  maxWidth: "min(26rem, 90%)",
                   margin: "0 auto",
-                  paddingBottom: "0.1em",
                   WebkitFontSmoothing: "antialiased",
                   MozOsxFontSmoothing: "grayscale",
                 }}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.9, ease: LUXURY_EASING }}
+                transition={{ duration: 0.8, delay: 2.2, ease: LUXURY_EASING }}
               >
-                London&apos;s premier destination for bespoke beauty
-                transformations.
+                Expert artistry for lasting natural beauty
               </motion.p>
 
-              {/* Decorative center dot - Chanel-inspired separator with golden ratio spacing */}
-              <div className="flex justify-center my-5">
-                <div className="w-1 h-1 rounded-full bg-soft-blush/80 opacity-90"></div>
-              </div>
-
-              {/* Secondary details with increased contrast and refined typography */}
+              {/* Credential line - location and artist */}
               <motion.p
-                className="text-center text-white/95 font-alta hero-description"
+                className="text-center text-white/60 font-alta mt-4 flex items-center justify-center gap-2"
                 style={{
-                  fontSize: "clamp(0.85rem, 1.3vw, 1rem)",
-                  letterSpacing: "0.05em",
-                  lineHeight: 1.38,
-                  maxWidth: "min(28rem, 90%)",
-                  margin: "0 auto",
-                  paddingTop: "0.1em",
-                  fontWeight: 400,
-                  textShadow:
-                    "0 0.5px 1px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)",
+                  fontSize: "clamp(0.65rem, 0.9vw, 0.8rem)",
+                  letterSpacing: "0.2em",
+                  fontWeight: 300,
+                  textShadow: "0 1px 2px rgba(0,0,0,0.4)",
                   WebkitFontSmoothing: "antialiased",
                   MozOsxFontSmoothing: "grayscale",
                 }}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2.1, ease: LUXURY_EASING }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.6 }}
+                transition={{ duration: 1, delay: 2.5, ease: LUXURY_EASING }}
               >
-                Expert semi-permanent makeup, lashes, brows and luxury facials.
+                <span>LONDON</span>
+                <span className="opacity-40">·</span>
+                <span>I G G Y</span>
               </motion.p>
             </div>
 
-            {/* Dual Booking Path CTA Buttons with responsive spacing */}
+            {/* Dual Booking Path CTA Buttons with golden ratio spacing */}
             <motion.div
-              className="mt-12 md:mt-16 lg:mt-20 flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8 w-full max-w-2xl mx-auto px-4"
+              className="mt-16 flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8 w-full max-w-2xl mx-auto px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 2.2, ease: LUXURY_EASING }}
+              transition={{ duration: 1, delay: 2.7, ease: LUXURY_EASING }}
             >
               <div className="w-full lg:w-auto">
                 <LuxuryShadcnButton
                   href="/booking"
-                  text="BOOK NOW"
+                  text="BOOK CONSULTATION"
                   luxuryVariant="elegant"
                   luxuryTheme="transparent"
                   luxurySize="large"
@@ -408,26 +397,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Repositioned scroll indicator to be explicitly below all content */}
-        <motion.div
-          className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 3, duration: 0.8, ease: LUXURY_EASING }}
-        >
-          <p className="font-alta text-white text-[10px] tracking-[0.25em] uppercase mb-3 opacity-70">
-            Discover
-          </p>
-          <motion.div
-            className="w-[0.5px] h-8 bg-white/50"
-            animate={{ scaleY: [0.3, 1, 0.3] }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        </motion.div>
       </motion.div>
     </motion.section>
   );

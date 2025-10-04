@@ -30,7 +30,6 @@ const AboutStrip: React.FC<AboutStripProps> = ({
   // Panel references with intersection observers
   const [imageRef, imageInView] = useInView({ threshold: 0.3 });
   const [quoteRef, quoteInView] = useInView({ threshold: 0.5 });
-  const [storyRef, storyInView] = useInView({ threshold: 0.4 });
 
   // Content reveal control
   const [isRevealed, setIsRevealed] = useState(false);
@@ -60,116 +59,65 @@ const AboutStrip: React.FC<AboutStripProps> = ({
       ref={containerRef}
       className={`relative w-full overflow-hidden ${className}`}
     >
-      {/* ==================== SECTION 1: MAIN TITLE ==================== */}
+      {/* ==================== SECTION 1: PHILOSOPHY QUOTE ==================== */}
       <motion.section
-        className="relative h-screen flex flex-col justify-center items-center px-4 sm:px-6 bg-light-cream"
+        ref={quoteRef}
+        className="h-screen flex items-center justify-center px-5 sm:px-6 bg-light-cream relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: isRevealed ? 1 : 0 }}
-        transition={{ duration: 1.8, ease: LUXURY_EASING }}
+        transition={{ duration: 1.2, ease: LUXURY_EASING }}
       >
-        {/* Clean, refined horizontal line - Chanel-inspired minimalism */}
-        <motion.div
-          className="absolute top-1/2 left-0 w-full h-[0.1px] bg-elegant-mocha/10"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: isRevealed ? 1 : 0 }}
-          transition={{ duration: 1.4, delay: 0.5, ease: LUXURY_EASING }}
-        />
-
-        {/* Title */}
-        <div className="text-center max-w-xl mx-auto relative z-10">
-          <motion.div
-            className="overflow-hidden mb-2"
-            initial={{ y: 50 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1.4, ease: LUXURY_EASING }}
-          >
-            <motion.p
-              className="font-alta text-sm tracking-[0.4em] text-elegant-mocha/60 uppercase mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.1, ease: LUXURY_EASING }}
-            >
-              The Atelier
-            </motion.p>
-
-            <div className="overflow-hidden">
-              <motion.h2
-                className="font-alice text-3xl sm:text-4xl md:text-5xl tracking-[0.25em] text-elegant-mocha uppercase"
-                initial={{ y: 100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1.4, delay: 0.3, ease: LUXURY_EASING }}
+        <div className="max-w-2xl mx-auto relative z-10">
+          <motion.div className="text-center px-6" style={{ y: parallaxY3 }}>
+            <motion.div className="w-full text-center">
+              <motion.p
+                className="font-alta text-elegant-mocha/60 text-xs tracking-[0.4em] uppercase mb-16 text-center inline-block"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{
+                  opacity: quoteInView ? 1 : 0,
+                  y: quoteInView ? 0 : 10,
+                }}
+                transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
               >
-                The Story
-              </motion.h2>
-            </div>
-          </motion.div>
+                Philosophy
+              </motion.p>
+            </motion.div>
 
-          {/* Elegantly animated line */}
-          <motion.div
-            className="w-0 h-[0.1px] bg-elegant-mocha/40 mx-auto my-8"
-            animate={{ width: isRevealed ? "40%" : "0%" }}
-            transition={{ duration: 1.4, delay: 0.8, ease: LUXURY_EASING }}
-          />
-
-          {/* Scroll indicator */}
-          <motion.div
-            className="mt-10"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{
-              opacity: isRevealed ? [0.4, 1, 0.4] : 0,
-              y: isRevealed ? [0, 10, 0] : 10,
-            }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: LUXURY_EASING,
-              delay: 1.5,
-              repeatDelay: 0.5,
-            }}
-          >
-            <svg
-              className="mx-auto"
-              width="16"
-              height="30"
-              viewBox="0 0 16 30"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 2L8 28M8 28L2 22M8 28L14 22"
-                stroke="#7F5539"
-                strokeOpacity="0.6"
-                strokeWidth="0.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            <div className="relative">
+              <motion.div
+                className="w-16 h-[0.25px] bg-elegant-mocha/30 mx-auto mb-10"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: quoteInView ? 1 : 0 }}
+                transition={{ duration: 0.9, delay: 0.6, ease: LUXURY_EASING }}
               />
-            </svg>
+
+              <motion.blockquote
+                className="font-alice text-2xl sm:text-3xl md:text-4xl text-elegant-mocha/90 leading-relaxed tracking-wide italic"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: quoteInView ? 1 : 0 }}
+                transition={{ duration: 0.7, delay: 0.3, ease: LUXURY_EASING }}
+              >
+                {quote}
+              </motion.blockquote>
+
+              <motion.div
+                className="w-10 h-[0.25px] bg-elegant-mocha/30 mx-auto mt-10"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: quoteInView ? 1 : 0 }}
+                transition={{ duration: 0.9, delay: 1.1, ease: LUXURY_EASING }}
+              />
+            </div>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* ==================== SECTION 2: FOUNDER IMAGE ==================== */}
+      {/* ==================== SECTION 2: ARTIST IMAGE & CREDENTIALS ==================== */}
       <motion.section
         ref={imageRef}
-        className="min-h-screen flex items-center justify-center px-5 sm:px-6 py-10 bg-light-cream relative"
+        className="py-20 md:py-24 flex items-center justify-center px-5 sm:px-6 bg-light-cream relative"
       >
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            className="absolute inset-0 opacity-[0.02]"
-            initial={{ backgroundSize: "120%" }}
-            animate={{ backgroundSize: imageInView ? "100%" : "120%" }}
-            transition={{ duration: 3, ease: LUXURY_EASING }}
-            style={{
-              backgroundImage: "url('/images/brand/IMG_5460.jpg')",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              filter: "blur(1px)",
-            }}
-          />
-        </div>
-
-        <div className="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center relative z-10">
-          <div className="md:col-span-7 relative">
+        <div className="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center relative z-10">
+          <div className="relative">
             <motion.div
               className="relative overflow-hidden"
               style={{ y: parallaxY1 }}
@@ -237,208 +185,77 @@ const AboutStrip: React.FC<AboutStripProps> = ({
             </motion.div>
           </div>
 
-          {/* Descriptive text */}
+          {/* Artist Story & CTA */}
           <motion.div
-            className="md:col-span-5 pl-0 md:pl-4"
+            className="pl-0 md:pl-8 lg:pl-12 flex flex-col justify-center"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: imageInView ? 1 : 0, x: imageInView ? 0 : 20 }}
             transition={{ duration: 1, delay: 0.6, ease: LUXURY_EASING }}
             style={{ y: parallaxY2 }}
           >
-            <div className="py-6 pr-4">
-              <motion.h3
-                className="font-alice text-elegant-mocha/90 text-2xl sm:text-3xl tracking-[0.2em] uppercase mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: imageInView ? 1 : 0,
-                  y: imageInView ? 0 : 20,
-                }}
-                transition={{ duration: 0.8, delay: 0.8, ease: LUXURY_EASING }}
-              >
-                The Artist
-              </motion.h3>
-
-              <motion.div
-                className="w-10 h-[0.25px] bg-elegant-mocha/30 mb-8"
-                initial={{ width: 0 }}
-                animate={{ width: imageInView ? 40 : 0 }}
-                transition={{ duration: 1, delay: 1, ease: LUXURY_EASING }}
-              />
-
-              <motion.p
-                className="font-alta text-elegant-mocha/70 tracking-wide leading-relaxed text-sm"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: imageInView ? 1 : 0 }}
-                transition={{ duration: 1, delay: 1.2, ease: LUXURY_EASING }}
-              >
-                After perfecting her craft across Europe&apos;s elite beauty
-                institutions, {founderName} established a new standard in beauty
-                artistry. Each precise movement reflects years of dedicated
-                expertise.
-              </motion.p>
-
-              <motion.div
-                className="w-6 h-[0.25px] bg-elegant-mocha/30 mt-8 ml-auto"
-                initial={{ width: 0 }}
-                animate={{ width: imageInView ? 24 : 0 }}
-                transition={{ duration: 0.8, delay: 1.4, ease: LUXURY_EASING }}
-              />
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* ==================== SECTION 3: PHILOSOPHY QUOTE ==================== */}
-      <motion.section
-        ref={quoteRef}
-        className="h-screen flex items-center justify-center px-5 sm:px-6 bg-light-cream relative"
-      >
-        {/* Simplified design - removed grid lines for cleaner Chanel-esque aesthetic */}
-
-        <div className="max-w-2xl mx-auto relative z-10">
-          {/* Quote display */}
-          <motion.div className="text-center px-6" style={{ y: parallaxY3 }}>
-            <motion.div className="w-full text-center">
-              <motion.p
-                className="font-alta text-elegant-mocha/60 text-xs tracking-[0.4em] uppercase mb-16 text-center inline-block"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{
-                  opacity: quoteInView ? 1 : 0,
-                  y: quoteInView ? 0 : 10,
-                }}
-                transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASING }}
-              >
-                Philosophy
-              </motion.p>
+            {/* Section label */}
+            <motion.div
+              className="mb-8 md:mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: imageInView ? 1 : 0,
+                y: imageInView ? 0 : 20,
+              }}
+              transition={{ duration: 0.8, delay: 0.8, ease: LUXURY_EASING }}
+            >
+              <p className="font-alta text-elegant-mocha/60 text-xs tracking-[0.4em] uppercase mb-4">
+                Artistry
+              </p>
+              <div className="w-12 h-[0.5px] bg-elegant-mocha/25"></div>
             </motion.div>
 
-            {/* Quote with refined minimal styling - Chanel-inspired simplicity */}
-            <div className="relative">
-              <motion.div
-                className="w-16 h-[0.25px] bg-elegant-mocha/30 mx-auto mb-10"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: quoteInView ? 1 : 0 }}
-                transition={{ duration: 0.9, delay: 0.6, ease: LUXURY_EASING }}
-              />
-
-              <motion.blockquote
-                className="font-alice text-2xl sm:text-3xl md:text-4xl text-elegant-mocha/90 leading-relaxed tracking-wide italic"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: quoteInView ? 1 : 0 }}
-                transition={{ duration: 0.7, delay: 0.3, ease: LUXURY_EASING }}
-              >
-                {quote}
-              </motion.blockquote>
-
-              <motion.div
-                className="w-10 h-[0.25px] bg-elegant-mocha/30 mx-auto mt-10"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: quoteInView ? 1 : 0 }}
-                transition={{ duration: 0.9, delay: 1.1, ease: LUXURY_EASING }}
-              />
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* ==================== SECTION 4: FOUNDER STORY ==================== */}
-      <motion.section
-        ref={storyRef}
-        className="min-h-screen flex items-center justify-center px-5 sm:px-6 py-16 bg-light-cream"
-      >
-        <div className="max-w-3xl mx-auto">
-          <motion.div
-            className="mb-10 inline-block"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: storyInView ? 1 : 0, y: storyInView ? 0 : 20 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASING }}
-          >
-            <h3 className="font-alice text-xl sm:text-2xl md:text-3xl tracking-[0.3em] text-elegant-mocha uppercase">
-              Vision
-            </h3>
-            <div className="w-12 h-[0.25px] bg-elegant-mocha/30 mt-4"></div>
-          </motion.div>
-
-          {/* Paragraphs with staggered reveal */}
-          <motion.div
-            className="font-alta text-elegant-mocha/70 space-y-6 mt-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: storyInView ? 1 : 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: LUXURY_EASING }}
-          >
-            {paragraphs.map((paragraph, index) => (
-              <motion.p
-                key={index}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{
-                  opacity: storyInView ? 1 : 0,
-                  y: storyInView ? 0 : 15,
-                }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.4 + index * 0.2,
-                  ease: LUXURY_EASING,
-                }}
-                className="leading-relaxed tracking-wide text-base md:text-lg"
-              >
-                {paragraph}
-              </motion.p>
-            ))}
-          </motion.div>
-
-          {/* Signature */}
-          <motion.div
-            className="mt-16 text-right"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: storyInView ? 1 : 0 }}
-            transition={{ duration: 0.7, delay: 0.8, ease: LUXURY_EASING }}
-          >
-            <motion.svg
-              width="180"
-              height="50"
-              viewBox="0 0 180 60"
-              className="ml-auto text-elegant-mocha/70"
+            {/* Origin Story - Natural narrative format */}
+            <motion.div
+              className="space-y-6 mb-10 md:mb-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: imageInView ? 1 : 0 }}
+              transition={{ duration: 1, delay: 1, ease: LUXURY_EASING }}
             >
-              {/* Animated signature */}
-              <motion.path
-                d="M10,40 C20,20 40,10 60,30 C80,50 100,20 120,30 C140,40 160,20 170,30"
-                stroke="currentColor"
-                fill="none"
-                strokeWidth="1.5"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{
-                  pathLength: storyInView ? 1 : 0,
-                  opacity: storyInView ? 0.8 : 0,
-                }}
-                transition={{
-                  duration: 2.5,
-                  ease: LUXURY_EASING,
-                  delay: 1.0,
-                }}
-              />
-            </motion.svg>
-            <p className="font-alice text-elegant-mocha/80 mt-3 tracking-[0.1em] text-sm text-right">
-              {founderName}
-            </p>
-          </motion.div>
+              <p className="font-alice text-elegant-mocha text-base md:text-lg leading-relaxed tracking-wide">
+                After a decade perfecting microblading techniques across Europe&apos;s
+                leading academies, Iggy founded FaceFrame Beauty in 2018 with a
+                single mission: to prove that semi-permanent makeup can enhance
+                rather than alter.
+              </p>
 
-          {/* Standardized Booking CTA */}
-          <motion.div
-            className="mt-12 text-center mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: storyInView ? 1 : 0, y: storyInView ? 0 : 20 }}
-            transition={{ duration: 0.7, delay: 1.2, ease: LUXURY_EASING }}
-          >
-            <LuxuryShadcnButton
-              href="/booking"
-              text="BOOK YOUR EXPERIENCE"
-              luxuryVariant="elegant"
-              luxuryTheme="dark"
-              luxurySize="large"
+              <p className="font-alice text-elegant-mocha text-base md:text-lg leading-relaxed tracking-wide">
+                Our clients describe the same feeling: waking up and recognizing
+                themselves in the mirror—just more rested, more defined, more confident.
+              </p>
+            </motion.div>
+
+            {/* Decorative separator */}
+            <motion.div
+              className="w-20 h-[0.5px] bg-elegant-mocha/20 mb-8 md:mb-10"
+              initial={{ width: 0 }}
+              animate={{ width: imageInView ? 80 : 0 }}
+              transition={{ duration: 1.2, delay: 1.3, ease: LUXURY_EASING }}
             />
+
+            {/* CTA Button */}
+            <motion.div
+              className="flex justify-center"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: imageInView ? 1 : 0, y: imageInView ? 0 : 15 }}
+              transition={{ duration: 0.8, delay: 1.5, ease: LUXURY_EASING }}
+            >
+              <LuxuryShadcnButton
+                href="/booking"
+                text="BOOK YOUR CONSULTATION"
+                luxuryVariant="elegant"
+                luxuryTheme="dark"
+                luxurySize="large"
+              />
+            </motion.div>
           </motion.div>
         </div>
       </motion.section>
+
     </div>
   );
 };
