@@ -25,7 +25,7 @@ export const FEATURED_CATEGORIES: ServiceCategory[] = [
     title: "Semi-Permanent Makeup",
     description:
       "Precision techniques that enhance your natural beauty with lasting elegance",
-    imageUrl: "/images/gallery/image1.webp",
+    imageUrl: "/images/gallery/services-preview/semi-permanent.webp",
     featured: "Signature Brows",
     exclusivity: "Custom-developed technique",
     result: "Natural, elegant definition",
@@ -35,7 +35,7 @@ export const FEATURED_CATEGORIES: ServiceCategory[] = [
     title: "Lashes & Brows",
     description:
       "Expert enhancements that define your features with subtle sophistication",
-    imageUrl: "/images/gallery/image4.webp",
+    imageUrl: "/images/gallery/services-preview/lashes-brows.webp",
     featured: "Volume Lashes",
     exclusivity: "Premium application method",
     result: "Striking yet natural effect",
@@ -45,7 +45,7 @@ export const FEATURED_CATEGORIES: ServiceCategory[] = [
     title: "Luxury Facials",
     description:
       "Transformative treatments that reveal your skin's natural radiance",
-    imageUrl: "/images/gallery/image16.webp",
+    imageUrl: "/images/gallery/services-preview/facials.webp",
     featured: "Million Dollar Facial",
     exclusivity: "Curated premium experience",
     result: "Radiant transformation",
