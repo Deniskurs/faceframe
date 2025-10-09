@@ -135,17 +135,21 @@ export default function LuxuryClientVoices({
                       >
                         {/* Testimonial Content - Fixed width for consistent alignment */}
                         <div className="w-full max-w-xl mx-auto flex flex-col items-center">
-                          {/* Rating Display - Minimal refined aesthetic */}
-                          <div className="flex justify-center mb-12 space-x-3">
+                          {/* Rating Display - Elegant star rating */}
+                          <div className="flex justify-center mb-12 space-x-1.5">
                             {[...Array(5)].map((_, index) => (
-                              <div
+                              <svg
                                 key={index}
-                                className={`w-[2px] h-6 ${
+                                className={`w-5 h-5 transition-colors duration-300 ${
                                   index < (testimonial.rating || 5)
-                                    ? "bg-elegant-mocha/30"
-                                    : "bg-elegant-mocha/10"
+                                    ? "text-elegant-mocha/30 fill-elegant-mocha/30"
+                                    : "text-elegant-mocha/10 fill-elegant-mocha/10"
                                 }`}
-                              />
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                              </svg>
                             ))}
                           </div>
 

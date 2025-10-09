@@ -12,8 +12,8 @@ interface AboutStripProps {
   founderImage?: string;
   founderName?: string;
   quote?: string;
-  paragraphs?: string[];
   subtitle?: string;
+  paragraphs?: string[];
 }
 
 const AboutStrip: React.FC<AboutStripProps> = ({
@@ -23,8 +23,8 @@ const AboutStrip: React.FC<AboutStripProps> = ({
   quote = "Beauty is not about perfection. It's about enhancing your natural features with precision and care.",
   subtitle = "FOUNDER & CREATIVE DIRECTOR",
   paragraphs = [
-    "After training with elite artists across Europe and perfecting her craft for over a decade, Iggy established FaceFrame Beauty with a singular vision: to create a sanctuary where precision meets luxury.",
-    "Each treatment at FaceFrame Beauty is approached with meticulous attention to detail, ensuring that every client leaves with results that enhance their natural beauty rather than masking it.",
+    "After a decade perfecting microblading techniques across Europe's leading academies, Iggy founded FaceFrame Beauty in 2018 with a single mission: to prove that semi-permanent makeup can enhance rather than alter.",
+    "Our clients describe the same feeling: waking up and recognizing themselves in the mirror—just more rested, more defined, more confident.",
   ],
 }) => {
   // Panel references with intersection observers
@@ -216,17 +216,14 @@ const AboutStrip: React.FC<AboutStripProps> = ({
               animate={{ opacity: imageInView ? 1 : 0 }}
               transition={{ duration: 1, delay: 1, ease: LUXURY_EASING }}
             >
-              <p className="font-alice text-elegant-mocha text-base md:text-lg leading-relaxed tracking-wide">
-                After a decade perfecting microblading techniques across Europe&apos;s
-                leading academies, Iggy founded FaceFrame Beauty in 2018 with a
-                single mission: to prove that semi-permanent makeup can enhance
-                rather than alter.
-              </p>
-
-              <p className="font-alice text-elegant-mocha text-base md:text-lg leading-relaxed tracking-wide">
-                Our clients describe the same feeling: waking up and recognizing
-                themselves in the mirror—just more rested, more defined, more confident.
-              </p>
+              {paragraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="font-alice text-elegant-mocha text-base md:text-lg leading-relaxed tracking-wide"
+                >
+                  {paragraph}
+                </p>
+              ))}
             </motion.div>
 
             {/* Decorative separator */}

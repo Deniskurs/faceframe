@@ -3,6 +3,12 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Loader2 } from "lucide-react";
 
 export const AskQuestionSection: React.FC = () => {
   const [question, setQuestion] = useState("");
@@ -165,7 +171,7 @@ export const AskQuestionSection: React.FC = () => {
 
             <div className="h-[1px] w-16 bg-elegant-mocha/30 mx-auto mb-6" />
 
-            <p className="font-alta text-elegant-mocha/80 leading-relaxed">
+            <p className="font-alta text-elegant-mocha/80 leading-relaxed font-medium">
               Ask your own question and we&apos;ll do our best to answer it
               instantly.
             </p>
@@ -180,11 +186,11 @@ export const AskQuestionSection: React.FC = () => {
             className="space-y-6"
           >
             <div className="relative">
-              <textarea
+              <Textarea
                 value={question}
                 onChange={handleInputChange}
                 placeholder="Type your beauty question here..."
-                className="w-full min-h-[120px] p-4 rounded-sm border border-elegant-mocha/20 bg-white/80 backdrop-blur-sm font-alta text-elegant-mocha placeholder:text-elegant-mocha/50 focus:outline-none focus:ring-2 focus:ring-elegant-mocha/20 focus:border-elegant-mocha/40 transition-all duration-300 resize-none"
+                className="min-h-[120px] font-alta text-elegant-mocha placeholder:text-elegant-mocha/50 border-elegant-mocha/20 bg-white/80 backdrop-blur-sm focus-visible:ring-elegant-mocha/20 focus-visible:border-elegant-mocha/40 resize-none"
                 disabled={
                   loading || (questionsUsed >= 3 && cooldownRemaining > 0)
                 }
@@ -200,15 +206,15 @@ export const AskQuestionSection: React.FC = () => {
 
             {/* Rate limiting info */}
             {questionsUsed > 0 && (
-              <div className="text-center">
-                <p className="text-sm font-alta text-elegant-mocha/60">
+              <div className="flex justify-center gap-2 flex-wrap">
+                <Badge variant="ghost" className="font-alta">
                   Questions used: {questionsUsed}/3
-                  {cooldownRemaining > 0 && (
-                    <span className="block mt-1">
-                      Next question in: {formatTime(cooldownRemaining)}
-                    </span>
-                  )}
-                </p>
+                </Badge>
+                {cooldownRemaining > 0 && (
+                  <Badge variant="luxury" className="font-alta">
+                    Next question in: {formatTime(cooldownRemaining)}
+                  </Badge>
+                )}
               </div>
             )}
 
@@ -217,54 +223,32 @@ export const AskQuestionSection: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-4 bg-red-50 border border-red-200 rounded-sm"
               >
-                <p className="text-red-700 font-alta text-sm">{error}</p>
+                <Alert variant="destructive">
+                  <AlertDescription className="font-alta font-medium">
+                    {error}
+                  </AlertDescription>
+                </Alert>
               </motion.div>
             )}
 
             {/* Submit button */}
             <div className="text-center">
-              <button
+              <Button
                 type="submit"
                 disabled={!isFormValid}
-                className={`
-                  px-8 py-3 font-alice text-sm uppercase tracking-[0.2em] border transition-all duration-300
-                  ${
-                    isFormValid
-                      ? "bg-elegant-mocha text-white border-elegant-mocha hover:bg-elegant-mocha/90 hover:scale-105"
-                      : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                  }
-                `}
+                size="lg"
+                className="font-alice uppercase tracking-[0.2em] bg-elegant-mocha hover:bg-elegant-mocha/90 text-white border-0"
               >
                 {loading ? (
-                  <span className="flex items-center justify-center">
-                    <svg
-                      className="animate-spin -ml-1 mr-3 h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Getting Answer...
-                  </span>
+                  </>
                 ) : (
                   "Get Answer"
                 )}
-              </button>
+              </Button>
             </div>
           </motion.form>
 
@@ -274,14 +258,19 @@ export const AskQuestionSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: LUXURY_EASING }}
-              className="mt-8 p-6 bg-white/60 backdrop-blur-sm border border-elegant-mocha/10 rounded-sm"
             >
-              <h3 className="font-alice text-lg text-elegant-mocha uppercase tracking-[0.1em] mb-4">
-                Answer:
-              </h3>
-              <p className="font-alta text-elegant-mocha/80 leading-relaxed">
-                {answer}
-              </p>
+              <Card className="mt-8 bg-white/60 backdrop-blur-sm border-elegant-mocha/10">
+                <CardHeader>
+                  <CardTitle className="font-alice text-lg text-elegant-mocha uppercase tracking-[0.1em]">
+                    Answer:
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="font-alta text-elegant-mocha/80 leading-relaxed font-medium">
+                    {answer}
+                  </p>
+                </CardContent>
+              </Card>
             </motion.div>
           )}
         </div>

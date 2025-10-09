@@ -108,7 +108,7 @@ Do **not** refer to yourself as an AI or assistant. You are IGGY — a passionat
 Answer the following question:`;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-5-nano-2025-08-07",
       messages: [
         {
           role: "system",
