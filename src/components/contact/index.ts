@@ -1,5 +1,12 @@
-export { default as ContactHero } from "./ContactHero";
-export { default as ContactIntro } from "./ContactIntro";
-export { default as ContactHub } from "./ContactHub";
-export { default as StudioLocations } from "./StudioLocations";
-export { default as ContactMethods } from "./ContactMethods";
+/**
+ * Contact Components - Barrel Export
+ * Central export point for all contact page components
+ */
+
+export { ContactHero } from "./ContactHero";
+export { ContactMethodsGrid } from "./ContactMethodsGrid";
+export { ContactForm } from "./ContactForm";
+export { StudioTabs } from "./StudioTabs";
+export { ProcessTimeline } from "./ProcessTimeline";
+export { ContactFAQ } from "./ContactFAQ";
+export { SocialConnect } from "./SocialConnect";
