@@ -145,7 +145,7 @@ const Hero = () => {
         className="absolute top-12 left-12 hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, delay: 0.8, ease: LUXURY_EASING }}
+        transition={{ duration: 1.5, delay: 0.3, ease: LUXURY_EASING }}
       >
         <div className="w-12 h-[0.5px] bg-white/30"></div>
         <div className="w-[0.5px] h-12 bg-white/30"></div>
@@ -154,7 +154,7 @@ const Hero = () => {
         className="absolute bottom-12 right-12 hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, delay: 1.0, ease: LUXURY_EASING }}
+        transition={{ duration: 1.5, delay: 0.4, ease: LUXURY_EASING }}
       >
         <div className="w-12 h-[0.5px] bg-white/30 ml-auto"></div>
         <div className="w-[0.5px] h-12 bg-white/30 ml-auto"></div>
@@ -277,7 +277,7 @@ const Hero = () => {
               className="h-[0.5px] w-20 bg-soft-blush/70 mx-auto mt-12 mb-8"
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: 80, opacity: 0.7 }}
-              transition={{ duration: 1.2, delay: 1.6, ease: LUXURY_EASING }}
+              transition={{ duration: 1.2, delay: 0.8, ease: LUXURY_EASING }}
             />
 
             {/* Subtitle with Chanel-like controlled width */}
@@ -340,30 +340,11 @@ const Hero = () => {
                 }}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2.2, ease: LUXURY_EASING }}
+                transition={{ duration: 0.8, delay: 1.2, ease: LUXURY_EASING }}
               >
                 Expert artistry for lasting natural beauty
               </motion.p>
 
-              {/* Credential line - location and artist */}
-              <motion.p
-                className="text-center text-white/60 font-alta mt-4 flex items-center justify-center gap-2"
-                style={{
-                  fontSize: "clamp(0.65rem, 0.9vw, 0.8rem)",
-                  letterSpacing: "0.2em",
-                  fontWeight: 300,
-                  textShadow: "0 1px 2px rgba(0,0,0,0.4)",
-                  WebkitFontSmoothing: "antialiased",
-                  MozOsxFontSmoothing: "grayscale",
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
-                transition={{ duration: 1, delay: 2.5, ease: LUXURY_EASING }}
-              >
-                <span>LONDON</span>
-                <span className="opacity-40">·</span>
-                <span>I G G Y</span>
-              </motion.p>
             </div>
 
             {/* Dual Booking Path CTA Buttons with golden ratio spacing */}
@@ -371,7 +352,7 @@ const Hero = () => {
               className="mt-16 flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8 w-full max-w-2xl mx-auto px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 2.7, ease: LUXURY_EASING }}
+              transition={{ duration: 0.8, delay: 1.0, ease: LUXURY_EASING }}
             >
               <div className="w-full lg:w-auto">
                 <LuxuryShadcnButton
@@ -381,6 +362,7 @@ const Hero = () => {
                   luxuryTheme="transparent"
                   luxurySize="large"
                   className="w-full lg:w-auto min-w-[200px] justify-center"
+                  enableMobilePatternInterrupt={true}
                 />
               </div>
               <div className="w-full lg:w-auto">

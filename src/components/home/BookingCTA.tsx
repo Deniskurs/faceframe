@@ -23,26 +23,11 @@ interface BookingCTAProps {
 const BookingCTA = ({
   backgroundImage = "/images/gallery/image14.webp",
   title = "BOOK YOUR APPOINTMENT",
-  subtitle = "Limited appointments available. Join our exclusive clientele to experience precision beauty artistry.",
+  subtitle = "Limited appointments available.",
   // buttonText = "SCHEDULE NOW",
   // buttonLink = "/booking",
   className = "",
 }: BookingCTAProps) => {
-  // Refined, minimal trust indicators with CHANEL-inspired aesthetics
-  const trustItems = [
-    {
-      id: "gdpr",
-      text: "PRIVACY ASSURED",
-    },
-    {
-      id: "premium",
-      text: "PREMIUM EXPERIENCE",
-    },
-    {
-      id: "rating",
-      text: "EXCEPTIONAL RESULTS",
-    },
-  ];
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -57,7 +42,7 @@ const BookingCTA = ({
     <FadeInSection intensity="subtle">
       <motion.section
         ref={sectionRef}
-        className={`relative py-28 md:py-36 overflow-hidden ${className}`}
+        className={`relative py-32 md:py-40 overflow-hidden ${className}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: LUXURY_EASING }}
@@ -82,12 +67,21 @@ const BookingCTA = ({
         </motion.div>
 
         {/* CHANEL-inspired decorative elements */}
-        <div className="absolute top-12 left-12 w-[1px] h-20 bg-white/20 hidden md:block"></div>
-        <div className="absolute top-12 left-12 w-20 h-[1px] bg-white/20 hidden md:block"></div>
-        <div className="absolute bottom-12 right-12 w-[1px] h-20 bg-white/20 hidden md:block"></div>
-        <div className="absolute bottom-12 right-12 w-20 h-[1px] bg-white/20 hidden md:block"></div>
+        <div className="absolute top-12 left-12 w-[0.5px] h-12 bg-white/30 hidden md:block"></div>
+        <div className="absolute top-12 left-12 w-12 h-[0.5px] bg-white/30 hidden md:block"></div>
+        <div className="absolute bottom-12 right-12 w-[0.5px] h-12 bg-white/30 hidden md:block"></div>
+        <div className="absolute bottom-12 right-12 w-12 h-[0.5px] bg-white/30 hidden md:block"></div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-10 text-center">
+          {/* Top decorative separator - editorial framing */}
+          <motion.div
+            className="w-24 h-[0.5px] bg-white/30 mx-auto mb-16"
+            initial={{ width: 0, opacity: 0 }}
+            whileInView={{ width: 96, opacity: 0.3 }}
+            transition={{ duration: 1.2, ease: LUXURY_EASING }}
+            viewport={{ once: true }}
+          />
+
           {/* CHANEL-style heading with refined typography */}
           <motion.div
             className="mb-12 inline-block"
@@ -96,15 +90,15 @@ const BookingCTA = ({
             transition={{ duration: 0.8, ease: LUXURY_EASING }}
             viewport={{ once: true }}
           >
-            <h2 className="font-alice text-2xl md:text-3xl tracking-[0.25em] text-white uppercase">
+            <h2 className="font-alice text-3xl md:text-4xl tracking-[0.2em] text-white uppercase">
               {title}
             </h2>
-            <div className="h-[1px] w-12 bg-white/40 mx-auto mt-6"></div>
+            <div className="h-[0.5px] w-16 bg-white/40 mx-auto mt-8"></div>
           </motion.div>
 
           {/* Refined subtitle with proper tracking */}
           <motion.p
-            className="font-alta text-base md:text-lg text-white/80 mb-16 max-w-xl mx-auto tracking-wide leading-relaxed"
+            className="font-alta text-base md:text-lg text-white/75 mb-[3.25rem] max-w-lg mx-auto tracking-wide leading-relaxed"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: LUXURY_EASING }}
@@ -115,55 +109,43 @@ const BookingCTA = ({
 
           {/* Dual Booking Path Options */}
           <motion.div
-            className="mb-20 flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8 w-full max-w-2xl mx-auto px-4"
+            className="flex flex-col sm:flex-row justify-center items-center gap-5 sm:gap-6 w-full max-w-md mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3, ease: LUXURY_EASING }}
             viewport={standardViewport}
           >
-            <div className="w-full lg:w-auto">
+            <div className="w-full sm:w-auto">
               <LuxuryShadcnButton
                 href="/booking"
                 text="BOOK NOW"
                 luxuryVariant="elegant"
                 luxuryTheme="transparent"
                 luxurySize="large"
-                className="w-full lg:w-auto min-w-[200px] justify-center"
+                className="w-full sm:w-auto min-w-[190px]"
+                enableMobilePatternInterrupt={true}
               />
             </div>
-            <div className="w-full lg:w-auto">
+            <div className="w-full sm:w-auto">
               <LuxuryShadcnButton
                 href="/services"
                 text="VIEW SERVICES"
                 luxuryVariant="outline"
                 luxuryTheme="transparent"
                 luxurySize="large"
-                className="w-full lg:w-auto min-w-[200px] justify-center"
+                className="w-full sm:w-auto min-w-[190px]"
               />
             </div>
           </motion.div>
 
-          {/* Minimal trust indicators with refined styling */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-20">
-            {trustItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.4 + index * 0.1,
-                  ease: LUXURY_EASING,
-                }}
-                viewport={{ once: true }}
-              >
-                <div className="text-white/80 text-xs tracking-[0.2em]">
-                  {item.text}
-                </div>
-                <div className="h-[1px] w-full bg-white/20 mt-2"></div>
-              </motion.div>
-            ))}
-          </div>
+          {/* Bottom decorative separator - editorial framing */}
+          <motion.div
+            className="w-24 h-[0.5px] bg-white/30 mx-auto mt-16"
+            initial={{ width: 0, opacity: 0 }}
+            whileInView={{ width: 96, opacity: 0.3 }}
+            transition={{ duration: 1.2, delay: 0.3, ease: LUXURY_EASING }}
+            viewport={{ once: true }}
+          />
         </div>
       </motion.section>
     </FadeInSection>

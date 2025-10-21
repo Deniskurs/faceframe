@@ -45,13 +45,9 @@ const AboutStrip: React.FC<AboutStripProps> = ({
   const parallaxY2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const parallaxY3 = useTransform(scrollYProgress, [0, 1], [0, -20]);
 
-  // Show section gradually on page load
+  // Show section immediately when scrolled into view
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsRevealed(true);
-    }, 800);
-
-    return () => clearTimeout(timer);
+    setIsRevealed(true);
   }, []);
 
   return (
@@ -245,8 +241,9 @@ const AboutStrip: React.FC<AboutStripProps> = ({
                 href="/booking"
                 text="BOOK YOUR CONSULTATION"
                 luxuryVariant="elegant"
-                luxuryTheme="dark"
+                luxuryTheme="light"
                 luxurySize="large"
+                enableMobilePatternInterrupt={true}
               />
             </motion.div>
           </motion.div>

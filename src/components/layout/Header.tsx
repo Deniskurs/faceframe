@@ -347,24 +347,24 @@ const Header = () => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <span className="sr-only">Menu</span>
-          <div className="relative w-6 h-6 flex flex-col justify-center items-center transform transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]">
+          <div className="relative w-6 h-6 flex flex-col justify-center items-center transform transition-all duration-700 ease-luxury">
             {/* Enhanced hamburger lines with luxury transitions */}
             <span
-              className={`absolute h-[1px] w-6 transform transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${
+              className={`absolute h-[1px] w-6 transform transition-all duration-700 ease-luxury ${
                 isMobileMenuOpen
                   ? "rotate-45 translate-y-0 bg-elegant-mocha/90 w-5"
                   : "translate-y-[-5px] bg-current shadow-sm"
               }`}
             ></span>
             <span
-              className={`absolute h-[1px] w-4 transform transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${
+              className={`absolute h-[1px] w-4 transform transition-all duration-700 ease-luxury ${
                 isMobileMenuOpen
                   ? "opacity-0 translate-x-3 bg-elegant-mocha/90"
                   : "opacity-100 bg-current shadow-sm"
               }`}
             ></span>
             <span
-              className={`absolute h-[1px] w-6 transform transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${
+              className={`absolute h-[1px] w-6 transform transition-all duration-700 ease-luxury ${
                 isMobileMenuOpen
                   ? "-rotate-45 translate-y-0 bg-elegant-mocha/90 w-5"
                   : "translate-y-[5px] bg-current shadow-sm"
@@ -450,7 +450,7 @@ const Header = () => {
                   <LuxuryShadcnButton
                     href="/booking"
                     text="BOOK AN APPOINTMENT"
-                    luxuryVariant="outline"
+                    luxuryVariant="elegant"
                     luxuryTheme="light"
                     luxurySize="large"
                     className="min-w-[250px]"

@@ -1,36 +1,24 @@
 import Layout from "@/components/layout/Layout";
-import AboutHero from "@/components/about/AboutHero";
-import JourneySection from "@/components/about/JourneySection";
-import ExpertiseCredentials from "@/components/about/ExpertiseCredentials";
-import FaceFrameExperience from "@/components/about/FaceFrameExperience";
-import CoreValues from "@/components/about/CoreValues";
+import HeroPortrait from "@/components/about/HeroPortrait";
+import FounderStory from "@/components/about/FounderStory";
 import LuxuryClientVoices from "@/components/home/client-voices/LuxuryClientVoices";
-import AboutCTA from "@/components/about/AboutCTA";
+import PersonalInvitation from "@/components/about/PersonalInvitation";
 
 export default function AboutPage() {
   return (
     <Layout>
       <div className="min-h-screen">
-        {/* Intimate Hero introducing Iggy and FaceFrame Beauty */}
-        <AboutHero />
+        {/* Powerful single-image hero with minimal text */}
+        <HeroPortrait />
 
-        {/* The Journey - Origin, Training, Philosophy using Tabs */}
-        <JourneySection />
+        {/* Founder's story - 3 paragraphs, 1 image */}
+        <FounderStory />
 
-        {/* Expertise & Credentials with Hover Cards */}
-        <ExpertiseCredentials />
-
-        {/* The FaceFrame Experience with Studio Carousel */}
-        <FaceFrameExperience />
-
-        {/* Core Values using Accordion */}
-        <CoreValues />
-
-        {/* Client Voices - Reusing luxury component from home */}
+        {/* Client testimonials - reuse from home */}
         <LuxuryClientVoices hideTitle={false} />
 
-        {/* Final CTA - Book Consultation */}
-        <AboutCTA />
+        {/* Simple, personal CTA */}
+        <PersonalInvitation />
       </div>
     </Layout>
   );

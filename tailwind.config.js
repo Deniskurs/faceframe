@@ -85,6 +85,9 @@ module.exports = {
   		borderWidth: {
   			hairline: '0.5px'
   		},
+  		transitionTimingFunction: {
+  			luxury: 'cubic-bezier(0.19, 1, 0.22, 1)'
+  		},
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
   		},

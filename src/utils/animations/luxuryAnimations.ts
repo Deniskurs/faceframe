@@ -79,3 +79,27 @@ export const sequenceTimings = {
   content: 0.3,
   cta: 0.4,
 };
+
+// Accessibility: Reduced motion support (WCAG 2.1 compliance)
+export const shouldReduceMotion = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+};
+
+export const getAnimationDuration = (defaultDuration: number): number => {
+  return shouldReduceMotion() ? 0 : defaultDuration;
+};
+
+export const getAnimationDelay = (defaultDelay: number): number => {
+  return shouldReduceMotion() ? 0 : defaultDelay;
+};
+
+export const getAccessibleTransition = (
+  duration: number,
+  delay: number = 0,
+  ease: readonly number[] = LUXURY_EASING
+) => ({
+  duration: getAnimationDuration(duration),
+  delay: getAnimationDelay(delay),
+  ease,
+});

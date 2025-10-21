@@ -5,6 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import CursorEffect from "../shared/CursorEffect";
 import useSmoothScroll from "@/utils/animations/useSmoothScroll";
+import { Toaster } from "@/components/ui/toaster";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -38,6 +39,9 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="flex-grow pt-20">{children}</main>
 
       <Footer />
+
+      {/* Toast notifications */}
+      <Toaster />
     </div>
   );
 };

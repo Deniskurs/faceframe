@@ -5,7 +5,7 @@
  * A wrapper around shadcn's Button component with FaceFrame's CHANEL-inspired luxury styling
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -21,13 +21,13 @@ const LUXURY_VARIANTS = {
     light:
       "bg-light-cream text-elegant-mocha border-2 border-elegant-mocha/40 shadow-sm hover:bg-elegant-mocha hover:text-white",
     transparent:
-      "bg-white/15 backdrop-blur-sm text-white border border-white/40 hover:bg-white/25 hover:border-white/60 shadow-lg",
+      "bg-white/75 text-elegant-mocha border border-white/90 shadow-[0_8px_30px_rgba(0,0,0,0.35)] hover:bg-white/85 hover:border-white/95 hover:shadow-[0_12px_40px_rgba(0,0,0,0.45)]",
   },
   outline: {
     dark: "border border-white/30 text-white hover:bg-white/10 hover:border-white/50",
     light:
       "border border-elegant-mocha/30 text-elegant-mocha hover:bg-elegant-mocha hover:text-white",
-    transparent: "border border-white/40 text-white hover:bg-white/10 hover:border-white/60",
+    transparent: "border-2 border-white/80 text-white bg-black/40 hover:bg-white/15 hover:border-white/95",
   },
   text: {
     dark: "text-white hover:text-white/80 border-b border-white/30 hover:border-white",
@@ -55,6 +55,8 @@ export interface LuxuryShadcnButtonProps
   luxurySize?: keyof typeof LUXURY_SIZES;
   className?: string;
   asChild?: boolean;
+  enableMobilePatternInterrupt?: boolean;
+  isLoading?: boolean;
 }
 
 /**
@@ -68,11 +70,67 @@ export function LuxuryShadcnButton({
   luxurySize = "medium",
   className = "",
   asChild = false,
+  enableMobilePatternInterrupt = false,
+  isLoading = false,
   ...props
 }: LuxuryShadcnButtonProps) {
   // Track hover state for enhanced animations
   const [isHovered, setIsHovered] = useState(false);
   const lineAnimation = useAnimation();
+
+  // Mobile pattern interrupt state
+  const [isMobile, setIsMobile] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const glowAnimation = useAnimation();
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Mobile pattern interrupt animation logic
+  useEffect(() => {
+    if (!enableMobilePatternInterrupt || !isMobile || !isInView) {
+      return;
+    }
+
+    const maxInitialCycles = 1;
+
+    // Initial animation cycles when button enters view
+    const runInitialCycles = async () => {
+      for (let i = 0; i < maxInitialCycles; i++) {
+        await glowAnimation.start({
+          opacity: [0.2, 0.8, 0.2],
+          transition: {
+            duration: 2.8,
+            ease: LUXURY_EASING,
+          },
+        });
+      }
+    };
+
+    runInitialCycles();
+
+    // Periodic animation every 8 seconds after initial cycles
+    const periodicInterval = setInterval(() => {
+      glowAnimation.start({
+        opacity: [0.2, 0.8, 0.2],
+        transition: {
+          duration: 2.8,
+          ease: LUXURY_EASING,
+        },
+      });
+    }, 8000);
+
+    return () => clearInterval(periodicInterval);
+  }, [enableMobilePatternInterrupt, isMobile, isInView, glowAnimation]);
 
   // Animate the line on hover
   const handleHoverStart = () => {
@@ -95,7 +153,9 @@ export function LuxuryShadcnButton({
   const luxuryClasses = cn(
     LUXURY_VARIANTS[luxuryVariant][luxuryTheme],
     LUXURY_SIZES[luxurySize],
-    "font-alta tracking-[0.25em] uppercase relative overflow-hidden group whitespace-nowrap inline-flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
+    "font-alta tracking-[0.25em] uppercase relative overflow-hidden group whitespace-nowrap inline-flex items-center justify-center transition-all duration-700 ease-luxury",
+    "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-deep-bronze/50 focus-visible:outline-none",
+    "active:scale-[0.98] active:shadow-[0_4px_15px_rgba(0,0,0,0.25)]",
     className
   );
 
@@ -117,17 +177,24 @@ export function LuxuryShadcnButton({
     <>
       {/* Text with luxury backdrop for improved readability */}
       <motion.span
-        className="relative z-20"
+        className="relative z-20 flex items-center justify-center gap-2"
         animate={{
           letterSpacing: isHovered ? "0.28em" : "0.25em",
         }}
         transition={{ duration: 0.8, ease: LUXURY_EASING }}
       >
+        {isLoading && (
+          <motion.span
+            className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          />
+        )}
         <LuxuryTextBackdrop
           intensity={luxuryTheme === "dark" ? "light" : "medium"}
           isHeading={false}
         >
-          {text}
+          {isLoading ? "PROCESSING..." : text}
         </LuxuryTextBackdrop>
       </motion.span>
 
@@ -145,10 +212,10 @@ export function LuxuryShadcnButton({
       />
 
       {/* CHANEL-inspired corner accents */}
-      <div className="absolute top-0 left-0 w-[0.25px] h-0 bg-deep-bronze/40 group-hover:h-[8px] transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] z-30"></div>
-      <div className="absolute top-0 left-0 w-0 h-[0.25px] bg-deep-bronze/40 group-hover:w-[8px] transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] z-30"></div>
-      <div className="absolute bottom-0 right-0 w-[0.25px] h-0 bg-deep-bronze/40 group-hover:h-[8px] transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] z-30"></div>
-      <div className="absolute bottom-0 right-0 w-0 h-[0.25px] bg-deep-bronze/40 group-hover:w-[8px] transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] z-30"></div>
+      <div className="absolute top-0 left-0 w-[0.25px] h-0 bg-deep-bronze/40 group-hover:h-[8px] transition-all duration-700 ease-luxury z-30"></div>
+      <div className="absolute top-0 left-0 w-0 h-[0.25px] bg-deep-bronze/40 group-hover:w-[8px] transition-all duration-700 ease-luxury z-30"></div>
+      <div className="absolute bottom-0 right-0 w-[0.25px] h-0 bg-deep-bronze/40 group-hover:h-[8px] transition-all duration-700 ease-luxury z-30"></div>
+      <div className="absolute bottom-0 right-0 w-0 h-[0.25px] bg-deep-bronze/40 group-hover:w-[8px] transition-all duration-700 ease-luxury z-30"></div>
 
       {/* Bottom accent line animation */}
       <motion.div
@@ -159,35 +226,80 @@ export function LuxuryShadcnButton({
     </>
   );
 
-  if (href) {
-    return (
-      <motion.div
-        variants={buttonMotionVariants}
-        initial="initial"
-        whileHover="hover"
-        onHoverStart={handleHoverStart}
-        onHoverEnd={handleHoverEnd}
-        className="inline-block"
-      >
-        <Link href={href} className={luxuryClasses}>
-          {content}
-        </Link>
-      </motion.div>
-    );
-  }
-
-  return (
+  // Render the button wrapped with optional glow effect
+  const buttonElement = href ? (
     <motion.div
       variants={buttonMotionVariants}
       initial="initial"
       whileHover="hover"
       onHoverStart={handleHoverStart}
       onHoverEnd={handleHoverEnd}
-      className="inline-block"
+      className="inline-block relative"
     >
-      <Button className={luxuryClasses} asChild={asChild} {...props}>
+      <Link
+        href={href}
+        className={luxuryClasses}
+        onClick={(e) => {
+          if (isLoading) e.preventDefault();
+        }}
+        aria-disabled={isLoading}
+      >
+        {content}
+      </Link>
+    </motion.div>
+  ) : (
+    <motion.div
+      variants={buttonMotionVariants}
+      initial="initial"
+      whileHover="hover"
+      onHoverStart={handleHoverStart}
+      onHoverEnd={handleHoverEnd}
+      className="inline-block relative"
+    >
+      <Button className={luxuryClasses} asChild={asChild} disabled={isLoading} {...props}>
         {content}
       </Button>
+    </motion.div>
+  );
+
+  // Always render with wrapper to prevent hydration mismatch
+  // Control glow visibility via CSS and animation state
+  return (
+    <motion.div
+      className="relative inline-block"
+      onViewportEnter={
+        enableMobilePatternInterrupt ? () => setIsInView(true) : undefined
+      }
+      onViewportLeave={
+        enableMobilePatternInterrupt ? () => setIsInView(false) : undefined
+      }
+      viewport={enableMobilePatternInterrupt ? { once: false, amount: 0.5 } : undefined}
+      suppressHydrationWarning
+    >
+      {/* Mobile Pattern Interrupt - Border Glow Pulse */}
+      {/* Hidden on desktop (md:hidden) or when not enabled */}
+      <motion.div
+        className={`absolute inset-0 pointer-events-none rounded-lg ${
+          enableMobilePatternInterrupt ? "md:hidden" : "hidden"
+        }`}
+        style={{
+          boxShadow: `
+            0 0 30px 6px ${
+              luxuryTheme === "light"
+                ? "rgba(155, 118, 83, 0.7)" // deep-bronze
+                : "rgba(234, 172, 139, 0.7)" // soft-blush
+            },
+            0 0 50px 10px ${
+              luxuryTheme === "light"
+                ? "rgba(155, 118, 83, 0.4)" // deep-bronze
+                : "rgba(234, 172, 139, 0.4)" // soft-blush
+            }
+          `,
+        }}
+        initial={{ opacity: 0 }}
+        animate={glowAnimation}
+      />
+      {buttonElement}
     </motion.div>
   );
 }

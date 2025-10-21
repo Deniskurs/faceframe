@@ -262,7 +262,7 @@ const NotFound = () => {
                     className="font-alta text-elegant-mocha hover:text-deep-bronze transition-colors duration-500 text-sm tracking-[0.1em] uppercase relative group"
                   >
                     {link.label}
-                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-deep-bronze/60 group-hover:w-full transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]"></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-deep-bronze/60 group-hover:w-full transition-all duration-700 ease-luxury"></span>
                   </Link>
                 </motion.div>
               ))}

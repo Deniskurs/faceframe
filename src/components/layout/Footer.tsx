@@ -1,34 +1,138 @@
 import React from "react";
 import Link from "next/link";
-import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
+import { Separator } from "@/components/ui/separator";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-elegant-mocha text-white pt-16 pb-8">
-      <div className="luxury-container">
-        {/* Footer Top Section */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
-          {/* Logo & About */}
-          <div className="md:col-span-4">
-            <h3 className="font-alice text-2xl mb-4">FaceFrame Beauty</h3>
-            <p className="font-alta text-soft-blush mb-6">
-              London&apos;s premier destination for bespoke beauty
-              transformations. Specializing in luxury semi-permanent makeup,
-              lashes, brows and facial treatments.
-            </p>
-            {/* Social Links */}
-            <div className="flex space-x-4">
+    <footer className="bg-light-cream">
+      {/* Top Gradient Divider */}
+      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-soft-blush/40 to-transparent" />
+
+      <div className="luxury-container py-12 md:py-16">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-10 md:gap-16">
+          {/* Navigation Section */}
+          <div>
+            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-6">
+              Navigation
+            </h3>
+            <nav>
+              <ul className="space-y-3">
+                <li>
+                  <Link
+                    href="/"
+                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/about"
+                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/services"
+                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                  >
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/gallery"
+                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                  >
+                    Gallery
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                  >
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/booking"
+                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                  >
+                    Booking
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          {/* Vertical Divider - Desktop Only */}
+          <Separator
+            orientation="vertical"
+            className="hidden md:block absolute left-[calc(66.66%)] top-0 bottom-0 bg-soft-blush/30"
+            style={{ height: "100%", marginLeft: "-0.5px" }}
+          />
+
+          {/* Services Section */}
+          <div>
+            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-6">
+              Services
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/services#semi-permanent-makeup"
+                  className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                >
+                  Semi-Permanent Makeup
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services#lashes-brows"
+                  className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                >
+                  Lashes & Brows
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services#facials"
+                  className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                >
+                  Facials
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Horizontal Divider - Mobile Only (after Services) */}
+          <Separator
+            orientation="horizontal"
+            className="md:hidden bg-soft-blush/30"
+          />
+
+          {/* Social Section */}
+          <div>
+            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-6">
+              Follow Us
+            </h3>
+            <div className="flex md:flex-col gap-3">
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-soft-blush flex items-center justify-center transition-colors hover:bg-deep-bronze"
+                className="w-9 h-9 rounded-full border border-elegant-mocha/30 flex items-center justify-center text-elegant-mocha transition-all duration-700 hover:bg-deep-bronze/10 hover:border-deep-bronze"
                 aria-label="Instagram"
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-4 h-4"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -44,11 +148,11 @@ const Footer = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-soft-blush flex items-center justify-center transition-colors hover:bg-deep-bronze"
+                className="w-9 h-9 rounded-full border border-elegant-mocha/30 flex items-center justify-center text-elegant-mocha transition-all duration-700 hover:bg-deep-bronze/10 hover:border-deep-bronze"
                 aria-label="Facebook"
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-4 h-4"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -60,226 +164,33 @@ const Footer = () => {
                   />
                 </svg>
               </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-soft-blush flex items-center justify-center transition-colors hover:bg-deep-bronze"
-                aria-label="Twitter"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                </svg>
-              </a>
             </div>
           </div>
-
-          {/* Quick Links */}
-          <div className="md:col-span-2">
-            <h4 className="font-alice text-lg mb-5 text-soft-blush">
-              Quick Links
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/gallery"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  Gallery
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div className="md:col-span-3">
-            <h4 className="font-alice text-lg mb-5 text-soft-blush">
-              Services
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/services#semi-permanent-makeup"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  Semi-Permanent Makeup
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services#lashes-brows"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  Lashes & Brows
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services#facials"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  Facials
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services#waxing"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  Waxing
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div className="md:col-span-3">
-            <h4 className="font-alice text-lg mb-5 text-soft-blush">Contact</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <svg
-                  className="w-5 h-5 mt-1 mr-3 text-soft-blush"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                <span className="font-alta">123 Elegance Street, London</span>
-              </li>
-              <li className="flex items-start">
-                <svg
-                  className="w-5 h-5 mt-1 mr-3 text-soft-blush"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                <a
-                  href="mailto:info@faceframebeauty.com"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  info@faceframebeauty.com
-                </a>
-              </li>
-              <li className="flex items-start">
-                <svg
-                  className="w-5 h-5 mt-1 mr-3 text-soft-blush"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
-                <a
-                  href="tel:+442012345678"
-                  className="font-alta transition-colors hover:text-soft-blush"
-                >
-                  +44 20 1234 5678
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-deep-bronze opacity-30 mb-8" />
+        {/* Bottom Divider */}
+        <Separator className="my-10 md:my-12 bg-soft-blush/30" />
 
-        {/* Booking CTA */}
-        <div className="text-center mb-12">
-          <h4 className="font-alice text-xl mb-6 text-soft-blush">
-            Ready to Experience Luxury Beauty?
-          </h4>
-          <LuxuryShadcnButton
-            href="/booking"
-            text="BOOK YOUR APPOINTMENT"
-            luxuryVariant="elegant"
-            luxuryTheme="transparent"
-            luxurySize="large"
-          />
-        </div>
-
-        {/* Footer Bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="font-alta text-sm text-soft-blush mb-4 md:mb-0">
-            &copy; {currentYear} FaceFrame Beauty. All rights reserved.
-          </p>
-          <div className="flex space-x-6">
+        {/* Legal Footer */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-wrap justify-center md:justify-start items-center gap-4">
             <Link
               href="/privacy-policy"
-              className="font-alta text-sm text-soft-blush hover:text-white transition-colors"
+              className="font-alta text-xs tracking-[0.2em] text-muted-sand hover:text-elegant-mocha transition-colors duration-700"
             >
               Privacy Policy
             </Link>
+            <span className="text-muted-sand/50">•</span>
             <Link
               href="/terms-of-service"
-              className="font-alta text-sm text-soft-blush hover:text-white transition-colors"
+              className="font-alta text-xs tracking-[0.2em] text-muted-sand hover:text-elegant-mocha transition-colors duration-700"
             >
               Terms of Service
             </Link>
           </div>
+          <p className="font-alta text-xs tracking-[0.2em] text-muted-sand text-center md:text-right">
+            © {currentYear} FaceFrame Beauty. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

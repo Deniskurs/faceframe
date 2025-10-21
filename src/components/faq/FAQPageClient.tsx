@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
+import { Accordion } from "@/components/ui/accordion";
 import { FAQSection } from "./FAQSection";
 import { AskQuestionSection } from "./AskQuestionSection";
 import { FAQ } from "@/types";
@@ -65,14 +66,21 @@ export const FAQPageClient: React.FC<FAQPageClientProps> = ({
       <section className="py-20 md:py-28 bg-white">
         <div className="luxury-container">
           <div className="max-w-4xl mx-auto">
-            {orderedCategories.map((category, index) => (
-              <FAQSection
-                key={category}
-                title={category}
-                faqs={faqsByCategory[category]}
-                sectionIndex={index}
-              />
-            ))}
+            <Accordion
+              type="single"
+              collapsible
+              className="space-y-6"
+            >
+              {orderedCategories.map((category, index) => (
+                <FAQSection
+                  key={category}
+                  title={category}
+                  faqs={faqsByCategory[category]}
+                  sectionIndex={index}
+                  categoryValue={category}
+                />
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>

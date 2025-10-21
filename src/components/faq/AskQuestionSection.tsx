@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { Loader2 } from "lucide-react";
+import { Label } from "@/components/ui/label";
 
 export const AskQuestionSection: React.FC = () => {
   const [question, setQuestion] = useState("");
@@ -185,22 +185,30 @@ export const AskQuestionSection: React.FC = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <div className="relative">
-              <Textarea
-                value={question}
-                onChange={handleInputChange}
-                placeholder="Type your beauty question here..."
-                className="min-h-[120px] font-alta text-elegant-mocha placeholder:text-elegant-mocha/50 border-elegant-mocha/20 bg-white/80 backdrop-blur-sm focus-visible:ring-elegant-mocha/20 focus-visible:border-elegant-mocha/40 resize-none"
-                disabled={
-                  loading || (questionsUsed >= 3 && cooldownRemaining > 0)
-                }
-                aria-label="Ask your beauty question"
-                rows={4}
-              />
+            <div className="space-y-3">
+              <Label
+                htmlFor="question"
+                className="font-alice text-sm text-elegant-mocha tracking-[0.1em] uppercase"
+              >
+                Your Question
+              </Label>
+              <div className="relative">
+                <Textarea
+                  id="question"
+                  value={question}
+                  onChange={handleInputChange}
+                  placeholder="Type your beauty question here..."
+                  className="min-h-[120px] font-alice text-base leading-relaxed tracking-wide text-elegant-mocha placeholder:text-elegant-mocha/50 border-elegant-mocha/20 bg-white/80 backdrop-blur-sm focus-visible:ring-elegant-mocha/20 focus-visible:border-elegant-mocha/40 resize-none"
+                  disabled={
+                    loading || (questionsUsed >= 3 && cooldownRemaining > 0)
+                  }
+                  rows={4}
+                />
 
-              {/* Character counter */}
-              <div className="absolute bottom-3 right-3 text-xs font-alta text-elegant-mocha/60">
-                {charCount}/{maxChars}
+                {/* Character counter */}
+                <div className="absolute bottom-3 right-3 text-xs font-alta text-elegant-mocha/60">
+                  {charCount}/{maxChars}
+                </div>
               </div>
             </div>
 
@@ -234,21 +242,16 @@ export const AskQuestionSection: React.FC = () => {
 
             {/* Submit button */}
             <div className="text-center">
-              <Button
+              <LuxuryShadcnButton
                 type="submit"
+                text="GET ANSWER"
+                luxuryVariant="elegant"
+                luxuryTheme="light"
+                luxurySize="medium"
+                className="min-w-[200px] justify-center"
                 disabled={!isFormValid}
-                size="lg"
-                className="font-alice uppercase tracking-[0.2em] bg-elegant-mocha hover:bg-elegant-mocha/90 text-white border-0"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Getting Answer...
-                  </>
-                ) : (
-                  "Get Answer"
-                )}
-              </Button>
+                isLoading={loading}
+              />
             </div>
           </motion.form>
 
@@ -259,14 +262,15 @@ export const AskQuestionSection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: LUXURY_EASING }}
             >
-              <Card className="mt-8 bg-white/60 backdrop-blur-sm border-elegant-mocha/10">
-                <CardHeader>
-                  <CardTitle className="font-alice text-lg text-elegant-mocha uppercase tracking-[0.1em]">
-                    Answer:
+              <Card className="mt-8 bg-white/90 backdrop-blur-sm border-elegant-mocha/20 shadow-md">
+                <CardHeader className="pb-4">
+                  <CardTitle className="font-alice text-base sm:text-lg text-elegant-mocha uppercase tracking-[0.12em]">
+                    Answer from IGGY
                   </CardTitle>
+                  <div className="h-[1px] w-12 bg-elegant-mocha/20 mt-3" />
                 </CardHeader>
-                <CardContent>
-                  <p className="font-alta text-elegant-mocha/80 leading-relaxed font-medium">
+                <CardContent className="pt-2">
+                  <p className="font-alice text-base md:text-lg text-elegant-mocha leading-relaxed tracking-wide">
                     {answer}
                   </p>
                 </CardContent>
