@@ -1,12 +1,10 @@
 /**
  * Contact Components - Barrel Export
  * Central export point for all contact page components
+ * Streamlined exports for the redesigned contact page
  */
 
 export { ContactHero } from "./ContactHero";
-export { ContactMethodsGrid } from "./ContactMethodsGrid";
-export { ContactForm } from "./ContactForm";
-export { StudioTabs } from "./StudioTabs";
-export { ProcessTimeline } from "./ProcessTimeline";
+export { ContactFormWithProcess } from "./ContactFormWithProcess";
+export { StudioComparison } from "./StudioComparison";
 export { ContactFAQ } from "./ContactFAQ";
-export { SocialConnect } from "./SocialConnect";

@@ -2,11 +2,13 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { PageHero } from "@/components/shared/PageHero";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { Accordion } from "@/components/ui/accordion";
 import { FAQSection } from "./FAQSection";
 import { AskQuestionSection } from "./AskQuestionSection";
 import { FAQ } from "@/types";
+import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 
 interface FAQPageClientProps {
   orderedCategories: string[];
@@ -17,50 +19,66 @@ export const FAQPageClient: React.FC<FAQPageClientProps> = ({
   orderedCategories,
   faqsByCategory,
 }) => {
+  // Format category names for display
+  const formatCategoryName = (category: string): string => {
+    const categoryLabels: Record<string, string> = {
+      "general": "General",
+      "semi-permanent-makeup": "Semi-Permanent",
+      "booking": "Booking",
+      "lashes-brows": "Lashes & Brows",
+      "facials": "Facials",
+    };
+    return categoryLabels[category] || category;
+  };
+
+  // Smooth scroll to category section
+  const scrollToCategory = (category: string) => {
+    const element = document.getElementById(`category-${category}`);
+    if (element) {
+      const offset = 100; // Account for fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <>
-      {/* Page Header */}
-      <section className="bg-light-cream py-20 md:py-28">
-        <div className="luxury-container">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-            >
-              <h1 className="font-alice text-4xl sm:text-5xl md:text-6xl text-elegant-mocha uppercase tracking-[0.2em] mb-6">
-                Frequently Asked Questions
-              </h1>
-
-              <div className="h-[1px] w-24 bg-elegant-mocha/30 mx-auto mb-8" />
-
-              <p className="font-alta text-lg text-elegant-mocha/80 leading-relaxed max-w-2xl mx-auto">
-                Find answers to the most common questions about our treatments,
-                booking process, and what to expect at FaceFrame Beauty.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+      {/* Page Hero with Category Navigation */}
+      <PageHero
+        title="Frequently Asked Questions"
+        description="Find answers to the most common questions about our treatments, booking process, and what to expect at FaceFrame Beauty."
+        height="minimal"
+      >
+        {/* Category Navigation Pills */}
+        <div className="flex flex-wrap gap-3 justify-center mt-6">
+          {orderedCategories.map((category, index) => (
+            <motion.button
+              key={category}
+              onClick={() => scrollToCategory(category)}
+              className="px-5 py-2.5 bg-white border border-elegant-mocha/20 rounded-full
+                         hover:bg-elegant-mocha hover:text-white hover:border-elegant-mocha
+                         transition-all duration-300 font-alta text-sm tracking-[0.02em]
+                         text-elegant-mocha shadow-sm hover:shadow-md"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{
-                duration: 0.6,
-                delay: 0.4,
-                ease: [0.19, 1, 0.22, 1],
+                duration: 0.4,
+                delay: 0.7 + index * 0.1,
+                ease: LUXURY_EASING,
               }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <LuxuryShadcnButton
-                href="#ask-ai-question"
-                text="STILL HAVE QUESTIONS?"
-                luxuryVariant="outline"
-                luxuryTheme="light"
-                luxurySize="medium"
-              />
-            </motion.div>
-          </div>
+              {formatCategoryName(category)}
+            </motion.button>
+          ))}
         </div>
-      </section>
+      </PageHero>
 
       {/* FAQ Content */}
       <section className="py-20 md:py-28 bg-white">

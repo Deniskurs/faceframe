@@ -1,4 +1,3 @@
-import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
 import AboutStrip from "@/components/home/AboutStrip";
 import { ServicesPreview } from "@/components/home/services";
@@ -17,7 +16,7 @@ export default function Home() {
   ];
 
   return (
-    <Layout>
+    <>
       {/* Hero section */}
       <Hero />
 
@@ -50,6 +49,6 @@ export default function Home() {
         subtitle="Limited appointments available each week. Join London's elite clientele in experiencing the art of precise beauty enhancement."
         buttonText="SECURE YOUR APPOINTMENT"
       />
-    </Layout>
+    </>
   );
 }

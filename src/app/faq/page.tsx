@@ -1,6 +1,5 @@
 import React from "react";
 import { Metadata } from "next";
-import Layout from "@/components/layout/Layout";
 import { FAQPageClient } from "@/components/faq/FAQPageClient";
 import faqService from "@/services/faqService";
 import { FAQ } from "@/types";
@@ -45,11 +44,9 @@ export default async function FAQPage() {
   );
 
   return (
-    <Layout>
-      <FAQPageClient
-        orderedCategories={orderedCategories}
-        faqsByCategory={faqsByCategory}
-      />
-    </Layout>
+    <FAQPageClient
+      orderedCategories={orderedCategories}
+      faqsByCategory={faqsByCategory}
+    />
   );
 }

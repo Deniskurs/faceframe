@@ -117,31 +117,6 @@ export function SectionTitle({
           }}
         />
       </div>
-
-      {/* Subtle absolute positioning for luxury feel - visible on all devices */}
-      <motion.div
-        className={`absolute top-1/2 -translate-y-1/2 left-0 w-12 sm:w-16 h-[0.25px] ${colorScheme[variant].sideLine}`}
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: isRevealed ? 1 : 0 }}
-        style={{ transformOrigin: "left" }}
-        transition={{
-          duration: animationDurations.long,
-          ease: LUXURY_EASING,
-          delay: sequenceTimings.cta,
-        }}
-      />
-
-      <motion.div
-        className={`absolute top-1/2 -translate-y-1/2 right-0 w-12 sm:w-16 h-[0.25px] ${colorScheme[variant].sideLine}`}
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: isRevealed ? 1 : 0 }}
-        style={{ transformOrigin: "right" }}
-        transition={{
-          duration: animationDurations.long,
-          ease: LUXURY_EASING,
-          delay: sequenceTimings.cta,
-        }}
-      />
     </div>
   );
 }

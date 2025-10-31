@@ -1,12 +1,9 @@
 import { Metadata } from "next";
 import {
   ContactHero,
-  ContactMethodsGrid,
-  ContactForm,
-  StudioTabs,
-  ProcessTimeline,
+  ContactFormWithProcess,
+  StudioComparison,
   ContactFAQ,
-  SocialConnect,
 } from "@/components/contact";
 
 export const metadata: Metadata = {
@@ -31,33 +28,25 @@ export const metadata: Metadata = {
 };
 
 /**
- * Contact Page - "The Invitation"
- * Editorial magazine-style contact experience with asymmetric layouts,
- * interactive elements, and luxury Chanel-esque design
+ * Contact Page - Professional & Minimalistic
+ * Streamlined 4-section layout focused on conversion and clarity
+ * Clean design with smooth scrolling for optimal user experience
+ * Mobile-first with proper header spacing
  */
 export default function ContactPage() {
   return (
-    <main className="min-h-screen">
-      {/* Editorial Split Hero - 60/40 Asymmetric Layout */}
+    <>
+      {/* Simplified Hero - Responsive heights with clear CTA */}
       <ContactHero />
 
-      {/* Four Paths Contact Methods - 2x2 Grid */}
-      <ContactMethodsGrid />
+      {/* Combined Form + Process Timeline - 2-column layout */}
+      <ContactFormWithProcess />
 
-      {/* Main Consultation Request Form - Glass Morphic */}
-      <ContactForm />
+      {/* Studio Locations - Side-by-side comparison */}
+      <StudioComparison />
 
-      {/* What Happens Next Timeline - 4 Steps */}
-      <ProcessTimeline />
-
-      {/* Two Worlds Studio Tabs - Interactive Tabs */}
-      <StudioTabs />
-
-      {/* Questions FAQ - Accordion */}
+      {/* FAQ + Social Links + CTAs - Integrated footer section */}
       <ContactFAQ />
-
-      {/* Follow the Journey - Social Connect CTA */}
-      <SocialConnect />
-    </main>
+    </>
   );
 }

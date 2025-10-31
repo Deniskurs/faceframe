@@ -145,8 +145,9 @@ html {
   select {
     @apply font-alta rounded-md transition-all duration-300 bg-white bg-opacity-90 px-4 py-2;
     border: 1px solid var(--soft-blush);
+    font-size: 16px; /* Prevent iOS zoom on focus */
   }
-  
+
   input:focus,
   textarea:focus,
   select:focus {
@@ -156,6 +157,41 @@ html {
 
   button {
     @apply transition-all duration-300 font-alta;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    /* Prevent iOS zoom on form inputs */
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
+
+    /* Smooth touch scrolling for iOS */
+    * {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Remove tap highlight on mobile */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+
+  /* Safe area insets for iOS notch devices */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+    }
+  }
+
+  /* Fix for 100vh on mobile browsers */
+  @supports (-webkit-touch-callout: none) {
+    .min-h-screen {
+      min-height: -webkit-fill-available;
+    }
   }
   :root {
     --light-cream: #EDE0D4;

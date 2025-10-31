@@ -3,6 +3,7 @@ import { Alice } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import LenisProvider from "@/components/layout/LenisProvider";
+import Layout from "@/components/layout/Layout";
 
 const alice = Alice({
   weight: ["400"],
@@ -40,6 +41,14 @@ export const metadata: Metadata = {
     "London's premier destination for semi-permanent makeup, lashes, brows and luxury facial treatments. Book your transformation today.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover", // For safe area on iOS notch devices
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,7 +61,9 @@ export default function RootLayout({
         style={{ overscrollBehaviorX: "auto" }}
         suppressHydrationWarning={true}
       >
-        <LenisProvider>{children}</LenisProvider>
+        <LenisProvider>
+          <Layout>{children}</Layout>
+        </LenisProvider>
       </body>
     </html>
   );

@@ -70,7 +70,7 @@ const AccordionItem = ({
           >
             <div className="px-8 pb-6 pt-0">
               <div className="h-[1px] w-full bg-soft-blush/20 mb-5"></div>
-              <p className="font-alta text-sm tracking-wide leading-relaxed text-muted-sand">
+              <p className="font-alice text-base md:text-lg text-elegant-mocha leading-relaxed tracking-wide">
                 {faq.answer}
               </p>
             </div>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 
@@ -15,6 +16,7 @@ interface NavLinkProps {
   isScrolled: boolean;
   isMobile?: boolean;
   onClick?: () => void;
+  isActive?: boolean;
 }
 
 // CHANEL-inspired navigation link with enhanced typography
@@ -24,6 +26,7 @@ const NavLink = ({
   isScrolled,
   isMobile = false,
   onClick = () => {},
+  isActive = false,
 }: NavLinkProps) => {
   return (
     <Link
@@ -35,8 +38,10 @@ const NavLink = ({
     >
       {/* Refined readable link text with luxury tracking */}
       <span
-        className={`inline-block tracking-[0.12em] transition-all duration-700 font-normal navbar-link ${
-          isScrolled
+        className={`inline-block tracking-[0.12em] transition-all duration-300 font-normal navbar-link ${
+          isActive
+            ? "text-deep-bronze"
+            : isScrolled
             ? "text-luxury-primary group-hover:text-deep-bronze"
             : "text-luxury-primary group-hover:text-deep-bronze"
         }`}
@@ -44,7 +49,7 @@ const NavLink = ({
           textShadow: isScrolled
             ? "none"
             : "none",
-          fontWeight: 400,
+          fontWeight: isActive ? 500 : 400,
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
         }}
@@ -52,14 +57,23 @@ const NavLink = ({
         {children}
       </span>
 
-      {/* CHANEL-inspired underline with luxury timing */}
+      {/* CHANEL-inspired underline with luxury timing - faster and shows when active */}
       <motion.span
         className={`absolute left-0 bottom-[-3px] h-[1px] ${
-          isScrolled ? "bg-elegant-mocha/80" : "bg-elegant-mocha/80"
+          isActive ? "bg-deep-bronze" : isScrolled ? "bg-elegant-mocha/80" : "bg-elegant-mocha/80"
         }`}
-        initial={{ width: "0%", left: "50%", opacity: 0 }}
+        initial={{
+          width: isActive ? "100%" : "0%",
+          left: isActive ? "0%" : "50%",
+          opacity: isActive ? 0.8 : 0
+        }}
+        animate={{
+          width: isActive ? "100%" : undefined,
+          left: isActive ? "0%" : undefined,
+          opacity: isActive ? 0.8 : undefined,
+        }}
         whileHover={{ width: "100%", left: "0%", opacity: 0.8 }}
-        transition={{ duration: 0.7, ease: LUXURY_EASING }}
+        transition={{ duration: 0.35, ease: LUXURY_EASING }}
       />
     </Link>
   );
@@ -70,37 +84,42 @@ const MobileNavLink = ({
   href,
   children,
   onClick = () => {},
+  isActive = false,
 }: {
   href: string;
   children: ReactNode;
   onClick?: () => void;
+  isActive?: boolean;
 }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.7, ease: LUXURY_EASING }}
+      transition={{ duration: 0.45, ease: LUXURY_EASING }}
       className="overflow-hidden"
     >
       <Link
         href={href}
-        className="font-alta text-base tracking-[0.15em] uppercase font-normal text-luxury-primary block py-5 transition-colors duration-700 hover:text-deep-bronze"
+        className={`font-alta text-base tracking-[0.15em] uppercase block py-5 transition-colors duration-300 hover:text-deep-bronze ${
+          isActive ? "text-deep-bronze font-medium" : "text-luxury-primary font-normal"
+        }`}
         onClick={onClick}
       >
         {children}
       </Link>
       <motion.div
-        className="h-[1px] w-full bg-soft-blush/40"
+        className={`h-[1px] w-full ${isActive ? "bg-deep-bronze/60" : "bg-soft-blush/40"}`}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ duration: 0.9, delay: 0.1, ease: LUXURY_EASING }}
+        transition={{ duration: 0.6, delay: 0.05, ease: LUXURY_EASING }}
       />
     </motion.div>
   );
 };
 
 const Header = () => {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -139,11 +158,23 @@ const Header = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Close mobile menu on ESC key press
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isMobileMenuOpen]);
+
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
 
-  // Refined header animation
+  // Refined header animation - animates once on mount
   const headerVariants = {
     hidden: { y: -100, opacity: 0 },
     visible: {
@@ -157,26 +188,26 @@ const Header = () => {
     },
   };
 
-  // CHANEL-inspired mobile menu animation
+  // CHANEL-inspired mobile menu animation - faster for better responsiveness
   const overlayVariants = {
     closed: {
       x: "100%",
       transition: {
-        duration: 0.6,
+        duration: 0.4,
         ease: [0.32, 0.72, 0, 1],
         when: "afterChildren",
-        staggerChildren: 0.05,
+        staggerChildren: 0.03,
         staggerDirection: -1,
       },
     },
     open: {
       x: "0%",
       transition: {
-        duration: 0.7,
+        duration: 0.45,
         ease: [0.22, 1, 0.36, 1],
         when: "beforeChildren",
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        staggerChildren: 0.06,
+        delayChildren: 0.1,
       },
     },
   };
@@ -204,6 +235,7 @@ const Header = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${
         isScrolled ? "h-[60px] md:h-[64px]" : "h-[70px] md:h-[80px]"
       }`}
+      style={{ willChange: isScrolled ? "auto" : "height" }}
       initial="hidden"
       animate="visible"
       variants={headerVariants}
@@ -241,9 +273,11 @@ const Header = () => {
           <Link href="/" className="group flex items-center">
             {/* Logo Image with scaled transitions - optimized for transparent logo */}
             <div
-              className={`transition-all duration-700 ${
-                isScrolled ? "w-10 h-10" : "w-12 h-12"
-              }`}
+              className="w-12 h-12 transition-transform duration-700 origin-left"
+              style={{
+                transform: isScrolled ? "scale(0.833)" : "scale(1)",
+                willChange: "transform"
+              }}
             >
               <Image
                 src="/images/logo/tl-brown.webp"
@@ -308,22 +342,22 @@ const Header = () => {
         >
           {/* Golden ratio-inspired spacing between nav items */}
           <div className="flex items-center space-x-2 mr-8">
-            <NavLink href="/" isScrolled={isScrolled}>
+            <NavLink href="/" isScrolled={isScrolled} isActive={pathname === "/"}>
               HOME
             </NavLink>
-            <NavLink href="/services" isScrolled={isScrolled}>
+            <NavLink href="/services" isScrolled={isScrolled} isActive={pathname === "/services"}>
               SERVICES
             </NavLink>
-            <NavLink href="/gallery" isScrolled={isScrolled}>
+            <NavLink href="/gallery" isScrolled={isScrolled} isActive={pathname === "/gallery"}>
               GALLERY
             </NavLink>
-            <NavLink href="/about" isScrolled={isScrolled}>
+            <NavLink href="/about" isScrolled={isScrolled} isActive={pathname === "/about"}>
               ABOUT
             </NavLink>
-            <NavLink href="/faq" isScrolled={isScrolled}>
+            <NavLink href="/faq" isScrolled={isScrolled} isActive={pathname === "/faq"}>
               FAQ
             </NavLink>
-            <NavLink href="/contact" isScrolled={isScrolled}>
+            <NavLink href="/contact" isScrolled={isScrolled} isActive={pathname === "/contact"}>
               CONTACT
             </NavLink>
           </div>
@@ -377,13 +411,24 @@ const Header = () => {
       {/* CHANEL-inspired refined Full-Screen Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-light-cream flex md:hidden"
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={overlayVariants}
-          >
+          <>
+            {/* Backdrop - click to close */}
+            <motion.div
+              className="fixed inset-0 z-40 bg-black/20 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={closeMobileMenu}
+            />
+
+            <motion.div
+              className="fixed inset-0 z-50 bg-light-cream flex md:hidden"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={overlayVariants}
+            >
             {/* Corner accents for mobile menu */}
             <div className="absolute top-6 left-6 w-4 h-[0.5px] bg-elegant-mocha/20"></div>
             <div className="absolute top-6 left-6 w-[0.5px] h-4 bg-elegant-mocha/20"></div>
@@ -406,37 +451,37 @@ const Header = () => {
                 {/* Elegant Mobile Menu Links with refined spacing */}
                 <nav className="space-y-0 mt-8">
                   <motion.div variants={navLinkVariants}>
-                    <MobileNavLink href="/" onClick={closeMobileMenu}>
+                    <MobileNavLink href="/" onClick={closeMobileMenu} isActive={pathname === "/"}>
                       HOME
                     </MobileNavLink>
                   </motion.div>
 
                   <motion.div variants={navLinkVariants}>
-                    <MobileNavLink href="/services" onClick={closeMobileMenu}>
+                    <MobileNavLink href="/services" onClick={closeMobileMenu} isActive={pathname === "/services"}>
                       SERVICES
                     </MobileNavLink>
                   </motion.div>
 
                   <motion.div variants={navLinkVariants}>
-                    <MobileNavLink href="/gallery" onClick={closeMobileMenu}>
+                    <MobileNavLink href="/gallery" onClick={closeMobileMenu} isActive={pathname === "/gallery"}>
                       GALLERY
                     </MobileNavLink>
                   </motion.div>
 
                   <motion.div variants={navLinkVariants}>
-                    <MobileNavLink href="/about" onClick={closeMobileMenu}>
+                    <MobileNavLink href="/about" onClick={closeMobileMenu} isActive={pathname === "/about"}>
                       ABOUT
                     </MobileNavLink>
                   </motion.div>
 
                   <motion.div variants={navLinkVariants}>
-                    <MobileNavLink href="/faq" onClick={closeMobileMenu}>
+                    <MobileNavLink href="/faq" onClick={closeMobileMenu} isActive={pathname === "/faq"}>
                       FAQ
                     </MobileNavLink>
                   </motion.div>
 
                   <motion.div variants={navLinkVariants}>
-                    <MobileNavLink href="/contact" onClick={closeMobileMenu}>
+                    <MobileNavLink href="/contact" onClick={closeMobileMenu} isActive={pathname === "/contact"}>
                       CONTACT
                     </MobileNavLink>
                   </motion.div>
@@ -470,6 +515,7 @@ const Header = () => {
               </div>
             </div>
           </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.header>

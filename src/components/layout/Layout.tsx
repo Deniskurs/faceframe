@@ -36,7 +36,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       <Header />
 
-      <main className="flex-grow pt-20">{children}</main>
+      <main className="flex-grow pt-[70px] md:pt-[80px]">{children}</main>
 
       <Footer />
 

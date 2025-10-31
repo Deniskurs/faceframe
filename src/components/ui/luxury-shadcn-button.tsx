@@ -26,7 +26,7 @@ const LUXURY_VARIANTS = {
   outline: {
     dark: "border border-white/30 text-white hover:bg-white/10 hover:border-white/50",
     light:
-      "border border-elegant-mocha/30 text-elegant-mocha hover:bg-elegant-mocha hover:text-white",
+      "border-2 border-elegant-mocha/70 text-elegant-mocha bg-elegant-mocha/10 hover:bg-elegant-mocha/20 hover:border-elegant-mocha/90",
     transparent: "border-2 border-white/80 text-white bg-black/40 hover:bg-white/15 hover:border-white/95",
   },
   text: {

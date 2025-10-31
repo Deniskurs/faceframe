@@ -72,13 +72,6 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Vertical Divider - Desktop Only */}
-          <Separator
-            orientation="vertical"
-            className="hidden md:block absolute left-[calc(66.66%)] top-0 bottom-0 bg-soft-blush/30"
-            style={{ height: "100%", marginLeft: "-0.5px" }}
-          />
-
           {/* Services Section */}
           <div>
             <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-6">
