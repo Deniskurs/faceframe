@@ -135,6 +135,7 @@ export default function LuxuryTransformationsGallery({
                       {...(galleryItems[0].aspectRatio
                         ? { aspectRatio: galleryItems[0].aspectRatio }
                         : { height: 680 })}
+                      mobileAspectRatio="3 / 2"
                       initialPosition={38} // Golden ratio (62/38) for slider position
                       categoryLabel={galleryItems[0].category}
                       showClientResult={true}

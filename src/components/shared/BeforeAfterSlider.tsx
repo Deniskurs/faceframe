@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ReactCompareSlider } from "react-compare-slider";
@@ -15,6 +15,9 @@ interface BeforeAfterSliderProps {
   initialPosition?: number;
   /** Container aspect ratio (e.g. "1616 / 640"). Takes precedence over `height`. */
   aspectRatio?: "1:1" | "4:3" | "16:9" | "auto" | (string & {});
+  /** Optional override applied below the `md` breakpoint (768 px). Use a taller
+   *  ratio here when the native ratio is panoramic and squashes on phones. */
+  mobileAspectRatio?: string;
   /** Fallback container height in px when no `aspectRatio` is provided. */
   height?: number;
   className?: string;
@@ -106,18 +109,18 @@ function SliderHandle() {
   // We must restore `pointer-events: auto` on the line + circle so they are the
   // interactive targets on touch devices (where `onlyHandleDraggable` defaults to `true`).
   return (
-    <div className="relative h-full w-[56px] flex items-center justify-center">
+    <div className="relative h-full w-[44px] md:w-[56px] flex items-center justify-center">
       {/* Full-height divider line — also part of the touch target */}
       <div
-        className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-white shadow-[0_0_6px_rgba(0,0,0,0.25)]"
+        className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1.5px] md:w-[2px] bg-white shadow-[0_0_6px_rgba(0,0,0,0.25)]"
         style={{ pointerEvents: "auto", touchAction: "none" }}
       />
-      {/* Grab handle circle */}
+      {/* Grab handle circle — smaller on mobile so it stays proportional */}
       <div
-        className="relative w-12 h-12 sm:w-11 sm:h-11 rounded-full bg-white flex items-center justify-center shadow-[0_2px_12px_rgba(0,0,0,0.22)]"
+        className="relative w-9 h-9 md:w-11 md:h-11 rounded-full bg-white flex items-center justify-center shadow-[0_2px_12px_rgba(0,0,0,0.22)]"
         style={{ pointerEvents: "auto", touchAction: "none" }}
       >
-        <div className="flex flex-col gap-[3px] w-3">
+        <div className="flex flex-col gap-[2.5px] md:gap-[3px] w-[10px] md:w-3">
           <div className="h-[1.5px] w-full bg-elegant-mocha/80 rounded-full" />
           <div className="h-[1.5px] w-full bg-elegant-mocha/80 rounded-full" />
         </div>
@@ -207,6 +210,7 @@ export default function BeforeAfterSlider({
   alt,
   initialPosition = 50,
   aspectRatio,
+  mobileAspectRatio,
   height = 400,
   className = "",
   categoryLabel,
@@ -217,6 +221,8 @@ export default function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const [hintVisible, setHintVisible] = useState(false);
   const hasInteractedRef = useRef(false);
+  const reactId = useId();
+  const scopeId = `bas-${reactId.replace(/[^a-zA-Z0-9]/g, "")}`;
 
   const { ref: inViewRef, inView } = useInView({
     threshold: 0.35,
@@ -253,15 +259,21 @@ export default function BeforeAfterSlider({
     : { height: `${height}px` };
   const imageDims = parseDimensions(aspectRatio);
 
+  const mobileRatio = mobileAspectRatio?.replace(":", " / ");
+
   return (
     <motion.div
       ref={inViewRef}
+      data-bas={scopeId}
       className={`relative select-none overflow-hidden shadow-lg ${className}`}
       style={containerStyle}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6, ease: LUXURY_EASING }}
     >
+      {mobileRatio && (
+        <style>{`@media (max-width: 767px){[data-bas="${scopeId}"]{aspect-ratio:${mobileRatio};height:auto;}}`}</style>
+      )}
       <ReactCompareSlider
         defaultPosition={initialPosition}
         onPositionChange={handlePositionChange}
