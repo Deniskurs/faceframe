@@ -74,6 +74,7 @@ function LuxuryShadcnButtonComponent({
   asChild = false,
   enableMobilePatternInterrupt = false,
   isLoading = false,
+  onClick,
   ...props
 }: LuxuryShadcnButtonProps) {
   // Track hover state for enhanced animations
@@ -242,7 +243,11 @@ function LuxuryShadcnButtonComponent({
         href={href}
         className={luxuryClasses}
         onClick={(e) => {
-          if (isLoading) e.preventDefault();
+          if (isLoading) {
+            e.preventDefault();
+            return;
+          }
+          onClick?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
         }}
         aria-disabled={isLoading}
       >
@@ -258,7 +263,7 @@ function LuxuryShadcnButtonComponent({
       onHoverEnd={handleHoverEnd}
       className="inline-block relative"
     >
-      <Button className={luxuryClasses} asChild={asChild} disabled={isLoading} {...props}>
+      <Button className={luxuryClasses} asChild={asChild} disabled={isLoading} onClick={onClick} {...props}>
         {content}
       </Button>
     </motion.div>
