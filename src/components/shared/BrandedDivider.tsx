@@ -123,7 +123,8 @@ export default function BrandedDivider({
       <div className={`${heightClasses[height]} w-full relative`}>
         <Image
           src={image}
-          alt="FaceFrame Beauty brand element"
+          alt=""
+          aria-hidden
           fill
           sizes="100vw"
           className="object-cover"

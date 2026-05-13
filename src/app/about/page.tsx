@@ -1,22 +1,32 @@
+import { Metadata } from "next";
 import HeroPortrait from "@/components/about/HeroPortrait";
 import FounderStory from "@/components/about/FounderStory";
 import LuxuryClientVoices from "@/components/home/client-voices/LuxuryClientVoices";
 import PersonalInvitation from "@/components/about/PersonalInvitation";
+import { PersonJsonLd } from "@/components/shared/JsonLd";
+import { BRAND, SITE } from "@/config/business";
+
+export const metadata: Metadata = {
+  title: `About Iggy | ${BRAND.name}`,
+  description: `Meet Iggy — founder of ${BRAND.name}. A decade of European-trained artistry in semi-permanent makeup, lashes and luxury facials, working from an intimate studio in East London.`,
+  alternates: { canonical: `${SITE.url}/about` },
+  openGraph: {
+    title: `Meet Iggy | ${BRAND.name}`,
+    description:
+      "European-trained semi-permanent makeup artist. Founder of FaceFrame Beauty, East London.",
+    type: "profile",
+    url: `${SITE.url}/about`,
+  },
+};
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
-      {/* Powerful single-image hero with minimal text */}
+    <main className="min-h-screen">
+      <PersonJsonLd />
       <HeroPortrait />
-
-      {/* Founder's story - 3 paragraphs, 1 image */}
       <FounderStory />
-
-      {/* Client testimonials - reuse from home */}
       <LuxuryClientVoices hideTitle={false} />
-
-      {/* Simple, personal CTA */}
       <PersonalInvitation />
-    </div>
+    </main>
   );
 }

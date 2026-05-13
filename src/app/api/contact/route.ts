@@ -1,10 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
 // Rate limiting storage (in production, use Redis or database)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
+// Module-private. Next.js App Router rejects non-handler exports from
+// route.ts at build time. If end-to-end type safety with the client form
+// is needed later, lift this to src/lib/contact-schema.ts and import in
+// both places.
+const contactSchema = z.object({
+  firstName: z.string().min(1, "First name is required").max(60),
+  lastName: z.string().min(1, "Last name is required").max(60),
+  email: z.string().email("Please enter a valid email address").max(120),
+  phone: z.string().max(30).optional().or(z.literal("")),
+  service: z.string().min(1, "Please select a service"),
+  message: z.string().max(500).optional().or(z.literal("")),
+});
+
+
 function getClientId(request: NextRequest): string {
-  // Use IP address for rate limiting
   const forwarded = request.headers.get("x-forwarded-for");
   const realIp = request.headers.get("x-real-ip");
   const ip = forwarded ? forwarded.split(",")[0] : realIp || "unknown";
@@ -21,13 +35,11 @@ function isRateLimited(clientId: string): boolean {
   }
 
   if (now > clientData.resetTime) {
-    // Reset the counter
     rateLimitMap.set(clientId, { count: 1, resetTime: now + 60 * 60 * 1000 });
     return false;
   }
 
   if (clientData.count >= 5) {
-    // Allow 5 submissions per hour
     return true;
   }
 
@@ -35,24 +47,19 @@ function isRateLimited(clientId: string): boolean {
   return false;
 }
 
-function sanitizeInput(input: string): string {
-  // Remove potentially harmful characters and trim
+// Defence-in-depth: strip script blocks and any HTML tags before the value
+// reaches a templated email body. Schema validation handles everything else.
+function stripHtml(input: string): string {
   return input
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
     .replace(/<[^>]*>/g, "")
     .trim();
 }
 
-function validateEmail(email: string): boolean {
-  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  return emailRegex.test(email);
-}
-
 export async function POST(request: NextRequest) {
   try {
     const clientId = getClientId(request);
 
-    // Check rate limiting
     if (isRateLimited(clientId)) {
       return NextResponse.json(
         {
@@ -63,61 +70,28 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = await request.json();
-    const { firstName, lastName, email, phone, service, message } = body;
+    const body = await request.json().catch(() => null);
+    const result = contactSchema.safeParse(body);
 
-    // Validate required fields
-    if (!firstName || !lastName || !email || !service) {
+    if (!result.success) {
       return NextResponse.json(
-        { error: "Please fill in all required fields (First Name, Last Name, Email, and Service)." },
+        {
+          error: "Invalid form submission",
+          issues: result.error.flatten().fieldErrors,
+        },
         { status: 400 }
       );
     }
 
-    // Sanitize inputs
-    const sanitizedData = {
-      firstName: sanitizeInput(firstName),
-      lastName: sanitizeInput(lastName),
-      email: sanitizeInput(email),
-      phone: phone ? sanitizeInput(phone) : "",
-      service: sanitizeInput(service),
-      message: message ? sanitizeInput(message) : "",
+    const data = {
+      ...result.data,
+      message: result.data.message ? stripHtml(result.data.message) : "",
     };
-
-    // Validate email format
-    if (!validateEmail(sanitizedData.email)) {
-      return NextResponse.json(
-        { error: "Please enter a valid email address." },
-        { status: 400 }
-      );
-    }
-
-    // Validate field lengths
-    if (sanitizedData.firstName.length < 2 || sanitizedData.firstName.length > 50) {
-      return NextResponse.json(
-        { error: "First name must be between 2 and 50 characters." },
-        { status: 400 }
-      );
-    }
-
-    if (sanitizedData.lastName.length < 2 || sanitizedData.lastName.length > 50) {
-      return NextResponse.json(
-        { error: "Last name must be between 2 and 50 characters." },
-        { status: 400 }
-      );
-    }
-
-    if (sanitizedData.message && sanitizedData.message.length > 1000) {
-      return NextResponse.json(
-        { error: "Message must be less than 1000 characters." },
-        { status: 400 }
-      );
-    }
 
     // TODO: In production, integrate with an email service like Resend, SendGrid, or Nodemailer
     // For now, we'll log the data and return success
     console.log("Contact Form Submission:", {
-      ...sanitizedData,
+      ...data,
       timestamp: new Date().toISOString(),
     });
 
@@ -129,15 +103,15 @@ export async function POST(request: NextRequest) {
     await resend.emails.send({
       from: 'FaceFrame Beauty <noreply@faceframebeauty.com>',
       to: 'faceframe.byvil@gmail.com',
-      subject: `New Contact Form Submission from ${sanitizedData.firstName} ${sanitizedData.lastName}`,
+      subject: `New Contact Form Submission from ${data.firstName} ${data.lastName}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${sanitizedData.firstName} ${sanitizedData.lastName}</p>
-        <p><strong>Email:</strong> ${sanitizedData.email}</p>
-        <p><strong>Phone:</strong> ${sanitizedData.phone || 'Not provided'}</p>
-        <p><strong>Service Interest:</strong> ${sanitizedData.service}</p>
+        <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Phone:</strong> ${data.phone || 'Not provided'}</p>
+        <p><strong>Service Interest:</strong> ${data.service}</p>
         <p><strong>Message:</strong></p>
-        <p>${sanitizedData.message || 'No message provided'}</p>
+        <p>${data.message || 'No message provided'}</p>
       `,
     });
     */

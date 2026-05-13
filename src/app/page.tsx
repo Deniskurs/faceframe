@@ -9,10 +9,10 @@ import BookingCTA from "@/components/home/BookingCTA";
 export default function Home() {
   // Founder section content
   const founderQuote =
-    "Beauty is not about perfection. It's about enhancing your natural features with precision and care.";
+    "The goal isn't perfection. It's waking up and recognising yourself — just better.";
   const founderParagraphs = [
-    "After training with elite artists across Europe and perfecting her craft for over a decade, Iggy established FaceFrame Beauty with a singular vision: to create a sanctuary where precision meets luxury.",
-    "Each treatment at FaceFrame Beauty is approached with meticulous attention to detail, ensuring that every client leaves with results that enhance their natural beauty rather than masking it.",
+    "After a decade perfecting microblading and lash artistry across Europe's leading academies, Iggy founded FaceFrame Beauty with a single mission: to prove that semi-permanent makeup can enhance rather than alter.",
+    "Every treatment is one-to-one, meticulous, and bespoke — so clients leave looking unmistakably like themselves, only more rested, more defined, more confident.",
   ];
 
   return (
@@ -45,9 +45,8 @@ export default function Home() {
       {/* Final booking CTA */}
       <BookingCTA
         backgroundImage="/images/brand/IMG_5461.webp"
-        title="Reserve Your Beauty Experience"
-        subtitle="Limited appointments available each week. Join London's elite clientele in experiencing the art of precise beauty enhancement."
-        buttonText="SECURE YOUR APPOINTMENT"
+        title="Reserve Your Appointment"
+        subtitle="Iggy works with a small number of clients each week. Availability is typically two to three weeks ahead — secure your date below."
       />
     </>
   );

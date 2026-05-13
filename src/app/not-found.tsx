@@ -13,6 +13,7 @@ import {
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import LuxuryTextBackdrop from "@/components/shared/LuxuryTextBackdrop";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
+import { CTA, getBookingHref, getServicesHref } from "@/config/business";
 
 const NotFound = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -215,8 +216,8 @@ const NotFound = () => {
             </div>
             <div className="w-full sm:w-auto">
               <LuxuryShadcnButton
-                href="/services"
-                text="VIEW SERVICES"
+                href={getServicesHref()}
+                text={CTA.viewServices}
                 luxuryVariant="outline"
                 luxuryTheme="light"
                 luxurySize="large"
@@ -245,7 +246,7 @@ const NotFound = () => {
                 { href: "/gallery", label: "Gallery" },
                 { href: "/about", label: "About" },
                 { href: "/contact", label: "Contact" },
-                { href: "/booking", label: "Book Now" },
+                { href: getBookingHref(), label: CTA.bookPrimary },
               ].map((link, index) => (
                 <motion.div
                   key={link.href}

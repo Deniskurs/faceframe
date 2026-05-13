@@ -5,6 +5,7 @@ import {
   standardViewport,
 } from "@/utils/animations/luxuryAnimations";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
+import { getServicesHref } from "@/config/business";
 
 export function ViewAllButton() {
   return (
@@ -19,7 +20,7 @@ export function ViewAllButton() {
       }}
     >
       <LuxuryShadcnButton
-        href="/services"
+        href={getServicesHref()}
         text="VIEW ALL SERVICES"
         luxuryVariant="outline"
         luxuryTheme="light"

@@ -79,7 +79,7 @@ export function PageHero({
           {/* Optional Label */}
           {label && (
             <motion.p
-              className="font-alta text-xs sm:text-sm tracking-[0.3em] uppercase text-elegant-mocha/60 mb-4"
+              className="font-alta text-xs sm:text-sm tracking-[0.3em] uppercase text-elegant-mocha/75 mb-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2, ease: LUXURY_EASING }}

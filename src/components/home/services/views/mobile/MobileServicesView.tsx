@@ -73,29 +73,36 @@ function EmblaDots({ api }: { api: EmblaApi | undefined }) {
     [api]
   );
 
+  const total = scrollSnaps.length;
+
   return (
-    <div className="flex items-center justify-center space-x-4">
-      {scrollSnaps.map((_, index) => (
-        <motion.button
-          key={index}
-          onClick={() => scrollTo(index)}
-          className={`focus:outline-none`}
-          aria-label={`Go to slide ${index + 1}`}
-        >
-          <motion.div
-            className={`${
-              selectedIndex === index
-                ? "w-7 h-[1.5px] bg-elegant-mocha/50"
-                : "w-3 h-[1.5px] bg-elegant-mocha/20"
-            }`}
-            animate={{
-              width: selectedIndex === index ? 28 : 12,
-              opacity: selectedIndex === index ? 1 : 0.6,
-            }}
-            transition={{ duration: 0.8, ease: LUXURY_EASING }}
-          />
-        </motion.button>
-      ))}
+    <div className="flex items-center justify-center gap-2" role="tablist" aria-label="Service slides">
+      {scrollSnaps.map((_, index) => {
+        const isActive = selectedIndex === index;
+        return (
+          <button
+            key={index}
+            type="button"
+            role="tab"
+            onClick={() => scrollTo(index)}
+            aria-label={`Go to slide ${index + 1} of ${total}`}
+            aria-current={isActive ? "true" : undefined}
+            aria-selected={isActive}
+            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/40 rounded-sm"
+          >
+            <motion.div
+              animate={{
+                width: isActive ? 28 : 12,
+                opacity: isActive ? 1 : 0.5,
+              }}
+              transition={{ duration: 0.6, ease: LUXURY_EASING }}
+              className={`h-[1.5px] ${
+                isActive ? "bg-elegant-mocha/55" : "bg-elegant-mocha/25"
+              }`}
+            />
+          </button>
+        );
+      })}
     </div>
   );
 }

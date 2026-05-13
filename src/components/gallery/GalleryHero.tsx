@@ -43,7 +43,7 @@ export default function GalleryHero() {
                          ${
                            isActive
                              ? "border-elegant-mocha text-elegant-mocha"
-                             : "border-transparent text-elegant-mocha/60 hover:text-elegant-mocha hover:border-elegant-mocha/40"
+                             : "border-transparent text-elegant-mocha/75 hover:text-elegant-mocha hover:border-elegant-mocha/40"
                          }`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

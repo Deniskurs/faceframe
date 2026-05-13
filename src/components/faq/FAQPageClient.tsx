@@ -9,6 +9,7 @@ import { FAQSection } from "./FAQSection";
 import { AskQuestionSection } from "./AskQuestionSection";
 import { FAQ } from "@/types";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
+import { CTA, FEATURES, getBookingHref, getServicesHref } from "@/config/business";
 
 interface FAQPageClientProps {
   orderedCategories: string[];
@@ -103,8 +104,12 @@ export const FAQPageClient: React.FC<FAQPageClientProps> = ({
         </div>
       </section>
 
-      {/* Ask Question Section */}
-      <AskQuestionSection />
+      {/*
+        AI-powered "Ask a question" panel.
+        Gated off via FEATURES.aiFaq while there's no live OpenAI billing.
+        The component stays imported so re-enabling is a one-line flip.
+      */}
+      {FEATURES.aiFaq && <AskQuestionSection />}
 
       {/* Contact CTA */}
       <section className="bg-elegant-mocha py-16 md:py-20">
@@ -128,15 +133,15 @@ export const FAQPageClient: React.FC<FAQPageClientProps> = ({
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <LuxuryShadcnButton
-                  href="/consultation"
-                  text="FREE CONSULTATION"
+                  href={getBookingHref()}
+                  text={CTA.bookConsultation}
                   luxuryVariant="elegant"
                   luxuryTheme="transparent"
                   luxurySize="large"
                 />
                 <LuxuryShadcnButton
-                  href="/services"
-                  text="VIEW SERVICES"
+                  href={getServicesHref()}
+                  text={CTA.viewServices}
                   luxuryVariant="outline"
                   luxuryTheme="transparent"
                   luxurySize="large"

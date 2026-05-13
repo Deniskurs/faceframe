@@ -4,19 +4,21 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import FadeInSection from "@/components/shared/FadeInSection";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
 
+// Note: previously wrapped in <FadeInSection>, which uses Framer's
+// `whileInView` to fade itself in. Combined with the `useInView` hook
+// below driving each child's `animate` prop, every card animated twice
+// when the section entered the viewport. Keep one entry trigger only.
 const FounderStory = () => {
   const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true });
 
   return (
-    <FadeInSection intensity="subtle">
-      <section className="py-32 md:py-40 px-6 bg-white" ref={ref}>
+    <section className="py-32 md:py-40 px-6 bg-white" ref={ref}>
         <div className="max-w-4xl mx-auto">
           {/* Eyebrow label */}
           <motion.p
-            className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/60 text-center mb-12"
+            className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/75 text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.2, ease: LUXURY_EASING }}
@@ -56,7 +58,7 @@ const FounderStory = () => {
                   &ldquo;I created FaceFrame Beauty so you could wake up feeling
                   beautifully, confidently you—every single day.&rdquo;
                 </blockquote>
-                <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/60 mt-4">
+                <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/75 mt-4">
                   — Iggy
                 </p>
               </div>
@@ -76,7 +78,7 @@ const FounderStory = () => {
               <div className="relative aspect-[3/4] overflow-hidden border border-soft-blush/10">
                 <Image
                   src="/images/gallery/image1.webp"
-                  alt="Precision and craftsmanship"
+                  alt="Detail of precision brow work by Iggy at FaceFrame Beauty"
                   fill
                   quality={90}
                   className="object-cover object-center"
@@ -87,7 +89,6 @@ const FounderStory = () => {
           </div>
         </div>
       </section>
-    </FadeInSection>
   );
 };
 

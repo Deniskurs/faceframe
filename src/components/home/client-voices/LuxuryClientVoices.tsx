@@ -136,14 +136,19 @@ export default function LuxuryClientVoices({
                         {/* Testimonial Content - Fixed width for consistent alignment */}
                         <div className="w-full max-w-xl mx-auto flex flex-col items-center">
                           {/* Rating Display - Elegant star rating */}
-                          <div className="flex justify-center mb-12 space-x-1.5">
+                          <div
+                            className="flex justify-center mb-12 space-x-1.5"
+                            role="img"
+                            aria-label={`${testimonial.rating || 5} out of 5 stars`}
+                          >
                             {[...Array(5)].map((_, index) => (
                               <svg
                                 key={index}
-                                className={`w-5 h-5 transition-colors duration-300 ${
+                                aria-hidden="true"
+                                className={`w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-300 ${
                                   index < (testimonial.rating || 5)
-                                    ? "text-elegant-mocha/30 fill-elegant-mocha/30"
-                                    : "text-elegant-mocha/10 fill-elegant-mocha/10"
+                                    ? "text-deep-bronze/70 fill-deep-bronze/70"
+                                    : "text-elegant-mocha/15 fill-elegant-mocha/15"
                                 }`}
                                 viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -180,38 +185,40 @@ export default function LuxuryClientVoices({
 
             {/* Elegant Chanel-inspired Navigation */}
             {testimonials.length > 1 && (
-              <div className="flex justify-between items-center mt-12">
-                {/* Left button with Chanel styling */}
+              <div className="flex justify-between items-center mt-12 gap-3">
+                {/* Left — text label hidden on mobile, just the line tap target */}
                 <motion.button
-                  className="flex items-center group focus:outline-none"
+                  type="button"
+                  className="flex items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/50 rounded-sm py-2 px-1 min-w-[44px] min-h-[44px]"
                   onClick={scrollPrev}
                   aria-label="Previous testimonial"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.4, ease: LUXURY_EASING }}
                 >
-                  <div className="w-12 h-[0.5px] bg-elegant-mocha/30 mr-3 group-hover:bg-elegant-mocha/60 transition-all duration-700"></div>
-                  <span className="font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/60 group-hover:text-elegant-mocha/90 transition-all duration-700">
+                  <div className="w-8 sm:w-12 h-[0.5px] bg-elegant-mocha/40 sm:mr-3 group-hover:bg-elegant-mocha/70 transition-all duration-700" />
+                  <span className="hidden sm:inline font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/75 group-hover:text-elegant-mocha/90 transition-all duration-700">
                     Prev
                   </span>
                 </motion.button>
 
-                {/* Minimal page indicator with Chanel aesthetic */}
-                <div className="font-alta text-xs tracking-wider text-elegant-mocha/60">
+                {/* Page indicator */}
+                <div className="font-alta text-xs tracking-wider text-elegant-mocha/75 tabular-nums">
                   {currentIndex + 1} / {testimonials.length}
                 </div>
 
-                {/* Right button with Chanel styling */}
+                {/* Right — text label hidden on mobile */}
                 <motion.button
-                  className="flex items-center group focus:outline-none"
+                  type="button"
+                  className="flex items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/50 rounded-sm py-2 px-1 min-w-[44px] min-h-[44px] justify-end"
                   onClick={scrollNext}
                   aria-label="Next testimonial"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.4, ease: LUXURY_EASING }}
                 >
-                  <span className="font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/60 group-hover:text-elegant-mocha/90 transition-all duration-700">
+                  <span className="hidden sm:inline font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/75 group-hover:text-elegant-mocha/90 transition-all duration-700">
                     Next
                   </span>
-                  <div className="w-12 h-[0.5px] bg-elegant-mocha/30 ml-3 group-hover:bg-elegant-mocha/60 transition-all duration-700"></div>
+                  <div className="w-8 sm:w-12 h-[0.5px] bg-elegant-mocha/40 sm:ml-3 group-hover:bg-elegant-mocha/70 transition-all duration-700" />
                 </motion.button>
               </div>
             )}

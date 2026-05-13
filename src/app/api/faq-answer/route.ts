@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
+import { FEATURES } from "@/config/business";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!, // Ensure you have set your OpenAI API key in environment variables
@@ -48,6 +49,16 @@ function sanitizeInput(input: string): string {
 }
 
 export async function POST(request: NextRequest) {
+  // Gated off — feature flag in src/config/business.ts. Returning 503
+  // keeps the route shape intact without burning OpenAI credits if the
+  // UI somehow calls it.
+  if (!FEATURES.aiFaq) {
+    return NextResponse.json(
+      { error: "This feature is currently unavailable." },
+      { status: 503 }
+    );
+  }
+
   try {
     const clientId = getClientId(request);
 

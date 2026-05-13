@@ -3,13 +3,16 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import FadeInSection from "../shared/FadeInSection";
+// FadeInSection removed: it wraps children in a motion.div with whileInView,
+// which combined with child motion.divs that also use whileInView produced a
+// visible double-fade-in. Children animate themselves below.
 import useAnimateOnScroll from "@/utils/animations/useAnimateOnScroll";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import {
   LUXURY_EASING,
   standardViewport,
 } from "@/utils/animations/luxuryAnimations";
+import { CTA, getBookingHref, getServicesHref } from "@/config/business";
 
 interface BookingCTAProps {
   backgroundImage?: string;
@@ -23,9 +26,7 @@ interface BookingCTAProps {
 const BookingCTA = ({
   backgroundImage = "/images/gallery/image14.webp",
   title = "BOOK YOUR APPOINTMENT",
-  subtitle = "Limited appointments available.",
-  // buttonText = "SCHEDULE NOW",
-  // buttonLink = "/booking",
+  subtitle = "Iggy takes a limited number of clients each week — availability is typically two to three weeks ahead.",
   className = "",
 }: BookingCTAProps) => {
 
@@ -39,14 +40,14 @@ const BookingCTA = ({
   });
 
   return (
-    <FadeInSection intensity="subtle">
-      <motion.section
-        ref={sectionRef}
-        className={`relative py-32 md:py-40 overflow-hidden ${className}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: LUXURY_EASING }}
-      >
+    <motion.section
+      ref={sectionRef}
+      className={`relative py-32 md:py-40 overflow-hidden ${className}`}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.8, ease: LUXURY_EASING }}
+    >
         {/* Background with refined styling */}
         <motion.div
           ref={imageRef}
@@ -55,7 +56,8 @@ const BookingCTA = ({
         >
           <Image
             src={backgroundImage}
-            alt="Luxury beauty experience"
+            alt=""
+            aria-hidden
             fill
             sizes="100vw"
             className="object-cover brightness-75"
@@ -117,8 +119,8 @@ const BookingCTA = ({
           >
             <div className="w-full sm:w-auto">
               <LuxuryShadcnButton
-                href="/booking"
-                text="BOOK NOW"
+                href={getBookingHref()}
+                text={CTA.bookPrimary}
                 luxuryVariant="elegant"
                 luxuryTheme="transparent"
                 luxurySize="large"
@@ -128,8 +130,8 @@ const BookingCTA = ({
             </div>
             <div className="w-full sm:w-auto">
               <LuxuryShadcnButton
-                href="/services"
-                text="VIEW SERVICES"
+                href={getServicesHref()}
+                text={CTA.viewServices}
                 luxuryVariant="outline"
                 luxuryTheme="transparent"
                 luxurySize="large"
@@ -147,8 +149,7 @@ const BookingCTA = ({
             viewport={{ once: true }}
           />
         </div>
-      </motion.section>
-    </FadeInSection>
+    </motion.section>
   );
 };
 

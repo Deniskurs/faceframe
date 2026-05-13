@@ -34,14 +34,14 @@ const HeroPortrait = () => {
         />
         <CredentialCard
           icon={MapPin}
-          title="Dual Studios"
-          subtitle="E2 & E3 London"
+          title="East London"
+          subtitle="E1 3AS"
           delay={1.0}
         />
       </div>
 
       {/* Founder Attribution */}
-      <p className="font-alta text-elegant-mocha/60 text-sm italic mt-8 tracking-wide">
+      <p className="font-alta text-elegant-mocha/75 text-sm italic mt-8 tracking-wide">
         — Iggy, Founder
       </p>
     </PageHero>

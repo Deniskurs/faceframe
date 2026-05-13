@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect, useRef, ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
+import { CTA, getBookingHref } from "@/config/business";
 
 // CHANEL-inspired luxury easing curves (same as hero for consistency)
 const LUXURY_EASING = [0.19, 1, 0.22, 1] as const;
@@ -122,6 +123,8 @@ const Header = () => {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const wasMenuOpenRef = useRef(false);
 
   // Enhanced scroll effect with transition logic
   useEffect(() => {
@@ -145,12 +148,18 @@ const Header = () => {
     return () => clearTimeout(initialDarkerOverlay);
   }, []);
 
-  // Disable scroll when mobile menu is open for full-screen overlay
+  // Disable scroll when mobile menu is open for full-screen overlay,
+  // and return focus to the hamburger trigger when the menu closes.
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
+      wasMenuOpenRef.current = true;
     } else {
       document.body.style.overflow = "";
+      if (wasMenuOpenRef.current) {
+        wasMenuOpenRef.current = false;
+        hamburgerRef.current?.focus();
+      }
     }
 
     return () => {
@@ -364,8 +373,8 @@ const Header = () => {
 
           {/* Ultra-refined CHANEL-inspired Book Now button */}
           <LuxuryShadcnButton
-            href="/booking"
-            text="BOOK"
+            href={getBookingHref()}
+            text={CTA.bookPrimary}
             luxuryVariant="outline"
             luxuryTheme={isScrolled ? "light" : "light"}
             luxurySize="small"
@@ -374,10 +383,13 @@ const Header = () => {
 
         {/* CHANEL-inspired luxury hamburger button with enhanced accessibility */}
         <button
-          className={`md:hidden relative z-[60] flex items-center justify-center w-14 h-14 focus:outline-none focus:ring-1 focus:ring-elegant-mocha/40 rounded-sm ${
+          ref={hamburgerRef}
+          className={`md:hidden relative z-[60] flex items-center justify-center w-14 h-14 focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/60 focus-visible:ring-offset-2 rounded-sm ${
             isScrolled ? "text-luxury-primary" : "text-luxury-primary"
           }`}
-          aria-label="Toggle mobile menu"
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <span className="sr-only">Menu</span>
@@ -423,6 +435,10 @@ const Header = () => {
             />
 
             <motion.div
+              id="mobile-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Site menu"
               className="fixed inset-0 z-50 bg-light-cream flex md:hidden"
               initial="closed"
               animate="open"
@@ -493,8 +509,8 @@ const Header = () => {
                   variants={navLinkVariants}
                 >
                   <LuxuryShadcnButton
-                    href="/booking"
-                    text="BOOK AN APPOINTMENT"
+                    href={getBookingHref()}
+                    text={CTA.bookPrimary}
                     luxuryVariant="elegant"
                     luxuryTheme="light"
                     luxurySize="large"

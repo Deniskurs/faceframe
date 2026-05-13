@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
+import { CTA, getBookingHref } from "@/config/business";
 
 interface AboutStripProps {
   className?: string;
@@ -20,7 +21,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
   className = "",
   founderImage = "/images/gallery/image22.webp",
   founderName = "Iggy",
-  quote = "Beauty is not about perfection. It's about enhancing your natural features with precision and care.",
+  quote = "The goal isn't perfection. It's waking up and recognising yourself — just better.",
   subtitle = "FOUNDER & CREATIVE DIRECTOR",
   paragraphs = [
     "After a decade perfecting microblading techniques across Europe's leading academies, Iggy founded FaceFrame Beauty in 2018 with a single mission: to prove that semi-permanent makeup can enhance rather than alter.",
@@ -67,7 +68,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
           <motion.div className="text-center px-6" style={{ y: parallaxY3 }}>
             <motion.div className="w-full text-center">
               <motion.p
-                className="font-alta text-elegant-mocha/60 text-xs tracking-[0.4em] uppercase mb-16 text-center inline-block"
+                className="font-alta text-elegant-mocha/75 text-xs tracking-[0.4em] uppercase mb-16 text-center inline-block"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{
                   opacity: quoteInView ? 1 : 0,
@@ -199,7 +200,7 @@ const AboutStrip: React.FC<AboutStripProps> = ({
               }}
               transition={{ duration: 0.8, delay: 0.8, ease: LUXURY_EASING }}
             >
-              <p className="font-alta text-elegant-mocha/60 text-xs tracking-[0.4em] uppercase mb-4">
+              <p className="font-alta text-elegant-mocha/75 text-xs tracking-[0.4em] uppercase mb-4">
                 Artistry
               </p>
               <div className="w-12 h-[0.5px] bg-elegant-mocha/25"></div>
@@ -238,8 +239,8 @@ const AboutStrip: React.FC<AboutStripProps> = ({
               transition={{ duration: 0.8, delay: 1.5, ease: LUXURY_EASING }}
             >
               <LuxuryShadcnButton
-                href="/booking"
-                text="BOOK YOUR CONSULTATION"
+                href={getBookingHref()}
+                text={CTA.bookConsultation}
                 luxuryVariant="elegant"
                 luxuryTheme="light"
                 luxurySize="large"

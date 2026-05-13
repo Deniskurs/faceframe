@@ -13,6 +13,7 @@ import useTextAnimation from "@/utils/animations/useTextAnimation";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import LuxuryTextBackdrop from "@/components/shared/LuxuryTextBackdrop";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
+import { CTA, getBookingHref, getServicesHref } from "@/config/business";
 
 const Hero = () => {
   // Refs for various elements
@@ -125,7 +126,7 @@ const Hero = () => {
         >
           <Image
             src="/images/hero/image4.webp"
-            alt="FaceFrame Beauty hero image"
+            alt="FaceFrame Beauty studio in East London — luxury semi-permanent makeup by Iggy"
             fill
             priority
             quality={98}
@@ -342,7 +343,8 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2, ease: LUXURY_EASING }}
               >
-                Expert artistry for lasting natural beauty
+                Microblading, lash artistry, and luxury facials — designed
+                to enhance, never mask.
               </motion.p>
 
             </div>
@@ -356,8 +358,8 @@ const Hero = () => {
             >
               <div className="w-full lg:w-auto">
                 <LuxuryShadcnButton
-                  href="/booking"
-                  text="BOOK CONSULTATION"
+                  href={getBookingHref()}
+                  text={CTA.bookConsultation}
                   luxuryVariant="elegant"
                   luxuryTheme="transparent"
                   luxurySize="large"
@@ -367,8 +369,8 @@ const Hero = () => {
               </div>
               <div className="w-full lg:w-auto">
                 <LuxuryShadcnButton
-                  href="/services"
-                  text="VIEW SERVICES"
+                  href={getServicesHref()}
+                  text={CTA.viewServices}
                   luxuryVariant="outline"
                   luxuryTheme="transparent"
                   luxurySize="large"

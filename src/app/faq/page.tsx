@@ -1,15 +1,26 @@
 import React from "react";
 import { Metadata } from "next";
 import { FAQPageClient } from "@/components/faq/FAQPageClient";
+import { FaqJsonLd } from "@/components/shared/JsonLd";
 import faqService from "@/services/faqService";
 import { FAQ } from "@/types";
 
+import { BRAND, SITE } from "@/config/business";
+
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions | FaceFrame Beauty",
+  title: `Frequently Asked Questions | ${BRAND.name}`,
   description:
-    "Find answers to common questions about our semi-permanent makeup, lash extensions, facials, and booking procedures. Expert advice from London's premier beauty studio.",
+    "Answers about our semi-permanent makeup, lash extensions, facials, aftercare, and booking. Plus an AI assistant for anything else.",
   keywords:
     "FAQ, beauty questions, semi-permanent makeup, lash extensions, facials, booking, London beauty salon",
+  alternates: { canonical: `${SITE.url}/faq` },
+  openGraph: {
+    title: `FAQs | ${BRAND.name}`,
+    description:
+      "Common questions answered — from microblading aftercare to booking and pricing.",
+    type: "website",
+    url: `${SITE.url}/faq`,
+  },
 };
 
 export default async function FAQPage() {
@@ -44,9 +55,12 @@ export default async function FAQPage() {
   );
 
   return (
-    <FAQPageClient
-      orderedCategories={orderedCategories}
-      faqsByCategory={faqsByCategory}
-    />
+    <>
+      <FaqJsonLd faqs={allFAQs} />
+      <FAQPageClient
+        orderedCategories={orderedCategories}
+        faqsByCategory={faqsByCategory}
+      />
+    </>
   );
 }

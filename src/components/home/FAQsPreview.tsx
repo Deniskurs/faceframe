@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import FadeInSection from "../shared/FadeInSection";
+// FadeInSection removed: stacked whileInView with child motion.divs caused
+// a visible double-fade on entry. Children animate themselves.
 import { FAQ } from "../../types";
 import faqService from "../../services/faqService";
 import { SectionTitle } from "@/components/shared/SectionTitle";
@@ -119,7 +120,6 @@ const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
   };
 
   return (
-    <FadeInSection intensity="subtle">
       <section className="py-24 md:py-32 px-6 bg-light-cream relative">
         <div className="max-w-3xl mx-auto">
           {/* Standardized section title */}
@@ -195,7 +195,6 @@ const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
           </motion.div>
         </div>
       </section>
-    </FadeInSection>
   );
 };
 

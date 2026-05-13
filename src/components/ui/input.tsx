@@ -110,7 +110,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           className={cn(
             // Solid background to create border-only effect
-            `shadow-input flex h-10 w-full rounded-[calc(0.5rem-2px)] border-none bg-white px-3 py-2 text-sm text-elegant-mocha transition duration-400 group-hover/input:shadow-none file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-sand/60 focus-visible:ring-[2px] focus-visible:ring-elegant-mocha focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
+            `shadow-input flex h-10 w-full rounded-[calc(0.5rem-2px)] border-none bg-white px-3 py-2 text-sm text-elegant-mocha transition duration-400 group-hover/input:shadow-none file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-sand/80 focus-visible:ring-[2px] focus-visible:ring-elegant-mocha focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
             // Dark mode styles
             `dark:bg-zinc-800 dark:text-white dark:placeholder:text-neutral-600 dark:shadow-[0px_0px_1px_1px_#404040] dark:focus-visible:ring-warm-beige`,
             className

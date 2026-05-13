@@ -60,9 +60,11 @@ export interface LuxuryShadcnButtonProps
 }
 
 /**
- * LuxuryShadcnButton - Combines shadcn's Button with FaceFrame's CHANEL-inspired styling
+ * LuxuryShadcnButton - Combines shadcn's Button with FaceFrame's CHANEL-inspired styling.
+ * Memoised because most CTAs sit inside scroll-animated parents that re-render
+ * on every scroll tick — without memoisation each scroll re-renders every button.
  */
-export function LuxuryShadcnButton({
+function LuxuryShadcnButtonComponent({
   href,
   text,
   luxuryVariant = "elegant",
@@ -303,3 +305,5 @@ export function LuxuryShadcnButton({
     </motion.div>
   );
 }
+
+export const LuxuryShadcnButton = React.memo(LuxuryShadcnButtonComponent);

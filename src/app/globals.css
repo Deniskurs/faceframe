@@ -51,7 +51,18 @@ html {
     color: rgba(127, 85, 57, 0.95); /* Slightly increased contrast */
   }
 
-  /* Typography System with balanced tracking */
+  /*
+   * Typography defaults — font-family, line-height, weight only.
+   *
+   * IMPORTANT: We intentionally do NOT set margin-bottom or max-width on
+   * headings/paragraphs here. Doing so causes stacked margins (component
+   * authors can't tell the global `mb-*` is already applied) and visually
+   * "off-centre" paragraphs in centred layouts (a `max-w-prose` paragraph
+   * inside a wider centred container reads as narrower than its sibling
+   * heading, producing a stair-step misalignment).
+   *
+   * Spacing and width belong to the component, not the cascade.
+   */
   h1,
   h2,
   h3,
@@ -59,59 +70,23 @@ html {
   h5,
   h6 {
     @apply font-alice leading-tight;
-    letter-spacing: 0.1em; /* Reduced for better readability */
-    font-weight: 400; /* Increased weight for better legibility */
+    font-weight: 400;
   }
 
-  /* Refined typographic scale with optimized spacing */
-  h1 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-    letter-spacing: 0.12em; /* CHANEL-accurate tracking */
-    line-height: 1.3;
-    @apply mb-6;
-  }
-
-  h2 {
-    @apply text-2xl md:text-3xl lg:text-4xl;
-    letter-spacing: 0.1em;
-    line-height: 1.35;
-    @apply mb-5;
-  }
-
-  h3 {
-    @apply text-xl md:text-2xl;
-    letter-spacing: 0.08em;
-    line-height: 1.4;
-    @apply mb-4;
-  }
-
-  h4 {
-    @apply text-lg md:text-xl;
-    letter-spacing: 0.07em;
-    line-height: 1.45;
-    @apply mb-3;
-  }
-
-  /* Improved paragraph styling for readability */
   p {
     @apply font-alta;
-    font-weight: 400; /* Standard weight for better readability */
-    letter-spacing: 0.02em; /* Reduced for better word shapes */
+    font-weight: 400;
     line-height: 1.7;
-    @apply mb-4 max-w-prose; /* Better paragraph flow */
   }
 
-  /* Small text adjustments */
   small,
   .text-small {
-    font-size: 0.875rem; /* 14px - Equivalent to text-sm */
-    letter-spacing: 0.01em;
+    font-size: 0.875rem;
     line-height: 1.5;
   }
 
   a {
     @apply transition-all duration-700;
-    letter-spacing: 0.08em;
   }
 
   /* Focus states for accessibility */
@@ -139,24 +114,22 @@ html {
     background-color: var(--elegant-mocha);
   }
 
-  /* Form elements refinement */
+  /*
+   * Form elements — keep iOS-no-zoom + font-family only.
+   *
+   * Padding, border, and background are owned by shadcn primitives
+   * (Input, Textarea, Select). Setting them here fights every form
+   * component and produces inconsistent input heights across pages.
+   */
   input,
   textarea,
   select {
-    @apply font-alta rounded-md transition-all duration-300 bg-white bg-opacity-90 px-4 py-2;
-    border: 1px solid var(--soft-blush);
+    @apply font-alta;
     font-size: 16px; /* Prevent iOS zoom on focus */
   }
 
-  input:focus,
-  textarea:focus,
-  select:focus {
-    border-color: var(--elegant-mocha);
-    box-shadow: 0 0 0 1px var(--elegant-mocha);
-  }
-
   button {
-    @apply transition-all duration-300 font-alta;
+    @apply font-alta;
   }
 
   /* Mobile optimizations */
@@ -688,10 +661,13 @@ html {
     display: none; /* Chrome, Safari and Opera */
   }
 
-  /* Improved mobile text sizing */
-  html {
-    font-size: 15px; /* Slightly smaller base for better mobile fit */
-  }
+  /*
+   * NOTE: A previous `html { font-size: 15px }` declaration lived here.
+   * It silently overrode the 16px base set in @layer base (utilities
+   * layer wins), shrinking every rem on the site to 15/16ths and
+   * dropping form inputs below the iOS no-zoom floor of 16px.
+   * Removed — the 16px base in @layer base is now authoritative.
+   */
 
   .mobile-text-boost {
     font-size: 1.05em; /* Boost critical content on mobile */

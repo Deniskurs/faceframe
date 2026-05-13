@@ -13,33 +13,20 @@ i want you to embody a proper professional programmer in UI UX creative designer
 - Tuesday - Saturday: 9:00 - 18:00
 - Sunday: Closed
 
-## Studio Locations
+## Studio Location
 
-### Professional Studio (Main Studio)
+### Luma Glow Studio
 
-- **Area**: East London, E2
-- **Type**: Full-service beauty studio
+- **Address**: 82 O'Leary Square, East London, E1 3AS
+- **Map**: https://maps.app.goo.gl/uftPwrgDKAFMP1iJ9
+- **Type**: Luxury beauty studio
 - **Features**:
   - Complete treatment suite
   - Professional equipment
-  - Comfortable waiting area
+  - One-to-one appointments
   - Easy public transport access
-- **Ambiance**: Contemporary luxury with professional ambiance
+- **Ambiance**: Contemporary luxury, intimate and personal
 - **Best For**: All services (facials, semi-permanent makeup, lash treatments)
-
-### Private Studio
-
-- **Area**: East London, E3
-- **Type**: Intimate home studio
-- **Features**:
-  - Private, one-on-one sessions
-  - Intimate atmosphere
-  - Personalized attention
-  - Tranquil environment
-- **Ambiance**: Warm, intimate, exclusively personal
-- **Best For**: Clients seeking more personal, private beauty experience
-
-**Note**: Exact addresses provided upon booking confirmation for privacy and exclusivity
 
 ## Available Services
 

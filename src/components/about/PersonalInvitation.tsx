@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
+import { CTA, getBookingHref } from "@/config/business";
 
 const PersonalInvitation = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,7 +32,7 @@ const PersonalInvitation = () => {
         <div className="relative w-full h-full">
           <Image
             src="/images/brand/IMG_5461.webp"
-            alt="FaceFrame Beauty Studio"
+            alt="FaceFrame Beauty studio interior in East London"
             fill
             quality={95}
             className="object-cover object-center"
@@ -61,7 +62,7 @@ const PersonalInvitation = () => {
             <div className="relative w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden border-2 border-soft-blush/30 shadow-lg">
               <Image
                 src="/images/gallery/image25.webp"
-                alt="Iggy - Founder"
+                alt="Iggy, founder of FaceFrame Beauty"
                 fill
                 quality={95}
                 className="object-cover object-center"
@@ -89,7 +90,7 @@ const PersonalInvitation = () => {
               If you&rsquo;re seeking an artist who values precision, natural
               results, and genuine care—I&rsquo;d be honored to meet you.
             </p>
-            <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/60">
+            <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/75">
               — Iggy
             </p>
           </motion.div>
@@ -102,8 +103,8 @@ const PersonalInvitation = () => {
             transition={{ duration: 0.8, delay: 0.9, ease: LUXURY_EASING }}
           >
             <LuxuryShadcnButton
-              href="/booking"
-              text="BOOK A CONSULTATION"
+              href={getBookingHref()}
+              text={CTA.bookConsultation}
               luxuryVariant="elegant"
               luxuryTheme="light"
               luxurySize="large"
