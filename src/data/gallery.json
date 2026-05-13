@@ -1,30 +1,33 @@
 [
   {
     "id": "gallery-1",
-    "beforeImage": "/images/gallery/image1.webp",
-    "afterImage": "/images/gallery/image3.webp",
+    "beforeImage": "/images/gallery/brows-before.jpg",
+    "afterImage": "/images/gallery/brows-after.jpg",
     "alt": "Eyebrow Transformation",
     "category": "Brows",
     "featured": true,
-    "serviceId": "brow-microblading"
+    "serviceId": "brow-microblading",
+    "aspectRatio": "1616 / 640"
   },
   {
     "id": "gallery-2",
-    "beforeImage": "/images/gallery/image4.webp",
-    "afterImage": "/images/gallery/image7.webp",
+    "beforeImage": "/images/gallery/lashes-before.jpg",
+    "afterImage": "/images/gallery/lashes-after.jpg",
     "alt": "Lash Extension Enhancement",
     "category": "Lashes",
     "featured": true,
-    "serviceId": "volume-lashes-full"
+    "serviceId": "volume-lashes-full",
+    "aspectRatio": "880 / 1168"
   },
   {
     "id": "gallery-3",
-    "beforeImage": "/images/gallery/image16.webp",
-    "afterImage": "/images/gallery/image19.webp",
+    "beforeImage": "/images/gallery/facial-before.jpg",
+    "afterImage": "/images/gallery/facial-after.jpg",
     "alt": "Facial Treatment Results",
     "category": "Facials",
     "featured": true,
-    "serviceId": "million-dollar-facial"
+    "serviceId": "million-dollar-facial",
+    "aspectRatio": "912 / 1136"
   },
   {
     "id": "gallery-4",

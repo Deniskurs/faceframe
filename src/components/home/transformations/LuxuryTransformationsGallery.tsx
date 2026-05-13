@@ -97,7 +97,7 @@ export default function LuxuryTransformationsGallery({
                 />
                 <div className="absolute inset-1/4 border-[0.5px] border-elegant-mocha/30" />
               </div>
-              <p className="mt-6 font-alta text-xs tracking-wider uppercase text-elegant-mocha/60">
+              <p className="mt-6 font-alta text-xs tracking-wider uppercase text-elegant-mocha/75">
                 Curating transformations
               </p>
             </div>
@@ -132,13 +132,14 @@ export default function LuxuryTransformationsGallery({
                       beforeImage={galleryItems[0].beforeImage}
                       afterImage={galleryItems[0].afterImage}
                       alt={galleryItems[0].alt || "Transformation"}
-                      height={680}
+                      {...(galleryItems[0].aspectRatio
+                        ? { aspectRatio: galleryItems[0].aspectRatio }
+                        : { height: 680 })}
                       initialPosition={38} // Golden ratio (62/38) for slider position
-                      labelStyle="elegant"
-                      autoAnimateOnHover={true}
                       categoryLabel={galleryItems[0].category}
                       showClientResult={true}
                       clientResultText="Real Client Result"
+                      priority
                     />
                   )}
                 </motion.div>
@@ -189,9 +190,8 @@ export default function LuxuryTransformationsGallery({
                         beforeImage={item.beforeImage}
                         afterImage={item.afterImage}
                         alt={item.alt}
-                        height={360}
+                        aspectRatio="4 / 5"
                         initialPosition={38} // Golden ratio position (62/38)
-                        autoAnimateOnHover={true}
                         categoryLabel={item.category}
                         showClientResult={true}
                         clientResultText="Client Result"

@@ -49,6 +49,7 @@ export interface GalleryItem {
   category: string;
   featured: boolean;
   serviceId?: string; // Optional link to corresponding service
+  aspectRatio?: string; // Optional CSS aspect-ratio (e.g. "1616 / 640") to match source image dimensions
 }
 
 // Contact form data
