@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { FEATURES } from "@/config/business";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!, // Ensure you have set your OpenAI API key in environment variables
-});
+// NOTE: the client is created inside the handler — a module-level
+// `new OpenAI()` throws at import time when OPENAI_API_KEY is absent,
+// which breaks `next build`'s page-data collection.
 
 // Rate limiting storage (in production, use Redis or database)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -49,15 +49,16 @@ function sanitizeInput(input: string): string {
 }
 
 export async function POST(request: NextRequest) {
-  // Gated off — feature flag in src/config/business.ts. Returning 503
-  // keeps the route shape intact without burning OpenAI credits if the
-  // UI somehow calls it.
-  if (!FEATURES.aiFaq) {
+  // Gated off — feature flag in src/config/business.ts, and the key may be
+  // deliberately unset. Returning 503 keeps the route shape intact without
+  // burning OpenAI credits if the UI somehow calls it.
+  if (!FEATURES.aiFaq || !process.env.OPENAI_API_KEY) {
     return NextResponse.json(
       { error: "This feature is currently unavailable." },
       { status: 503 }
     );
   }
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
   try {
     const clientId = getClientId(request);
