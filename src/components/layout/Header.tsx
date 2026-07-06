@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { UserRound } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
@@ -371,6 +372,20 @@ const Header = () => {
             </NavLink>
           </div>
 
+          {/* Client account — deliberately distinct from page navigation */}
+          <span
+            className="relative z-10 h-4 w-[0.5px] bg-elegant-mocha/25 mr-6"
+            aria-hidden="true"
+          />
+          <Link
+            href="/account"
+            aria-label="Client login — view or manage your appointments"
+            className="relative z-10 inline-flex items-center gap-1.5 mr-6 px-4 py-2 rounded-full border font-alta text-[11px] tracking-[0.2em] border-elegant-mocha/25 text-elegant-mocha hover:border-deep-bronze/50 hover:text-deep-bronze transition-all duration-300"
+          >
+            <UserRound className="w-3.5 h-3.5" aria-hidden="true" />
+            LOGIN
+          </Link>
+
           {/* Ultra-refined CHANEL-inspired Book Now button */}
           <LuxuryShadcnButton
             href={getBookingHref()}
@@ -500,6 +515,21 @@ const Header = () => {
                     <MobileNavLink href="/contact" onClick={closeMobileMenu} isActive={pathname === "/contact"}>
                       CONTACT
                     </MobileNavLink>
+                  </motion.div>
+
+                  <motion.div variants={navLinkVariants}>
+                    <Link
+                      href="/account"
+                      onClick={closeMobileMenu}
+                      aria-label="Client login — view or manage your appointments"
+                      className={`font-alta text-base tracking-[0.15em] uppercase flex items-center gap-2.5 py-5 transition-colors duration-300 hover:text-elegant-mocha ${
+                        pathname === "/account" ? "text-deep-bronze font-medium" : "text-deep-bronze"
+                      }`}
+                    >
+                      <UserRound className="w-4 h-4" aria-hidden="true" />
+                      LOGIN
+                    </Link>
+                    <div className="h-[1px] w-full bg-deep-bronze/25" />
                   </motion.div>
                 </nav>
 

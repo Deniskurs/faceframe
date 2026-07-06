@@ -1,0 +1,454 @@
+{
+  "source_url": "https://booksolo.co/faceframebeauty/book/treatments",
+  "scraped": "2026-05-13",
+  "services": [
+    {
+      "name": "Free consultation & patch test",
+      "category": "Semi-permanent make up",
+      "duration": 0,
+      "price": 0,
+      "description": "In this appointment we will examine your skin if it is suitable for Semi- Permanent Brow procedure, discuss expectations and what it is possible to achieve, we will do colour match, allergy skin patch test as well as getting answers to all your questions."
+    },
+    {
+      "name": "Beauty spots",
+      "category": "Semi-permanent make up",
+      "duration": 60,
+      "price": 35,
+      "description": "Beauty spot can be located on the face, shoulder, neck or breast or anywhere on the body. A beauty mark tattoo is a small dark artificial spot applied as an adornment with permanent cosmetics."
+    },
+    {
+      "name": "Freckles",
+      "category": "Semi-permanent make up",
+      "duration": 60,
+      "price": 70,
+      "description": "Semi-permanent makeup freckles are a new trend becoming more popular by the minute."
+    },
+    {
+      "name": "Brow Microblading",
+      "category": "Semi-permanent make up",
+      "duration": 120,
+      "price": 295,
+      "description": "Microblading is a semi-permanent technique for enhancing the appearance of the eyebrows."
+    },
+    {
+      "name": "Ombré Brows",
+      "category": "Semi-permanent make up",
+      "duration": 120,
+      "price": 295,
+      "description": "Ombre powder brows are a semi-permanent make up treatment that uses either a digital machine to insert tiny dots of pigment into the skin."
+    },
+    {
+      "name": "Combination Brows",
+      "category": "Semi-permanent make up",
+      "duration": 120,
+      "price": 320,
+      "description": "The Combination Brows is a treatment that combines hair stroke simulation with a mist of colour using shading techniques."
+    },
+    {
+      "name": "SPMU Brow colour boost - up to 6 months",
+      "category": "Semi-permanent make up",
+      "duration": 60,
+      "price": 90,
+      "description": "Color Boost boost is a touch-up procedure for people who have already received permanent makeup."
+    },
+    {
+      "name": "SPMU Brow colour boost - up to 9 months",
+      "category": "Semi-permanent make up",
+      "duration": 60,
+      "price": 100,
+      "description": "Color Boost boost is a touch-up procedure for people who have already received permanent makeup."
+    },
+    {
+      "name": "SPMU Brow colour boost - up to 12 months",
+      "category": "Semi-permanent make up",
+      "duration": 60,
+      "price": 120,
+      "description": "Color Boost boost is a touch-up procedure for people who have already received permanent makeup."
+    },
+    {
+      "name": "SPMU Brow colour boost - up to 18 months",
+      "category": "Semi-permanent make up",
+      "duration": 60,
+      "price": 135,
+      "description": "Color Boost boost is a touch-up procedure for people who have already received permanent makeup."
+    },
+    {
+      "name": "SPMU Brow correction or colour boost - over 18 months",
+      "category": "Semi-permanent make up",
+      "duration": 60,
+      "price": 150,
+      "description": "Color Boost boost is a touch-up procedure for people who have already received permanent makeup."
+    },
+    {
+      "name": "Saline Tattoo removal",
+      "category": "Semi-permanent make up",
+      "duration": 60,
+      "price": 45,
+      "description": "Saline SPMU brow removal is a method used to remove or lighten semi-permanent makeup."
+    },
+    {
+      "name": "Saline Tattoo removal 3 sessions",
+      "category": "Semi-permanent make up",
+      "duration": 180,
+      "price": 120,
+      "description": "Saline SPMU brow removal is a method used to remove or lighten semi-permanent makeup."
+    },
+    {
+      "name": "Saline Tattoo removal 6 sessions",
+      "category": "Semi-permanent make up",
+      "duration": 360,
+      "price": 230,
+      "description": "Saline SPMU brow removal is a method used to remove or lighten semi-permanent makeup."
+    },
+    {
+      "name": "Eyebrow shaping",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 10,
+      "description": "Waxing, tweezing and if needed trimming techniques are used to create perfectly tidy and shaped brows."
+    },
+    {
+      "name": "Men Eyebrow",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 10,
+      "description": "Shaping, tidying up brows using wax, tweezers and scissors to give neat and masculine look."
+    },
+    {
+      "name": "Eyebrow Tint",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 10,
+      "description": "A tint to give the brow hairs and skin a colour and depth."
+    },
+    {
+      "name": "Lash Tint",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 15,
+      "description": "Lash tint adds depth, colour and shine to the lashes, enhancing the eye."
+    },
+    {
+      "name": "Eyebrow Tint & Wax",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 20,
+      "description": "A combination of our eyebrow wax, tint & tidy treatments."
+    },
+    {
+      "name": "Lash & Eyebrow Tint",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 25,
+      "description": "A tint to darken the brow and lash hairs."
+    },
+    {
+      "name": "Lash Tint, Eyebrow Tint & Wax",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 30,
+      "description": "A combination of our lash tint, eyebrow tint & eyebrow wax treatments."
+    },
+    {
+      "name": "Lash Lift & Tint",
+      "category": "Lashes & Brows",
+      "duration": 45,
+      "price": 45,
+      "description": "A lash lift curls your natural lashes at the root."
+    },
+    {
+      "name": "Classic Lash Extensions full set",
+      "category": "Lashes & Brows",
+      "duration": 90,
+      "price": 60,
+      "description": "Individual lash extensions are meticulously added to each natural lash hair for a fuller, longer look."
+    },
+    {
+      "name": "Classic Lash Extensions- 2 weeks infill",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 35,
+      "description": "In this appointment old and outgrown Individual lash extensions are removed."
+    },
+    {
+      "name": "Classic Lash Extensions- 3 weeks infill",
+      "category": "Lashes & Brows",
+      "duration": 45,
+      "price": 45,
+      "description": "In this appointment old and outgrown Individual lash extensions are removed."
+    },
+    {
+      "name": "Hybrid Lash Extensions new set",
+      "category": "Lashes & Brows",
+      "duration": 90,
+      "price": 65,
+      "description": "Individual and fanning lash extensions are meticulously added."
+    },
+    {
+      "name": "Hybrid Lash Extensions- 2 weeks infill",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 40,
+      "description": "In this appointment old and outgrown lash extensions are removed."
+    },
+    {
+      "name": "Hybrid Lash Extensions- 3 weeks infill",
+      "category": "Lashes & Brows",
+      "duration": 45,
+      "price": 50,
+      "description": "In this appointment old and outgrown lash extensions are removed."
+    },
+    {
+      "name": "Volume Lash Extensions new set",
+      "category": "Lashes & Brows",
+      "duration": 90,
+      "price": 70,
+      "description": "Individual and hand made fanning lash extensions are meticulously added."
+    },
+    {
+      "name": "Volume Lash Extensions- 2 weeks infill",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 40,
+      "description": "In this appointment old and outgrown lash extensions are removed."
+    },
+    {
+      "name": "Volume Lash Extensions- 3 weeks infill",
+      "category": "Lashes & Brows",
+      "duration": 45,
+      "price": 50,
+      "description": "In this appointment old and outgrown lash extensions are removed."
+    },
+    {
+      "name": "Lash Extension Removal",
+      "category": "Lashes & Brows",
+      "duration": 30,
+      "price": 20,
+      "description": "Professional removal of eyelash extensions without damage to the natural lashes."
+    },
+    {
+      "name": "Men's Facial",
+      "category": "Facials",
+      "duration": 65,
+      "price": 65,
+      "description": "The Men's Facial is a revitalizing treatment tailored specifically for men's skin."
+    },
+    {
+      "name": "Deep cleansing",
+      "category": "Facials",
+      "duration": 60,
+      "price": 60,
+      "description": "A deep cleansing facial is a thorough skin treatment designed to remove impurities."
+    },
+    {
+      "name": "Dermaplaning",
+      "category": "Facials",
+      "duration": 50,
+      "price": 50,
+      "description": "Dermaplaning is a manual exfoliation procedure that gently abrades the dead layers of the skin."
+    },
+    {
+      "name": "Microneedling",
+      "category": "Facials",
+      "duration": 80,
+      "price": 80,
+      "description": "Microneedling is a treatment used on the face & body specifically targeting acne scarring."
+    },
+    {
+      "name": "Million Dollar Facial",
+      "category": "Facials",
+      "duration": 100,
+      "price": 100,
+      "description": "Million Dollar Facial is a luxurious facial where science meets indulgence."
+    },
+    {
+      "name": "Immaculate Peel",
+      "category": "Facials",
+      "duration": 55,
+      "price": 55,
+      "description": "A chemical peel enhances and smoothens the texture of the skin."
+    },
+    {
+      "name": "PregnaCare Facial",
+      "category": "Facials",
+      "duration": 55,
+      "price": 55,
+      "description": "The Pampering Cleansing & Hydrating Facial for Pregnant Women is a gentle treatment."
+    },
+    {
+      "name": "Million Dollar Miracle Mask",
+      "category": "Facials",
+      "duration": 55,
+      "price": 55,
+      "description": "Million Dollar Miracle Mask is a ground breaking facial mask packed with clinically proven ingredients."
+    },
+    {
+      "name": "Back cleansing",
+      "category": "Facials",
+      "duration": 60,
+      "price": 60,
+      "description": "A back cleansing facial is a targeted treatment that focuses on deep cleaning the skin on the back."
+    },
+    {
+      "name": "Add on",
+      "category": "Facials",
+      "duration": 30,
+      "price": 20,
+      "description": "Add on is an additional premium treatment to be added with facials."
+    },
+    {
+      "name": "Add on to Microneedling: skin boosters",
+      "category": "Facials",
+      "duration": 30,
+      "price": 40,
+      "description": "Enhance your microneedling treatment with Exosomes, Polynucleotides, Collagen for superior skin rejuvenation."
+    },
+    {
+      "name": "Eyebrow wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 10,
+      "description": "Eyebrow shaping using wax, finishing with tweeze and trim if needed."
+    },
+    {
+      "name": "Men Brow Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 10,
+      "description": "Shaping, tidying up brows using wax, tweezers and scissors to give neat and masculine look."
+    },
+    {
+      "name": "Brow, Lip & Chin Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 20,
+      "description": "An eyebrow wax with an upper lip wax and a chin wax."
+    },
+    {
+      "name": "Brow & Lip Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 15,
+      "description": "An eyebrow wax with an upper lip wax."
+    },
+    {
+      "name": "Chin Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 6,
+      "description": "Waxing to remove any hair from the chin area."
+    },
+    {
+      "name": "Lip Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 5,
+      "description": "The removal of all hair on the upper lip by waxing."
+    },
+    {
+      "name": "Nose wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 6,
+      "description": "Nose hair removal using hot wax."
+    },
+    {
+      "name": "Facial sides",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 8,
+      "description": "Hair removal from facial sides using wax."
+    },
+    {
+      "name": "Under Arms Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 10,
+      "description": "The removal of hair underneath arms."
+    },
+    {
+      "name": "Half Arm Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 15,
+      "description": "The removal of unwanted hair on your arms."
+    },
+    {
+      "name": "Full or 3/4 Arm Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 20,
+      "description": "The removal of unwanted hair on your arms."
+    },
+    {
+      "name": "Half Leg Wax - upper part",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 20,
+      "description": "The removal of upper part of leg hair using strip wax."
+    },
+    {
+      "name": "Half Leg Wax - lower part",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 15,
+      "description": "The removal of lower part of leg hair using strip wax."
+    },
+    {
+      "name": "Full Leg Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 30,
+      "description": "The removal of all leg hair using strip wax."
+    },
+    {
+      "name": "Bikini line Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 20,
+      "description": "The removal of hair outside of the knicker line."
+    },
+    {
+      "name": "Extended Bikini Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 30,
+      "description": "The removal of hair outside of the high bikini knicker line."
+    },
+    {
+      "name": "Brazilian Bikini Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 35,
+      "description": "The removal of underneath hair, leaving a small amount of hair on show."
+    },
+    {
+      "name": "Hollywood Bikini Wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 35,
+      "description": "The removal of all bikini hair."
+    },
+    {
+      "name": "Stomach wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 15,
+      "description": "Removal of stomach hair using strip wax."
+    },
+    {
+      "name": "Back wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 20,
+      "description": "Removal of back hair using strip wax."
+    },
+    {
+      "name": "Chest wax",
+      "category": "Waxing",
+      "duration": 30,
+      "price": 15,
+      "description": "Removal of chest hair using strip wax."
+    }
+  ]
+}

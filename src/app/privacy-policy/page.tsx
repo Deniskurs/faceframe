@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
       <section className="py-12 sm:py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-6 sm:px-8 lg:px-10 max-w-3xl">
           <article className="prose-luxury space-y-8 font-alice text-elegant-mocha/85 leading-relaxed tracking-wide">
-            <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/55">
+            <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/70">
               Last updated · {lastUpdated}
             </p>
 

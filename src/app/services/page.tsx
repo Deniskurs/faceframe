@@ -3,8 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/shared/PageHero";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
-import { BRAND, CTA, getBookingHref } from "@/config/business";
+import { BRAND, CTA } from "@/config/business";
 import serviceService from "@/services/serviceService";
+import { CATALOG_SERVICES } from "@/data/acuityCatalog";
 
 export const metadata: Metadata = {
   title: `Services | ${BRAND.name}`,
@@ -47,15 +48,27 @@ const CATEGORY_COPY: Record<
   },
 };
 
+/** Cheapest non-free treatment per category — an honest "from £X" signal. */
+function minPriceByCategory(): Record<string, number> {
+  const mins: Record<string, number> = {};
+  for (const s of CATALOG_SERVICES) {
+    const price = Number(s.priceDisplay.replace(/[^0-9.]/g, ""));
+    if (!price) continue; // skip the free consultation
+    if (!(s.category in mins) || price < mins[s.category]) mins[s.category] = price;
+  }
+  return mins;
+}
+
 export default async function ServicesPage() {
   const categories = await serviceService.getCategories();
+  const fromPrices = minPriceByCategory();
 
   return (
     <main>
       <PageHero
         label="Our Craft"
         title="Services"
-        description="A focused menu — every treatment performed personally by Iggy. Pricing and live availability appear on the booking page."
+        description="A focused menu — every treatment performed personally by Iggy. Browse a category, see prices and live availability, and book in under a minute."
         height="functional"
       />
 
@@ -87,8 +100,11 @@ export default async function ServicesPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-elegant-mocha/30 via-transparent to-transparent" />
                   </div>
                   <div className="p-6 sm:p-8">
-                    <p className="font-alta text-[11px] tracking-[0.25em] uppercase text-deep-bronze/80 mb-2">
+                    <p className="font-alta text-[11px] tracking-[0.25em] uppercase text-deep-bronze mb-2">
                       {category.count} treatment{category.count === 1 ? "" : "s"}
+                      {fromPrices[category.id] && (
+                        <> · from £{fromPrices[category.id]}</>
+                      )}
                     </p>
                     <h2 className="font-alice text-2xl text-elegant-mocha tracking-wide mb-3">
                       {copy.headline}
@@ -98,7 +114,7 @@ export default async function ServicesPage() {
                       {copy.description}
                     </p>
                     <LuxuryShadcnButton
-                      href={getBookingHref()}
+                      href={`/booking?category=${encodeURIComponent(category.id)}`}
                       text={CTA.bookPrimary}
                       luxuryVariant="elegant"
                       luxuryTheme="dark"
@@ -109,6 +125,24 @@ export default async function ServicesPage() {
               );
             })}
           </div>
+
+          {/* Surfaces that live in the booking journey but have no card above */}
+          <p className="text-center font-alice text-sm sm:text-base text-elegant-mocha/80 tracking-wide mt-10">
+            Also available:{" "}
+            <Link
+              href="/booking?category=saline-tattoo-removal"
+              className="text-deep-bronze hover:text-elegant-mocha underline underline-offset-2 transition-colors duration-300"
+            >
+              Saline Tattoo Removal
+            </Link>{" "}
+            ·{" "}
+            <Link
+              href="/booking?category=packages"
+              className="text-deep-bronze hover:text-elegant-mocha underline underline-offset-2 transition-colors duration-300"
+            >
+              Packages &amp; Gift Certificates
+            </Link>
+          </p>
 
           <div className="mt-16 text-center">
             <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/75 mb-3">
@@ -125,7 +159,7 @@ export default async function ServicesPage() {
               luxuryTheme="light"
               luxurySize="medium"
             />
-            <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/55 mt-8">
+            <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/75 mt-8">
               Want to see results first?{" "}
               <Link
                 href="/gallery"

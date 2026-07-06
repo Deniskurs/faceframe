@@ -138,7 +138,7 @@ const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
               <div className="relative w-12 h-12 mx-auto">
                 <div className="absolute inset-0 border border-elegant-mocha/30 border-t-elegant-mocha animate-spin"></div>
               </div>
-              <p className="mt-6 font-alta text-xs tracking-wider uppercase text-elegant-mocha/70">
+              <p className="mt-6 font-alta text-xs tracking-wider uppercase text-elegant-mocha/75">
                 Loading questions
               </p>
             </div>
@@ -171,7 +171,7 @@ const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
           {/* Empty State */}
           {!loading && !error && faqs.length === 0 && (
             <div className="text-center py-20 border border-soft-blush/10 bg-white">
-              <p className="font-alta text-sm tracking-wide text-elegant-mocha/70">
+              <p className="font-alice text-base tracking-wide text-elegant-mocha/80">
                 No questions available at the moment.
               </p>
             </div>

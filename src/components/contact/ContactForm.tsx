@@ -187,7 +187,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel className="font-alta tracking-[0.06em] uppercase text-xs text-elegant-mocha/85">
                 Phone
-                <span className="ml-2 normal-case text-elegant-mocha/50">
+                <span className="ml-2 normal-case text-elegant-mocha/65">
                   optional
                 </span>
               </FormLabel>
@@ -245,11 +245,11 @@ export function ContactForm() {
               <div className="flex items-baseline justify-between">
                 <FormLabel className="font-alta tracking-[0.06em] uppercase text-xs text-elegant-mocha/85">
                   Message
-                  <span className="ml-2 normal-case text-elegant-mocha/50">
+                  <span className="ml-2 normal-case text-elegant-mocha/65">
                     optional
                   </span>
                 </FormLabel>
-                <span className="text-[11px] font-alta text-elegant-mocha/55 tabular-nums">
+                <span className="text-[11px] font-alta text-elegant-mocha/70 tabular-nums">
                   {messageLength}/{MESSAGE_MAX}
                 </span>
               </div>
@@ -262,7 +262,7 @@ export function ContactForm() {
                   {...field}
                 />
               </FormControl>
-              <FormDescription className="font-alta text-[11px] text-elegant-mocha/55">
+              <FormDescription className="font-alta text-[11px] text-elegant-mocha/70">
                 Iggy reads every message personally — there&rsquo;s no template
                 reply.
               </FormDescription>

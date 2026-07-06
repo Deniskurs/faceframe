@@ -86,12 +86,18 @@ module.exports = {
   			hairline: '0.5px'
   		},
   		transitionTimingFunction: {
-  			luxury: 'cubic-bezier(0.19, 1, 0.22, 1)'
+  			luxury: 'cubic-bezier(0.19, 1, 0.22, 1)',
+			entrance: 'cubic-bezier(0.6, 0.05, 0.01, 0.9)',
+			silk: 'cubic-bezier(0.645, 0.045, 0.355, 1)'
   		},
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
   		},
   		keyframes: {
+			'shimmer-sweep': { '0%': { transform: 'translateX(-120%)' }, '100%': { transform: 'translateX(120%)' } },
+			'grain-drift': { '0%,100%': { transform: 'translate(0,0)' }, '25%': { transform: 'translate(-3%,2%)' }, '50%': { transform: 'translate(2%,-2%)' }, '75%': { transform: 'translate(-2%,-3%)' } },
+			'ken-burns': { '0%': { transform: 'scale(1) translate(0,0)' }, '100%': { transform: 'scale(1.08) translate(1.5%,-1.5%)' } },
+			'subtle-float': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
   			slideDown: {
   				'0%': {
   					transform: 'translateY(-100%)'
@@ -118,6 +124,10 @@ module.exports = {
   			}
   		},
   		animation: {
+			'shimmer-sweep': 'shimmer-sweep 1.1s cubic-bezier(0.19,1,0.22,1)',
+			'grain-drift': 'grain-drift 8s steps(4) infinite',
+			'ken-burns': 'ken-burns 12s cubic-bezier(0.19,1,0.22,1) infinite alternate',
+			'subtle-float': 'subtle-float 4s cubic-bezier(0.19,1,0.22,1) infinite',
   			'slide-down': 'slideDown 1.5s ease-in-out infinite',
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
@@ -128,6 +138,10 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		boxShadow: {
+			'luxury-sm': '0 2px 8px -2px rgba(127,85,57,0.08)',
+			luxury: '0 8px 30px -8px rgba(127,85,57,0.12)',
+			'luxury-lg': '0 20px 50px -12px rgba(127,85,57,0.18)',
+			'luxury-glow': '0 0 0 1px rgba(212,175,55,0.15), 0 12px 40px -10px rgba(127,85,57,0.2)',
   			input: '0px 2px 3px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02), 0px 0px 0px 1px rgba(25, 28, 33, 0.08)'
   		}
   	}

@@ -91,7 +91,7 @@ export default function EditorialTransformationLayout({
             variants={subtitleReveal.variants}
             initial={subtitleReveal.initial}
             animate={subtitleReveal.animate}
-            className="font-alta text-elegant-mocha/70 max-w-xl mx-auto -mt-8 mb-16 tracking-[0.12em] leading-[1.8] text-center text-[16px]"
+            className="font-alice text-elegant-mocha/80 max-w-xl mx-auto -mt-8 mb-16 tracking-wide leading-relaxed text-center text-base sm:text-lg"
           >
             {subtitle}
           </motion.p>
@@ -114,7 +114,7 @@ export default function EditorialTransformationLayout({
 
               {quoteAuthor && (
                 <div className="mt-8">
-                  <p className="font-alta text-[12px] tracking-[0.2em] uppercase text-elegant-mocha/70">
+                  <p className="font-alta text-[12px] tracking-[0.2em] uppercase text-elegant-mocha/75">
                     {quoteAuthor}
                   </p>
                 </div>

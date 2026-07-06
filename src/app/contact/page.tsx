@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { PageHero } from "@/components/shared/PageHero";
 import {
-  BookOrMessage,
+  MessageSection,
   QuickInfo,
   StudioComparison,
 } from "@/components/contact";
@@ -11,27 +11,25 @@ import { BRAND, SITE } from "@/config/business";
 
 export const metadata: Metadata = {
   title: `Contact | ${BRAND.name}`,
-  description: `Book a treatment or send Iggy a message. The intimate ${BRAND.name} studio in East London — semi-permanent makeup, lashes, brows, and luxury facials.`,
+  description: `Send Iggy a message. The intimate ${BRAND.name} studio in East London — semi-permanent makeup, lashes, brows, and luxury facials.`,
   alternates: { canonical: `${SITE.url}/contact` },
   openGraph: {
     title: `Contact ${BRAND.name}`,
     description:
-      "Schedule directly or message Iggy. East London studio. Response within 24 hours.",
+      "Message Iggy directly. East London studio. Response within 24 hours.",
     type: "website",
     url: `${SITE.url}/contact`,
   },
 };
 
 /**
- * Contact page — clean, opinionated, Acuity-ready.
+ * Contact page — conversation only; booking lives at /booking.
  *
  * Layout (top → bottom):
- *  1. PageHero — single light hero, no contact-info cards
- *  2. BookOrMessage — shadcn Tabs (Schedule | Message). Schedule tab houses
- *     the Acuity embed once `BOOKING.acuityEmbedHtml` is filled in.
+ *  1. PageHero — single light hero
+ *  2. MessageSection — message form + quiet booking pointer
  *  3. QuickInfo — compact horizontal strip (email · hours · studio · IG)
- *  4. StudioComparison — single studio location card (kept, lives further
- *     down so the booking surface stays primary)
+ *  4. StudioComparison — single studio location card
  *  5. Footer note → /faq for anything else
  */
 export default function ContactPage() {
@@ -40,11 +38,11 @@ export default function ContactPage() {
       <PageHero
         label="Get in Touch"
         title="Let's talk"
-        description="Schedule directly, or send Iggy a message — she reads every note personally and replies within 24 hours."
+        description="Send Iggy a message — she reads every note personally and replies within 24 hours."
         height="functional"
       />
 
-      <BookOrMessage />
+      <MessageSection />
 
       <QuickInfo />
 

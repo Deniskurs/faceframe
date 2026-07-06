@@ -228,7 +228,7 @@ export default function LuxuryClientVoices({
         {/* Empty State with Chanel-inspired minimalism */}
         {!loading && !error && testimonials.length === 0 && (
           <div className="text-center py-28 border border-soft-blush/10 bg-white">
-            <p className="font-alta text-sm tracking-wide text-elegant-mocha/70">
+            <p className="font-alice text-base tracking-wide text-elegant-mocha/80">
               Client voices will be featured here soon.
             </p>
           </div>

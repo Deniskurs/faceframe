@@ -63,7 +63,7 @@ export default function GalleryHero() {
 
       {/* Optional: Category count or description */}
       <motion.p
-        className="font-alta text-xs text-elegant-mocha/50 mt-4 tracking-wide"
+        className="font-alta text-xs text-elegant-mocha/70 mt-4 tracking-wide"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.3, ease: LUXURY_EASING }}

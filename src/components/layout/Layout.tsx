@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import CursorEffect from "../shared/CursorEffect";
 import useSmoothScroll from "@/utils/animations/useSmoothScroll";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -27,13 +26,6 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="flex flex-col min-h-screen relative">
-      {/* Premium custom cursor */}
-      <CursorEffect
-        color="#7F5539"
-        backgroundColor="rgba(127, 85, 57, 0.05)"
-        size={26}
-      />
-
       <Header />
 
       <main className="flex-grow pt-[70px] md:pt-[80px]">{children}</main>

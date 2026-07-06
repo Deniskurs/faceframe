@@ -1,0 +1,1202 @@
+[
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 0,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 0,
+  "duration": 15,
+  "description": "Skin suitability assessment for semi-permanent brow procedures. We discuss your goals and expectations, perform a colour match, and carry out an allergy patch test.",
+  "name": "Free Consultation & Patch Test",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Avoid water and skincare on the treated area for 24 hours. Aftercare instructions will be provided.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 35,
+  "duration": 60,
+  "description": "A small artificial beauty mark applied with permanent cosmetics — face, shoulder, neck, or anywhere on the body. Permanent placement of a single dark spot.",
+  "name": "Beauty Spots",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Avoid water and skincare on the treated area for 24 hours. Aftercare instructions will be provided.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 70,
+  "duration": 60,
+  "description": "Semi-permanent freckle tattoos — soft, natural-looking pigment dots that fade over 1–3 years.",
+  "name": "Freckles",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Avoid getting brows wet for 7 days. Full aftercare guide will be emailed to you. Touch-up appointment is included — please book within 5–8 weeks.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 295,
+  "duration": 120,
+  "description": "Semi-permanent technique for enhancing the appearance of the eyebrows, in which pigment is implanted into the skin in fine, short strokes resembling hair, using a hand tool with a blade formed of tiny needles. Shape and style is adapted to every client individually following their face features, skin and preferences.\n\nIn the price included :\n• Free consultation and a patch test\n• Initial procedure\n• Touch up in 5-8 weeks\n\nNOTE: please book consultation and a patch test appointment first.",
+  "name": "Brow Microblading",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Avoid getting brows wet for 7 days. Full aftercare guide will be emailed to you. Touch-up appointment is included — please book within 5–8 weeks.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 295,
+  "duration": 120,
+  "description": "Semi- permanent make up treatment that uses either a digital machine to insert tiny dots of pigment into the skin. It creates a more shaded effect, rather than the crisp hair strokes that are often associated with microblading. Shape and style is adapted to every client individually following their face features, skin and preferences.\n\nIn the price included :\n• Free consultation and a patch test\n• Initial procedure\n\nNOTE: please book consultation and a patch test appointment first.",
+  "name": "Ombré Brows",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Avoid getting brows wet for 7 days. Full aftercare guide will be emailed to you. Touch-up appointment is included — please book within 5–8 weeks.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 320,
+  "duration": 120,
+  "description": "The Combination Brows is a treatment that combines hair stroke simulation with a mist of colour using shading techniques with digital machine. Combining microblading with ombre powder together creates a more defined looking brow than just hairstrokes alone. Shape and style is adapted to every client individually following their face features, skin and preferences.\n\nIn the price included :\n• Free consultation and a patch test\n\nNOTE: please book consultation and a patch test appointment first.",
+  "name": "Combination Brows",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Standard aftercare applies. Avoid getting brows wet for 7 days.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 90,
+  "duration": 60,
+  "description": "Touch-up for existing clients within 6 months of their original treatment. Refreshes colour saturation while pigment is still strong.",
+  "name": "SPMU Brow Colour Boost — up to 6 months",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Standard aftercare applies. Avoid getting brows wet for 7 days.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 100,
+  "duration": 60,
+  "description": "Touch-up for existing clients within 9 months of their original treatment. Light pigment refresh and shape correction.",
+  "name": "SPMU Brow Colour Boost — up to 9 months",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Standard aftercare applies. Avoid getting brows wet for 7 days.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 120,
+  "duration": 60,
+  "description": "Annual maintenance touch-up. Restores pigment depth and adjusts shape to suit your face today.",
+  "name": "SPMU Brow Colour Boost — up to 12 months",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Standard aftercare applies. Avoid getting brows wet for 7 days.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 135,
+  "duration": 60,
+  "description": "Maintenance touch-up for clients up to 18 months post-procedure. Includes more substantial re-pigmentation work.",
+  "name": "SPMU Brow Colour Boost — up to 18 months",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Standard aftercare applies. Avoid getting brows wet for 7 days.",
+  "category": "Semi-Permanent Make-up",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 150,
+  "duration": 60,
+  "description": "Full correction or re-pigmentation for clients whose original treatment was over 18 months ago. May include shape redesign.",
+  "name": "SPMU Brow Correction or Colour Boost — over 18 months",
+  "isPrivate": false,
+  "color": "8B2540",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Avoid water on the treated area for 7 days. Full aftercare will be provided.",
+  "category": "Saline Tattoo Removal",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 45,
+  "duration": 60,
+  "description": "Lightens or removes existing semi-permanent makeup using a saline solution to draw pigment back out of the skin. Each client typically needs 3–6 sessions spaced 6–8 weeks apart.",
+  "name": "Saline Tattoo Removal — Single Session",
+  "isPrivate": false,
+  "color": "475569",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid tanning, excessive sweating, steam room, sauna, swimming and makeup for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 10,
+  "duration": 30,
+  "description": "Wax, tweeze, and trim to define and tidy the brow shape.",
+  "name": "Eyebrow Shaping",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid tanning, excessive sweating, steam room, sauna, swimming and makeup for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 10,
+  "duration": 30,
+  "description": "Wax, tweeze, and trim to tidy and neaten masculine brow shape without over-defining.",
+  "name": "Men's Eyebrow Shaping",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 10,
+  "duration": 30,
+  "description": "Colour and depth added to brow hairs and skin using professional brow tint.",
+  "name": "Eyebrow Tint",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 15,
+  "duration": 30,
+  "description": "Adds depth, shine, and definition to natural lashes — particularly useful for fair lash colour.",
+  "name": "Lash Tint",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid tanning, excessive sweating, steam room, sauna, swimming and makeup for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 20,
+  "duration": 30,
+  "description": "Combination treatment — brow tint plus shaping wax in a single appointment.",
+  "name": "Eyebrow Tint & Wax",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 25,
+  "duration": 30,
+  "description": "Combined lash and brow tint to deepen colour on both areas in one visit.",
+  "name": "Lash & Eyebrow Tint",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid tanning, excessive sweating, steam room, sauna, swimming and makeup for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 30,
+  "duration": 30,
+  "description": "Complete brow-and-lash refresh — lash tint, brow tint, and brow shaping in one appointment.",
+  "name": "Lash Tint, Eyebrow Tint & Wax",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 10,
+  "confirmationMessage": "Keep Lashes Dry: Avoid water, steam, and moisture around your lashes for at least 24-48 hours after the treatment to allow the lift and tint to set.\nAvoid Heat and Sweat: Stay away from saunas, hot showers, steam rooms, and exercise that causes sweating during this time.\nNo Rubbing or Touching: Do not rub, tug, or touch your lashes excessively to prevent disrupting the shape. No Eyelash Curlers: Do not use mechanical eyelash curlers, as this can damage the lifted lashes.\nCondition Lashes: After 48 hours, you can apply a lash conditioning serum. Brush Lashes: Use a clean spoolie to gently comb your lashes each morning to maintain their shape and separation.\nAvoid Excessive Heat: Keep lashes away from extreme heat, such as blow dryers, which could affect the curl.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 45,
+  "duration": 45,
+  "description": "Lifts and curls natural lashes at the root for a wide-eyed effect, finished with a tint for added depth.",
+  "name": "Lash Lift & Tint",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "Avoid Getting Lashes Wet: Keep your lashes completely dry for the first 24-48 hours to allow the adhesive to properly set.\nNo Steam or Heat: Avoid saunas, steam rooms, or hot showers during this time, as steam can weaken the adhesive.\nDo Not Touch or Rub: Refrain from touching, rubbing, or pulling on the lashes, as this can cause them to fall out or become misaligned.\nBe Gentle When Cleansing: Use a lash extension-safe cleanser to gently clean your eyes with a soft brush or cotton pad.\nAvoid Oil-Based Products: Stay away from oil-based cleansers, makeup removers, and moisturizers around the eye area, as they can break down the adhesive.\nBrush Your Lashes: Use a clean spoolie brush to gently comb through your lashes each morning to keep them tidy and in place.\nAvoid Excessive Heat: Keep away from blow dryers, ovens, or any high heat directly on your lashes.\nSchedule Refills: Lash extensions naturally shed with your natural lashes. Schedule refills every 2-3 weeks to maintain fullness and health of your lashes.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 60,
+  "duration": 90,
+  "description": "Individual lash extensions applied one-to-one to natural lashes for a fuller, longer look.",
+  "name": "Classic Lash Extensions — Full Set",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid water and steam for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 35,
+  "duration": 30,
+  "description": "Maintenance infill for classic lash extensions, booked within 2 weeks of last appointment. Outgrown extensions are removed and new ones applied.",
+  "name": "Classic Lash Infill — 2 Weeks",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid water and steam for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 45,
+  "duration": 45,
+  "description": "Maintenance infill for classic lash extensions, booked within 3 weeks. More fill required than 2-week infill.",
+  "name": "Classic Lash Infill — 3 Weeks",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "Avoid Getting Lashes Wet: Keep your lashes completely dry for the first 24-48 hours to allow the adhesive to properly set.\nNo Steam or Heat: Avoid saunas, steam rooms, or hot showers during this time, as steam can weaken the adhesive.\nDo Not Touch or Rub: Refrain from touching, rubbing, or pulling on the lashes, as this can cause them to fall out or become misaligned.\nBe Gentle When Cleansing: Use a lash extension-safe cleanser to gently clean your eyes with a soft brush or cotton pad.\nAvoid Oil-Based Products: Stay away from oil-based cleansers, makeup removers, and moisturizers around the eye area, as they can break down the adhesive.\nBrush Your Lashes: Use a clean spoolie brush to gently comb through your lashes each morning to keep them tidy and in place.\nAvoid Excessive Heat: Keep away from blow dryers, ovens, or any high heat directly on your lashes.\nSchedule Refills: Lash extensions naturally shed with your natural lashes. Schedule refills every 2-3 weeks to maintain fullness and health of your lashes.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 65,
+  "duration": 90,
+  "description": "Mix of individual classic lashes and small fan-style volume lashes for a textured, mid-density look.",
+  "name": "Hybrid Lash Extensions — New Set",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid water and steam for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 40,
+  "duration": 30,
+  "description": "Maintenance infill for hybrid lash extensions, booked within 2 weeks of last appointment.",
+  "name": "Hybrid Lash Infill — 2 Weeks",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid water and steam for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 50,
+  "duration": 45,
+  "description": "Maintenance infill for hybrid lash extensions, booked within 3 weeks.",
+  "name": "Hybrid Lash Infill — 3 Weeks",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "Avoid Getting Lashes Wet: Keep your lashes completely dry for the first 24-48 hours to allow the adhesive to properly set.\nNo Steam or Heat: Avoid saunas, steam rooms, or hot showers during this time, as steam can weaken the adhesive.\nDo Not Touch or Rub: Refrain from touching, rubbing, or pulling on the lashes, as this can cause them to fall out or become misaligned.\nBe Gentle When Cleansing: Use a lash extension-safe cleanser to gently clean your eyes with a soft brush or cotton pad.\nAvoid Oil-Based Products: Stay away from oil-based cleansers, makeup removers, and moisturizers around the eye area, as they can break down the adhesive.\nBrush Your Lashes: Use a clean spoolie brush to gently comb through your lashes each morning to keep them tidy and in place.\nAvoid Excessive Heat: Keep away from blow dryers, ovens, or any high heat directly on your lashes.\nSchedule Refills: Lash extensions naturally shed with your natural lashes. Schedule refills every 2-3 weeks to maintain fullness and health of your lashes.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 70,
+  "duration": 90,
+  "description": "Fans of ultra-fine lash extensions applied to each natural lash for the densest, dramatic look.",
+  "name": "Volume Lash Extensions — New Set",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid water and steam for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 40,
+  "duration": 30,
+  "description": "Maintenance infill for volume lash extensions, booked within 2 weeks of last appointment.",
+  "name": "Volume Lash Infill — 2 Weeks",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 5,
+  "confirmationMessage": "Avoid water and steam for 24 hours.",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 50,
+  "duration": 45,
+  "description": "Maintenance infill for volume lash extensions, booked within 3 weeks.",
+  "name": "Volume Lash Infill — 3 Weeks",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Lashes & Brows",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 20,
+  "duration": 30,
+  "description": "Professional removal of all lash extensions without damage to the natural lashes.",
+  "name": "Lash Extension Removal",
+  "isPrivate": false,
+  "color": "D4747A",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "Arrive with a clean-shaven face if possible, or with day-old growth — avoid shaving immediately before.",
+  "category": "Facials",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 65,
+  "duration": 65,
+  "description": "The Men’s Facial is a revitalizing treatment tailored specifically for men’s skin, targeting issues like clogged pores, rough texture, and irritation from shaving. This facial includes a deep cleanse, exfoliation to remove dead skin cells, and a soothing mask to reduce redness and inflammation. It’s designed to hydrate, smooth, and refresh the skin, addressing common concerns such as ingrown hairs and environmental stress.",
+  "name": "Men's Facial",
+  "isPrivate": false,
+  "color": "7B9B7E",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "SPF50 for all clients\nNo swimming for 48h\n-No excessive exercise, heat treatments and makeup for 48 hours\nNo other facial treatments for at least one week\nStay well hydrated",
+  "category": "Facials",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 60,
+  "duration": 60,
+  "description": "A deep cleansing facial is a thorough skin treatment designed to remove impurities, toxins, and dead skin cells from the face. It typically involves cleansing, exfoliation, steam, extractions, and a mask suited to each individual skin needs, leaving the skin refreshed, clear, and rejuvenated. Ideal for congested skin, this facial helps to unclog pores, reduce breakouts, and improve overall skin texture and tone.",
+  "name": "Deep Cleansing Facial",
+  "isPrivate": false,
+  "color": "7B9B7E",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "SPF50 for all clients\nNo swimming for 7 days\n-No excessive exercise, heat treatments and makeup for 48 hours\nNo exfoliation for 7 days\nNo other facial treatments for at least 2 weeks\nAvoid products such as Retinol for 7 days before/ after\nStay well hydrated",
+  "category": "Facials",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 50,
+  "duration": 50,
+  "description": "Dermaplaning is a manual exfoliation procedure that gently abrades the dead layers of the skin using a surgical blade. The procedure aims to increase the absorption of skincare products and diminish fine lines and wrinkles. The treatment creates a healthy glow and a radiant complexion.\nDermaplane aims to make your skins surface smooth, youthful and radiant. It is also used to remove \"peach fuzz\" the short soft vellus nonterminal hair from your face.\n. Perfect for clients with congested, dry and dull skin.",
+  "name": "Dermaplaning",
+  "isPrivate": false,
+  "color": "7B9B7E",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "SPF50 for all clients\nNo swimming for 7 days\n-No excessive exercise, heat treatments and makeup for 48 hours\nNo exfoliation for 7 days\nNo other facial treatments for at least 2 weeks\nAvoid products such as Retinol for 7 days before/ after\nStay well hydrated",
+  "category": "Facials",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 80,
+  "duration": 80,
+  "description": "Microneedling is a treatment used on the face& bodyspecifically targeting acne scarring, pore size and fine lines & wrinkles. The act of Microneedling creates multiple superficial puncture wounds, releasing growth factors\nthat stimulate the fibroblasts creating new collagen and elastin.\nThe aim of the treatment is to traumatise the skin without collateral damage to the epidermis and healthy tissue.\nThe recovery is rapid with very little downtime, residual pain or discomfort.",
+  "name": "Microneedling",
+  "isPrivate": false,
+  "color": "7B9B7E",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 15,
+  "paddingAfter": 15,
+  "confirmationMessage": "Avoid sun exposure for 48 hours. Full at-home regimen will be discussed.",
+  "category": "Facials",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 100,
+  "duration": 100,
+  "description": "Million Dollar Facial is a luxurious facial where science meets indulgence. Working the skin from the outside in, it has been designed to deeply exfoliate dead skin cells, remove non-terminal hair, flush toxins, increase cell turnover and stimulate collagen production.\nOur Million-dollar facial treatment is a 10-step unique protocol which combines dermaplaning, skin needling and lymphatic drainage massage to leave clients looking and feeling a million dollars.",
+  "name": "Million Dollar Facial",
+  "isPrivate": false,
+  "color": "7B9B7E",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "SPF50 for all clients\nNo swimming for 7 days\n-No excessive exercise, heat treatments and makeup for 48 hours\nNo exfoliation for 7 days\nNo other facial treatments for at least 2 weeks\nAvoid products such as Retinol for 7 days before/ after\nStay well hydrated",
+  "category": "Facials",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 55,
+  "duration": 55,
+  "description": "A chemical peel enhances and smoothens the texture of the skin. It is an effective treatment for facial blemishes, wrinkles and uneven pigmentation, problematic skin and pustules. They exfoliate the outer layers of dead skin, revealing a new skin layer with improved tone, texture and colour.\n\nIt is designed to give near immediate results without the downtime often associated with chemical peels.",
+  "name": "Immaculate Peel",
+  "isPrivate": false,
+  "color": "7B9B7E",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "Please let us know which trimester you're in when booking.",
+  "category": "Facials",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 55,
+  "duration": 55,
+  "description": "The Pampering Cleansing & Hydrating Facial for Pregnant Women is a gentle, nourishing treatment designed to address the unique skincare needs of expectant mothers. This facial uses pregnancy-safe products to deeply cleanse, hydrate, and soothe sensitive skin without any harsh chemicals. It includes a gentle cleanse, light exfoliation, pore cleanse, calming mask, and a hydrating serum to restore moisture, leaving skin soft, glowing, and refreshed.",
+  "name": "PregnaCare Facial",
+  "isPrivate": false,
+  "color": "7B9B7E",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "SPF50 for all clients\nNo swimming for 48h\n-No excessive exercise, heat treatments and makeup for 48 hours\nNo other facial treatments for at least one week\nStay well hydrated",
+  "category": "Facials",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 55,
+  "duration": 55,
+  "description": "Million Dollar Miracle Mask is a ground breaking facial mask packed with clinically proven ingredients. Leaving skin tighter, firmer and brighter.\n\nThe formula stimulates plasma into the deeper levels of the skin in order to enhance cellular renewal. Using the latest in peptide technology, this Miracle Mask has the unique ability to create micro circulation, promote collagen and detoxify skin.",
+  "name": "Million Dollar Miracle Mask",
+  "isPrivate": false,
+  "color": "7B9B7E",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "SPF50 for all clients\nNo swimming for 48h\n-No excessive exercise, heat treatments and makeup for 48 hours\nNo other facial treatments for at least one week\nStay well hydrated",
+  "category": "Facials",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 60,
+  "duration": 60,
+  "description": "A back cleansing facial is a targeted treatment that focuses on deep cleaning the skin on the back, an area prone to breakouts, clogged pores, and uneven texture. This facial typically includes cleansing, exfoliation, steam, and extractions to remove impurities and excess oil, followed by a soothing mask to hydrate and calm the skin. It helps to clear acne, reduce blemishes, and leave the back smooth and refreshed.",
+  "name": "Back Cleansing Facial",
+  "isPrivate": false,
+  "color": "7B9B7E",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 10,
+  "duration": 30,
+  "description": "Shaping using wax, finished with tweezing and trimming where needed.",
+  "name": "Eyebrow Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 10,
+  "duration": 30,
+  "description": "Tidy and shape men's brows using wax, tweezers, and scissors for a clean, masculine finish.",
+  "name": "Men's Brow Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 20,
+  "duration": 30,
+  "description": "Eyebrow wax with upper-lip wax and chin wax in one appointment.",
+  "name": "Brow, Lip & Chin Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 15,
+  "duration": 30,
+  "description": "Eyebrow wax combined with upper-lip wax.",
+  "name": "Brow & Lip Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 6,
+  "duration": 30,
+  "description": "Removal of any hair from the chin area using wax.",
+  "name": "Chin Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 5,
+  "duration": 30,
+  "description": "Removal of upper-lip hair using wax.",
+  "name": "Lip Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 6,
+  "duration": 30,
+  "description": "Removal of nose hair using hot wax.",
+  "name": "Nose Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 8,
+  "duration": 30,
+  "description": "Hair removal from the sides of the face using wax.",
+  "name": "Facial Sides Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 10,
+  "duration": 30,
+  "description": "Hair removal under the arms.",
+  "name": "Underarm Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 15,
+  "duration": 30,
+  "description": "Hair removal from the forearm (elbow down) or upper arm.",
+  "name": "Half Arm Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 20,
+  "duration": 30,
+  "description": "Hair removal from the full or three-quarter length of the arm.",
+  "name": "Full or 3/4 Arm Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 20,
+  "duration": 30,
+  "description": "Hair removal from the thigh using strip wax.",
+  "name": "Half Leg Wax — Upper",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 15,
+  "duration": 30,
+  "description": "Hair removal from the knee down using strip wax.",
+  "name": "Half Leg Wax — Lower",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 10,
+  "paddingAfter": 10,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 30,
+  "duration": 30,
+  "description": "Complete leg hair removal — thigh to ankle — using strip wax.",
+  "name": "Full Leg Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 20,
+  "duration": 30,
+  "description": "Hair removal from outside the knicker line.",
+  "name": "Bikini Line Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 30,
+  "duration": 30,
+  "description": "Hair removal further beyond the standard knicker line.",
+  "name": "Extended Bikini Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 10,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 35,
+  "duration": 30,
+  "description": "Removal of most bikini hair, leaving a small landing strip.",
+  "name": "Brazilian Bikini Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 10,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 35,
+  "duration": 30,
+  "description": "Full removal of all bikini hair.",
+  "name": "Hollywood Bikini Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 15,
+  "duration": 30,
+  "description": "Removal of stomach hair using strip wax.",
+  "name": "Stomach Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 20,
+  "duration": 30,
+  "description": "Removal of back hair using strip wax.",
+  "name": "Back Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ },
+ {
+  "type": "service",
+  "isActive": true,
+  "isBaseAppointmentType": true,
+  "paddingBefore": 5,
+  "paddingAfter": 5,
+  "confirmationMessage": "",
+  "category": "Waxing",
+  "calendarIds": [
+   12409062
+  ],
+  "price": 15,
+  "duration": 30,
+  "description": "Removal of chest hair using strip wax.",
+  "name": "Chest Wax",
+  "isPrivate": false,
+  "color": "C89B47",
+  "isSeries": false,
+  "location": ""
+ }
+]

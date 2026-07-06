@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { PageHero } from "@/components/shared/PageHero";
-import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
-import { BOOKING, CONTACT, HOURS, BRAND, CTA } from "@/config/business";
+import { BookingJourney } from "@/components/booking/BookingJourney";
+import { BRAND } from "@/config/business";
 
 export const metadata: Metadata = {
   title: `Book an Appointment | ${BRAND.name}`,
@@ -15,63 +16,44 @@ export const metadata: Metadata = {
 };
 
 export default function BookingPage() {
-  const acuityReady = Boolean(BOOKING.acuityEmbedHtml);
-
   return (
     <main>
       <PageHero
         label="Schedule"
         title="Book Your Appointment"
-        description="Select your service and a time that suits you. Iggy takes a limited number of clients each week."
-        height="functional"
+        description="Choose a treatment, then pick a time that suits you. Iggy takes a limited number of clients each week."
+        height="minimal"
       />
 
-      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+      <section className="pt-6 sm:pt-8 pb-12 sm:pb-16 lg:pb-20 bg-white">
         <div className="container mx-auto px-6 sm:px-8 lg:px-10 max-w-5xl">
-          {acuityReady ? (
-            <div
-              className="acuity-embed-container [&_iframe]:w-full [&_iframe]:min-h-[820px] [&_iframe]:border-0"
-              // Acuity provides a vetted iframe snippet — safe to inject.
-              dangerouslySetInnerHTML={{ __html: BOOKING.acuityEmbedHtml ?? "" }}
-            />
-          ) : (
-            <div className="border border-elegant-mocha/15 bg-light-cream/30 rounded-sm p-8 sm:p-12 text-center">
-              <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/75 mb-3">
-                Online Scheduling
-              </p>
-              <h2 className="font-alice text-2xl sm:text-3xl text-elegant-mocha tracking-wide mb-4">
-                Online booking opening soon
-              </h2>
-              <div className="h-[0.5px] w-12 bg-elegant-mocha/30 mx-auto mb-5" />
-              <p className="font-alice text-base md:text-lg text-elegant-mocha/80 leading-relaxed tracking-wide max-w-xl mx-auto mb-8">
-                In the meantime, message Iggy directly and she&rsquo;ll confirm
-                your slot personally — usually {CONTACT.responseTime}.
-              </p>
+          {/*
+            Native journey: category → treatment → scoped Acuity calendar.
+            useSearchParams inside requires a Suspense boundary for static rendering.
+          */}
+          <Suspense fallback={<div className="min-h-[400px]" aria-hidden="true" />}>
+            <BookingJourney />
+          </Suspense>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                <LuxuryShadcnButton
-                  href="/contact#contact-form"
-                  text="MESSAGE IGGY"
-                  luxuryVariant="elegant"
-                  luxuryTheme="dark"
-                  luxurySize="medium"
-                />
-                <LuxuryShadcnButton
-                  href="/services"
-                  text={CTA.viewServices}
-                  luxuryVariant="outline"
-                  luxuryTheme="light"
-                  luxurySize="medium"
-                />
-              </div>
+          {/* Client-account hint — the portal lives at /account */}
+          <div className="mt-12 pt-6 border-t-hairline border-elegant-mocha/15 text-center">
+            <p className="font-alice text-base text-elegant-mocha mb-1">
+              Already booked?
+            </p>
+            <p className="font-alice text-sm sm:text-base text-elegant-mocha/85 leading-relaxed tracking-wide max-w-2xl mx-auto">
+              Visit{" "}
+              <Link
+                href="/account"
+                className="text-deep-bronze underline underline-offset-2 hover:text-elegant-mocha transition-colors"
+              >
+                My Account
+              </Link>{" "}
+              to view, reschedule, or cancel your appointments and see your
+              package credits — or use the link in your confirmation email.
+            </p>
+          </div>
 
-              <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/55 mt-8">
-                Studio hours · {HOURS.display}
-              </p>
-            </div>
-          )}
-
-          {/* Reassurance row — visible whether Acuity is live or not */}
+          {/* Reassurance row */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
             {[
               {
@@ -98,7 +80,7 @@ export default function BookingPage() {
             ))}
           </div>
 
-          <p className="text-center font-alta text-xs tracking-[0.04em] text-elegant-mocha/55 mt-12">
+          <p className="text-center font-alta text-xs tracking-[0.04em] text-elegant-mocha/75 mt-12">
             Questions before booking?{" "}
             <Link
               href="/faq"

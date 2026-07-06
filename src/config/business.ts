@@ -57,31 +57,40 @@ export const STUDIO = {
 } as const;
 
 /**
- * BOOKING — Acuity Scheduling configuration.
+ * BOOKING — Acuity Scheduling configuration (LIVE as of 2026-07-05).
  *
- * When live Acuity URLs are ready, fill these in. While `acuityUrl` is null,
- * every booking CTA falls back to `/booking` (the shell page) so nothing
- * breaks. The shell page itself will swap a "coming soon" panel for the
- * embedded Acuity widget once `acuityEmbedHtml` is provided.
+ * Account: owner 36291837, GBP, Europe/London, single calendar "Face Frame".
+ * Master scheduler: https://app.acuityscheduling.com/schedule.php?owner=36291837
  *
- * Per-service deep links use Acuity's `appointmentType` query param.
+ * `acuityUrl` is deliberately null so every booking CTA routes to /booking,
+ * which renders the live embedded scheduler (`acuityEmbedHtml`) — clients
+ * stay on-site. Set `acuityUrl` to the master scheduler URL above to send
+ * CTAs directly to Acuity's hosted page instead.
+ *
+ * Category keys in `serviceIds` use Acuity's `appointmentType=category:<name>`
+ * deep-link filter (pre-encoded); service keys use numeric appointmentType IDs.
+ * All 60 services + 2 add-ons + 2 packages were imported and verified
+ * against `migration/acuity-import.xlsx` — see `migration/README.md`.
  */
 export const BOOKING = {
-  /** Master Acuity scheduling URL (e.g. https://app.acuityscheduling.com/schedule.php?owner=XXXXXX) */
+  /** Master Acuity URL — null keeps CTAs on-site at /booking (see above) */
   acuityUrl: null as string | null,
-  /** Optional dedicated services / category page on Acuity */
+  /** Off-site services page — intentionally null, /services stays canonical */
   servicesUrl: null as string | null,
-  /** Raw <iframe> snippet from Acuity for embedding on /booking */
-  acuityEmbedHtml: null as string | null,
-  /** Acuity appointmentType IDs per service — fill in when ready */
+  /** Acuity's vetted iframe snippet, embedded on /booking and /contact */
+  acuityEmbedHtml:
+    '<iframe src="https://app.acuityscheduling.com/schedule.php?owner=36291837" width="100%" height="800" frameBorder="0" allow="payment"></iframe>\n<script src="https://embed.acuityscheduling.com/js/embed.js" type="text/javascript"></script>' as
+      | string
+      | null,
+  /** Acuity appointmentType IDs (numeric) or category deep-link filters */
   serviceIds: {
-    "semi-permanent-makeup": null as string | null,
-    "microblading": null as string | null,
-    "lash-extensions": null as string | null,
-    "lash-lift-tint": null as string | null,
-    "brow-styling": null as string | null,
-    "luxury-facials": null as string | null,
-    "consultation": null as string | null,
+    "semi-permanent-makeup": "category:Semi-Permanent%20Make-up" as string | null,
+    "microblading": "95376913" as string | null,
+    "lash-extensions": "95376936" as string | null,
+    "lash-lift-tint": "95376935" as string | null,
+    "brow-styling": "category:Lashes%20%26%20Brows" as string | null,
+    "luxury-facials": "category:Facials" as string | null,
+    "consultation": "95376769" as string | null,
   },
 } as const;
 
