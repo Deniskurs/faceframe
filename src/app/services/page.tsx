@@ -26,20 +26,21 @@ const CATEGORY_COPY: Record<
     headline: "Semi-Permanent Makeup",
     description:
       "Microblading, ombré brows, lip blush. Hair-stroke precision designed to enhance your natural features rather than mask them.",
-    image: "/images/gallery/image1.webp",
+    image: "/images/gallery/services-preview/semi-permanent.webp",
   },
   "lashes-brows": {
     headline: "Lashes & Brows",
     description:
       "Volume lash extensions, lash lifts, brow lamination, and tinting. Subtle definition that complements every face.",
-    image: "/images/gallery/image4.webp",
+    image: "/images/gallery/services-preview/lashes-brows.webp",
   },
   facials: {
     headline: "Luxury Facials",
     description:
       "Million Dollar Facial, dermaplaning, hydrafacials. Deep, bespoke skincare for a calm, luminous result.",
-    image: "/images/gallery/image16.webp",
+    image: "/images/gallery/services-preview/facials.webp",
   },
+  // no services-preview shot exists for waxing yet — gallery image stays
   waxing: {
     headline: "Waxing",
     description:
@@ -48,20 +49,21 @@ const CATEGORY_COPY: Record<
   },
 };
 
-/** Cheapest non-free treatment per category — an honest "from £X" signal. */
-function minPriceByCategory(): Record<string, number> {
-  const mins: Record<string, number> = {};
+/** Real treatment counts + cheapest non-free price per category, from the live catalog. */
+function catalogFacts(): Record<string, { count: number; from: number | null }> {
+  const facts: Record<string, { count: number; from: number | null }> = {};
   for (const s of CATALOG_SERVICES) {
+    const entry = (facts[s.category] ??= { count: 0, from: null });
+    entry.count++;
     const price = Number(s.priceDisplay.replace(/[^0-9.]/g, ""));
-    if (!price) continue; // skip the free consultation
-    if (!(s.category in mins) || price < mins[s.category]) mins[s.category] = price;
+    if (price && (entry.from === null || price < entry.from)) entry.from = price;
   }
-  return mins;
+  return facts;
 }
 
 export default async function ServicesPage() {
   const categories = await serviceService.getCategories();
-  const fromPrices = minPriceByCategory();
+  const facts = catalogFacts();
 
   return (
     <main>
@@ -86,9 +88,9 @@ export default async function ServicesPage() {
                 <article
                   key={category.id}
                   id={category.id}
-                  className="bg-white border border-elegant-mocha/10 rounded-sm overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-700 ease-luxury"
+                  className="flex flex-col bg-white border border-elegant-mocha/10 rounded-sm overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-700 ease-luxury"
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden shrink-0">
                     <Image
                       src={copy.image}
                       alt={`${copy.headline} — ${BRAND.name}`}
@@ -99,11 +101,12 @@ export default async function ServicesPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-elegant-mocha/30 via-transparent to-transparent" />
                   </div>
-                  <div className="p-6 sm:p-8">
+                  <div className="flex flex-col flex-1 p-6 sm:p-8">
                     <p className="font-alta text-[11px] tracking-[0.25em] uppercase text-deep-bronze mb-2">
-                      {category.count} treatment{category.count === 1 ? "" : "s"}
-                      {fromPrices[category.id] && (
-                        <> · from £{fromPrices[category.id]}</>
+                      {facts[category.id]?.count ?? category.count} treatment
+                      {(facts[category.id]?.count ?? category.count) === 1 ? "" : "s"}
+                      {facts[category.id]?.from && (
+                        <> · from £{facts[category.id].from}</>
                       )}
                     </p>
                     <h2 className="font-alice text-2xl text-elegant-mocha tracking-wide mb-3">
@@ -113,13 +116,15 @@ export default async function ServicesPage() {
                     <p className="font-alice text-base text-elegant-mocha/80 leading-relaxed tracking-wide mb-6">
                       {copy.description}
                     </p>
-                    <LuxuryShadcnButton
-                      href={`/booking?category=${encodeURIComponent(category.id)}`}
-                      text={CTA.bookPrimary}
-                      luxuryVariant="elegant"
-                      luxuryTheme="dark"
-                      luxurySize="small"
-                    />
+                    <div className="mt-auto pt-1">
+                      <LuxuryShadcnButton
+                        href={`/booking?category=${encodeURIComponent(category.id)}`}
+                        text={CTA.bookPrimary}
+                        luxuryVariant="elegant"
+                        luxuryTheme="dark"
+                        luxurySize="small"
+                      />
+                    </div>
                   </div>
                 </article>
               );
