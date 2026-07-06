@@ -6,6 +6,10 @@ import {
   STUDIO,
   SITE,
 } from "@/config/business";
+import {
+  CATALOG_CATEGORIES,
+  CATALOG_SERVICES,
+} from "@/data/acuityCatalog";
 import type { FAQ } from "@/types";
 
 /**
@@ -77,6 +81,21 @@ export function LocalBusinessJsonLd() {
       name: "Hours",
       value: HOURS.detailed,
     },
+    currenciesAccepted: "GBP",
+    paymentAccepted: "Credit Card, Debit Card",
+    // Online booking — tells Google the site takes reservations directly
+    potentialAction: {
+      "@type": "ReserveAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE.url}/booking`,
+        actionPlatform: [
+          "https://schema.org/DesktopWebPlatform",
+          "https://schema.org/MobileWebPlatform",
+        ],
+      },
+      result: { "@type": "Reservation", name: "Beauty treatment appointment" },
+    },
   };
   return <JsonLdScript data={data} />;
 }
@@ -118,6 +137,45 @@ export function FaqJsonLd({ faqs }: { faqs: FAQ[] }) {
         text: faq.answer,
       },
     })),
+  };
+  return <JsonLdScript data={data} />;
+}
+
+/**
+ * OfferCatalog — the live treatment menu with real GBP prices, generated
+ * from the Acuity catalog. Drop into /services (and only there — 60 offers
+ * is too heavy for every page).
+ */
+export function ServicesCatalogJsonLd() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    "@id": `${SITE.url}/#business`,
+    name: BRAND.name,
+    url: SITE.url,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${BRAND.name} treatment menu`,
+      itemListElement: CATALOG_CATEGORIES.map((cat) => ({
+        "@type": "OfferCatalog",
+        name: cat.displayName,
+        itemListElement: CATALOG_SERVICES.filter(
+          (s) => s.category === cat.id && s.priceDisplay !== "Free",
+        ).map((s) => ({
+          "@type": "Offer",
+          name: s.name,
+          price: s.priceDisplay.replace(/[^0-9.]/g, ""),
+          priceCurrency: "GBP",
+          url: `${SITE.url}/booking?service=${s.slug}`,
+          itemOffered: {
+            "@type": "Service",
+            name: s.name,
+            description: s.description.slice(0, 200),
+            provider: { "@id": `${SITE.url}/#business` },
+          },
+        })),
+      })),
+    },
   };
   return <JsonLdScript data={data} />;
 }

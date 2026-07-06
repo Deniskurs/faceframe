@@ -126,8 +126,13 @@ export const CTA = {
 } as const;
 
 export const SITE = {
-  /** Public production URL — used for canonical, OG, sitemap. */
-  url: "https://faceframebeauty.com",
+  /**
+   * Public production URL — used for canonical, OG, sitemap, and schema.
+   * Driven by NEXT_PUBLIC_SITE_URL so the final domain (faceframe.co.uk /
+   * faceframe.com — TBD) is a Vercel env change + redeploy, no code edit.
+   * Fallback = the live Vercel alias, so canonicals are never wrong.
+   */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://faceframe-lac.vercel.app",
 } as const;
 
 /**

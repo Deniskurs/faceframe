@@ -6,6 +6,7 @@ import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { BRAND, CTA } from "@/config/business";
 import serviceService from "@/services/serviceService";
 import { CATALOG_SERVICES } from "@/data/acuityCatalog";
+import { ServicesCatalogJsonLd } from "@/components/shared/JsonLd";
 
 export const metadata: Metadata = {
   title: `Services | ${BRAND.name}`,
@@ -67,6 +68,7 @@ export default async function ServicesPage() {
 
   return (
     <main>
+      <ServicesCatalogJsonLd />
       <PageHero
         label="Our Craft"
         title="Services"

@@ -328,7 +328,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
           {/* Refined Chanel-inspired call-to-action */}
           <Link
-            href={`/services/${category.id}`}
+            href={`/services#${category.id}`}
             className="group relative font-alta text-[#2C1810] tracking-[0.35em] text-[11px] uppercase px-6 sm:px-8 py-[15px] inline-block overflow-hidden text-center w-full mt-auto font-medium"
             aria-label={`Explore ${category.title} service details`}
           >

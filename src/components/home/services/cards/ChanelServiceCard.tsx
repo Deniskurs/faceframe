@@ -277,7 +277,7 @@ export const ChanelServiceCard: React.FC<ChanelServiceCardProps> = ({
           {/* Discover button with Chanel-inspired styling */}
           <div className="mt-auto">
             <Link
-              href={`/services/${category.id}`}
+              href={`/services#${category.id}`}
               className="group relative inline-block font-alta text-elegant-mocha text-[11px] tracking-[0.35em] uppercase"
             >
               <span className="inline-block py-1">DISCOVER</span>
