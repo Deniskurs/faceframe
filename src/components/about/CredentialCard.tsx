@@ -44,7 +44,7 @@ export function CredentialCard({
       </p>
 
       {/* Subtitle */}
-      <p className="font-alta text-xs tracking-[0.04em] uppercase text-elegant-mocha/80 text-center">
+      <p className="font-alta text-xs tracking-wider uppercase text-elegant-mocha/80 text-center">
         {subtitle}
       </p>
     </motion.div>

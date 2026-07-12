@@ -158,7 +158,7 @@ function LuxuryShadcnButtonComponent({
   const luxuryClasses = cn(
     LUXURY_VARIANTS[luxuryVariant][luxuryTheme],
     LUXURY_SIZES[luxurySize],
-    "font-alta tracking-[0.25em] uppercase relative overflow-hidden group whitespace-nowrap inline-flex items-center justify-center transition-all duration-700 ease-luxury",
+    "font-alta tracking-luxury uppercase relative overflow-hidden group whitespace-nowrap inline-flex items-center justify-center transition-all duration-700 ease-luxury",
     "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-deep-bronze/50 focus-visible:outline-none",
     "active:scale-[0.98] active:shadow-[0_4px_15px_rgba(0,0,0,0.25)]",
     className

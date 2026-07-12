@@ -13,7 +13,7 @@ export function MessageSection() {
   return (
     <section
       id="contact-form"
-      className="py-12 sm:py-16 lg:py-20 bg-white"
+      className="scroll-mt-24 py-12 sm:py-16 lg:py-20 bg-white"
       aria-label="Message Iggy"
     >
       <div className="container mx-auto px-6 sm:px-8 max-w-3xl">
@@ -31,7 +31,7 @@ export function MessageSection() {
 
         <ContactForm />
 
-        <p className="text-center font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-8">
+        <p className="text-center font-alta text-xs tracking-wider text-elegant-mocha/80 mt-8">
           Prefer email?{" "}
           <Link
             href={`mailto:${CONTACT.email}`}

@@ -9,7 +9,7 @@ export default function GalleryHero() {
       title="Gallery"
       description="Recent work — brows, lashes, lips and facials"
       label="Our Work"
-      height="showcase"
+      height="minimal"
       backgroundGradient="bg-gradient-to-b from-elegant-mocha/5 via-light-cream/20 to-soft-blush/10"
     />
   );

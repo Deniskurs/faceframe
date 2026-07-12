@@ -150,7 +150,7 @@ export default function LuxuryTransformationsGallery({
               <div className="mb-36 relative">
                 {/* Left-aligned heading (Chanel signature) with proper spacing */}
                 <div className="pl-[8%] mb-16">
-                  <h3 className="font-alice text-[16px] tracking-[0.2em] text-elegant-mocha uppercase">
+                  <h3 className="font-alice text-base tracking-refined text-elegant-mocha uppercase">
                     RESULTS
                   </h3>
                 </div>

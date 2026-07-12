@@ -315,7 +315,7 @@ export function MobileServicesView({
         {/* Left arrow - Chanel-inspired elegant minimal style */}
         <motion.button
           onClick={scrollPrev}
-          className="absolute left-0 sm:left-6 top-0 p-3 text-elegant-mocha/60 focus:outline-none hidden sm:block"
+          className="absolute left-0 sm:left-6 top-0 bottom-0 my-auto h-11 w-11 text-elegant-mocha/60 focus:outline-none hidden sm:flex items-center justify-center"
           aria-label="Previous service"
           initial={{ opacity: 0.6 }}
           whileHover={{ opacity: 1, x: -2 }}
@@ -341,7 +341,7 @@ export function MobileServicesView({
         {/* Right arrow - Chanel-inspired elegant minimal style */}
         <motion.button
           onClick={scrollNext}
-          className="absolute right-0 sm:right-6 top-0 p-3 text-elegant-mocha/60 focus:outline-none hidden sm:block"
+          className="absolute right-0 sm:right-6 top-0 bottom-0 my-auto h-11 w-11 text-elegant-mocha/60 focus:outline-none hidden sm:flex items-center justify-center"
           aria-label="Next service"
           initial={{ opacity: 0.6 }}
           whileHover={{ opacity: 1, x: 2 }}

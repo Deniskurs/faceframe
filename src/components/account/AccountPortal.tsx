@@ -92,7 +92,7 @@ export function AccountPortal() {
   if (checking) {
     return (
       <div className="min-h-[280px] flex items-center justify-center">
-        <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/80 animate-pulse">
+        <p className="font-alta text-xs tracking-luxury uppercase text-elegant-mocha/80 animate-pulse">
           Checking your session…
         </p>
       </div>
@@ -150,7 +150,7 @@ function AccessForm({ onVerified }: { onVerified: () => void }) {
   return (
     <div className="max-w-md mx-auto">
       <div className="text-center mb-8">
-        <p className="font-alta text-[11px] tracking-[0.3em] uppercase text-deep-bronze mb-3">
+        <p className="font-alta text-xs tracking-[0.3em] uppercase text-deep-bronze mb-3">
           Client Account
         </p>
         <h2 className="font-alice text-2xl sm:text-3xl text-elegant-mocha tracking-wide mb-3">
@@ -167,7 +167,7 @@ function AccessForm({ onVerified }: { onVerified: () => void }) {
         <div>
           <label
             htmlFor="account-email"
-            className="block font-alta text-[11px] tracking-[0.2em] uppercase text-elegant-mocha/80 mb-2"
+            className="block font-alta text-xs tracking-refined uppercase text-elegant-mocha/80 mb-2"
           >
             Email address
           </label>
@@ -185,7 +185,7 @@ function AccessForm({ onVerified }: { onVerified: () => void }) {
         <div>
           <label
             htmlFor="account-phone"
-            className="block font-alta text-[11px] tracking-[0.2em] uppercase text-elegant-mocha/80 mb-2"
+            className="block font-alta text-xs tracking-refined uppercase text-elegant-mocha/80 mb-2"
           >
             Phone number
           </label>
@@ -210,7 +210,7 @@ function AccessForm({ onVerified }: { onVerified: () => void }) {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full font-alta text-xs tracking-[0.25em] uppercase px-8 py-4 bg-elegant-mocha text-white rounded-sm hover:bg-deep-bronze transition-colors duration-300 disabled:opacity-60"
+          className="w-full font-alta text-xs tracking-luxury uppercase px-8 py-4 bg-elegant-mocha text-white rounded-sm hover:bg-deep-bronze transition-colors duration-300 disabled:opacity-60"
         >
           {submitting ? "Checking…" : "View my account"}
         </button>
@@ -240,20 +240,20 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
       {/* Greeting */}
       <div className="flex flex-wrap items-baseline justify-between gap-4 pb-6 border-b-hairline border-elegant-mocha/15">
         <div>
-          <p className="font-alta text-[11px] tracking-[0.3em] uppercase text-deep-bronze mb-2">
+          <p className="font-alta text-xs tracking-[0.3em] uppercase text-deep-bronze mb-2">
             Client Account
           </p>
           <h2 className="font-alice text-2xl sm:text-3xl text-elegant-mocha tracking-wide">
             Welcome back{data.firstName ? `, ${data.firstName}` : ""}
           </h2>
-          <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/80 mt-1">
+          <p className="font-alta text-xs tracking-widest text-elegant-mocha/80 mt-1">
             {data.email}
           </p>
         </div>
         <button
           type="button"
           onClick={onLogout}
-          className="inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase text-elegant-mocha/80 hover:text-deep-bronze transition-colors duration-300 py-2"
+          className="inline-flex items-center gap-1.5 font-alta text-xs tracking-refined uppercase text-elegant-mocha/80 hover:text-deep-bronze transition-colors duration-300 py-2"
         >
           <LogOut className="w-3.5 h-3.5" aria-hidden="true" />
           Sign out
@@ -281,7 +281,7 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
                   <p className="font-alice text-base sm:text-lg text-elegant-mocha tracking-wide">
                     {a.type}
                   </p>
-                  <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/80 mt-1">
+                  <p className="font-alta text-xs tracking-widest text-elegant-mocha/80 mt-1">
                     {a.date} · {a.time}
                     <span className="mx-2 text-elegant-mocha/30">·</span>
                     {formatPrice(a.price)}
@@ -292,7 +292,7 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
                     href={a.confirmationPage}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 sm:mt-0 shrink-0 inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase px-5 py-2.5 border border-elegant-mocha/40 text-elegant-mocha rounded-sm hover:bg-elegant-mocha hover:text-white transition-colors duration-300"
+                    className="mt-3 sm:mt-0 shrink-0 inline-flex items-center gap-1.5 font-alta text-xs tracking-refined uppercase px-5 py-2.5 border border-elegant-mocha/40 text-elegant-mocha rounded-sm hover:bg-elegant-mocha hover:text-white transition-colors duration-300"
                   >
                     Manage
                     <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
@@ -300,7 +300,7 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
                 ) : (
                   <Link
                     href="/contact"
-                    className="mt-3 sm:mt-0 shrink-0 inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase px-5 py-2.5 border border-elegant-mocha/40 text-elegant-mocha rounded-sm hover:bg-elegant-mocha hover:text-white transition-colors duration-300"
+                    className="mt-3 sm:mt-0 shrink-0 inline-flex items-center gap-1.5 font-alta text-xs tracking-refined uppercase px-5 py-2.5 border border-elegant-mocha/40 text-elegant-mocha rounded-sm hover:bg-elegant-mocha hover:text-white transition-colors duration-300"
                   >
                     Contact us to change this booking
                   </Link>
@@ -340,7 +340,7 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
                 >
                   <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                     <p className="font-alice text-base text-elegant-mocha tracking-wide">{c.name}</p>
-                    <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/80">
+                    <p className="font-alta text-xs tracking-widest text-elegant-mocha/80">
                       {[
                         remaining !== null
                           ? `${remaining} session${remaining === 1 ? "" : "s"} left`
@@ -353,8 +353,8 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
                         .join(" · ")}
                     </p>
                   </div>
-                  <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/80 mt-1.5">
-                    Code <span className="text-deep-bronze font-medium tracking-[0.15em]">{c.code}</span>
+                  <p className="font-alta text-xs tracking-widest text-elegant-mocha/80 mt-1.5">
+                    Code <span className="text-deep-bronze font-medium tracking-editorial">{c.code}</span>
                     {c.expiration && <> · expires {c.expiration}</>}
                     <span className="mx-2 text-elegant-mocha/30">·</span>
                     Enter the code at checkout to redeem a session.
@@ -380,14 +380,14 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
                     <span className="font-alice text-sm sm:text-base text-elegant-mocha tracking-wide">
                       {a.type}
                     </span>
-                    <span className="ml-3 font-alta text-xs tracking-[0.08em] text-elegant-mocha/80">
+                    <span className="ml-3 font-alta text-xs tracking-widest text-elegant-mocha/80">
                       {a.date}
                     </span>
                   </div>
                   {slug && (
                     <Link
                       href={`/booking?service=${slug}`}
-                      className="font-alta text-[11px] tracking-[0.2em] uppercase text-deep-bronze hover:text-elegant-mocha transition-colors duration-300 py-1"
+                      className="font-alta text-xs tracking-refined uppercase text-deep-bronze hover:text-elegant-mocha transition-colors duration-300 py-1"
                     >
                       Book again
                     </Link>
@@ -411,7 +411,7 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
             href={PACKAGES_CATALOG_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase px-5 py-2.5 border border-deep-bronze/40 text-deep-bronze rounded-sm hover:bg-deep-bronze hover:text-white transition-colors duration-300"
+            className="mt-4 inline-flex items-center gap-1.5 font-alta text-xs tracking-refined uppercase px-5 py-2.5 border border-deep-bronze/40 text-deep-bronze rounded-sm hover:bg-deep-bronze hover:text-white transition-colors duration-300"
           >
             View packages &amp; gifts
             <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
@@ -433,7 +433,7 @@ function Section({
 }) {
   return (
     <section className="mt-10">
-      <h3 className="inline-flex items-center gap-2 font-alta text-[11px] tracking-[0.25em] uppercase text-deep-bronze mb-4">
+      <h3 className="inline-flex items-center gap-2 font-alta text-xs tracking-luxury uppercase text-deep-bronze mb-4">
         {icon}
         {title}
       </h3>

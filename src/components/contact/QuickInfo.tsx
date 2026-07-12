@@ -59,7 +59,7 @@ export function QuickInfo() {
                 <div className="flex items-start gap-3">
                   <Icon className="w-4 h-4 text-deep-bronze mt-1 shrink-0" />
                   <div className="min-w-0">
-                    <p className="font-alta text-[10px] tracking-[0.25em] uppercase text-elegant-mocha/80 mb-1">
+                    <p className="font-alta text-xs tracking-luxury uppercase text-elegant-mocha/80 mb-1">
                       {item.label}
                     </p>
                     <p className="font-alice text-sm text-elegant-mocha leading-snug truncate">

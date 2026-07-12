@@ -139,7 +139,7 @@ function CategoryLabel({ label }: { label: string }) {
     >
       <div className="relative">
         <div className="absolute inset-0 -m-1 bg-gradient-to-r from-black/50 to-transparent blur-[3px] rounded-sm" />
-        <p className="relative font-alta text-[11px] tracking-[0.25em] uppercase text-white/95 px-2 py-1">
+        <p className="relative font-alta text-xs tracking-luxury uppercase text-white/95 px-2 py-1">
           {label}
         </p>
         <motion.div
@@ -166,7 +166,7 @@ function ClientResultBadge({ label }: { label: string }) {
         <div className="relative flex items-baseline">
           <div className="w-[10px] h-[0.5px] bg-white/60 self-center mr-2" />
           <span
-            className="font-alta text-[10px] tracking-[0.2em] uppercase text-white/90 inline-block leading-[0.95]"
+            className="font-alta text-xs tracking-refined uppercase text-white/90 inline-block leading-[0.95]"
             style={{ transform: "translateY(-0.5px)" }}
           >
             {label}
@@ -195,7 +195,7 @@ function DragHint({ position }: { position: number }) {
             <div className="w-[6px] h-[1px] bg-elegant-mocha/60" />
             <div className="w-[3px] h-[3px] bg-elegant-mocha/40 rounded-full" />
           </div>
-          <span className="font-alta text-[10px] tracking-[0.15em] uppercase text-elegant-mocha/80 leading-none whitespace-nowrap">
+          <span className="font-alta text-xs tracking-editorial uppercase text-elegant-mocha/80 leading-none whitespace-nowrap">
             Drag to Compare
           </span>
         </div>

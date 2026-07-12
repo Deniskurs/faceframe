@@ -226,7 +226,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           >
             {/* Main premium title with enhanced readability */}
             <motion.h3
-              className="font-alta text-white text-xl tracking-[0.35em] uppercase leading-relaxed"
+              className="font-alta text-white text-xl tracking-[0.3em] uppercase leading-relaxed"
               animate={{ y: isHovered ? -2 : 0 }}
               transition={{ duration: 0.8, ease: LUXURY_EASING }}
             >
@@ -244,7 +244,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           style={{ minHeight: "240px" }} /* Minimum content height */
         >
           {/* Editorial-style description with Chanel-grade typography */}
-          <p className="font-alta text-[#2C1810] text-[14px] sm:text-[15px] tracking-[0.04em] leading-[1.85] mb-7 sm:mb-9 line-clamp-3 font-medium">
+          <p className="font-alta text-[#2C1810] text-sm sm:text-base tracking-wider leading-[1.85] mb-7 sm:mb-9 line-clamp-3 font-medium">
             {category.description}
           </p>
 
@@ -264,7 +264,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                       transition={{ duration: 1.1, ease: LUXURY_EASING }}
                     />
                   </div>
-                  <p className="font-alta text-[#3D2817] text-[12px] sm:text-[13px] tracking-[0.06em] leading-[1.6] font-medium">
+                  <p className="font-alta text-[#3D2817] text-xs sm:text-sm tracking-wider leading-[1.6] font-medium">
                     {category.exclusivity}
                   </p>
                 </div>
@@ -286,7 +286,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                       }}
                     />
                   </div>
-                  <p className="font-alta text-[#3D2817] text-[12px] sm:text-[13px] tracking-[0.06em] leading-[1.6] font-medium">
+                  <p className="font-alta text-[#3D2817] text-xs sm:text-sm tracking-wider leading-[1.6] font-medium">
                     {category.result}
                   </p>
                 </div>
@@ -309,7 +309,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                     />
                   </div>
                   <motion.p
-                    className="font-alta text-[#5D4037] text-[11px] sm:text-[12px] tracking-[0.06em] leading-[1.6] italic font-medium"
+                    className="font-alta text-[#5D4037] text-xs sm:text-xs tracking-wider leading-[1.6] italic font-medium"
                     animate={{
                       opacity: isHovered ? 0.9 : 0.75,
                     }}
@@ -328,7 +328,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           {/* Refined Chanel-inspired call-to-action */}
           <Link
             href={`/services#${category.id}`}
-            className="group relative font-alta text-[#2C1810] tracking-[0.35em] text-[11px] uppercase px-6 sm:px-8 py-[15px] inline-block overflow-hidden text-center w-full mt-auto font-medium"
+            className="group relative font-alta text-[#2C1810] tracking-[0.3em] text-xs uppercase px-6 sm:px-8 py-[15px] inline-block overflow-hidden text-center w-full mt-auto font-medium"
             aria-label={`Explore ${category.title} service details`}
           >
             {/* Ultra-thin button border */}

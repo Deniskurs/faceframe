@@ -38,7 +38,7 @@ const NavLink = ({
     >
       {/* Refined readable link text with luxury tracking */}
       <span
-        className={`inline-block tracking-[0.12em] transition-colors duration-300 font-normal navbar-link ${
+        className={`inline-block tracking-widest transition-colors duration-300 font-normal navbar-link ${
           isActive
             ? "text-deep-bronze"
             : "text-luxury-primary group-hover:text-deep-bronze"
@@ -96,7 +96,7 @@ const MobileNavLink = ({
     >
       <Link
         href={href}
-        className={`font-alta text-base tracking-[0.15em] uppercase block py-4 transition-colors duration-300 hover:text-deep-bronze ${
+        className={`font-alta text-base tracking-editorial uppercase block py-4 transition-colors duration-300 hover:text-deep-bronze ${
           isActive ? "text-deep-bronze font-medium" : "text-luxury-primary font-normal"
         }`}
         onClick={onClick}
@@ -120,6 +120,7 @@ const Header = () => {
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const wasMenuOpenRef = useRef(false);
+  const lockedScrollYRef = useRef(0);
 
   // Enhanced scroll effect with transition logic
   useEffect(() => {
@@ -136,22 +137,47 @@ const Header = () => {
   }, []);
 
 
-  // Disable scroll when mobile menu is open for full-screen overlay,
-  // and return focus to the hamburger trigger when the menu closes.
+  // Lock page scroll while the menu is open. `position: fixed` (rather than
+  // overflow: hidden, which iOS Safari ignores for touch scrolling) prevents
+  // rubber-banding behind the overlay; scroll position is restored on close.
+  // Also returns focus to the hamburger trigger when the menu closes.
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
+      lockedScrollYRef.current = window.scrollY;
+      Object.assign(document.body.style, {
+        position: "fixed",
+        top: `-${lockedScrollYRef.current}px`,
+        left: "0",
+        right: "0",
+        width: "100%",
+      });
       wasMenuOpenRef.current = true;
     } else {
-      document.body.style.overflow = "";
+      const unlock = () => {
+        Object.assign(document.body.style, {
+          position: "",
+          top: "",
+          left: "",
+          right: "",
+          width: "",
+        });
+      };
+      unlock();
       if (wasMenuOpenRef.current) {
+        window.scrollTo(0, lockedScrollYRef.current);
         wasMenuOpenRef.current = false;
         hamburgerRef.current?.focus();
       }
     }
 
     return () => {
-      document.body.style.overflow = "";
+      Object.assign(document.body.style, {
+        position: "",
+        top: "",
+        left: "",
+        right: "",
+        width: "",
+      });
     };
   }, [isMobileMenuOpen]);
 
@@ -336,7 +362,7 @@ const Header = () => {
               }`}
             >
               <span
-                className={`font-alice block tracking-[0.12em] transition-[font-size] duration-300 font-normal navbar-logo-text ${
+                className={`font-alice block tracking-widest transition-[font-size] duration-300 font-normal navbar-logo-text ${
                   isScrolled
                     ? "text-luxury-primary text-base md:text-lg"
                     : "text-luxury-primary text-lg md:text-xl"
@@ -352,11 +378,7 @@ const Header = () => {
                 FACEFRAME
               </span>
               <span
-                className={`font-alice tracking-[0.08em] transition-[font-size] duration-300 navbar-logo-text ${
-                  isScrolled
-                    ? "text-luxury-secondary text-[10px]"
-                    : "text-luxury-secondary text-xs"
-                }`}
+                className="font-alice tracking-widest navbar-logo-text text-luxury-secondary text-xs"
                 style={{
                   textShadow:
                     "0 0.5px 0.5px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.02)",
@@ -373,7 +395,7 @@ const Header = () => {
 
         {/* Architectural Desktop Navigation with CHANEL-inspired refined spacing */}
         <motion.nav
-          className="hidden md:flex items-center"
+          className="hidden lg:flex items-center"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: LUXURY_EASING }}
@@ -408,7 +430,7 @@ const Header = () => {
           <Link
             href="/account"
             aria-label="Client login — view or manage your appointments"
-            className="relative z-10 inline-flex items-center gap-1.5 mr-6 px-4 py-2.5 min-h-[40px] rounded-full border font-alta text-[11px] tracking-[0.2em] border-elegant-mocha/25 text-elegant-mocha hover:border-deep-bronze/50 hover:text-deep-bronze transition-colors duration-300"
+            className="relative z-10 inline-flex items-center gap-1.5 mr-6 px-4 py-2.5 min-h-[40px] rounded-full border font-alta text-xs tracking-refined border-elegant-mocha/25 text-elegant-mocha hover:border-deep-bronze/50 hover:text-deep-bronze transition-colors duration-300"
           >
             <UserRound className="w-3.5 h-3.5" aria-hidden="true" />
             LOGIN
@@ -427,7 +449,7 @@ const Header = () => {
         {/* CHANEL-inspired luxury hamburger button with enhanced accessibility */}
         <button
           ref={hamburgerRef}
-          className="md:hidden relative z-[60] flex items-center justify-center w-14 h-14 focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/60 focus-visible:ring-offset-2 rounded-sm text-luxury-primary"
+          className="lg:hidden relative z-[60] flex items-center justify-center w-14 h-14 focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/60 focus-visible:ring-offset-2 rounded-sm text-luxury-primary"
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
@@ -467,7 +489,7 @@ const Header = () => {
           <>
             {/* Backdrop - click to close */}
             <motion.div
-              className="fixed inset-0 z-40 bg-black/20 md:hidden"
+              className="fixed inset-0 z-40 bg-black/20 lg:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -481,7 +503,7 @@ const Header = () => {
               role="dialog"
               aria-modal="true"
               aria-label="Site menu"
-              className="fixed inset-0 z-50 bg-light-cream flex md:hidden"
+              className="fixed inset-0 z-50 bg-light-cream flex lg:hidden"
               initial="closed"
               animate="open"
               exit="closed"
@@ -498,7 +520,7 @@ const Header = () => {
               <div className="flex-1 flex flex-col justify-start px-10 py-10 overflow-y-auto">
                 <div className="my-auto w-full">
                 <motion.div className="mb-8" variants={navLinkVariants}>
-                  <h2 className="font-alice text-elegant-mocha text-2xl mb-3 tracking-[0.15em]">
+                  <h2 className="font-alice text-elegant-mocha text-2xl mb-3 tracking-editorial">
                     FaceFrame Beauty
                   </h2>
                   <div className="w-12 h-[0.5px] bg-elegant-mocha/30 mb-3"></div>
@@ -550,7 +572,7 @@ const Header = () => {
                       href="/account"
                       onClick={closeMobileMenu}
                       aria-label="Client login — view or manage your appointments"
-                      className={`font-alta text-base tracking-[0.15em] uppercase flex items-center gap-2.5 py-4 transition-colors duration-300 hover:text-elegant-mocha ${
+                      className={`font-alta text-base tracking-editorial uppercase flex items-center gap-2.5 py-4 transition-colors duration-300 hover:text-elegant-mocha ${
                         pathname === "/account" ? "text-deep-bronze font-medium" : "text-deep-bronze"
                       }`}
                     >
@@ -582,7 +604,7 @@ const Header = () => {
                   className="mt-10 text-center"
                   variants={navLinkVariants}
                 >
-                  <p className="font-alta text-muted-sand text-xs tracking-[0.2em] uppercase">
+                  <p className="font-alta text-muted-sand text-xs tracking-refined uppercase">
                     London, UK
                   </p>
                 </motion.div>

@@ -63,7 +63,7 @@ export const FAQPageClient: React.FC<FAQPageClientProps> = ({
               onClick={() => scrollToCategory(category)}
               className="px-5 py-2.5 bg-white border border-elegant-mocha/20 rounded-full
                          hover:bg-elegant-mocha hover:text-white hover:border-elegant-mocha
-                         transition-all duration-300 font-alta text-sm tracking-[0.02em]
+                         transition-all duration-300 font-alta text-sm tracking-wide
                          text-elegant-mocha shadow-sm hover:shadow-md"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -121,7 +121,7 @@ export const FAQPageClient: React.FC<FAQPageClientProps> = ({
               transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
               viewport={{ once: true }}
             >
-              <h2 className="font-alice text-2xl sm:text-3xl text-white uppercase tracking-[0.2em] mb-6">
+              <h2 className="font-alice text-2xl sm:text-3xl text-white uppercase tracking-refined mb-6">
                 Need Personal Advice?
               </h2>
 

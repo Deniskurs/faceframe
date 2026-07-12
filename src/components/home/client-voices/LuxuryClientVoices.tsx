@@ -168,7 +168,7 @@ export default function LuxuryClientVoices({
 
                           {/* Client Information with golden ratio proportioned container */}
                           <div className="flex flex-col items-center w-full max-w-[200px]">
-                            <p className="font-alta text-sm uppercase tracking-[0.15em] text-muted-sand mb-1 w-full text-center">
+                            <p className="font-alta text-sm uppercase tracking-editorial text-muted-sand mb-1 w-full text-center">
                               {testimonial.name}
                             </p>
                             <p className="font-alta text-xs tracking-wide text-muted-sand/80 mt-1 w-full text-center">
@@ -196,7 +196,7 @@ export default function LuxuryClientVoices({
                   transition={{ duration: 0.4, ease: LUXURY_EASING }}
                 >
                   <div className="w-8 sm:w-12 h-[0.5px] bg-elegant-mocha/40 sm:mr-3 group-hover:bg-elegant-mocha/70 transition-all duration-700" />
-                  <span className="hidden sm:inline font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/80 group-hover:text-elegant-mocha/90 transition-all duration-700">
+                  <span className="hidden sm:inline font-alta text-xs tracking-editorial uppercase text-elegant-mocha/80 group-hover:text-elegant-mocha/90 transition-all duration-700">
                     Prev
                   </span>
                 </motion.button>
@@ -215,7 +215,7 @@ export default function LuxuryClientVoices({
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.4, ease: LUXURY_EASING }}
                 >
-                  <span className="hidden sm:inline font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/80 group-hover:text-elegant-mocha/90 transition-all duration-700">
+                  <span className="hidden sm:inline font-alta text-xs tracking-editorial uppercase text-elegant-mocha/80 group-hover:text-elegant-mocha/90 transition-all duration-700">
                     Next
                   </span>
                   <div className="w-8 sm:w-12 h-[0.5px] bg-elegant-mocha/40 sm:ml-3 group-hover:bg-elegant-mocha/70 transition-all duration-700" />

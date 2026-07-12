@@ -93,7 +93,7 @@ export default function ServicesPage() {
                 <article
                   key={category.id}
                   id={category.id}
-                  className="flex flex-col bg-white border border-elegant-mocha/10 rounded-sm overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-700 ease-luxury"
+                  className="scroll-mt-24 flex flex-col bg-white border border-elegant-mocha/10 rounded-sm overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-700 ease-luxury"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden shrink-0">
                     <Image
@@ -107,7 +107,7 @@ export default function ServicesPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-elegant-mocha/30 via-transparent to-transparent" />
                   </div>
                   <div className="flex flex-col flex-1 p-6 sm:p-8">
-                    <p className="font-alta text-xs tracking-[0.25em] uppercase text-deep-bronze mb-2">
+                    <p className="font-alta text-xs tracking-luxury uppercase text-deep-bronze tabular-nums mb-2">
                       {category.count} treatment
                       {category.count === 1 ? "" : "s"}
                       {facts[category.id]?.from && (
@@ -139,23 +139,25 @@ export default function ServicesPage() {
           {/* Surfaces that live in the booking journey but have no card above */}
           <p className="text-center font-alice text-sm sm:text-base text-elegant-mocha/80 tracking-wide mt-10">
             Also available:{" "}
-            <Link
-              href="/booking?service=saline-tattoo-removal-single-session"
-              className="text-deep-bronze hover:text-elegant-mocha underline underline-offset-2 transition-colors duration-300"
-            >
-              Saline Tattoo Removal
-            </Link>{" "}
-            ·{" "}
+            <span className="whitespace-nowrap">
+              <Link
+                href="/booking?service=saline-tattoo-removal-single-session"
+                className="text-deep-bronze hover:text-elegant-mocha underline underline-offset-2 transition-colors duration-300"
+              >
+                Saline Tattoo Removal
+              </Link>{" "}
+              ·
+            </span>{" "}
             <Link
               href="/booking?category=packages"
-              className="text-deep-bronze hover:text-elegant-mocha underline underline-offset-2 transition-colors duration-300"
+              className="whitespace-nowrap text-deep-bronze hover:text-elegant-mocha underline underline-offset-2 transition-colors duration-300"
             >
               Packages &amp; Gift Certificates
             </Link>
           </p>
 
           <div className="mt-16 text-center">
-            <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/80 mb-3">
+            <p className="font-alta text-xs tracking-luxury uppercase text-elegant-mocha/80 mb-3">
               Not sure which service?
             </p>
             <p className="font-alice text-base md:text-lg text-elegant-mocha/80 leading-relaxed tracking-wide max-w-xl mx-auto mb-6">
@@ -169,7 +171,7 @@ export default function ServicesPage() {
               luxuryTheme="light"
               luxurySize="medium"
             />
-            <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-4">
+            <p className="font-alta text-xs tracking-wider text-elegant-mocha/80 mt-4">
               or{" "}
               <Link
                 href="/contact#contact-form"
@@ -178,7 +180,7 @@ export default function ServicesPage() {
                 {CTA.askQuestion}
               </Link>
             </p>
-            <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-8">
+            <p className="font-alta text-xs tracking-wider text-elegant-mocha/80 mt-8">
               Want to see results first?{" "}
               <Link
                 href="/gallery"

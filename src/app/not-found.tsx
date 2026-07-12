@@ -234,7 +234,7 @@ const NotFound = () => {
             transition={{ duration: 1, delay: 2.5, ease: LUXURY_EASING }}
           >
             <motion.p 
-              className="font-alta text-luxury-subtle text-sm uppercase tracking-[0.15em] mb-6 text-center"
+              className="font-alta text-luxury-subtle text-sm uppercase tracking-editorial mb-6 text-center"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 2.6, ease: LUXURY_EASING }}
@@ -260,7 +260,7 @@ const NotFound = () => {
                 >
                   <Link
                     href={link.href}
-                    className="font-alta text-elegant-mocha hover:text-deep-bronze transition-colors duration-500 text-sm tracking-[0.1em] uppercase relative group"
+                    className="font-alta text-elegant-mocha hover:text-deep-bronze transition-colors duration-500 text-sm tracking-widest uppercase relative group"
                   >
                     {link.label}
                     <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-deep-bronze/60 group-hover:w-full transition-all duration-700 ease-luxury"></span>
@@ -278,7 +278,7 @@ const NotFound = () => {
           animate={{ opacity: 0.3 }}
           transition={{ delay: 3.5, duration: 1, ease: LUXURY_EASING }}
         >
-          <p className="font-alta text-elegant-mocha text-[9px] tracking-[0.3em] uppercase mb-2">
+          <p className="font-alta text-elegant-mocha text-xs tracking-[0.3em] uppercase mb-2">
             FaceFrame Beauty
           </p>
           <div className="w-[0.5px] h-6 bg-elegant-mocha/40"></div>

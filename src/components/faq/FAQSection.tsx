@@ -50,7 +50,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
       >
         <AccordionTrigger className="px-8 py-6 hover:bg-light-cream/50 transition-colors duration-500">
           <motion.h2
-            className="font-alice text-xl sm:text-2xl text-elegant-mocha uppercase tracking-[0.15em] text-left"
+            className="font-alice text-xl sm:text-2xl text-elegant-mocha uppercase tracking-editorial text-left"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
@@ -94,7 +94,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
                   className="border-b border-elegant-mocha/10 last:border-b-0"
                 >
                   <AccordionTrigger className="py-5 text-left hover:text-deep-bronze transition-colors duration-500">
-                    <span className="font-alta text-sm sm:text-base text-elegant-mocha tracking-[0.08em] pr-4">
+                    <span className="font-alta text-sm sm:text-base text-elegant-mocha tracking-widest pr-4">
                       {faq.question}
                     </span>
                   </AccordionTrigger>

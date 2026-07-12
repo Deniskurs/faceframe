@@ -5,9 +5,9 @@ import { Separator } from "@/components/ui/separator";
 import { SOCIAL, BRAND, CONTACT, HOURS, STUDIO } from "@/config/business";
 
 // Shared link treatment — CSS uppercase keeps the header's all-caps
-// discipline without hard-coding cased literals; py-2 keeps tap targets.
+// discipline without hard-coding cased literals; min-h-[44px] keeps tap targets.
 const footerLinkClass =
-  "font-alta text-sm tracking-[0.15em] uppercase text-elegant-mocha hover:text-deep-bronze transition-colors duration-700 inline-block py-2";
+  "font-alta text-sm tracking-editorial uppercase text-elegant-mocha hover:text-deep-bronze transition-colors duration-700 inline-flex items-center min-h-[44px]";
 
 // Mirrors the header nav order, with the client login and booking entries
 // appended in the same sequence the header presents them.
@@ -39,7 +39,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
           {/* Navigation */}
           <div>
-            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-4">
+            <h3 className="font-alice text-sm uppercase tracking-luxury text-elegant-mocha mb-4">
               Navigation
             </h3>
             <nav>
@@ -57,7 +57,7 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-4">
+            <h3 className="font-alice text-sm uppercase tracking-luxury text-elegant-mocha mb-4">
               Services
             </h3>
             <ul className="space-y-1">
@@ -73,14 +73,14 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-4">
+            <h3 className="font-alice text-sm uppercase tracking-luxury text-elegant-mocha mb-4">
               Contact
             </h3>
-            <ul className="space-y-1 font-alta text-sm tracking-[0.1em] text-elegant-mocha">
+            <ul className="space-y-1 font-alta text-sm tracking-widest text-elegant-mocha">
               <li>
                 <a
                   href={`mailto:${CONTACT.email}`}
-                  className="hover:text-deep-bronze transition-colors duration-700 inline-block py-2 break-all"
+                  className="hover:text-deep-bronze transition-colors duration-700 inline-flex items-center min-h-[44px] break-all"
                 >
                   {CONTACT.email}
                 </a>
@@ -91,7 +91,7 @@ const Footer = () => {
                   href={STUDIO.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-deep-bronze transition-colors duration-700 inline-block py-2 leading-relaxed"
+                  className="hover:text-deep-bronze transition-colors duration-700 inline-block py-3 leading-relaxed"
                 >
                   {STUDIO.streetAddress}
                   <br />
@@ -108,7 +108,7 @@ const Footer = () => {
 
           {/* Social */}
           <div>
-            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-4">
+            <h3 className="font-alice text-sm uppercase tracking-luxury text-elegant-mocha mb-4">
               Follow Us
             </h3>
             <div className="flex md:flex-col gap-3">
@@ -140,19 +140,19 @@ const Footer = () => {
           <div className="flex flex-wrap justify-center md:justify-start items-center gap-4">
             <Link
               href="/privacy-policy"
-              className="font-alta text-xs tracking-[0.2em] uppercase text-muted-sand hover:text-elegant-mocha transition-colors duration-700 inline-block py-2"
+              className="font-alta text-xs tracking-refined uppercase text-muted-sand hover:text-elegant-mocha transition-colors duration-700 inline-flex items-center min-h-[44px]"
             >
               Privacy Policy
             </Link>
             <span className="text-muted-sand/50">•</span>
             <Link
               href="/terms-of-service"
-              className="font-alta text-xs tracking-[0.2em] uppercase text-muted-sand hover:text-elegant-mocha transition-colors duration-700 inline-block py-2"
+              className="font-alta text-xs tracking-refined uppercase text-muted-sand hover:text-elegant-mocha transition-colors duration-700 inline-flex items-center min-h-[44px]"
             >
               Terms of Service
             </Link>
           </div>
-          <p className="font-alta text-xs tracking-[0.2em] text-muted-sand text-center md:text-right">
+          <p className="font-alta text-xs tracking-refined text-muted-sand text-center md:text-right">
             © {currentYear} {BRAND.name}. All rights reserved.
           </p>
         </div>

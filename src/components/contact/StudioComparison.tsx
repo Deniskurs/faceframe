@@ -45,7 +45,7 @@ export function StudioComparison() {
               <h2 className="font-alice text-2xl lg:text-3xl tracking-wide text-elegant-mocha uppercase mb-2">
                 {STUDIO.name}
               </h2>
-              <p className="font-alta text-deep-bronze/80 text-xs tracking-[0.04em] uppercase">
+              <p className="font-alta text-deep-bronze/80 text-xs tracking-wider uppercase">
                 {STUDIO.type}
               </p>
             </div>
@@ -62,14 +62,14 @@ export function StudioComparison() {
               href={STUDIO.mapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-alta text-xs tracking-[0.2em] uppercase text-deep-bronze hover:text-elegant-mocha transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/40 rounded-sm"
+              className="inline-flex items-center gap-1.5 font-alta text-xs tracking-refined uppercase text-deep-bronze hover:text-elegant-mocha transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/40 rounded-sm"
             >
               View on Google Maps
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
 
             <div>
-              <h3 className="font-alta text-elegant-mocha tracking-[0.04em] text-xs uppercase mb-3">
+              <h3 className="font-alta text-elegant-mocha tracking-wider text-xs uppercase mb-3">
                 Features
               </h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
@@ -87,7 +87,7 @@ export function StudioComparison() {
             <div>
               <Badge
                 variant="outline"
-                className="border-elegant-mocha/30 text-elegant-mocha bg-white font-alta tracking-[0.04em] text-xs px-3 py-1.5"
+                className="border-elegant-mocha/30 text-elegant-mocha bg-white font-alta tracking-wider text-xs px-3 py-1.5"
               >
                 Best for: {STUDIO.bestFor}
               </Badge>

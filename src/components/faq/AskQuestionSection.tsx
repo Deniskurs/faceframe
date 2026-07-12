@@ -165,7 +165,7 @@ export const AskQuestionSection: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="font-alice text-2xl sm:text-3xl text-elegant-mocha uppercase tracking-[0.2em] mb-4">
+            <h2 className="font-alice text-2xl sm:text-3xl text-elegant-mocha uppercase tracking-refined mb-4">
               Still have a question?
             </h2>
 
@@ -188,7 +188,7 @@ export const AskQuestionSection: React.FC = () => {
             <div className="space-y-3">
               <Label
                 htmlFor="question"
-                className="font-alice text-sm text-elegant-mocha tracking-[0.1em] uppercase"
+                className="font-alice text-sm text-elegant-mocha tracking-widest uppercase"
               >
                 Your Question
               </Label>
@@ -267,7 +267,7 @@ export const AskQuestionSection: React.FC = () => {
             >
               <Card className="mt-8 bg-white/90 backdrop-blur-sm border-elegant-mocha/20 shadow-md">
                 <CardHeader className="pb-4">
-                  <CardTitle className="font-alice text-base sm:text-lg text-elegant-mocha uppercase tracking-[0.12em]">
+                  <CardTitle className="font-alice text-base sm:text-lg text-elegant-mocha uppercase tracking-widest">
                     Answer from IGGY
                   </CardTitle>
                   <div className="h-[1px] w-12 bg-elegant-mocha/20 mt-3" />

@@ -24,11 +24,11 @@ export default function InstagramGallery({ posts }: InstagramGalleryProps) {
       className="relative bg-gradient-to-b from-elegant-mocha/8 via-soft-blush/15 to-light-cream/40"
       aria-label="Instagram gallery"
     >
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-20 sm:py-28 md:py-32">
-        <div className="flex flex-col items-center gap-12 sm:gap-16 w-full">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16">
+        <div className="flex flex-col items-center gap-8 sm:gap-10 w-full">
           {/* Section header */}
           <motion.header
-            className="flex flex-col items-center gap-6 sm:gap-8 text-center w-full max-w-3xl"
+            className="flex flex-col items-center gap-3 sm:gap-4 text-center w-full max-w-3xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={standardViewport}
@@ -39,11 +39,11 @@ export default function InstagramGallery({ posts }: InstagramGalleryProps) {
               <div className="w-2.5 h-2.5 border border-soft-blush/60 rounded-full bg-soft-blush/10" />
               <div className="w-16 h-[0.5px] bg-soft-blush/50" />
             </div>
-            <p className="font-alta text-xs sm:text-sm tracking-[0.4em] uppercase text-elegant-mocha/80 font-light">
+            <p className="font-alta text-xs sm:text-sm tracking-[0.4em] uppercase text-elegant-mocha/80">
               {sectionContent.preTitle}
             </p>
 
-            <h2 className="font-alice text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] text-elegant-mocha uppercase font-light leading-[1.15]">
+            <h2 className="font-alice text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-editorial sm:tracking-refined md:tracking-luxury text-elegant-mocha uppercase leading-[1.15]">
               {sectionContent.title}
             </h2>
 
@@ -103,7 +103,7 @@ export default function InstagramGallery({ posts }: InstagramGalleryProps) {
               href={SOCIAL.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-alice text-sm sm:text-base md:text-lg text-elegant-mocha/85 hover:text-deep-bronze tracking-[0.2em] italic font-light transition-colors duration-500"
+              className="font-alice text-sm sm:text-base md:text-lg text-elegant-mocha/85 hover:text-deep-bronze tracking-refined italic transition-colors duration-500"
             >
               {sectionContent.note}
             </a>

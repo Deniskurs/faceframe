@@ -191,7 +191,7 @@ export const ChanelServiceCard: React.FC<ChanelServiceCardProps> = ({
           className="absolute top-6 left-0 z-20"
           variants={numberVariants}
         >
-          <span className="font-alta text-elegant-mocha/50 text-[18px] sm:text-[20px] tracking-[0.05em]">
+          <span className="font-alta text-elegant-mocha/50 text-lg sm:text-xl tracking-wider">
             N° {numberIndex}
           </span>
         </motion.div>
@@ -223,7 +223,7 @@ export const ChanelServiceCard: React.FC<ChanelServiceCardProps> = ({
 
             {/* Category label with Chanel styling - positioned for asymmetry */}
             <div className="absolute bottom-8 left-8">
-              <span className="font-alta text-white/90 text-[11px] tracking-[0.2em] uppercase">
+              <span className="font-alta text-white/90 text-xs tracking-refined uppercase">
                 {category.featured}
               </span>
             </div>
@@ -234,7 +234,7 @@ export const ChanelServiceCard: React.FC<ChanelServiceCardProps> = ({
         <div className="pl-0 pr-6">
           {/* Title with luxurious spacing */}
           <motion.h3
-            className="font-alta text-[26px] text-elegant-mocha uppercase tracking-luxury mb-5"
+            className="font-alta text-2xl text-elegant-mocha uppercase tracking-luxury mb-5"
             variants={titleVariants}
           >
             {category.title}
@@ -248,7 +248,7 @@ export const ChanelServiceCard: React.FC<ChanelServiceCardProps> = ({
 
           {/* Description with Chanel-inspired typography */}
           <motion.p
-            className="font-alta text-elegant-mocha/80 text-[15px] leading-[1.7] tracking-[0.03em] mb-10 max-w-[90%]"
+            className="font-alta text-elegant-mocha/80 text-base leading-[1.7] tracking-wide mb-10 max-w-[90%]"
             variants={descriptionVariants}
           >
             {category.description}
@@ -266,7 +266,7 @@ export const ChanelServiceCard: React.FC<ChanelServiceCardProps> = ({
                 <div className="flex-shrink-0 w-[18px] mr-5">
                   <div className="w-0 h-[0.5px] bg-deep-bronze/80 mt-3 group-hover:w-full"></div>
                 </div>
-                <p className="font-alta text-elegant-mocha/90 text-[13px] tracking-[0.05em] leading-[1.6]">
+                <p className="font-alta text-elegant-mocha/90 text-sm tracking-wider leading-[1.6]">
                   {item.label}
                 </p>
               </motion.div>
@@ -277,7 +277,7 @@ export const ChanelServiceCard: React.FC<ChanelServiceCardProps> = ({
           <div className="mt-auto">
             <Link
               href={`/services#${category.id}`}
-              className="group relative inline-block font-alta text-elegant-mocha text-[11px] tracking-[0.35em] uppercase"
+              className="group relative inline-block font-alta text-elegant-mocha text-xs tracking-[0.3em] uppercase"
             >
               <span className="inline-block py-1">DISCOVER</span>
               <div className="absolute bottom-0 left-0 w-0 h-[0.5px] bg-elegant-mocha/40 group-hover:w-full transition-all duration-700 ease-out"></div>

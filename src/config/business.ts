@@ -162,4 +162,10 @@ export const FEATURES = {
    * pay for. Re-enable once billing is in place.
    */
   aiFaq: false as boolean,
+  /**
+   * Native on-site scheduler backed by the Acuity REST API (server-side).
+   * When false — or whenever an availability call fails at runtime — the
+   * booking journey falls back to the embedded Acuity iframe automatically.
+   */
+  nativeBooking: true as boolean,
 } as const;

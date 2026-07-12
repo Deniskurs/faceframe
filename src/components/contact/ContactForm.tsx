@@ -119,7 +119,7 @@ export function ContactForm() {
             name="firstName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-alta tracking-[0.06em] uppercase text-xs text-elegant-mocha/85">
+                <FormLabel className="font-alta tracking-wider uppercase text-xs text-elegant-mocha/85">
                   First name
                 </FormLabel>
                 <FormControl>
@@ -130,7 +130,7 @@ export function ContactForm() {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="font-alta tracking-[0.02em]" />
+                <FormMessage className="font-alta tracking-wide" />
               </FormItem>
             )}
           />
@@ -140,7 +140,7 @@ export function ContactForm() {
             name="lastName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-alta tracking-[0.06em] uppercase text-xs text-elegant-mocha/85">
+                <FormLabel className="font-alta tracking-wider uppercase text-xs text-elegant-mocha/85">
                   Last name
                 </FormLabel>
                 <FormControl>
@@ -151,7 +151,7 @@ export function ContactForm() {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="font-alta tracking-[0.02em]" />
+                <FormMessage className="font-alta tracking-wide" />
               </FormItem>
             )}
           />
@@ -162,7 +162,7 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-alta tracking-[0.06em] uppercase text-xs text-elegant-mocha/85">
+              <FormLabel className="font-alta tracking-wider uppercase text-xs text-elegant-mocha/85">
                 Email
               </FormLabel>
               <FormControl>
@@ -175,7 +175,7 @@ export function ContactForm() {
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="font-alta tracking-[0.02em]" />
+              <FormMessage className="font-alta tracking-wide" />
             </FormItem>
           )}
         />
@@ -185,7 +185,7 @@ export function ContactForm() {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-alta tracking-[0.06em] uppercase text-xs text-elegant-mocha/85">
+              <FormLabel className="font-alta tracking-wider uppercase text-xs text-elegant-mocha/85">
                 Phone
                 <span className="ml-2 normal-case text-elegant-mocha/65">
                   optional
@@ -201,7 +201,7 @@ export function ContactForm() {
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="font-alta tracking-[0.02em]" />
+              <FormMessage className="font-alta tracking-wide" />
             </FormItem>
           )}
         />
@@ -211,7 +211,7 @@ export function ContactForm() {
           name="service"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-alta tracking-[0.06em] uppercase text-xs text-elegant-mocha/85">
+              <FormLabel className="font-alta tracking-wider uppercase text-xs text-elegant-mocha/85">
                 Service interest
               </FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
@@ -232,7 +232,7 @@ export function ContactForm() {
                   ))}
                 </SelectContent>
               </Select>
-              <FormMessage className="font-alta tracking-[0.02em]" />
+              <FormMessage className="font-alta tracking-wide" />
             </FormItem>
           )}
         />
@@ -243,13 +243,13 @@ export function ContactForm() {
           render={({ field }) => (
             <FormItem>
               <div className="flex items-baseline justify-between">
-                <FormLabel className="font-alta tracking-[0.06em] uppercase text-xs text-elegant-mocha/85">
+                <FormLabel className="font-alta tracking-wider uppercase text-xs text-elegant-mocha/85">
                   Message
                   <span className="ml-2 normal-case text-elegant-mocha/65">
                     optional
                   </span>
                 </FormLabel>
-                <span className="text-[11px] font-alta text-elegant-mocha/80 tabular-nums">
+                <span className="text-xs font-alta text-elegant-mocha/80 tabular-nums">
                   {messageLength}/{MESSAGE_MAX}
                 </span>
               </div>
@@ -262,11 +262,11 @@ export function ContactForm() {
                   {...field}
                 />
               </FormControl>
-              <FormDescription className="font-alta text-[11px] text-elegant-mocha/80">
+              <FormDescription className="font-alta text-xs text-elegant-mocha/80">
                 Iggy reads every message personally — there&rsquo;s no template
                 reply.
               </FormDescription>
-              <FormMessage className="font-alta tracking-[0.02em]" />
+              <FormMessage className="font-alta tracking-wide" />
             </FormItem>
           )}
         />
@@ -287,7 +287,7 @@ export function ContactForm() {
         {submitState === "success" && (
           <Alert className="bg-green-50 border-green-200 text-green-800">
             <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
-            <AlertDescription className="font-alta tracking-[0.02em] text-sm">
+            <AlertDescription className="font-alta tracking-wide text-sm">
               {submitMessage}
             </AlertDescription>
           </Alert>
@@ -296,7 +296,7 @@ export function ContactForm() {
         {submitState === "error" && (
           <Alert className="bg-red-50 border-red-200 text-red-800">
             <AlertCircle className="h-4 w-4" aria-hidden="true" />
-            <AlertDescription className="font-alta tracking-[0.02em] text-sm">
+            <AlertDescription className="font-alta tracking-wide text-sm">
               {submitMessage}
             </AlertDescription>
           </Alert>

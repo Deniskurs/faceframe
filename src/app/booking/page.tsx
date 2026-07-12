@@ -34,7 +34,7 @@ export default function BookingPage() {
           <Suspense
             fallback={
               <div className="min-h-[400px] flex items-center justify-center">
-                <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/80 animate-pulse">
+                <p className="font-alta text-xs tracking-luxury uppercase text-elegant-mocha/80 animate-pulse">
                   Preparing your calendar…
                 </p>
               </div>
@@ -78,7 +78,7 @@ export default function BookingPage() {
               },
             ].map((item) => (
               <div key={item.title} className="text-center sm:text-left">
-                <p className="font-alta text-[11px] tracking-[0.25em] uppercase text-deep-bronze/80 mb-2">
+                <p className="font-alta text-xs tracking-luxury uppercase text-deep-bronze/80 mb-2">
                   {item.title}
                 </p>
                 <p className="font-alice text-sm text-elegant-mocha/80 leading-relaxed tracking-wide">
@@ -88,7 +88,7 @@ export default function BookingPage() {
             ))}
           </div>
 
-          <p className="text-center font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-12">
+          <p className="text-center font-alta text-xs tracking-wider text-elegant-mocha/80 mt-12">
             Questions before booking?{" "}
             <Link
               href="/faq"

@@ -22,6 +22,8 @@ import {
   serviceSchedulerUrl,
   type CatalogService,
 } from "@/data/acuityCatalog";
+import { FEATURES } from "@/config/business";
+import { NativeScheduler } from "@/components/booking/NativeScheduler";
 
 const PACKAGES_TAB = "packages";
 
@@ -248,7 +250,7 @@ function SelectStep({
           type="button"
           onClick={() => onCategory(PACKAGES_TAB)}
           aria-pressed={activeCategory === PACKAGES_TAB}
-          className={`inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 py-2 ${
+          className={`inline-flex items-center gap-1.5 font-alta text-xs tracking-refined uppercase transition-colors duration-300 py-2 ${
             activeCategory === PACKAGES_TAB
               ? "text-elegant-mocha"
               : "text-deep-bronze hover:text-elegant-mocha"
@@ -290,7 +292,7 @@ function CategoryPill({
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`shrink-0 inline-flex items-center gap-2 px-5 py-3 sm:py-2.5 rounded-full border font-alta text-xs sm:text-sm tracking-[0.06em] transition-all duration-300 ${
+      className={`shrink-0 inline-flex items-center gap-2 px-5 py-3 sm:py-2.5 rounded-full border font-alta text-xs sm:text-sm tracking-wider transition-all duration-300 ${
         active
           ? "bg-elegant-mocha text-white border-elegant-mocha shadow-md"
           : "bg-white text-elegant-mocha border-elegant-mocha/25 hover:border-elegant-mocha/50 hover:shadow-sm"
@@ -301,6 +303,19 @@ function CategoryPill({
   );
 }
 
+/** Splits "…\n\nIncluded in the price:\n• a\n• b" into prose + bullet lines. */
+function splitDescription(description: string): { prose: string; included: string[] } {
+  const marker = "Included in the price:";
+  const idx = description.indexOf(marker);
+  if (idx === -1) return { prose: description.trim(), included: [] };
+  const included = description
+    .slice(idx + marker.length)
+    .split("\n")
+    .map((line) => line.replace(/^\s*•\s*/, "").trim())
+    .filter(Boolean);
+  return { prose: description.slice(0, idx).trim(), included };
+}
+
 function ServiceRow({
   service,
   onBook,
@@ -309,6 +324,30 @@ function ServiceRow({
   onBook: (slug: string) => void;
 }) {
   const isConsultation = service.slug === CONSULTATION_SLUG;
+  const { prose, included } = useMemo(
+    () => splitDescription(service.description),
+    [service.description],
+  );
+
+  // Long descriptions clamp to three lines with a quiet toggle — shown only
+  // when the prose actually overflows. The accordion unmounts its content
+  // while closed, so the element arrives via a state ref and a ResizeObserver
+  // measures the moment it gains real dimensions.
+  const [proseEl, setProseEl] = useState<HTMLParagraphElement | null>(null);
+  const [overflows, setOverflows] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    if (expanded || !proseEl) return; // unclamped prose never overflows — keep the toggle
+    const observer = new ResizeObserver(() => {
+      if (proseEl.clientHeight > 0) {
+        setOverflows(proseEl.scrollHeight > proseEl.clientHeight + 1);
+      }
+    });
+    observer.observe(proseEl);
+    return () => observer.disconnect();
+  }, [proseEl, expanded]);
+
   return (
     <AccordionItem
       value={service.slug}
@@ -321,31 +360,62 @@ function ServiceRow({
               {service.name}
             </span>
             {service.consultationRequired && (
-              <span className="ml-3 inline-block align-middle font-alta text-[10px] tracking-[0.18em] uppercase text-deep-bronze border border-deep-bronze/30 rounded-full px-2.5 py-0.5">
+              <span className="ml-3 inline-block align-middle font-alta text-xs tracking-editorial uppercase text-deep-bronze border border-deep-bronze/30 rounded-full px-2.5 py-0.5">
                 Consultation first
               </span>
             )}
           </div>
-          <span className="shrink-0 font-alta text-xs sm:text-sm tracking-[0.08em] text-elegant-mocha/80">
+          <span className="shrink-0 whitespace-nowrap text-right font-alta text-xs sm:text-sm tracking-widest text-elegant-mocha/80">
             <Clock className="inline w-3.5 h-3.5 mr-1.5 -mt-0.5 opacity-60" aria-hidden="true" />
             {formatDuration(service.duration)}
             <span className="mx-2 text-elegant-mocha/30">·</span>
-            <span className="text-elegant-mocha">{service.priceDisplay}</span>
+            <span className="text-elegant-mocha tabular-nums">{service.priceDisplay}</span>
           </span>
         </div>
       </AccordionTrigger>
       <AccordionContent className="pb-6">
         <div className="sm:flex sm:items-end sm:justify-between sm:gap-8">
-          <div className="max-w-2xl">
-            <p className="font-alice text-sm sm:text-base text-elegant-mocha/80 leading-relaxed tracking-wide whitespace-pre-line">
-              {service.description}
+          <div className="max-w-2xl min-w-0">
+            <p
+              ref={setProseEl}
+              className={`font-alice text-sm sm:text-base text-elegant-mocha/80 leading-relaxed tracking-wide whitespace-pre-line ${expanded ? "" : "line-clamp-3"}`}
+            >
+              {prose}
             </p>
+            {overflows && (
+              <button
+                type="button"
+                aria-expanded={expanded}
+                onClick={() => setExpanded((v) => !v)}
+                className="min-h-[44px] -mb-2 font-alta text-xs tracking-refined uppercase text-deep-bronze hover:text-elegant-mocha transition-colors duration-300"
+              >
+                {expanded ? "Read less" : "Read more"}
+              </button>
+            )}
+            {included.length > 0 && (
+              <div className="mt-4">
+                <p className="font-alta text-xs tracking-refined uppercase text-elegant-mocha/70 mb-2">
+                  Included in the price
+                </p>
+                <ul className="space-y-1.5">
+                  {included.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 font-alice text-sm text-elegant-mocha/80 leading-relaxed tracking-wide"
+                    >
+                      <span aria-hidden="true" className="shrink-0 mt-2.5 w-3 h-px bg-deep-bronze/60" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           <div className="mt-5 sm:mt-0 shrink-0">
             <button
               type="button"
               onClick={() => onBook(service.slug)}
-              className="inline-block font-alta text-xs tracking-[0.25em] uppercase px-8 py-3.5 bg-elegant-mocha text-white border border-elegant-mocha rounded-sm hover:bg-deep-bronze hover:border-deep-bronze transition-colors duration-300"
+              className="inline-block font-alta text-xs tracking-luxury uppercase px-8 py-3.5 bg-elegant-mocha text-white border border-elegant-mocha rounded-sm hover:bg-deep-bronze hover:border-deep-bronze transition-colors duration-300"
             >
               Choose a time
             </button>
@@ -367,10 +437,10 @@ function PackagesPanel() {
         {CATALOG_PACKAGES.map((pkg) => (
           <article
             key={pkg.name}
-            className="flex flex-col h-full border border-elegant-mocha/15 rounded-sm p-7 sm:p-8 bg-light-cream/20"
+            className="flex flex-col h-full border border-elegant-mocha/15 rounded-sm p-7 bg-light-cream/20"
           >
-            <p className="font-alta text-[10px] tracking-[0.25em] uppercase text-deep-bronze mb-3">
-              {pkg.sessions} sessions · {pkg.savings}
+            <p className="font-alta text-xs tracking-luxury uppercase text-deep-bronze mb-3">
+              {pkg.sessions} sessions
             </p>
             <h3 className="font-alice text-xl text-elegant-mocha tracking-wide mb-3">
               {pkg.name}
@@ -378,13 +448,20 @@ function PackagesPanel() {
             <p className="font-alice text-sm text-elegant-mocha/80 leading-relaxed tracking-wide mb-5">
               {pkg.description}
             </p>
-            <div className="mt-auto flex items-center justify-between">
-              <span className="font-alice text-2xl text-elegant-mocha">{pkg.priceDisplay}</span>
+            <div className="mt-auto">
+              <div className="flex items-baseline justify-between gap-4 mb-4">
+                <span className="font-alice text-xl text-elegant-mocha tabular-nums">
+                  {pkg.priceDisplay}
+                </span>
+                <span className="font-alta text-xs tracking-refined uppercase text-deep-bronze whitespace-nowrap">
+                  {pkg.savings}
+                </span>
+              </div>
               <a
                 href={PACKAGES_CATALOG_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-alta text-xs tracking-[0.25em] uppercase px-6 py-3 border border-elegant-mocha/40 text-elegant-mocha rounded-sm hover:bg-elegant-mocha hover:text-white transition-colors duration-300"
+                className="w-full inline-flex items-center justify-center gap-1.5 min-h-[44px] font-alta text-xs tracking-luxury uppercase px-6 py-3 border border-elegant-mocha/40 text-elegant-mocha rounded-sm hover:bg-elegant-mocha hover:text-white transition-colors duration-300"
               >
                 Purchase
                 <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
@@ -393,7 +470,7 @@ function PackagesPanel() {
           </article>
         ))}
       </div>
-      <p className="text-center font-alta text-[10px] tracking-[0.08em] uppercase text-elegant-mocha/80 mt-6">
+      <p className="text-center font-alta text-xs tracking-widest uppercase text-elegant-mocha/80 mt-6">
         Checkout opens in Acuity, our secure booking partner
       </p>
       <p className="text-center font-alice text-sm text-elegant-mocha/80 tracking-wide mt-4">
@@ -440,6 +517,11 @@ function ScheduleStep({
   const [iframeLoaded, setIframeLoaded] = useState(false); // real onLoad
   const [loadStalled, setLoadStalled] = useState(false);
 
+  // Native scheduler by default; any availability failure flips this row to
+  // the embedded Acuity iframe below — same journey, zero dead ends.
+  const [iframeFallback, setIframeFallback] = useState(false);
+  const useNative = FEATURES.nativeBooking && !iframeFallback;
+
   // Scroll the step header into view when arriving via deep link / selection.
   useEffect(() => {
     document.getElementById("booking-journey-top")?.scrollIntoView({ block: "nearest" });
@@ -450,7 +532,7 @@ function ScheduleStep({
   // the veil at 4s regardless. If onLoad still hasn't fired by 10s, surface a
   // quiet escape hatch beneath the (still mounted) iframe.
   useEffect(() => {
-    if (!showCalendar) return;
+    if (!showCalendar || useNative) return;
     setSchedulerLoaded(false);
     setIframeLoaded(false);
     setLoadStalled(false);
@@ -460,7 +542,7 @@ function ScheduleStep({
       clearTimeout(veil);
       clearTimeout(stall);
     };
-  }, [service.slug, showCalendar]);
+  }, [service.slug, showCalendar, useNative]);
 
   return (
     <motion.div key="schedule" {...fade} id="booking-journey-top">
@@ -468,7 +550,7 @@ function ScheduleStep({
       <button
         type="button"
         onClick={onBack}
-        className="inline-flex items-center gap-1.5 min-h-[44px] -my-2 px-2 -mx-2 font-alta text-[11px] tracking-[0.2em] uppercase text-deep-bronze hover:text-elegant-mocha transition-colors duration-300"
+        className="inline-flex items-center gap-1.5 min-h-[44px] -my-2 px-2 -mx-2 font-alta text-xs tracking-refined uppercase text-deep-bronze hover:text-elegant-mocha transition-colors duration-300"
       >
         <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
         All treatments
@@ -477,7 +559,7 @@ function ScheduleStep({
         <h2 className="font-alice text-2xl sm:text-3xl text-elegant-mocha tracking-wide">
           {service.name}
         </h2>
-        <p className="font-alta text-sm tracking-[0.08em] text-elegant-mocha/80">
+        <p className="font-alta text-sm tracking-widest text-elegant-mocha/80">
           {formatDuration(service.duration)}
           <span className="mx-2 text-elegant-mocha/30">·</span>
           <span className="text-elegant-mocha">{service.priceDisplay}</span>
@@ -487,7 +569,7 @@ function ScheduleStep({
       {/* Consultation gate — first-time clients never see the calendar before answering */}
       {gated && !consultationConfirmed ? (
         <div className="mt-6 border border-elegant-mocha/15 bg-light-cream/20 rounded-sm px-6 py-8 sm:px-10 sm:py-10 text-center">
-          <p className="font-alta text-[11px] tracking-[0.3em] uppercase text-deep-bronze mb-3">
+          <p className="font-alta text-xs tracking-[0.3em] uppercase text-deep-bronze mb-3">
             Before you book
           </p>
           <h3 className="font-alice text-xl sm:text-2xl text-elegant-mocha tracking-wide mb-3">
@@ -502,19 +584,21 @@ function ScheduleStep({
             <button
               type="button"
               onClick={() => setConsultationConfirmed(true)}
-              className="w-full sm:w-auto font-alta text-xs tracking-[0.25em] uppercase px-8 py-3.5 bg-elegant-mocha text-white border border-elegant-mocha rounded-sm hover:bg-deep-bronze hover:border-deep-bronze transition-colors duration-300"
+              className="w-full sm:w-auto font-alta text-xs tracking-luxury uppercase px-8 py-3.5 bg-elegant-mocha text-white border border-elegant-mocha rounded-sm hover:bg-deep-bronze hover:border-deep-bronze transition-colors duration-300"
             >
               Yes — show available times
             </button>
             <button
               type="button"
               onClick={onBookConsultation}
-              className="w-full sm:w-auto font-alta text-xs tracking-[0.25em] uppercase px-8 py-3.5 border border-deep-bronze/40 text-deep-bronze rounded-sm hover:bg-deep-bronze hover:text-white transition-colors duration-300"
+              className="w-full sm:w-auto font-alta text-xs tracking-luxury uppercase px-8 py-3.5 border border-deep-bronze/40 text-deep-bronze rounded-sm hover:bg-deep-bronze hover:text-white transition-colors duration-300"
             >
               Not yet — book the consultation first
             </button>
           </div>
         </div>
+      ) : useNative ? (
+        <NativeScheduler service={service} onUnavailable={() => setIframeFallback(true)} />
       ) : (
         <>
           {/* Scoped Acuity scheduler — calendar + details for this ONE treatment */}
@@ -540,7 +624,7 @@ function ScheduleStep({
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-1 sm:inset-2 flex items-center justify-center bg-light-cream/60 backdrop-blur-[1px] rounded-sm"
               >
-                <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/80 animate-pulse">
+                <p className="font-alta text-xs tracking-luxury uppercase text-elegant-mocha/80 animate-pulse">
                   Preparing your calendar…
                 </p>
               </div>

@@ -49,7 +49,7 @@ export default function GlobalError({
           />
         </div>
 
-        <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-10">
+        <p className="font-alta text-xs tracking-wider text-elegant-mocha/80 mt-10">
           Need a hand?{" "}
           <Link
             href={`mailto:${CONTACT.email}`}

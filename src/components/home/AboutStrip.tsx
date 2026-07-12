@@ -167,11 +167,11 @@ const AboutStrip: React.FC<AboutStripProps> = ({
                   }}
                 >
                   <div className="max-w-[90%] w-auto py-4 px-6 bg-black/80 backdrop-blur-sm border-[0.25px] border-white/20 flex flex-col items-center justify-center">
-                    <p className="font-alice text-white text-base tracking-[0.25em] mb-2 text-center">
+                    <p className="font-alice text-white text-base tracking-luxury mb-2 text-center">
                       {founderName}
                     </p>
                     <div className="flex justify-center items-center w-full">
-                      <p className="font-alta text-white/70 text-[11px] sm:text-xs font-medium tracking-[0.25em] sm:tracking-[0.35em] md:tracking-[0.5em] text-center">
+                      <p className="font-alta text-white/70 text-xs sm:text-xs font-medium tracking-luxury sm:tracking-[0.3em] md:tracking-[0.4em] text-center">
                         {subtitle}
                       </p>
                     </div>

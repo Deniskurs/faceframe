@@ -91,7 +91,7 @@ const BookingCTA = ({
             transition={{ duration: 0.8, ease: LUXURY_EASING }}
             viewport={{ once: true }}
           >
-            <h2 className="font-alice text-3xl md:text-4xl tracking-[0.2em] text-white uppercase">
+            <h2 className="font-alice text-3xl md:text-4xl tracking-refined text-white uppercase">
               {title}
             </h2>
             <div className="h-[0.5px] w-16 bg-white/40 mx-auto mt-8"></div>
