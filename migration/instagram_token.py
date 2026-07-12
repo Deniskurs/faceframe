@@ -61,7 +61,7 @@ def main() -> None:
     env = load_env()
     app_id = env["FB_APP_ID"]
     app_secret = env["FB_APP_SECRET"]
-    page_id = env["FB_PAGE_ID"]
+    page_id = env.get("FB_PAGE_ID", "")
     base = env.get("FB_GRAPH_API_URL", "https://graph.facebook.com/v23.0")
 
     print("1/4 exchanging for a long-lived user token…")
@@ -77,12 +77,20 @@ def main() -> None:
     print("2/4 deriving the permanent Page token…")
     accounts = get(base, "me/accounts", access_token=long_lived).get("data", [])
     page = next((p for p in accounts if p["id"] == page_id), None)
+    if page is None and len(accounts) == 1:
+        # Env holds a stale/placeholder page id — a single page is unambiguous.
+        page = accounts[0]
+        print(
+            f'    FB_PAGE_ID in .env.local is stale — using the only page this '
+            f'user manages: {page["name"]} ({page["id"]}).\n'
+            f'    Update FB_PAGE_ID={page["id"]} in .env.local AND Vercel.'
+        )
     if page is None:
         listed = ", ".join(f'{p["name"]} ({p["id"]})' for p in accounts) or "none"
         sys.exit(
-            f"error: page {page_id} not among this user's pages: {listed}.\n"
-            "Log into Graph Explorer with the account that manages the "
-            "FaceFrame Beauty page."
+            f"error: page {page_id or '<unset>'} not among this user's pages: {listed}.\n"
+            "Pick the FaceFrame page id from that list, set FB_PAGE_ID in "
+            ".env.local, and rerun."
         )
     page_token = page["access_token"]
 
