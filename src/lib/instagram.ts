@@ -2,27 +2,21 @@ import "server-only";
 import { SOCIAL } from "@/config/business";
 
 /**
- * Server-side Instagram feed via the Facebook Graph API.
+ * Server-side Instagram feed.
  *
- * TOKEN: use a NEVER-EXPIRING Page access token (a Page token derived from a
- * long-lived user token has no expiry — this is documented Meta behaviour).
- * One-time setup, no renewal:
- *   1. Open the Graph API Explorer (developers.facebook.com/tools/explorer),
- *      select the FaceFrame app, choose "User Token" and grant
- *      `instagram_basic`, `pages_show_list`, `pages_read_engagement`.
- *      Copy the short-lived token it shows.
- *   2. Run `python3 migration/instagram_token.py <that-token>` — it exchanges
- *      it for a long-lived user token, derives the permanent Page token,
- *      verifies it can read the Instagram media, and prints it.
- *   3. Set FB_LONG_LIVED_TOKEN to the printed value (and FB_PAGE_ID if unset)
- *      in the Vercel environment and redeploy.
+ * PRIMARY — "Instagram API with Instagram Login" (matches the GalleryWebsite
+ * Meta app): set INSTAGRAM_ACCESS_TOKEN to a long-lived Instagram user token
+ * (App Dashboard -> Instagram -> API setup with Instagram login -> Generate
+ * access tokens). These tokens last 60 days; /api/instagram/refresh (weekly
+ * Vercel cron) refreshes the token, persists it to the project env via the
+ * Vercel API, and triggers a redeploy — fully self-maintaining.
  *
- * The permanent token only dies if the Facebook account password changes,
- * permissions are revoked, or the app is deleted — rerun the script then.
+ * LEGACY — Facebook-Page-backed Graph API: FB_LONG_LIVED_TOKEN + FB_PAGE_ID
+ * (never-expiring Page token via migration/instagram_token.py). Used only
+ * when INSTAGRAM_ACCESS_TOKEN is absent.
  *
- * NOTE: the token currently in .env.local was a 60-day user token that
- * expired in August 2025, so getInstagramFeed() returns null today and
- * callers fall back to FALLBACK_POSTS. That null path is intentional and safe.
+ * Any failure in either path returns null and callers fall back to
+ * FALLBACK_POSTS — the gallery never breaks.
  */
 
 export interface InstagramPost {
@@ -50,13 +44,60 @@ function captionToAlt(caption?: string): string {
   return firstLine.length > 80 ? `${firstLine.slice(0, 80).trimEnd()}…` : firstLine;
 }
 
+async function fetchMedia(
+  url: string,
+  limit: number,
+): Promise<InstagramPost[] | null> {
+  const mediaRes = await fetch(url, { next: { revalidate: 3600 } });
+  if (!mediaRes.ok) {
+    console.warn(`[instagram] media fetch failed (${mediaRes.status}) — using fallback gallery`);
+    return null;
+  }
+  const media = (await mediaRes.json()) as { data?: GraphMediaItem[] };
+  if (!media.data?.length) {
+    console.warn("[instagram] media response empty — using fallback gallery");
+    return null;
+  }
+  const posts = media.data
+    .slice(0, limit)
+    .map((item): InstagramPost | null => {
+      const src = item.media_type === "VIDEO" ? item.thumbnail_url : item.media_url;
+      if (!src) return null;
+      return {
+        id: item.id,
+        src,
+        alt: captionToAlt(item.caption),
+        permalink: item.permalink,
+      };
+    })
+    .filter((post): post is InstagramPost => post !== null);
+  return posts.length ? posts : null;
+}
+
+const MEDIA_FIELDS = "id,media_type,media_url,thumbnail_url,permalink,caption";
+
 export async function getInstagramFeed(limit = 12): Promise<InstagramPost[] | null> {
+  // Primary: Instagram-Login user token — direct, no page hop.
+  const igToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+  if (igToken) {
+    try {
+      return await fetchMedia(
+        `https://graph.instagram.com/me/media?fields=${MEDIA_FIELDS}&limit=${limit}&access_token=${igToken}`,
+        limit,
+      );
+    } catch (error) {
+      console.warn("[instagram] feed fetch failed — using fallback gallery", error);
+      return null;
+    }
+  }
+
+  // Legacy: Facebook-Page-backed flow.
   const token = process.env.FB_LONG_LIVED_TOKEN;
   const pageId = process.env.FB_PAGE_ID;
   const base = process.env.FB_GRAPH_API_URL || "https://graph.facebook.com/v23.0";
 
   if (!token || !pageId) {
-    console.warn("[instagram] FB_LONG_LIVED_TOKEN / FB_PAGE_ID missing — using fallback gallery");
+    console.warn("[instagram] no Instagram credentials configured — using fallback gallery");
     return null;
   }
 
@@ -78,34 +119,10 @@ export async function getInstagramFeed(limit = 12): Promise<InstagramPost[] | nu
       return null;
     }
 
-    const mediaRes = await fetch(
-      `${base}/${igId}/media?fields=id,media_type,media_url,thumbnail_url,permalink,caption&limit=${limit}&access_token=${token}`,
-      { next: { revalidate: 3600 } },
+    return await fetchMedia(
+      `${base}/${igId}/media?fields=${MEDIA_FIELDS}&limit=${limit}&access_token=${token}`,
+      limit,
     );
-    if (!mediaRes.ok) {
-      console.warn(`[instagram] media fetch failed (${mediaRes.status}) — using fallback gallery`);
-      return null;
-    }
-    const media = (await mediaRes.json()) as { data?: GraphMediaItem[] };
-    if (!media.data?.length) {
-      console.warn("[instagram] media response empty — using fallback gallery");
-      return null;
-    }
-
-    const posts = media.data
-      .map((item): InstagramPost | null => {
-        const src = item.media_type === "VIDEO" ? item.thumbnail_url : item.media_url;
-        if (!src) return null;
-        return {
-          id: item.id,
-          src,
-          alt: captionToAlt(item.caption),
-          permalink: item.permalink,
-        };
-      })
-      .filter((post): post is InstagramPost => post !== null);
-
-    return posts.length ? posts : null;
   } catch (error) {
     console.warn("[instagram] feed fetch failed — using fallback gallery", error);
     return null;
