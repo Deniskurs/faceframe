@@ -40,8 +40,8 @@ const LUXURY_VARIANTS = {
 
 // Custom size classes with Alta font and tracking
 const LUXURY_SIZES = {
-  small: "py-3 px-6 text-xs sm:py-3 sm:px-8",
-  medium: "py-3 px-6 text-xs sm:py-4 sm:px-10 sm:text-sm",
+  small: "min-h-[44px] py-3 px-6 text-xs sm:py-3 sm:px-8",
+  medium: "min-h-[44px] py-3 px-6 text-xs sm:py-4 sm:px-10 sm:text-sm",
   large: "py-4 px-8 text-sm sm:py-5 sm:px-12 sm:text-base",
 };
 
@@ -57,6 +57,7 @@ export interface LuxuryShadcnButtonProps
   asChild?: boolean;
   enableMobilePatternInterrupt?: boolean;
   isLoading?: boolean;
+  loadingText?: string;
 }
 
 /**
@@ -74,6 +75,7 @@ function LuxuryShadcnButtonComponent({
   asChild = false,
   enableMobilePatternInterrupt = false,
   isLoading = false,
+  loadingText = "PROCESSING…",
   onClick,
   ...props
 }: LuxuryShadcnButtonProps) {
@@ -197,7 +199,7 @@ function LuxuryShadcnButtonComponent({
           intensity={luxuryTheme === "dark" ? "light" : "medium"}
           isHeading={false}
         >
-          {isLoading ? "PROCESSING..." : text}
+          {isLoading ? loadingText : text}
         </LuxuryTextBackdrop>
       </motion.span>
 

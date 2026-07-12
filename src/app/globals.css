@@ -7,31 +7,6 @@ html {
   scroll-behavior: auto;
 }
 
-/* Font declarations */
-@font-face {
-  font-family: "Alta";
-  src: url("/fonts/Alta-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Alta";
-  src: url("/fonts/Alta-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Alta";
-  src: url("/fonts/Alta-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* CHANEL-Dior Luxury Typography System */
 @layer base {
   html {
@@ -48,7 +23,7 @@ html {
     /* More balanced letter-spacing for body text */
     letter-spacing: 0.01em;
     line-height: 1.6;
-    color: rgba(127, 85, 57, 0.95); /* Slightly increased contrast */
+    color: rgba(115, 77, 51, 0.95); /* elegant-mocha, slightly softened */
   }
 
   /*
@@ -91,9 +66,8 @@ html {
 
   /* Focus states for accessibility */
   *:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--elegant-mocha);
-    opacity: 0.5;
+    outline: 2px solid #89593C; /* deep-bronze */
+    outline-offset: 2px;
   }
 
   /* Subtle scroll bar styling */
@@ -171,8 +145,8 @@ html {
     --soft-blush: #E6CCB2;
     --warm-beige: #DDB892;
     --muted-sand: #B08968;
-    --elegant-mocha: #7F5539;
-    --deep-bronze: #9C6644;
+    --elegant-mocha: #734D33;
+    --deep-bronze: #89593C;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -199,111 +173,9 @@ html {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
 }
 
 @layer components {
-  /* CHANEL-Inspired Button System */
-  .btn {
-    @apply inline-flex items-center justify-center text-center font-alta uppercase;
-    letter-spacing: 0.15em; /* Reduced for better readability */
-    font-weight: 400; /* Improved legibility */
-    transition: all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Button Treatments */
-  .btn-primary {
-    background-color: var(--elegant-mocha);
-    @apply text-white px-8 py-3;
-    border: 1px solid var(--elegant-mocha);
-  }
-
-  .btn-primary:hover {
-    @apply bg-transparent;
-    color: var(--elegant-mocha);
-  }
-
-  .btn-secondary {
-    background-color: var(--warm-beige);
-    color: var(--elegant-mocha);
-    @apply px-8 py-3;
-    border: 1px solid var(--warm-beige);
-  }
-
-  .btn-secondary:hover {
-    @apply bg-transparent;
-  }
-
-  .btn-outline {
-    @apply bg-transparent px-8 py-3;
-    border: 1px solid var(--elegant-mocha);
-    color: var(--elegant-mocha);
-  }
-
-  .btn-outline:hover {
-    background-color: var(--elegant-mocha);
-    @apply text-white;
-  }
-
-  /* Refined Button Sizing */
-  .btn-sm {
-    @apply text-xs px-6 py-2;
-    letter-spacing: 0.15em;
-  }
-
-  .btn-lg {
-    @apply text-sm px-10 py-4;
-    letter-spacing: 0.25em;
-  }
-
-  /* Contextual Button Styles */
-  .btn-on-light {
-    background-color: var(--elegant-mocha);
-    @apply text-white;
-    border: 1px solid var(--elegant-mocha);
-  }
-
-  .btn-on-light:hover {
-    @apply bg-transparent;
-    color: var(--elegant-mocha);
-  }
-
-  .btn-on-dark {
-    @apply bg-white border border-white;
-    color: var(--elegant-mocha);
-  }
-
-  .btn-on-dark:hover {
-    @apply bg-transparent text-white;
-  }
-
   /* CHANEL-Inspired Layout System */
   .luxury-container {
     @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-10;
@@ -318,26 +190,9 @@ html {
     @apply py-10 md:py-16;
   }
 
-  /* Refined Card System */
-  .luxury-card {
-    @apply bg-white overflow-hidden;
-    border: 1px solid rgba(230, 204, 178, 0.1);
-    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-  }
-
-  .luxury-card:hover {
-    border-color: rgba(127, 85, 57, 0.2);
-    box-shadow: 0 10px 30px -15px rgba(127, 85, 57, 0.07);
-  }
-
   /* Visual Effects */
   .text-shadow-sm {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  }
-
-  /* CHANEL-Inspired Glass Effect */
-  .glass-effect {
-    @apply backdrop-blur-sm bg-white/70 border border-white/10;
   }
 
   /* Sophisticated Animation System */
@@ -387,18 +242,6 @@ html {
     transform: scale(1.03);
   }
 
-  /* Section Title Styling */
-  .section-title {
-    @apply font-alice uppercase relative mb-16;
-    letter-spacing: 0.25em;
-  }
-
-  .section-title::after {
-    content: "";
-    @apply absolute left-0 bottom-0 h-[1px] w-12 mt-2;
-    background-color: var(--elegant-mocha);
-  }
-
   /* Subtle Hover States */
   .hover-lift {
     transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1),
@@ -407,29 +250,24 @@ html {
 
   .hover-lift:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px -10px rgba(127, 85, 57, 0.1);
+    box-shadow: 0 10px 30px -10px rgba(115, 77, 51, 0.1);
   }
 
   /* Improved text contrast utility classes (replaces opacity modifiers) */
   .text-luxury-primary {
-    color: rgba(127, 85, 57, 1); /* Full opacity elegant-mocha */
+    color: rgba(115, 77, 51, 1); /* Full opacity elegant-mocha */
   }
 
   .text-luxury-secondary {
-    color: rgba(127, 85, 57, 0.9); /* High contrast but slightly softer */
+    color: rgba(115, 77, 51, 0.9); /* High contrast but slightly softer */
   }
 
   .text-luxury-subtle {
-    color: rgba(
-      127,
-      85,
-      57,
-      0.8
-    ); /* For secondary content, still very readable */
+    color: rgba(115, 77, 51, 0.8); /* For secondary content, still very readable */
   }
 
   .text-luxury-muted {
-    color: rgba(127, 85, 57, 0.7); /* For decorative elements only */
+    color: rgba(115, 77, 51, 0.7); /* For decorative elements only */
   }
 
   /* Enhanced text on image utilities with CHANEL-inspired treatments */
@@ -589,14 +427,12 @@ html {
   .navbar-link {
     font-weight: 400 !important;
     letter-spacing: 0.12em !important;
-    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 0 3px rgba(0, 0, 0, 0.1) !important;
     -webkit-font-smoothing: antialiased !important;
   }
 
   /* Enhanced logo text legibility for iOS */
   .navbar-logo-text {
     font-weight: 400 !important;
-    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 0 3px rgba(0, 0, 0, 0.1) !important;
     -webkit-font-smoothing: antialiased !important;
   }
 }
@@ -631,23 +467,21 @@ html {
   /* Enhanced navbar text rendering for high-DPI screens */
   .navbar-link {
     font-weight: 400;
-    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 0 3px rgba(0, 0, 0, 0.1);
     text-rendering: geometricPrecision;
   }
 
   /* Enhanced navbar logo text for high-DPI screens */
   .navbar-logo-text {
     font-weight: 400;
-    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 0 2px rgba(0, 0, 0, 0.1);
     text-rendering: geometricPrecision;
   }
+}
 
-  /* Custom text selection colors for luxury feel */
-  ::selection {
-    background: rgba(127, 85, 57, 0.2);
-    color: #fff;
-    text-shadow: none;
-  }
+/* Text selection — legible on both white and cream surfaces */
+::selection {
+  background: #E6CCB2; /* soft-blush */
+  color: #734D33; /* elegant-mocha */
+  text-shadow: none;
 }
 
 /* Utility class for hiding scrollbars across all screen sizes */

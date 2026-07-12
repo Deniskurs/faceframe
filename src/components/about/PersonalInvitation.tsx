@@ -88,9 +88,9 @@ const PersonalInvitation = () => {
           >
             <p className="font-alice text-lg md:text-xl text-elegant-mocha leading-relaxed mb-6">
               If you&rsquo;re seeking an artist who values precision, natural
-              results, and genuine care—I&rsquo;d be honored to meet you.
+              results, and genuine care — I&rsquo;d be honoured to meet you.
             </p>
-            <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/75">
+            <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/80">
               — Iggy
             </p>
           </motion.div>
@@ -103,7 +103,7 @@ const PersonalInvitation = () => {
             transition={{ duration: 0.8, delay: 0.9, ease: LUXURY_EASING }}
           >
             <LuxuryShadcnButton
-              href={getBookingHref()}
+              href={getBookingHref("consultation")}
               text={CTA.bookConsultation}
               luxuryVariant="elegant"
               luxuryTheme="light"

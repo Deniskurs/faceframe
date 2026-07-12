@@ -133,7 +133,7 @@ export const FAQPageClient: React.FC<FAQPageClientProps> = ({
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <LuxuryShadcnButton
-                  href={getBookingHref()}
+                  href={getBookingHref("consultation")}
                   text={CTA.bookConsultation}
                   luxuryVariant="elegant"
                   luxuryTheme="transparent"

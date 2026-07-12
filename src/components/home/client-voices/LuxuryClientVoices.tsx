@@ -196,13 +196,13 @@ export default function LuxuryClientVoices({
                   transition={{ duration: 0.4, ease: LUXURY_EASING }}
                 >
                   <div className="w-8 sm:w-12 h-[0.5px] bg-elegant-mocha/40 sm:mr-3 group-hover:bg-elegant-mocha/70 transition-all duration-700" />
-                  <span className="hidden sm:inline font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/75 group-hover:text-elegant-mocha/90 transition-all duration-700">
+                  <span className="hidden sm:inline font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/80 group-hover:text-elegant-mocha/90 transition-all duration-700">
                     Prev
                   </span>
                 </motion.button>
 
                 {/* Page indicator */}
-                <div className="font-alta text-xs tracking-wider text-elegant-mocha/75 tabular-nums">
+                <div className="font-alta text-xs tracking-wider text-elegant-mocha/80 tabular-nums">
                   {currentIndex + 1} / {testimonials.length}
                 </div>
 
@@ -215,7 +215,7 @@ export default function LuxuryClientVoices({
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.4, ease: LUXURY_EASING }}
                 >
-                  <span className="hidden sm:inline font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/75 group-hover:text-elegant-mocha/90 transition-all duration-700">
+                  <span className="hidden sm:inline font-alta text-xs tracking-[0.15em] uppercase text-elegant-mocha/80 group-hover:text-elegant-mocha/90 transition-all duration-700">
                     Next
                   </span>
                   <div className="w-8 sm:w-12 h-[0.5px] bg-elegant-mocha/40 sm:ml-3 group-hover:bg-elegant-mocha/70 transition-all duration-700" />

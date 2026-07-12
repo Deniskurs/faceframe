@@ -42,9 +42,9 @@ export function StudioComparison() {
         >
           <div className="p-6 sm:p-10 space-y-5 sm:space-y-6">
             <div>
-              <h3 className="font-alice text-2xl lg:text-3xl tracking-wide text-elegant-mocha uppercase mb-2">
+              <h2 className="font-alice text-2xl lg:text-3xl tracking-wide text-elegant-mocha uppercase mb-2">
                 {STUDIO.name}
-              </h3>
+              </h2>
               <p className="font-alta text-deep-bronze/80 text-xs tracking-[0.04em] uppercase">
                 {STUDIO.type}
               </p>
@@ -69,9 +69,9 @@ export function StudioComparison() {
             </a>
 
             <div>
-              <h4 className="font-alta text-elegant-mocha tracking-[0.04em] text-xs uppercase mb-3">
+              <h3 className="font-alta text-elegant-mocha tracking-[0.04em] text-xs uppercase mb-3">
                 Features
-              </h4>
+              </h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
                 {STUDIO.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2">

@@ -126,10 +126,10 @@ const Hero = () => {
         >
           <Image
             src="/images/hero/image4.webp"
-            alt="FaceFrame Beauty studio in East London — luxury semi-permanent makeup by Iggy"
+            alt="FaceFrame Beauty studio in East London — semi-permanent makeup by Iggy"
             fill
             priority
-            quality={98}
+            quality={85}
             sizes="100vw"
             className="object-cover object-center"
           />
@@ -184,12 +184,12 @@ const Hero = () => {
           {/* Ultra-minimal CHANEL-inspired heading structure */}
           <div className="mb-28 md:mb-32">
             {/* Main Heading split into two lines */}
-            <div className="mb-8">
+            <h1 className="mb-8">
               {/* Chanel-inspired controlled width container to prevent wrapping */}
-              <div className="overflow-hidden w-full">
-                {/* FACEFRAME title with fixed width constraints */}
-                <motion.h1
-                  className="uppercase text-white hero-heading alice-text whitespace-nowrap mx-auto"
+              <span className="block overflow-hidden w-full">
+                {/* FACEFRAME line with fixed width constraints */}
+                <motion.span
+                  className="block uppercase text-white hero-heading alice-text whitespace-nowrap mx-auto"
                   style={{
                     width: "fit-content",
                     fontSize: "clamp(1.75rem, 5vw, 3.5rem)",
@@ -226,13 +226,13 @@ const Hero = () => {
                       )
                     )}
                   </motion.span>
-                </motion.h1>
-              </div>
+                </motion.span>
+              </span>
 
-              {/* BEAUTY title with fixed width constraints */}
-              <div className="overflow-hidden w-full mt-1">
-                <motion.h1
-                  className="uppercase text-white hero-heading alice-text whitespace-nowrap mx-auto"
+              {/* BEAUTY line with fixed width constraints */}
+              <span className="block overflow-hidden w-full mt-1">
+                <motion.span
+                  className="block uppercase text-white hero-heading alice-text whitespace-nowrap mx-auto"
                   style={{
                     width: "fit-content",
                     fontSize: "clamp(1.5rem, 4vw, 2.75rem)",
@@ -269,9 +269,9 @@ const Hero = () => {
                       )
                     )}
                   </motion.span>
-                </motion.h1>
-              </div>
-            </div>
+                </motion.span>
+              </span>
+            </h1>
 
             {/* Refined separator with animation - Fibonacci spacing (48px) */}
             <motion.div
@@ -283,7 +283,7 @@ const Hero = () => {
 
             {/* Subtitle with Chanel-like controlled width */}
             <div className="overflow-hidden w-full">
-              <h2
+              <p
                 className="text-soft-blush alice-text text-on-dark mx-auto letter-spacing-elegant"
                 style={{
                   width: "fit-content",
@@ -318,7 +318,7 @@ const Hero = () => {
                     </motion.span>
                   ))}
                 </motion.span>
-              </h2>
+              </p>
             </div>
 
             {/* Chanel-inspired description - single refined statement */}
@@ -343,7 +343,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2, ease: LUXURY_EASING }}
               >
-                Microblading, lash artistry, and luxury facials — designed
+                Microblading, lash artistry, and facials — designed
                 to enhance, never mask.
               </motion.p>
 
@@ -358,7 +358,7 @@ const Hero = () => {
             >
               <div className="w-full lg:w-auto">
                 <LuxuryShadcnButton
-                  href={getBookingHref()}
+                  href={getBookingHref("consultation")}
                   text={CTA.bookConsultation}
                   luxuryVariant="elegant"
                   luxuryTheme="transparent"

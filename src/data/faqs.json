@@ -2,35 +2,35 @@
   {
     "id": "faq-1",
     "question": "How long do semi-permanent brows last?",
-    "answer": "Our signature brow treatments typically last 12-18 months, depending on your skin type, lifestyle, and aftercare routine. We provide complimentary touch-ups within the first 6 weeks to ensure perfect results.",
+    "answer": "Our signature brow treatments typically last 12-18 months, depending on your skin type, lifestyle, and aftercare routine. We provide a complimentary touch-up within 5-8 weeks to ensure perfect results.",
     "category": "semi-permanent-makeup",
     "featured": true
   },
   {
     "id": "faq-2",
     "question": "Is the treatment painful?",
-    "answer": "Your comfort is our priority. We use premium numbing creams that make the experience surprisingly comfortable. Most clients describe the sensation as mild pressure rather than pain, and many even fall asleep during their treatments.",
+    "answer": "Your comfort is our priority. We use premium numbing creams to keep the experience comfortable, and most clients describe the sensation as mild pressure rather than pain.",
     "category": "general",
     "featured": true
   },
   {
     "id": "faq-3",
-    "question": "What's the healing process like?",
-    "answer": "Healing varies by treatment but generally takes 7-10 days. Initial color appears darker and bolder, then lightens as healing progresses. We provide a luxury aftercare kit and detailed instructions to ensure optimal results.",
+    "question": "What’s the healing process like?",
+    "answer": "Healing varies by treatment but generally takes 7-10 days. Initial colour appears darker and bolder, then lightens as healing progresses. We provide an aftercare kit and detailed instructions to ensure optimal results.",
     "category": "semi-permanent-makeup",
     "featured": true
   },
   {
     "id": "faq-4",
     "question": "How do I book an appointment?",
-    "answer": "Appointments can be booked directly through our website using the 'Book Now' button. We use the secure Simplybook.me platform, which allows you to select your preferred service, date, and time. You'll receive an immediate confirmation and a reminder as your appointment approaches.",
+    "answer": "Appointments are booked directly on our website through the booking page. Select your preferred service, date, and time, and you’ll receive an immediate confirmation followed by a reminder as your appointment approaches.",
     "category": "booking",
     "featured": true
   },
   {
     "id": "faq-5",
     "question": "What is the cancellation policy?",
-    "answer": "We understand that plans change. We request at least 48 hours' notice for cancellations or rescheduling. Cancellations with less notice may incur a 50% charge of your service fee to cover the reserved time. No-shows without notice are subject to the full service fee.",
+    "answer": "We understand that plans change. We request at least 48 hours’ notice for cancellations or rescheduling. Cancellations with less notice may incur a 50% charge of your service fee to cover the reserved time. No-shows without notice are subject to the full service fee.",
     "category": "booking",
     "featured": false
   },
@@ -44,7 +44,7 @@
   {
     "id": "faq-7",
     "question": "Do I need a patch test before my treatment?",
-    "answer": "Yes, for most color treatments including brows, lashes, and lips, we require a patch test at least 48 hours before your appointment. This quick procedure helps ensure you won't have an adverse reaction to any of the products used.",
+    "answer": "Yes, for most colour treatments including brows, lashes, and lips, we require a patch test at least 48 hours before your appointment. This quick procedure helps ensure you won’t have an adverse reaction to any of the products used.",
     "category": "general",
     "featured": false
   },
@@ -58,7 +58,7 @@
   {
     "id": "faq-9",
     "question": "What is the Million Dollar Facial and what are its benefits?",
-    "answer": "The Million Dollar Facial is our signature luxury treatment that combines multiple techniques including deep cleansing, exfoliation, extraction, dermaplaning, and custom serums. Benefits include improved skin texture, reduced fine lines, enhanced product absorption, and a radiant complexion that lasts for weeks.",
+    "answer": "The Million Dollar Facial is our signature treatment that combines multiple techniques including deep cleansing, exfoliation, extraction, dermaplaning, and custom serums. Benefits include improved skin texture, reduced fine lines, enhanced product absorption, and a radiant complexion that lasts for weeks.",
     "category": "facials",
     "featured": false
   },
@@ -71,7 +71,7 @@
   },
   {
     "id": "faq-11",
-    "question": "What's the difference between microblading, ombré, and combination brows?",
+    "question": "What’s the difference between microblading, ombré, and combination brows?",
     "answer": "Microblading creates fine, hair-like strokes using a manual blade technique for a natural look. Ombré brows use a digital machine to create a soft, shaded effect from light to dark, similar to makeup. Combination brows blend both techniques - hair strokes at the front with shading through the body and tail for a fuller, more defined appearance.",
     "category": "semi-permanent-makeup",
     "featured": false
@@ -79,35 +79,35 @@
   {
     "id": "faq-12",
     "question": "How often do I need colour boost treatments?",
-    "answer": "Colour boost frequency depends on how long you've had your semi-permanent makeup. For treatments up to 6 months old, we recommend every 6-9 months. For older treatments, annual colour boosts help maintain vibrancy. Individual factors like skin type, lifestyle, and sun exposure affect fading rates.",
+    "answer": "Colour boost frequency depends on how long you’ve had your semi-permanent makeup. For treatments up to 6 months old, we recommend every 6-9 months. For older treatments, annual colour boosts help maintain vibrancy. Individual factors like skin type, lifestyle, and sun exposure affect fading rates.",
     "category": "semi-permanent-makeup",
     "featured": false
   },
   {
     "id": "faq-13",
-    "question": "Can semi-permanent makeup be removed if I'm not happy?",
+    "question": "Can semi-permanent makeup be removed if I’m not happy?",
     "answer": "Yes, we offer saline tattoo removal for semi-permanent makeup. This gentle method uses a saline solution to lift pigment from the skin naturally. Multiple sessions may be required for complete removal, and we offer package deals for 3 or 6 sessions. A consultation is required before booking removal treatments.",
     "category": "semi-permanent-makeup",
     "featured": false
   },
   {
     "id": "faq-14",
-    "question": "What's included in the semi-permanent brow treatment price?",
-    "answer": "Our comprehensive brow treatments include: free consultation and patch test, the initial procedure, a touch-up appointment within 5-8 weeks, a luxury aftercare kit, and a complimentary brow wax. This ensures you achieve the perfect results and proper healing.",
+    "question": "What’s included in the semi-permanent brow treatment price?",
+    "answer": "Our comprehensive brow treatments include: free consultation and patch test, the initial procedure, a touch-up appointment within 5-8 weeks, an aftercare kit, and a complimentary brow wax. This ensures you achieve the perfect results and proper healing.",
     "category": "semi-permanent-makeup",
     "featured": false
   },
   {
     "id": "faq-15",
     "question": "Do I need to avoid certain activities before my SPMU treatment?",
-    "answer": "Yes, please avoid blood-thinning medications like aspirin for 48 hours if medically safe, limit alcohol and caffeine, and avoid sun exposure or tanning. Don't wax or tint your brows for a week before treatment. We'll provide a complete preparation guide when you book your consultation.",
+    "answer": "Yes, please avoid blood-thinning medications like aspirin for 48 hours if medically safe, limit alcohol and caffeine, and avoid sun exposure or tanning. Don’t wax or tint your brows for a week before treatment. We’ll provide a complete preparation guide when you book your consultation.",
     "category": "semi-permanent-makeup",
     "featured": false
   },
   {
     "id": "faq-16",
-    "question": "What's the difference between classic, hybrid, and volume lash extensions?",
-    "answer": "Classic extensions apply one extension per natural lash for a natural, mascara-like effect. Hybrid combines classic and volume techniques for fuller coverage. Volume extensions use multiple ultra-fine lashes per natural lash, creating dramatic fullness and glamour. We'll help you choose based on your natural lashes and desired look.",
+    "question": "What’s the difference between classic, hybrid, and volume lash extensions?",
+    "answer": "Classic extensions apply one extension per natural lash for a natural, mascara-like effect. Hybrid combines classic and volume techniques for fuller coverage. Volume extensions use multiple ultra-fine lashes per natural lash, creating dramatic fullness and glamour. We’ll help you choose based on your natural lashes and desired look.",
     "category": "lashes-brows",
     "featured": false
   },
@@ -121,7 +121,7 @@
   {
     "id": "faq-18",
     "question": "Should I choose a lash lift or lash extensions?",
-    "answer": "Lash lifts enhance your natural lashes with a curl and tint, lasting 6-8 weeks with minimal maintenance. Extensions add length and volume but require regular infills every 2-3 weeks. Choose a lift for low-maintenance enhancement or extensions for dramatic transformation and customizable looks.",
+    "answer": "Lash lifts enhance your natural lashes with a curl and tint, lasting 6-8 weeks with minimal maintenance. Extensions add length and volume but require regular infills every 2-3 weeks. Choose a lift for low-maintenance enhancement or extensions for dramatic transformation and customisable looks.",
     "category": "lashes-brows",
     "featured": false
   },
@@ -142,20 +142,20 @@
   {
     "id": "faq-21",
     "question": "How do I choose the right facial for my skin type?",
-    "answer": "Our deep cleansing facial is perfect for congested or oily skin, while dermaplaning suits dry, dull complexions. The Million Dollar Facial addresses aging concerns and combines multiple techniques. For sensitive skin, try our pregnancy-safe facial. We'll assess your skin during consultation to recommend the best treatment.",
+    "answer": "Our deep cleansing facial is perfect for congested or oily skin, while dermaplaning suits dry, dull complexions. The Million Dollar Facial addresses ageing concerns and combines multiple techniques. For sensitive skin, try our pregnancy-safe facial. We’ll assess your skin during consultation to recommend the best treatment.",
     "category": "facials",
     "featured": false
   },
   {
     "id": "faq-22",
     "question": "What makes the Million Dollar Facial special?",
-    "answer": "Our signature Million Dollar Facial combines dermaplaning, microneedling, and lymphatic drainage in a unique 10-step protocol. It targets multiple concerns - pigmentation, fine lines, scarring, and dullness - in one luxurious treatment. The combination of techniques delivers superior results compared to individual treatments.",
+    "answer": "Our signature Million Dollar Facial combines dermaplaning, microneedling, and lymphatic drainage in a unique 10-step protocol. It targets multiple concerns - pigmentation, fine lines, scarring, and dullness - in one comprehensive treatment. The combination of techniques delivers superior results compared to individual treatments.",
     "category": "facials",
     "featured": false
   },
   {
     "id": "faq-23",
-    "question": "What's the difference between dermaplaning and microneedling?",
+    "question": "What’s the difference between dermaplaning and microneedling?",
     "answer": "Dermaplaning manually exfoliates using a surgical blade to remove dead skin and peach fuzz, creating smooth, glowing skin. Microneedling uses tiny needles to stimulate collagen production, targeting scarring, pore size, and fine lines. Both can be combined for enhanced results in our Million Dollar Facial.",
     "category": "facials",
     "featured": false
@@ -163,42 +163,42 @@
   {
     "id": "faq-24",
     "question": "How often should I get facials?",
-    "answer": "For optimal skin health, we recommend monthly facials. However, frequency depends on your skin type and concerns. Problem skin may benefit from bi-weekly treatments initially, while maintenance clients might prefer every 6-8 weeks. We'll create a personalized treatment plan during your consultation.",
+    "answer": "For optimal skin health, we recommend monthly facials. However, frequency depends on your skin type and concerns. Problem skin may benefit from bi-weekly treatments initially, while maintenance clients might prefer every 6-8 weeks. We’ll create a personalised treatment plan during your consultation.",
     "category": "facials",
     "featured": false
   },
   {
     "id": "faq-25",
     "question": "How far in advance should I book my appointment?",
-    "answer": "We recommend booking 2-3 weeks in advance, especially for semi-permanent makeup treatments that require consultations. Popular appointment times (evenings and weekends) fill up quickly. For urgent treatments or last-minute availability, please call us directly and we'll do our best to accommodate you.",
+    "answer": "We recommend booking 2-3 weeks in advance, especially for semi-permanent makeup treatments that require consultations. Popular appointment times (evenings and weekends) fill up quickly. For urgent treatments or last-minute availability, please email or message us and we’ll do our best to accommodate you.",
     "category": "booking",
     "featured": false
   },
   {
     "id": "faq-26",
     "question": "Do you require a deposit for bookings?",
-    "answer": "Yes, we require a deposit to secure your appointment, which is deducted from your final treatment cost. Deposit amounts vary by service - typically £20-50 for most treatments. This ensures serious commitment and helps us manage our busy schedule effectively.",
+    "answer": "Where a deposit applies, it is taken when you book and deducted from your final treatment cost. This secures your appointment and helps us manage the schedule fairly for every client.",
     "category": "booking",
     "featured": false
   },
   {
     "id": "faq-27",
     "question": "What should I bring to my appointment?",
-    "answer": "Just bring yourself! We provide everything needed for your treatment, including aftercare products. For semi-permanent makeup, bring inspiration photos if you have them. Wear comfortable clothing and avoid tight collars for lash treatments. Leave valuables at home for your peace of mind.",
+    "answer": "You only need to bring yourself — we provide everything needed for your treatment, including aftercare products. For semi-permanent makeup, bring inspiration photos if you have them. Wear comfortable clothing and avoid tight collars for lash treatments. Leave valuables at home for your peace of mind.",
     "category": "booking",
     "featured": false
   },
   {
     "id": "faq-28",
     "question": "Can I book multiple treatments together?",
-    "answer": "Yes, many treatments can be combined in one visit for convenience. Popular combinations include lash and brow tinting, or adding dermaplaning to facials. However, some treatments like semi-permanent makeup require separate appointments for healing. We'll advise on the best scheduling during consultation.",
+    "answer": "Yes, many treatments can be combined in one visit for convenience. Popular combinations include lash and brow tinting, or adding dermaplaning to facials. However, some treatments like semi-permanent makeup require separate appointments for healing. We’ll advise on the best scheduling during consultation.",
     "category": "booking",
     "featured": false
   },
   {
     "id": "faq-29",
     "question": "What can I expect during my first visit?",
-    "answer": "Your first visit begins with a comprehensive consultation to understand your goals and assess your suitability for treatment. We'll explain the process, discuss expectations, and may perform a patch test if required. You'll receive aftercare instructions and can ask any questions. We want you to feel completely comfortable and informed.",
+    "answer": "Your first visit begins with a comprehensive consultation to understand your goals and assess your suitability for treatment. We’ll explain the process, discuss expectations, and may perform a patch test if required. You’ll receive aftercare instructions and can ask any questions. We want you to feel completely comfortable and informed.",
     "category": "general",
     "featured": false
   },
@@ -212,7 +212,7 @@
   {
     "id": "faq-31",
     "question": "What if I have sensitive skin or allergies?",
-    "answer": "We perform patch tests 48 hours before color treatments to check for reactions. Please inform us of any known allergies or skin sensitivities when booking. We use hypoallergenic, premium products and can modify treatments for sensitive skin. Your safety and comfort are our top priorities.",
+    "answer": "We perform patch tests 48 hours before colour treatments to check for reactions. Please inform us of any known allergies or skin sensitivities when booking. We use hypoallergenic, premium products and can modify treatments for sensitive skin. Your safety and comfort are our top priorities.",
     "category": "general",
     "featured": false
   }

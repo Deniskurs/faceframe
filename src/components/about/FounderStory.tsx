@@ -17,14 +17,14 @@ const FounderStory = () => {
     <section className="py-32 md:py-40 px-6 bg-white" ref={ref}>
         <div className="max-w-4xl mx-auto">
           {/* Eyebrow label */}
-          <motion.p
-            className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/75 text-center mb-12"
+          <motion.h2
+            className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/80 text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.2, ease: LUXURY_EASING }}
           >
             The Artisan
-          </motion.p>
+          </motion.h2>
 
           {/* Main narrative - centered, single column */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-center">
@@ -36,15 +36,14 @@ const FounderStory = () => {
               transition={{ duration: 0.8, delay: 0.4, ease: LUXURY_EASING }}
             >
               <p className="font-alice text-lg md:text-xl leading-relaxed text-elegant-mocha">
-                After training with master artists across Milan, Paris, and
-                London, Iggy brought European precision to her London studio in
-                2018.
+                After training with master artists across Europe, Iggy brought
+                precision to her London studio in 2017.
               </p>
 
               <p className="font-alice text-lg md:text-xl leading-relaxed text-muted-sand">
-                No corporate messaging. No fluff. Just a decade spent mastering
-                the art of subtle enhancement—creating results that look
-                beautifully, naturally you.
+                Every appointment is one-to-one, and every treatment is
+                performed by Iggy herself — a decade of practice in the art of
+                subtle enhancement.
               </p>
 
               <p className="font-alice text-lg md:text-xl leading-relaxed text-muted-sand">
@@ -58,7 +57,7 @@ const FounderStory = () => {
                   &ldquo;I created FaceFrame Beauty so you could wake up feeling
                   beautifully, confidently you—every single day.&rdquo;
                 </blockquote>
-                <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/75 mt-4">
+                <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/80 mt-4">
                   — Iggy
                 </p>
               </div>

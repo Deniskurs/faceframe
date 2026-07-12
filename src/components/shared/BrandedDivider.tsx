@@ -128,7 +128,6 @@ export default function BrandedDivider({
           fill
           sizes="100vw"
           className="object-cover"
-          priority
         />
 
         {overlay && (

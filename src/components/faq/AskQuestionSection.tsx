@@ -75,7 +75,7 @@ export const AskQuestionSection: React.FC = () => {
 
     if (questionsUsed >= 3) {
       setError(
-        "You've reached the limit of 3 questions per 5 minutes. Please wait before asking another question."
+        "You’ve reached the limit of 3 questions per 5 minutes. Please wait before asking another question."
       );
       return;
     }
@@ -206,7 +206,7 @@ export const AskQuestionSection: React.FC = () => {
                 />
 
                 {/* Character counter */}
-                <div className="absolute bottom-3 right-3 text-xs font-alta text-elegant-mocha/75">
+                <div className="absolute bottom-3 right-3 text-xs font-alta text-elegant-mocha/80">
                   {charCount}/{maxChars}
                 </div>
               </div>

@@ -10,7 +10,7 @@ import { BRAND, SITE } from "@/config/business";
 export const metadata: Metadata = {
   title: `Frequently Asked Questions | ${BRAND.name}`,
   description:
-    "Answers about our semi-permanent makeup, lash extensions, facials, aftercare, and booking. Plus an AI assistant for anything else.",
+    "Answers about our semi-permanent makeup, lash extensions, facials, aftercare, and booking.",
   keywords:
     "FAQ, beauty questions, semi-permanent makeup, lash extensions, facials, booking, London beauty salon",
   alternates: { canonical: `${SITE.url}/faq` },

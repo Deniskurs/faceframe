@@ -95,13 +95,26 @@ export const BOOKING = {
 } as const;
 
 /**
+ * On-site catalog slugs for service keys — used when Acuity is not live so
+ * booking CTAs can still deep-link into /booking?service=<slug>.
+ * Slugs must match `CATALOG_SERVICES` in src/data/acuityCatalog.ts.
+ */
+const ONSITE_SERVICE_SLUGS: Partial<Record<keyof typeof BOOKING.serviceIds, string>> = {
+  consultation: "free-consultation-patch-test",
+  microblading: "brow-microblading",
+};
+
+/**
  * Resolves the URL a booking CTA should point to.
  * - If Acuity is live → external Acuity URL (optionally per-service)
- * - Otherwise → /booking shell page (which keeps the user on-site)
+ * - Otherwise → /booking, deep-linked to the service when a slug is mapped
  */
 export function getBookingHref(serviceKey?: keyof typeof BOOKING.serviceIds): string {
   const base = BOOKING.acuityUrl;
-  if (!base) return "/booking";
+  if (!base) {
+    const slug = serviceKey && ONSITE_SERVICE_SLUGS[serviceKey];
+    return slug ? `/booking?service=${slug}` : "/booking";
+  }
   if (serviceKey && BOOKING.serviceIds[serviceKey]) {
     return `${base}${base.includes("?") ? "&" : "?"}appointmentType=${BOOKING.serviceIds[serviceKey]}`;
   }
@@ -122,7 +135,9 @@ export const CTA = {
   bookConsultation: "BOOK CONSULTATION",
   viewServices: "VIEW SERVICES",
   viewGallery: "VIEW GALLERY",
+  viewAll: "VIEW ALL",
   sendMessage: "SEND MESSAGE",
+  askQuestion: "ASK A QUESTION",
 } as const;
 
 export const SITE = {

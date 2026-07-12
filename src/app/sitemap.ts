@@ -2,8 +2,6 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/config/business";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   const routes: Array<{
     path: string;
     priority: number;
@@ -22,7 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return routes.map((route) => ({
     url: `${SITE.url}${route.path}`,
-    lastModified,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));

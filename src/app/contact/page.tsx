@@ -37,7 +37,7 @@ export default function ContactPage() {
     <main>
       <PageHero
         label="Get in Touch"
-        title="Let's talk"
+        title="Let’s talk"
         description="Send Iggy a message — she reads every note personally and replies within 24 hours."
         height="functional"
       />
@@ -50,7 +50,7 @@ export default function ContactPage() {
 
       <section className="bg-white py-12 sm:py-16">
         <div className="container mx-auto px-6 sm:px-8 max-w-3xl text-center">
-          <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/75 mb-3">
+          <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/80 mb-3">
             Still curious?
           </p>
           <p className="font-alice text-base sm:text-lg text-elegant-mocha/85 leading-relaxed tracking-wide">

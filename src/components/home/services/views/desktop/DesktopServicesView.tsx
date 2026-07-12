@@ -10,7 +10,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { FEATURED_CATEGORIES, LUXURY_EASING } from "../../core/types";
 import { ServiceCard } from "../../cards/ServiceCard";
-import { SectionTitle } from "../../components/SectionTitle";
+import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ViewAllButton } from "../../components/ViewAllButton";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import { useCardHeight } from "../../cards/useCardHeight";

@@ -3,18 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/shared/PageHero";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
-import { BRAND, CTA } from "@/config/business";
-import serviceService from "@/services/serviceService";
-import { CATALOG_SERVICES } from "@/data/acuityCatalog";
+import { BRAND, CTA, getBookingHref } from "@/config/business";
+import { CATALOG_CATEGORIES, CATALOG_SERVICES } from "@/data/acuityCatalog";
 import { ServicesCatalogJsonLd } from "@/components/shared/JsonLd";
 
 export const metadata: Metadata = {
   title: `Services | ${BRAND.name}`,
-  description: `Semi-permanent makeup, lashes & brows, and luxury facials at ${BRAND.name} in East London. Book a consultation with Iggy.`,
+  description: `Semi-permanent makeup, lashes & brows, and facials at ${BRAND.name} in East London. Book a consultation with Iggy.`,
   openGraph: {
     title: `Services | ${BRAND.name}`,
     description:
-      "Microblading, lash extensions, brow styling, and luxury facials. Crafted by Iggy at her East London studio.",
+      "Microblading, lash extensions, brow styling, and facials. Crafted by Iggy at her East London studio.",
     type: "website",
   },
 };
@@ -26,19 +25,19 @@ const CATEGORY_COPY: Record<
   "semi-permanent-makeup": {
     headline: "Semi-Permanent Makeup",
     description:
-      "Microblading, ombré brows, lip blush. Hair-stroke precision designed to enhance your natural features rather than mask them.",
+      "Microblading, ombré and combination brows, freckles, and beauty spots. Hair-stroke precision designed to enhance your natural features rather than mask them.",
     image: "/images/gallery/services-preview/semi-permanent.webp",
   },
   "lashes-brows": {
     headline: "Lashes & Brows",
     description:
-      "Volume lash extensions, lash lifts, brow lamination, and tinting. Subtle definition that complements every face.",
+      "Classic, hybrid, and volume lash extensions, lash lifts, tinting, and brow shaping. Subtle definition that complements every face.",
     image: "/images/gallery/services-preview/lashes-brows.webp",
   },
   facials: {
-    headline: "Luxury Facials",
+    headline: "Facials",
     description:
-      "Million Dollar Facial, dermaplaning, hydrafacials. Deep, bespoke skincare for a calm, luminous result.",
+      "Million Dollar Facial, dermaplaning, microneedling, and peels. Deep, bespoke skincare for a calm, luminous result.",
     image: "/images/gallery/services-preview/facials.webp",
   },
   // no services-preview shot exists for waxing yet — gallery image stays
@@ -62,9 +61,13 @@ function catalogFacts(): Record<string, { count: number; from: number | null }> 
   return facts;
 }
 
-export default async function ServicesPage() {
-  const categories = await serviceService.getCategories();
+export default function ServicesPage() {
   const facts = catalogFacts();
+  const categories = CATALOG_CATEGORIES.map((c) => ({
+    id: c.id,
+    name: c.displayName,
+    count: facts[c.id]?.count ?? 0,
+  })).filter((c) => c.count > 0);
 
   return (
     <main>
@@ -104,9 +107,9 @@ export default async function ServicesPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-elegant-mocha/30 via-transparent to-transparent" />
                   </div>
                   <div className="flex flex-col flex-1 p-6 sm:p-8">
-                    <p className="font-alta text-[11px] tracking-[0.25em] uppercase text-deep-bronze mb-2">
-                      {facts[category.id]?.count ?? category.count} treatment
-                      {(facts[category.id]?.count ?? category.count) === 1 ? "" : "s"}
+                    <p className="font-alta text-xs tracking-[0.25em] uppercase text-deep-bronze mb-2">
+                      {category.count} treatment
+                      {category.count === 1 ? "" : "s"}
                       {facts[category.id]?.from && (
                         <> · from £{facts[category.id].from}</>
                       )}
@@ -121,7 +124,7 @@ export default async function ServicesPage() {
                     <div className="mt-auto pt-1">
                       <LuxuryShadcnButton
                         href={`/booking?category=${encodeURIComponent(category.id)}`}
-                        text={CTA.bookPrimary}
+                        text={CTA.viewAll}
                         luxuryVariant="elegant"
                         luxuryTheme="dark"
                         luxurySize="small"
@@ -137,7 +140,7 @@ export default async function ServicesPage() {
           <p className="text-center font-alice text-sm sm:text-base text-elegant-mocha/80 tracking-wide mt-10">
             Also available:{" "}
             <Link
-              href="/booking?category=saline-tattoo-removal"
+              href="/booking?service=saline-tattoo-removal-single-session"
               className="text-deep-bronze hover:text-elegant-mocha underline underline-offset-2 transition-colors duration-300"
             >
               Saline Tattoo Removal
@@ -152,7 +155,7 @@ export default async function ServicesPage() {
           </p>
 
           <div className="mt-16 text-center">
-            <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/75 mb-3">
+            <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/80 mb-3">
               Not sure which service?
             </p>
             <p className="font-alice text-base md:text-lg text-elegant-mocha/80 leading-relaxed tracking-wide max-w-xl mx-auto mb-6">
@@ -160,13 +163,22 @@ export default async function ServicesPage() {
               your skin and goals.
             </p>
             <LuxuryShadcnButton
-              href="/contact#contact-form"
+              href={getBookingHref("consultation")}
               text={CTA.bookConsultation}
               luxuryVariant="outline"
               luxuryTheme="light"
               luxurySize="medium"
             />
-            <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/75 mt-8">
+            <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-4">
+              or{" "}
+              <Link
+                href="/contact#contact-form"
+                className="text-deep-bronze hover:text-elegant-mocha transition-colors duration-300 underline underline-offset-2"
+              >
+                {CTA.askQuestion}
+              </Link>
+            </p>
+            <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-8">
               Want to see results first?{" "}
               <Link
                 href="/gallery"

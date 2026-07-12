@@ -19,7 +19,7 @@ export default function GlobalError({
   return (
     <main className="min-h-[80vh] flex items-center justify-center bg-light-cream px-6 py-20">
       <div className="max-w-xl mx-auto text-center">
-        <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/75 mb-3">
+        <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/80 mb-3">
           Something went wrong
         </p>
         <h1 className="font-alice text-3xl sm:text-4xl text-elegant-mocha tracking-wide mb-5">
@@ -49,7 +49,7 @@ export default function GlobalError({
           />
         </div>
 
-        <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/75 mt-10">
+        <p className="font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-10">
           Need a hand?{" "}
           <Link
             href={`mailto:${CONTACT.email}`}

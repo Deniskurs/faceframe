@@ -26,9 +26,9 @@ export const FEATURED_CATEGORIES: ServiceCategory[] = [
     description:
       "Precision techniques that enhance your natural beauty with lasting elegance",
     imageUrl: "/images/gallery/services-preview/semi-permanent.webp",
-    featured: "Signature Brows",
-    exclusivity: "Custom-developed technique",
-    result: "Natural, elegant definition",
+    featured: "Brow Microblading",
+    exclusivity: "Hair strokes drawn by hand with a fine blade",
+    result: "From £295 — around two hours, retouch included",
   },
   {
     id: "lashes-brows",
@@ -37,17 +37,17 @@ export const FEATURED_CATEGORIES: ServiceCategory[] = [
       "Expert enhancements that define your features with subtle sophistication",
     imageUrl: "/images/gallery/services-preview/lashes-brows.webp",
     featured: "Volume Lashes",
-    exclusivity: "Premium application method",
-    result: "Striking yet natural effect",
+    exclusivity: "Lightweight fans applied to each natural lash",
+    result: "From £70 — around ninety minutes",
   },
   {
     id: "facials",
-    title: "Luxury Facials",
+    title: "Facials",
     description:
-      "Transformative treatments that reveal your skin's natural radiance",
+      "Transformative treatments that reveal your skin’s natural radiance",
     imageUrl: "/images/gallery/services-preview/facials.webp",
     featured: "Million Dollar Facial",
-    exclusivity: "Curated premium experience",
-    result: "Radiant transformation",
+    exclusivity: "Ten-step protocol with dermaplaning and skin needling",
+    result: "From £100 — one hour forty minutes",
   },
 ];

@@ -114,7 +114,7 @@ export default function EditorialTransformationLayout({
 
               {quoteAuthor && (
                 <div className="mt-8">
-                  <p className="font-alta text-[12px] tracking-[0.2em] uppercase text-elegant-mocha/75">
+                  <p className="font-alta text-[12px] tracking-[0.2em] uppercase text-elegant-mocha/80">
                     {quoteAuthor}
                   </p>
                 </div>

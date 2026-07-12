@@ -2,7 +2,31 @@ import React from "react";
 import Link from "next/link";
 import { Instagram, Facebook } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { SOCIAL, BRAND } from "@/config/business";
+import { SOCIAL, BRAND, CONTACT, HOURS, STUDIO } from "@/config/business";
+
+// Shared link treatment — CSS uppercase keeps the header's all-caps
+// discipline without hard-coding cased literals; py-2 keeps tap targets.
+const footerLinkClass =
+  "font-alta text-sm tracking-[0.15em] uppercase text-elegant-mocha hover:text-deep-bronze transition-colors duration-700 inline-block py-2";
+
+// Mirrors the header nav order, with the client login and booking entries
+// appended in the same sequence the header presents them.
+const NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
+  { href: "/account", label: "Login" },
+  { href: "/booking", label: "Booking" },
+] as const;
+
+const SERVICE_LINKS = [
+  { href: "/services#semi-permanent-makeup", label: "Semi-Permanent Makeup" },
+  { href: "/services#lashes-brows", label: "Lashes & Brows" },
+  { href: "/services#facials", label: "Facials" },
+] as const;
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,115 +36,79 @@ const Footer = () => {
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-soft-blush/40 to-transparent" />
 
       <div className="luxury-container py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-10 md:gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
           {/* Navigation */}
           <div>
-            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-6">
+            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-4">
               Navigation
             </h3>
             <nav>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="/"
-                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about"
-                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/services"
-                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
-                  >
-                    Services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/gallery"
-                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
-                  >
-                    Gallery
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/faq"
-                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
-                  >
-                    FAQ
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact"
-                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
-                  >
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/booking"
-                    className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
-                  >
-                    Booking
-                  </Link>
-                </li>
+              <ul className="space-y-1">
+                {NAV_LINKS.map(({ href, label }) => (
+                  <li key={href}>
+                    <Link href={href} className={footerLinkClass}>
+                      {label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-6">
+            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-4">
               Services
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-1">
+              {SERVICE_LINKS.map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href} className={footerLinkClass}>
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-4">
+              Contact
+            </h3>
+            <ul className="space-y-1 font-alta text-sm tracking-[0.1em] text-elegant-mocha">
               <li>
-                <Link
-                  href="/services#semi-permanent-makeup"
-                  className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                <a
+                  href={`mailto:${CONTACT.email}`}
+                  className="hover:text-deep-bronze transition-colors duration-700 inline-block py-2 break-all"
                 >
-                  Semi-Permanent Makeup
-                </Link>
+                  {CONTACT.email}
+                </a>
               </li>
+              <li className="py-2">{HOURS.display}</li>
               <li>
-                <Link
-                  href="/services#lashes-brows"
-                  className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
+                <a
+                  href={STUDIO.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-deep-bronze transition-colors duration-700 inline-block py-2 leading-relaxed"
                 >
-                  Lashes & Brows
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services#facials"
-                  className="font-alta text-sm tracking-[0.15em] text-elegant-mocha hover:text-deep-bronze transition-colors duration-700"
-                >
-                  Facials
-                </Link>
+                  {STUDIO.streetAddress}
+                  <br />
+                  {STUDIO.area}, {STUDIO.postcode}
+                </a>
               </li>
             </ul>
           </div>
 
           <Separator
             orientation="horizontal"
-            className="md:hidden bg-soft-blush/30"
+            className="sm:hidden bg-soft-blush/30"
           />
 
           {/* Social */}
           <div>
-            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-6">
+            <h3 className="font-alice text-sm uppercase tracking-[0.25em] text-elegant-mocha mb-4">
               Follow Us
             </h3>
             <div className="flex md:flex-col gap-3">
@@ -128,7 +116,7 @@ const Footer = () => {
                 href={SOCIAL.instagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-elegant-mocha/30 flex items-center justify-center text-elegant-mocha transition-all duration-700 hover:bg-deep-bronze/10 hover:border-deep-bronze focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/40"
+                className="w-11 h-11 rounded-full border border-elegant-mocha/30 flex items-center justify-center text-elegant-mocha transition-all duration-700 hover:bg-deep-bronze/10 hover:border-deep-bronze focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/40"
                 aria-label={`${BRAND.name} on Instagram (${SOCIAL.instagram.handle})`}
               >
                 <Instagram className="w-4 h-4" aria-hidden="true" />
@@ -137,7 +125,7 @@ const Footer = () => {
                 href={SOCIAL.facebook.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-elegant-mocha/30 flex items-center justify-center text-elegant-mocha transition-all duration-700 hover:bg-deep-bronze/10 hover:border-deep-bronze focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/40"
+                className="w-11 h-11 rounded-full border border-elegant-mocha/30 flex items-center justify-center text-elegant-mocha transition-all duration-700 hover:bg-deep-bronze/10 hover:border-deep-bronze focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deep-bronze/40"
                 aria-label={`${BRAND.name} on Facebook (${SOCIAL.facebook.handle})`}
               >
                 <Facebook className="w-4 h-4" aria-hidden="true" />
@@ -152,14 +140,14 @@ const Footer = () => {
           <div className="flex flex-wrap justify-center md:justify-start items-center gap-4">
             <Link
               href="/privacy-policy"
-              className="font-alta text-xs tracking-[0.2em] text-muted-sand hover:text-elegant-mocha transition-colors duration-700"
+              className="font-alta text-xs tracking-[0.2em] uppercase text-muted-sand hover:text-elegant-mocha transition-colors duration-700 inline-block py-2"
             >
               Privacy Policy
             </Link>
             <span className="text-muted-sand/50">•</span>
             <Link
               href="/terms-of-service"
-              className="font-alta text-xs tracking-[0.2em] text-muted-sand hover:text-elegant-mocha transition-colors duration-700"
+              className="font-alta text-xs tracking-[0.2em] uppercase text-muted-sand hover:text-elegant-mocha transition-colors duration-700 inline-block py-2"
             >
               Terms of Service
             </Link>

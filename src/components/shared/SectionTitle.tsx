@@ -66,7 +66,7 @@ export function SectionTitle({
             delay: sequenceTimings.subtitle,
           }}
         >
-          <motion.h3
+          <motion.p
             className={`font-alta text-sm tracking-luxury ${colorScheme[variant].subtitle} uppercase`}
             initial={{ y: 20 }}
             animate={{ y: isRevealed ? 0 : 20 }}
@@ -77,7 +77,7 @@ export function SectionTitle({
             }}
           >
             {subtitle}
-          </motion.h3>
+          </motion.p>
         </motion.div>
 
         {/* Minimalist header with precise letter spacing and timing */}

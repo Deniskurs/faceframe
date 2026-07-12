@@ -13,7 +13,7 @@ import { Award, GraduationCap, MapPin } from "lucide-react";
 const HeroPortrait = () => {
   return (
     <PageHero
-      title="Ten Years of European Mastery"
+      title="A Decade of European Mastery"
       description="One unwavering commitment to your natural beauty"
       label="About FaceFrame"
       height="showcase"
@@ -41,7 +41,7 @@ const HeroPortrait = () => {
       </div>
 
       {/* Founder Attribution */}
-      <p className="font-alta text-elegant-mocha/75 text-sm italic mt-8 tracking-wide">
+      <p className="font-alta text-elegant-mocha/80 text-sm italic mt-8 tracking-wide">
         — Iggy, Founder
       </p>
     </PageHero>

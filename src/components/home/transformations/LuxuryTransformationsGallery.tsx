@@ -97,7 +97,7 @@ export default function LuxuryTransformationsGallery({
                 />
                 <div className="absolute inset-1/4 border-[0.5px] border-elegant-mocha/30" />
               </div>
-              <p className="mt-6 font-alta text-xs tracking-wider uppercase text-elegant-mocha/75">
+              <p className="mt-6 font-alta text-xs tracking-wider uppercase text-elegant-mocha/80">
                 Curating transformations
               </p>
             </div>

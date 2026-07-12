@@ -61,7 +61,6 @@ const BookingCTA = ({
             fill
             sizes="100vw"
             className="object-cover brightness-75"
-            priority
           />
           {/* More sophisticated gradient overlay */}
           <div className="absolute inset-0 bg-black/50"></div>

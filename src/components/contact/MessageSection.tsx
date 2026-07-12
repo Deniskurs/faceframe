@@ -31,7 +31,7 @@ export function MessageSection() {
 
         <ContactForm />
 
-        <p className="text-center font-alta text-xs tracking-[0.04em] text-elegant-mocha/75 mt-8">
+        <p className="text-center font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-8">
           Prefer email?{" "}
           <Link
             href={`mailto:${CONTACT.email}`}

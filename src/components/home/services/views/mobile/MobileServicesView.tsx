@@ -10,7 +10,7 @@ import { motion, useInView } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { ServiceCard } from "../../cards/ServiceCard";
 import { FEATURED_CATEGORIES, LUXURY_EASING } from "../../core/types";
-import { SectionTitle } from "../../components/SectionTitle";
+import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ViewAllButton } from "../../components/ViewAllButton";
 import styles from "@/styles/embla.module.css";
 import { useCardHeight } from "../../cards/useCardHeight";

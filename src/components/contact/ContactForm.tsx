@@ -34,7 +34,7 @@ const SERVICE_OPTIONS = [
   { value: "lash-extensions", label: "Lash Extensions" },
   { value: "lash-lift-tint", label: "Lash Lift & Tint" },
   { value: "brow-styling", label: "Brow Styling" },
-  { value: "luxury-facials", label: "Luxury Facials" },
+  { value: "luxury-facials", label: "Facials" },
   { value: "consultation", label: "Consultation (unsure)" },
   { value: "other", label: "Other" },
 ] as const;
@@ -88,7 +88,7 @@ export function ContactForm() {
       if (response.ok) {
         setSubmitState("success");
         setSubmitMessage(
-          `Thank you — your message is on its way to Iggy. She'll respond ${CONTACT.responseTime}.`
+          `Thank you — your message is on its way to Iggy. She’ll respond ${CONTACT.responseTime}.`
         );
         form.reset();
       } else {
@@ -249,7 +249,7 @@ export function ContactForm() {
                     optional
                   </span>
                 </FormLabel>
-                <span className="text-[11px] font-alta text-elegant-mocha/70 tabular-nums">
+                <span className="text-[11px] font-alta text-elegant-mocha/80 tabular-nums">
                   {messageLength}/{MESSAGE_MAX}
                 </span>
               </div>
@@ -262,7 +262,7 @@ export function ContactForm() {
                   {...field}
                 />
               </FormControl>
-              <FormDescription className="font-alta text-[11px] text-elegant-mocha/70">
+              <FormDescription className="font-alta text-[11px] text-elegant-mocha/80">
                 Iggy reads every message personally — there&rsquo;s no template
                 reply.
               </FormDescription>

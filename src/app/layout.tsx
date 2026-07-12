@@ -45,10 +45,9 @@ const alta = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: {
-    default: `${BRAND.name} | Luxury Semi-Permanent Makeup in London`,
-    template: `%s · ${BRAND.name}`,
-  },
+  // No title template: every page supplies its own fully-branded title
+  // (ending "| FaceFrame Beauty"), so a template would double-brand them.
+  title: `${BRAND.name} | Luxury Semi-Permanent Makeup in London`,
   description:
     "London's destination for semi-permanent makeup, lashes, brows, and luxury facials. Intimate East London studio. Book with Iggy.",
   applicationName: BRAND.name,

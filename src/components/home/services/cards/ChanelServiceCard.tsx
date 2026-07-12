@@ -211,7 +211,6 @@ export const ChanelServiceCard: React.FC<ChanelServiceCardProps> = ({
               sizes="(max-width: 768px) 85vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover object-center"
               quality={92}
-              priority={index < 2}
             />
 
             {/* Chanel-style image treatments */}

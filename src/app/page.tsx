@@ -9,9 +9,9 @@ import BookingCTA from "@/components/home/BookingCTA";
 export default function Home() {
   // Founder section content
   const founderQuote =
-    "The goal isn't perfection. It's waking up and recognising yourself — just better.";
+    "The goal isn’t perfection. It’s waking up and recognising yourself — just better.";
   const founderParagraphs = [
-    "After a decade perfecting microblading and lash artistry across Europe's leading academies, Iggy founded FaceFrame Beauty with a single mission: to prove that semi-permanent makeup can enhance rather than alter.",
+    "After a decade training with master artists across Europe, Iggy opened her London studio in 2017 with a single mission: to prove that semi-permanent makeup can enhance rather than alter.",
     "Every treatment is one-to-one, meticulous, and bespoke — so clients leave looking unmistakably like themselves, only more rested, more defined, more confident.",
   ];
 
@@ -46,7 +46,6 @@ export default function Home() {
       <BookingCTA
         backgroundImage="/images/brand/IMG_5461.webp"
         title="Reserve Your Appointment"
-        subtitle="Iggy works with a small number of clients each week. Availability is typically two to three weeks ahead — secure your date below."
       />
     </>
   );

@@ -1,17 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 // FadeInSection removed: stacked whileInView with child motion.divs caused
 // a visible double-fade on entry. Children animate themselves.
 import { FAQ } from "../../types";
-import faqService from "../../services/faqService";
+import faqData from "@/data/faqs.json";
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import {
   LUXURY_EASING,
   standardViewport,
 } from "@/utils/animations/luxuryAnimations";
+
+// Featured FAQs resolved at build time — no client-side fetch needed
+const FEATURED_FAQS: FAQ[] = (faqData as FAQ[]).filter((faq) => faq.featured);
 
 interface AccordionItemProps {
   faq: FAQ;
@@ -87,33 +90,10 @@ interface FAQsPreviewProps {
 }
 
 const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
-  const [faqs, setFaqs] = useState<FAQ[]>([]);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Fetch featured FAQs when component mounts
-  useEffect(() => {
-    const fetchFAQs = async () => {
-      try {
-        setLoading(true);
-        const featuredFAQs = await faqService.getFeaturedFAQs();
-        setFaqs(featuredFAQs);
-        // Open the first FAQ by default for better UX
-        if (featuredFAQs.length > 0) {
-          setActiveIndex(0);
-        }
-        setError(null);
-      } catch (err) {
-        console.error("Error fetching FAQs:", err);
-        setError("Unable to load FAQs. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFAQs();
-  }, []);
+  // Open the first FAQ by default for better UX
+  const [activeIndex, setActiveIndex] = useState<number | null>(
+    FEATURED_FAQS.length > 0 ? 0 : null
+  );
 
   const toggleFaq = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -132,31 +112,10 @@ const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
             />
           )}
 
-          {/* Refined Loading State */}
-          {loading && (
-            <div className="text-center py-20">
-              <div className="relative w-12 h-12 mx-auto">
-                <div className="absolute inset-0 border border-elegant-mocha/30 border-t-elegant-mocha animate-spin"></div>
-              </div>
-              <p className="mt-6 font-alta text-xs tracking-wider uppercase text-elegant-mocha/75">
-                Loading questions
-              </p>
-            </div>
-          )}
-
-          {/* Error State */}
-          {error && (
-            <div className="text-center py-20">
-              <p className="font-alta text-sm tracking-wide text-deep-bronze">
-                {error}
-              </p>
-            </div>
-          )}
-
           {/* FAQ Accordion with refined spacing */}
-          {!loading && !error && faqs.length > 0 && (
+          {FEATURED_FAQS.length > 0 && (
             <div className="space-y-6">
-              {faqs.map((faq, index) => (
+              {FEATURED_FAQS.map((faq, index) => (
                 <AccordionItem
                   key={faq.id}
                   faq={faq}
@@ -169,7 +128,7 @@ const FAQsPreview = ({ hideTitle = false }: FAQsPreviewProps) => {
           )}
 
           {/* Empty State */}
-          {!loading && !error && faqs.length === 0 && (
+          {FEATURED_FAQS.length === 0 && (
             <div className="text-center py-20 border border-soft-blush/10 bg-white">
               <p className="font-alice text-base tracking-wide text-elegant-mocha/80">
                 No questions available at the moment.

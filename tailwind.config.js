@@ -14,8 +14,8 @@ module.exports = {
   			'soft-blush': '#E6CCB2',
   			'warm-beige': '#DDB892',
   			'muted-sand': '#B08968',
-  			'elegant-mocha': '#7F5539',
-  			'deep-bronze': '#9C6644',
+  			'elegant-mocha': '#734D33',
+  			'deep-bronze': '#89593C',
   			'silver-bronze': '#A8988B',
   			'rose-gold': '#C9A88A',
   			'luxe-gold': '#D4AF37',
@@ -138,10 +138,10 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		boxShadow: {
-			'luxury-sm': '0 2px 8px -2px rgba(127,85,57,0.08)',
-			luxury: '0 8px 30px -8px rgba(127,85,57,0.12)',
-			'luxury-lg': '0 20px 50px -12px rgba(127,85,57,0.18)',
-			'luxury-glow': '0 0 0 1px rgba(212,175,55,0.15), 0 12px 40px -10px rgba(127,85,57,0.2)',
+			'luxury-sm': '0 2px 8px -2px rgba(115,77,51,0.08)',
+			luxury: '0 8px 30px -8px rgba(115,77,51,0.12)',
+			'luxury-lg': '0 20px 50px -12px rgba(115,77,51,0.18)',
+			'luxury-glow': '0 0 0 1px rgba(212,175,55,0.15), 0 12px 40px -10px rgba(115,77,51,0.2)',
   			input: '0px 2px 3px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02), 0px 0px 0px 1px rgba(25, 28, 33, 0.08)'
   		}
   	}
