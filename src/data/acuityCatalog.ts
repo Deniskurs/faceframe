@@ -2,6 +2,7 @@
  * Acuity service catalog — GENERATED from the live Acuity account (owner 36291837).
  * Regenerate via migration tooling when services change in Acuity (see migration/README.md).
  * Generated 2026-07-05. Source of truth: the Acuity dashboard.
+ * MANUAL OVERRIDE: Saline Tattoo Removal is surfaced under the semi-permanent-makeup category on the website (client request 2026-07); re-apply if regenerating from Acuity.
  */
 
 export interface CatalogService {
@@ -66,11 +67,6 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     "id": "waxing",
     "acuityName": "Waxing",
     "displayName": "Waxing"
-  },
-  {
-    "id": "saline-tattoo-removal",
-    "acuityName": "Saline Tattoo Removal",
-    "displayName": "Saline Tattoo Removal"
   }
 ];
 
@@ -787,7 +783,7 @@ export const CATALOG_SERVICES: CatalogService[] = [
     "slug": "saline-tattoo-removal-single-session",
     "acuityId": 95376923,
     "name": "Saline Tattoo Removal — Single Session",
-    "category": "saline-tattoo-removal",
+    "category": "semi-permanent-makeup",
     "priceDisplay": "£45",
     "durationDisplay": "1 hour",
     "duration": 60,
@@ -813,3 +809,18 @@ export const CATALOG_PACKAGES: CatalogPackage[] = [
     "savings": "Save £40 vs single sessions"
   }
 ];
+import { DESCRIPTION_OVERRIDES } from "./catalogOverrides";
+
+// Editorial overrides survive regeneration — this appended block re-applies them over the generated descriptions above.
+for (const service of CATALOG_SERVICES) {
+  const override = DESCRIPTION_OVERRIDES[service.slug];
+  if (override) service.description = override;
+}
+
+if (process.env.NODE_ENV !== "production") {
+  for (const slug of Object.keys(DESCRIPTION_OVERRIDES)) {
+    if (!CATALOG_SERVICES.some((s) => s.slug === slug)) {
+      console.warn(`[catalogOverrides] Unknown service slug in DESCRIPTION_OVERRIDES: ${slug}`);
+    }
+  }
+}

@@ -18,6 +18,14 @@ const SLUG_BY_ACUITY_ID: Record<number, string> = Object.fromEntries(
   CATALOG_SERVICES.map((s) => [s.acuityId, s.slug]),
 );
 
+/** Acuity sends "45.00" strings — show £45, £47.50, or "Free". */
+function formatPrice(price: string): string {
+  const value = Number.parseFloat(price);
+  if (Number.isNaN(value)) return price;
+  if (value === 0) return "Free";
+  return `£${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)}`;
+}
+
 interface PortalAppointment {
   id: number;
   type: string;
@@ -84,7 +92,7 @@ export function AccountPortal() {
   if (checking) {
     return (
       <div className="min-h-[280px] flex items-center justify-center">
-        <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/70 animate-pulse">
+        <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/80 animate-pulse">
           Checking your session…
         </p>
       </div>
@@ -208,7 +216,7 @@ function AccessForm({ onVerified }: { onVerified: () => void }) {
         </button>
       </form>
 
-      <p className="font-alice text-sm text-elegant-mocha/70 leading-relaxed tracking-wide text-center mt-6">
+      <p className="font-alice text-sm text-elegant-mocha/80 leading-relaxed tracking-wide text-center mt-6">
         New to FaceFrame?{" "}
         <Link
           href="/booking"
@@ -238,14 +246,14 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
           <h2 className="font-alice text-2xl sm:text-3xl text-elegant-mocha tracking-wide">
             Welcome back{data.firstName ? `, ${data.firstName}` : ""}
           </h2>
-          <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/70 mt-1">
+          <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/80 mt-1">
             {data.email}
           </p>
         </div>
         <button
           type="button"
           onClick={onLogout}
-          className="inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase text-elegant-mocha/70 hover:text-deep-bronze transition-colors duration-300 py-2"
+          className="inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase text-elegant-mocha/80 hover:text-deep-bronze transition-colors duration-300 py-2"
         >
           <LogOut className="w-3.5 h-3.5" aria-hidden="true" />
           Sign out
@@ -275,18 +283,28 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
                   </p>
                   <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/80 mt-1">
                     {a.date} · {a.time}
-                    <span className="mx-2 text-elegant-mocha/30">·</span>£{a.price}
+                    <span className="mx-2 text-elegant-mocha/30">·</span>
+                    {formatPrice(a.price)}
                   </p>
                 </div>
-                <a
-                  href={a.confirmationPage}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 sm:mt-0 shrink-0 inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase px-5 py-2.5 border border-elegant-mocha/40 text-elegant-mocha rounded-sm hover:bg-elegant-mocha hover:text-white transition-colors duration-300"
-                >
-                  Manage
-                  <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
-                </a>
+                {a.canClientCancel || a.canClientReschedule ? (
+                  <a
+                    href={a.confirmationPage}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 sm:mt-0 shrink-0 inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase px-5 py-2.5 border border-elegant-mocha/40 text-elegant-mocha rounded-sm hover:bg-elegant-mocha hover:text-white transition-colors duration-300"
+                  >
+                    Manage
+                    <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <Link
+                    href="/contact"
+                    className="mt-3 sm:mt-0 shrink-0 inline-flex items-center gap-1.5 font-alta text-[11px] tracking-[0.2em] uppercase px-5 py-2.5 border border-elegant-mocha/40 text-elegant-mocha rounded-sm hover:bg-elegant-mocha hover:text-white transition-colors duration-300"
+                  >
+                    Contact us to change this booking
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -323,11 +341,19 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
                   <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                     <p className="font-alice text-base text-elegant-mocha tracking-wide">{c.name}</p>
                     <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/80">
-                      {remaining !== null && <>{remaining} session{remaining === 1 ? "" : "s"} left</>}
-                      {c.remainingMinutes !== null && <>{c.remainingMinutes} minutes left</>}
+                      {[
+                        remaining !== null
+                          ? `${remaining} session${remaining === 1 ? "" : "s"} left`
+                          : null,
+                        c.remainingMinutes !== null
+                          ? `${c.remainingMinutes} minutes left`
+                          : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
                     </p>
                   </div>
-                  <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/70 mt-1.5">
+                  <p className="font-alta text-xs tracking-[0.08em] text-elegant-mocha/80 mt-1.5">
                     Code <span className="text-deep-bronze font-medium tracking-[0.15em]">{c.code}</span>
                     {c.expiration && <> · expires {c.expiration}</>}
                     <span className="mx-2 text-elegant-mocha/30">·</span>
@@ -354,7 +380,7 @@ function Dashboard({ data, onLogout }: { data: PortalData; onLogout: () => void 
                     <span className="font-alice text-sm sm:text-base text-elegant-mocha tracking-wide">
                       {a.type}
                     </span>
-                    <span className="ml-3 font-alta text-xs tracking-[0.08em] text-elegant-mocha/70">
+                    <span className="ml-3 font-alta text-xs tracking-[0.08em] text-elegant-mocha/80">
                       {a.date}
                     </span>
                   </div>
@@ -418,7 +444,7 @@ function Section({
 
 function EmptyRow({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-alice text-sm sm:text-base text-elegant-mocha/75 leading-relaxed tracking-wide">
+    <p className="font-alice text-sm sm:text-base text-elegant-mocha/80 leading-relaxed tracking-wide">
       {children}
     </p>
   );

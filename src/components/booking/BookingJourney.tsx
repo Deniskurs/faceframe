@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import Script from "next/script";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, Clock, Gift } from "lucide-react";
@@ -64,12 +65,23 @@ export function BookingJourney() {
   const paramCategory = searchParams.get("category");
 
   const selected = paramService ? SERVICE_BY_SLUG[paramService] ?? null : null;
+  // Deep links to slugs no longer in the catalog fall back to the list —
+  // with a notice, and the dead param cleaned from the URL below.
+  const staleService = Boolean(paramService) && !selected;
+  const [staleNotice, setStaleNotice] = useState(false);
   const activeCategory =
     paramCategory === PACKAGES_TAB
       ? PACKAGES_TAB
       : CATALOG_CATEGORIES.some((c) => c.id === paramCategory)
         ? (paramCategory as string)
         : CATALOG_CATEGORIES[0].id;
+
+  // How many history entries this journey has pushed (entering the scheduler
+  // pushes; everything else replaces). Lets "All treatments" call
+  // router.back() when we own the previous entry, so browser history never
+  // accumulates duplicates — while direct deep links still fall back to
+  // replace instead of leaving the site.
+  const pushCountRef = useRef(0);
 
   const setParams = useCallback(
     (
@@ -84,10 +96,32 @@ export function BookingJourney() {
       const qs = params.toString();
       const url = qs ? `${pathname}?${qs}` : pathname;
       // push when entering the scheduler so browser-back returns to the list
-      if (mode === "push") router.push(url, { scroll: false });
-      else router.replace(url, { scroll: false });
+      if (mode === "push") {
+        pushCountRef.current += 1;
+        router.push(url, { scroll: false });
+      } else {
+        router.replace(url, { scroll: false });
+      }
     },
     [router, pathname, searchParams],
+  );
+
+  useEffect(() => {
+    if (!staleService || !paramService) return;
+    setStaleNotice(true);
+    setParams({ service: null });
+  }, [staleService, paramService, setParams]);
+
+  const goBackToList = useCallback(
+    (category: string) => {
+      if (pushCountRef.current > 0) {
+        pushCountRef.current -= 1;
+        router.back();
+      } else {
+        setParams({ service: null, category });
+      }
+    },
+    [router, setParams],
   );
 
   const consultation: CatalogService | undefined = SERVICE_BY_SLUG[CONSULTATION_SLUG];
@@ -106,7 +140,7 @@ export function BookingJourney() {
             key={`schedule-${selected.slug}`}
             service={selected}
             consultation={consultation}
-            onBack={() => setParams({ service: null, category: selected.category })}
+            onBack={() => goBackToList(selected.category)}
             onBookConsultation={
               consultation
                 ? () => setParams({ service: consultation.slug, category: null }, "push")
@@ -115,6 +149,11 @@ export function BookingJourney() {
           />
         ) : (
           <motion.div key="select" {...fade}>
+            {staleNotice && (
+              <p className="mb-6 border border-elegant-mocha/15 bg-light-cream/30 rounded-sm px-5 py-3 font-alice text-sm text-elegant-mocha/85 leading-relaxed tracking-wide text-center">
+                That treatment is no longer offered — browse the current menu below.
+              </p>
+            )}
             <SelectStep
               activeCategory={activeCategory}
               onCategory={(id) => setParams({ category: id, service: null })}
@@ -161,7 +200,7 @@ function SelectStep({
       const strip = stripRef.current;
       if (!strip) return;
       setOverflowing(strip.scrollWidth > strip.clientWidth + 4);
-      const active = strip.querySelector<HTMLElement>('[aria-selected="true"]');
+      const active = strip.querySelector<HTMLElement>('[aria-pressed="true"]');
       if (!active) return;
       const target = active.offsetLeft - (strip.clientWidth - active.offsetWidth) / 2;
       strip.scrollTo({ left: Math.max(0, target) });
@@ -181,8 +220,8 @@ function SelectStep({
         <div
           ref={stripRef}
           className="flex gap-2.5 sm:gap-3 sm:flex-wrap sm:justify-center overflow-x-auto sm:overflow-visible
-                     pb-2 sm:pb-0 px-6 sm:px-0 scrollbar-none"
-          role="tablist"
+                     pb-2 sm:pb-0 px-6 sm:px-0 scrollbar-hide"
+          role="group"
           aria-label="Treatment categories"
         >
           {CATALOG_CATEGORIES.map((cat) => (
@@ -249,8 +288,7 @@ function CategoryPill({
   return (
     <button
       type="button"
-      role="tab"
-      aria-selected={active}
+      aria-pressed={active}
       onClick={onClick}
       className={`shrink-0 inline-flex items-center gap-2 px-5 py-3 sm:py-2.5 rounded-full border font-alta text-xs sm:text-sm tracking-[0.06em] transition-all duration-300 ${
         active
@@ -283,7 +321,7 @@ function ServiceRow({
               {service.name}
             </span>
             {service.consultationRequired && (
-              <span className="ml-3 hidden sm:inline-block align-middle font-alta text-[10px] tracking-[0.18em] uppercase text-deep-bronze border border-deep-bronze/30 rounded-full px-2.5 py-0.5">
+              <span className="ml-3 inline-block align-middle font-alta text-[10px] tracking-[0.18em] uppercase text-deep-bronze border border-deep-bronze/30 rounded-full px-2.5 py-0.5">
                 Consultation first
               </span>
             )}
@@ -299,11 +337,6 @@ function ServiceRow({
       <AccordionContent className="pb-6">
         <div className="sm:flex sm:items-end sm:justify-between sm:gap-8">
           <div className="max-w-2xl">
-            {service.consultationRequired && (
-              <p className="sm:hidden font-alta text-[10px] tracking-[0.18em] uppercase text-deep-bronze mb-2">
-                Consultation required first
-              </p>
-            )}
             <p className="font-alice text-sm sm:text-base text-elegant-mocha/80 leading-relaxed tracking-wide whitespace-pre-line">
               {service.description}
             </p>
@@ -342,7 +375,7 @@ function PackagesPanel() {
             <h3 className="font-alice text-xl text-elegant-mocha tracking-wide mb-3">
               {pkg.name}
             </h3>
-            <p className="font-alice text-sm text-elegant-mocha/75 leading-relaxed tracking-wide mb-5">
+            <p className="font-alice text-sm text-elegant-mocha/80 leading-relaxed tracking-wide mb-5">
               {pkg.description}
             </p>
             <div className="mt-auto flex items-center justify-between">
@@ -360,10 +393,10 @@ function PackagesPanel() {
           </article>
         ))}
       </div>
-      <p className="text-center font-alta text-[10px] tracking-[0.08em] uppercase text-elegant-mocha/70 mt-6">
+      <p className="text-center font-alta text-[10px] tracking-[0.08em] uppercase text-elegant-mocha/80 mt-6">
         Checkout opens in Acuity, our secure booking partner
       </p>
-      <p className="text-center font-alice text-sm text-elegant-mocha/70 tracking-wide mt-4">
+      <p className="text-center font-alice text-sm text-elegant-mocha/80 tracking-wide mt-4">
         Looking to treat someone? Gift certificates are available for any amount{" "}
         <a
           href={PACKAGES_CATALOG_URL}
@@ -394,19 +427,40 @@ function ScheduleStep({
   onBack: () => void;
   onBookConsultation?: () => void;
 }) {
-  const [schedulerLoaded, setSchedulerLoaded] = useState(false);
+  const isConsultation = service.slug === consultation?.slug;
+  const gated = service.consultationRequired && !isConsultation && Boolean(onBookConsultation);
+
+  // Gated treatments ask about the consultation before any calendar renders;
+  // "Yes" reveals the scheduler for this visit only (state resets per service
+  // — ScheduleStep is keyed by slug).
+  const [consultationConfirmed, setConsultationConfirmed] = useState(false);
+  const showCalendar = !gated || consultationConfirmed;
+
+  const [schedulerLoaded, setSchedulerLoaded] = useState(false); // veil lift
+  const [iframeLoaded, setIframeLoaded] = useState(false); // real onLoad
+  const [loadStalled, setLoadStalled] = useState(false);
 
   // Scroll the step header into view when arriving via deep link / selection.
-  // Fallback timer: the iframe's load event can fire BEFORE hydration attaches
-  // onLoad (SSR + fast cache), which would leave the calendar invisible.
   useEffect(() => {
-    setSchedulerLoaded(false);
     document.getElementById("booking-journey-top")?.scrollIntoView({ block: "nearest" });
-    const fallback = setTimeout(() => setSchedulerLoaded(true), 4000);
-    return () => clearTimeout(fallback);
   }, [service.slug]);
 
-  const isConsultation = service.slug === consultation?.slug;
+  // Fallback timer: the iframe's load event can fire BEFORE hydration attaches
+  // onLoad (SSR + fast cache), which would leave the calendar invisible — lift
+  // the veil at 4s regardless. If onLoad still hasn't fired by 10s, surface a
+  // quiet escape hatch beneath the (still mounted) iframe.
+  useEffect(() => {
+    if (!showCalendar) return;
+    setSchedulerLoaded(false);
+    setIframeLoaded(false);
+    setLoadStalled(false);
+    const veil = setTimeout(() => setSchedulerLoaded(true), 4000);
+    const stall = setTimeout(() => setLoadStalled(true), 10000);
+    return () => {
+      clearTimeout(veil);
+      clearTimeout(stall);
+    };
+  }, [service.slug, showCalendar]);
 
   return (
     <motion.div key="schedule" {...fade} id="booking-journey-top">
@@ -430,46 +484,92 @@ function ScheduleStep({
         </p>
       </div>
 
-      {/* Consultation-first notice */}
-      {service.consultationRequired && !isConsultation && onBookConsultation && (
-        <div className="mt-5 border border-deep-bronze/25 bg-soft-blush/15 rounded-sm px-5 py-4 sm:flex sm:items-center sm:justify-between sm:gap-6">
-          <p className="font-alice text-sm sm:text-base text-elegant-mocha/85 leading-relaxed tracking-wide">
-            This treatment requires a free consultation &amp; patch test first —
-            if you haven&rsquo;t visited before, please book that instead.
+      {/* Consultation gate — first-time clients never see the calendar before answering */}
+      {gated && !consultationConfirmed ? (
+        <div className="mt-6 border border-elegant-mocha/15 bg-light-cream/20 rounded-sm px-6 py-8 sm:px-10 sm:py-10 text-center">
+          <p className="font-alta text-[11px] tracking-[0.3em] uppercase text-deep-bronze mb-3">
+            Before you book
           </p>
-          <button
-            type="button"
-            onClick={onBookConsultation}
-            className="mt-3 sm:mt-0 shrink-0 font-alta text-[11px] tracking-[0.2em] uppercase px-5 py-3 border border-deep-bronze/40 text-deep-bronze rounded-sm hover:bg-deep-bronze hover:text-white transition-colors duration-300"
-          >
-            Book consultation
-          </button>
-        </div>
-      )}
-
-      {/* Scoped Acuity scheduler — calendar + details for this ONE treatment */}
-      <div className="relative mt-6 border-hairline border border-elegant-mocha/10 bg-light-cream/20 rounded-sm p-1 sm:p-2 acuity-embed-container [&_iframe]:w-full [&_iframe]:min-h-[760px] [&_iframe]:border-0">
-        <iframe
-          src={serviceSchedulerUrl(service.acuityId)}
-          title={`Book ${service.name} — choose a date and time`}
-          width="100%"
-          height="760"
-          frameBorder="0"
-          allow="payment"
-          onLoad={() => setSchedulerLoaded(true)}
-        />
-        {/* Overlay unmounts once the calendar has painted beneath it */}
-        {!schedulerLoaded && (
-          <div
-            aria-hidden="true"
-            className="absolute inset-1 sm:inset-2 flex items-center justify-center bg-light-cream/60 backdrop-blur-[1px] rounded-sm"
-          >
-            <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/70 animate-pulse">
-              Preparing your calendar…
-            </p>
+          <h3 className="font-alice text-xl sm:text-2xl text-elegant-mocha tracking-wide mb-3">
+            Have you had your free consultation and patch test?
+          </h3>
+          <p className="font-alice text-sm sm:text-base text-elegant-mocha/80 leading-relaxed tracking-wide max-w-xl mx-auto mb-7">
+            This treatment requires a consultation and patch test before your
+            first appointment — it keeps you safe and lets us plan your result
+            together.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <button
+              type="button"
+              onClick={() => setConsultationConfirmed(true)}
+              className="w-full sm:w-auto font-alta text-xs tracking-[0.25em] uppercase px-8 py-3.5 bg-elegant-mocha text-white border border-elegant-mocha rounded-sm hover:bg-deep-bronze hover:border-deep-bronze transition-colors duration-300"
+            >
+              Yes — show available times
+            </button>
+            <button
+              type="button"
+              onClick={onBookConsultation}
+              className="w-full sm:w-auto font-alta text-xs tracking-[0.25em] uppercase px-8 py-3.5 border border-deep-bronze/40 text-deep-bronze rounded-sm hover:bg-deep-bronze hover:text-white transition-colors duration-300"
+            >
+              Not yet — book the consultation first
+            </button>
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <>
+          {/* Scoped Acuity scheduler — calendar + details for this ONE treatment */}
+          <div
+            aria-busy={!schedulerLoaded}
+            className="relative mt-6 border-hairline border border-elegant-mocha/10 bg-light-cream/20 rounded-sm p-1 sm:p-2 acuity-embed-container [&_iframe]:w-full [&_iframe]:min-h-[760px] [&_iframe]:border-0"
+          >
+            <iframe
+              src={serviceSchedulerUrl(service.acuityId)}
+              title={`Book ${service.name} — choose a date and time`}
+              width="100%"
+              height="760"
+              frameBorder="0"
+              allow="payment"
+              onLoad={() => {
+                setSchedulerLoaded(true);
+                setIframeLoaded(true);
+              }}
+            />
+            {/* Overlay unmounts once the calendar has painted beneath it */}
+            {!schedulerLoaded && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-1 sm:inset-2 flex items-center justify-center bg-light-cream/60 backdrop-blur-[1px] rounded-sm"
+              >
+                <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/80 animate-pulse">
+                  Preparing your calendar…
+                </p>
+              </div>
+            )}
+          </div>
+          {/* Escape hatch when the embed never reports load — non-destructive */}
+          {loadStalled && !iframeLoaded && (
+            <p className="mt-3 text-center font-alice text-sm text-elegant-mocha/80 leading-relaxed tracking-wide">
+              Calendar not loading?{" "}
+              <a
+                href={serviceSchedulerUrl(service.acuityId)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-deep-bronze underline underline-offset-2 hover:text-elegant-mocha transition-colors"
+              >
+                Open it in a new tab
+              </a>{" "}
+              or{" "}
+              <Link
+                href="/contact"
+                className="text-deep-bronze underline underline-offset-2 hover:text-elegant-mocha transition-colors"
+              >
+                get in touch
+              </Link>
+              .
+            </p>
+          )}
+        </>
+      )}
     </motion.div>
   );
 }

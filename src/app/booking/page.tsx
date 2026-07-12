@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { PageHero } from "@/components/shared/PageHero";
 import { BookingJourney } from "@/components/booking/BookingJourney";
-import { BRAND } from "@/config/business";
+import { BRAND, STUDIO } from "@/config/business";
 
 export const metadata: Metadata = {
   title: `Book an Appointment | ${BRAND.name}`,
@@ -31,7 +31,15 @@ export default function BookingPage() {
             Native journey: category → treatment → scoped Acuity calendar.
             useSearchParams inside requires a Suspense boundary for static rendering.
           */}
-          <Suspense fallback={<div className="min-h-[400px]" aria-hidden="true" />}>
+          <Suspense
+            fallback={
+              <div className="min-h-[400px] flex items-center justify-center">
+                <p className="font-alta text-xs tracking-[0.25em] uppercase text-elegant-mocha/80 animate-pulse">
+                  Preparing your calendar…
+                </p>
+              </div>
+            }
+          >
             <BookingJourney />
           </Suspense>
 
@@ -58,29 +66,29 @@ export default function BookingPage() {
             {[
               {
                 title: "East London studio",
-                body: "Luma Glow Studio · 82 O'Leary Square · E1 3AS.",
+                body: `${STUDIO.name} · ${STUDIO.streetAddress} · ${STUDIO.postcode}.`,
               },
               {
-                title: "Personal service",
-                body: "Iggy works with a small number of clients each week. Every appointment is one-to-one.",
+                title: "One-to-one appointments",
+                body: "Every appointment is one-to-one with Iggy — your treatment is never rushed or shared.",
               },
               {
-                title: "Easy aftercare",
-                body: "You'll receive aftercare guidance by email before and after your appointment.",
+                title: "Aftercare included",
+                body: "You’ll receive tailored aftercare guidance by email before and after your appointment.",
               },
             ].map((item) => (
               <div key={item.title} className="text-center sm:text-left">
                 <p className="font-alta text-[11px] tracking-[0.25em] uppercase text-deep-bronze/80 mb-2">
                   {item.title}
                 </p>
-                <p className="font-alice text-sm text-elegant-mocha/75 leading-relaxed tracking-wide">
+                <p className="font-alice text-sm text-elegant-mocha/80 leading-relaxed tracking-wide">
                   {item.body}
                 </p>
               </div>
             ))}
           </div>
 
-          <p className="text-center font-alta text-xs tracking-[0.04em] text-elegant-mocha/75 mt-12">
+          <p className="text-center font-alta text-xs tracking-[0.04em] text-elegant-mocha/80 mt-12">
             Questions before booking?{" "}
             <Link
               href="/faq"
