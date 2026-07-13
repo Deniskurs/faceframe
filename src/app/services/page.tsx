@@ -40,12 +40,11 @@ const CATEGORY_COPY: Record<
       "Million Dollar Facial, dermaplaning, microneedling, and peels. Deep, bespoke skincare for a calm, luminous result.",
     image: "/images/gallery/services-preview/facials.webp",
   },
-  // no services-preview shot exists for waxing yet — gallery image stays
   waxing: {
     headline: "Waxing",
     description:
       "Premium wax formulations and gentle technique for lasting, comfortable results.",
-    image: "/images/gallery/image7.webp",
+    image: "/images/gallery/services-preview/waxing.webp",
   },
 };
 
