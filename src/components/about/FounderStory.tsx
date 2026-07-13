@@ -42,8 +42,8 @@ const FounderStory = () => {
 
               <p className="font-alice text-lg md:text-xl leading-relaxed text-muted-sand">
                 Every appointment is one-to-one, and every treatment is
-                performed by Iggy herself — a decade of practice in the art of
-                subtle enhancement.
+                performed by Iggy herself, drawing on a decade of practice in
+                the art of subtle enhancement.
               </p>
 
               <p className="font-alice text-lg md:text-xl leading-relaxed text-muted-sand">
@@ -55,7 +55,7 @@ const FounderStory = () => {
               <div className="pt-8 mt-8 border-t border-soft-blush/20">
                 <blockquote className="font-alice text-xl md:text-2xl italic text-elegant-mocha/90 leading-relaxed">
                   &ldquo;I created FaceFrame Beauty so you could wake up feeling
-                  beautifully, confidently you—every single day.&rdquo;
+                  beautifully, confidently you, every single day.&rdquo;
                 </blockquote>
                 <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/80 mt-4">
                   — Iggy

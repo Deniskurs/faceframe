@@ -397,7 +397,7 @@ export function NativeScheduler({
                         }}
                         className={`shrink-0 flex flex-col items-center justify-center min-w-[3.5rem] min-h-[44px] px-3 py-2 rounded-sm border transition-colors duration-300 ${
                           active
-                            ? "bg-elegant-mocha text-white border-elegant-mocha"
+                            ? "bg-deep-bronze text-light-cream border-deep-bronze"
                             : "bg-white text-elegant-mocha border-elegant-mocha/20 hover:border-elegant-mocha/50"
                         }`}
                       >

@@ -8,10 +8,8 @@ import { SOCIAL } from "@/config/business";
 import type { InstagramPost } from "@/lib/instagram";
 
 const sectionContent = {
-  preTitle: "Precious Moments",
-  title: "INSTAGRAM",
-  description: "Recent work and healed results, shared as they happen.",
-  note: `Follow ${SOCIAL.instagram.handle} for daily inspiration`,
+  label: "Instagram",
+  note: `Follow ${SOCIAL.instagram.handle}`,
 };
 
 interface InstagramGalleryProps {
@@ -26,31 +24,27 @@ export default function InstagramGallery({ posts }: InstagramGalleryProps) {
     >
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16">
         <div className="flex flex-col items-center gap-8 sm:gap-10 w-full">
-          {/* Section header */}
-          <motion.header
-            className="flex flex-col items-center gap-3 sm:gap-4 text-center w-full max-w-3xl"
-            initial={{ opacity: 0, y: 30 }}
+          {/* Attribution row — the page's single title lives in the hero above */}
+          <motion.div
+            className="flex w-full items-baseline justify-between gap-4 border-b border-elegant-mocha/15 pb-3"
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={standardViewport}
-            transition={{ duration: 1.2, ease: LUXURY_EASING }}
+            transition={{ duration: 0.8, ease: LUXURY_EASING }}
           >
-            <div className="flex items-center gap-6">
-              <div className="w-16 h-[0.5px] bg-soft-blush/50" />
-              <div className="w-2.5 h-2.5 border border-soft-blush/60 rounded-full bg-soft-blush/10" />
-              <div className="w-16 h-[0.5px] bg-soft-blush/50" />
-            </div>
-            <p className="font-alta text-xs sm:text-sm tracking-[0.4em] uppercase text-elegant-mocha/80">
-              {sectionContent.preTitle}
-            </p>
-
-            <h2 className="font-alice text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-editorial sm:tracking-refined md:tracking-luxury text-elegant-mocha uppercase leading-[1.15]">
-              {sectionContent.title}
+            <h2 className="flex items-center gap-2 font-alta text-xs tracking-luxury uppercase text-elegant-mocha/80">
+              <Instagram className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
+              {sectionContent.label}
             </h2>
-
-            <p className="font-alta text-sm sm:text-base md:text-lg text-elegant-mocha/80 leading-relaxed tracking-wide max-w-2xl">
-              {sectionContent.description}
-            </p>
-          </motion.header>
+            <a
+              href={SOCIAL.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-alta text-xs tracking-refined uppercase text-deep-bronze hover:text-elegant-mocha transition-colors duration-500 whitespace-nowrap"
+            >
+              {sectionContent.note}
+            </a>
+          </motion.div>
 
           {/* Post grid */}
           <motion.div
@@ -86,26 +80,21 @@ export default function InstagramGallery({ posts }: InstagramGalleryProps) {
             ))}
           </motion.div>
 
-          {/* Follow note */}
+          {/* Quiet closing note */}
           <motion.div
-            className="flex flex-col items-center gap-6 text-center"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-center"
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={standardViewport}
-            transition={{ delay: 0.2, duration: 1, ease: LUXURY_EASING }}
+            transition={{ delay: 0.1, duration: 0.8, ease: LUXURY_EASING }}
           >
-            <div className="flex items-center gap-5">
-              <div className="h-[0.5px] w-16 bg-elegant-mocha/40" />
-              <div className="w-2.5 h-2.5 border border-soft-blush/60 rounded-full bg-soft-blush/10" />
-              <div className="h-[0.5px] w-16 bg-elegant-mocha/40" />
-            </div>
             <a
               href={SOCIAL.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-alice text-sm sm:text-base md:text-lg text-elegant-mocha/85 hover:text-deep-bronze tracking-refined italic transition-colors duration-500"
+              className="font-alice text-sm sm:text-base text-elegant-mocha/85 hover:text-deep-bronze tracking-refined italic transition-colors duration-500"
             >
-              {sectionContent.note}
+              Recent work and healed results, shared as they happen — {SOCIAL.instagram.handle}
             </a>
           </motion.div>
         </div>

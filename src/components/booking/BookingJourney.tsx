@@ -294,7 +294,7 @@ function CategoryPill({
       onClick={onClick}
       className={`shrink-0 inline-flex items-center gap-2 px-5 py-3 sm:py-2.5 rounded-full border font-alta text-xs sm:text-sm tracking-wider transition-all duration-300 ${
         active
-          ? "bg-elegant-mocha text-white border-elegant-mocha shadow-md"
+          ? "bg-deep-bronze text-light-cream border-deep-bronze shadow-md"
           : "bg-white text-elegant-mocha border-elegant-mocha/25 hover:border-elegant-mocha/50 hover:shadow-sm"
       }`}
     >
@@ -365,11 +365,15 @@ function ServiceRow({
               </span>
             )}
           </div>
-          <span className="shrink-0 whitespace-nowrap text-right font-alta text-xs sm:text-sm tracking-widest text-elegant-mocha/80">
-            <Clock className="inline w-3.5 h-3.5 mr-1.5 -mt-0.5 opacity-60" aria-hidden="true" />
-            {formatDuration(service.duration)}
-            <span className="mx-2 text-elegant-mocha/30">·</span>
-            <span className="text-elegant-mocha tabular-nums">{service.priceDisplay}</span>
+          <span className="shrink-0 flex items-center font-alta text-xs sm:text-sm tracking-widest text-elegant-mocha/80">
+            {/* Fixed columns: clocks and prices align vertically across rows */}
+            <span className="flex w-[110px] sm:w-[128px] items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 shrink-0 opacity-60" aria-hidden="true" />
+              {formatDuration(service.duration)}
+            </span>
+            <span className="w-[48px] sm:w-[56px] text-right text-elegant-mocha tabular-nums">
+              {service.priceDisplay}
+            </span>
           </span>
         </div>
       </AccordionTrigger>

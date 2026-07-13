@@ -57,27 +57,47 @@ export default function BookingPage() {
                 My Account
               </Link>{" "}
               to view, reschedule, or cancel your appointments and see your
-              package credits — or use the link in your confirmation email.
+              package credits, or use the link in your confirmation email.
             </p>
           </div>
 
-          {/* Reassurance row */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
+          {/* Reassurance row — hairline-topped columns, one two-line fact each */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 mt-12">
             {[
               {
                 title: "East London studio",
-                body: `${STUDIO.name} · ${STUDIO.streetAddress} · ${STUDIO.postcode}.`,
+                body: (
+                  <>
+                    {STUDIO.name}
+                    <br />
+                    {STUDIO.streetAddress},{" "}
+                    <span className="whitespace-nowrap">{STUDIO.postcode}</span>
+                  </>
+                ),
               },
               {
                 title: "One-to-one appointments",
-                body: "Every appointment is one-to-one with Iggy — your treatment is never rushed or shared.",
+                body: (
+                  <>
+                    Every appointment is one-to-one with Iggy. Your treatment
+                    is never rushed or shared.
+                  </>
+                ),
               },
               {
                 title: "Aftercare included",
-                body: "You’ll receive tailored aftercare guidance by email before and after your appointment.",
+                body: (
+                  <>
+                    Tailored aftercare guidance arrives by email before and
+                    after your appointment.
+                  </>
+                ),
               },
             ].map((item) => (
-              <div key={item.title} className="text-center sm:text-left">
+              <div
+                key={item.title}
+                className="border-t border-elegant-mocha/15 pt-4 text-center sm:text-left"
+              >
                 <p className="font-alta text-xs tracking-luxury uppercase text-deep-bronze/80 mb-2">
                   {item.title}
                 </p>

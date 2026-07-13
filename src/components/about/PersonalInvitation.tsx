@@ -25,8 +25,10 @@ const PersonalInvitation = () => {
       className="relative min-h-[75vh] w-full overflow-hidden flex items-center pt-20 pb-0"
     >
       {/* Background Image with Parallax - Light Overlay */}
+      {/* Oversized by 2rem top/bottom so the -30px parallax travel never
+          exposes the page background at the section edges */}
       <motion.div
-        className="absolute inset-0 w-full h-full"
+        className="absolute -inset-y-8 inset-x-0"
         style={{ y: imageY }}
       >
         <div className="relative w-full h-full">
@@ -34,7 +36,7 @@ const PersonalInvitation = () => {
             src="/images/brand/IMG_5461.webp"
             alt="FaceFrame Beauty studio interior in East London"
             fill
-            quality={95}
+            quality={85}
             className="object-cover object-center"
             sizes="100vw"
           />
@@ -88,7 +90,7 @@ const PersonalInvitation = () => {
           >
             <p className="font-alice text-lg md:text-xl text-elegant-mocha leading-relaxed mb-6">
               If you&rsquo;re seeking an artist who values precision, natural
-              results, and genuine care — I&rsquo;d be honoured to meet you.
+              results, and genuine care, I&rsquo;d be honoured to meet you.
             </p>
             <p className="font-alta text-xs tracking-[0.3em] uppercase text-elegant-mocha/80">
               — Iggy

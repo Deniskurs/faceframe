@@ -152,7 +152,7 @@ const Hero = () => {
         <div className="w-[0.5px] h-12 bg-white/30"></div>
       </motion.div>
       <motion.div
-        className="absolute bottom-12 right-12 hidden md:block"
+        className="absolute top-12 right-12 hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.4, ease: LUXURY_EASING }}

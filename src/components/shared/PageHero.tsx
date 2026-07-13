@@ -57,9 +57,9 @@ export function PageHero({
         <div className="w-[0.5px] h-12 bg-elegant-mocha/25"></div>
       </motion.div>
 
-      {/* CHANEL Corner Accents - Bottom Right */}
+      {/* CHANEL Corner Accents - Top Right */}
       <motion.div
-        className="absolute bottom-8 sm:bottom-12 right-8 sm:right-12 hidden md:block"
+        className="absolute top-8 sm:top-12 right-8 sm:right-12 hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.6, ease: LUXURY_EASING }}
