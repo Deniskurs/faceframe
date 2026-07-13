@@ -76,10 +76,10 @@ const FounderStory = () => {
             >
               <div className="relative aspect-[3/4] overflow-hidden border border-soft-blush/10">
                 <Image
-                  src="/images/gallery/image1.webp"
-                  alt="Detail of precision brow work by Iggy at FaceFrame Beauty"
+                  src="/images/about/iggy-client.webp"
+                  alt="Iggy perfecting a client’s brows at the FaceFrame Beauty studio"
                   fill
-                  quality={90}
+                  quality={85}
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
