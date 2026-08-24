@@ -1,12 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, Check } from "lucide-react";
 import { LuxuryShadcnButton } from "@/components/ui/luxury-shadcn-button";
 import { LUXURY_EASING } from "@/utils/animations/luxuryAnimations";
-import type { CatalogService } from "@/data/acuityCatalog";
+import {
+  addonsForService,
+  formatPrice,
+  parsePrice,
+  type CatalogService,
+  type ResolvedChain,
+} from "@/data/acuityCatalog";
 
 const fade = {
   initial: { opacity: 0, y: 8 },
@@ -84,10 +90,17 @@ async function getJson<T>(url: string): Promise<T> {
 function parseSlot(iso: string): Date {
   return new Date(iso.replace(/([+-]\d{2})(\d{2})$/, "$1:$2"));
 }
-
 interface Confirmation {
   id: number;
   datetime: string;
+  /** Minutes as returned by Acuity; includes selected add-ons' extra time. */
+  duration?: string;
+  /** Total price as returned by Acuity; includes selected add-ons. */
+  price?: string;
+  /** Treatment name - present on basket rows */
+  type?: string;
+  /** Start time label ("10:30am") - present on basket rows */
+  time?: string;
 }
 
 /* ------------------------------------------------------------------ */
@@ -95,20 +108,67 @@ interface Confirmation {
 /* ------------------------------------------------------------------ */
 
 export function NativeScheduler({
-  service,
+  services,
   onUnavailable,
 }: {
-  service: CatalogService;
+  /** One treatment books normally; two or more chain back-to-back. */
+  services: CatalogService[];
   /** Availability could not be fetched — parent switches to the iframe. */
   onUnavailable: () => void;
 }) {
+  const primary = services[0];
+  const isMulti = services.length > 1;
+  const typeIds = useMemo(() => services.map((s) => s.acuityId), [services]);
+  const servicesKey = useMemo(
+    () => services.map((s) => s.slug).join("|"),
+    [services],
+  );
   const [dates, setDates] = useState<string[] | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [times, setTimes] = useState<string[] | null>(null);
   const [timesVersion, setTimesVersion] = useState(0);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
-  const [confirmation, setConfirmation] = useState<Confirmation | null>(null);
+  const [confirmations, setConfirmations] = useState<Confirmation[] | null>(null);
+  /** Resolved per-start schedules for basket chains (multi only) */
+  const [chainMap, setChainMap] = useState<Record<string, ResolvedChain>>({});
+  const addonOptions = useMemo(
+    () => (isMulti ? [] : addonsForService(primary.acuityId)),
+    [isMulti, primary.acuityId],
+  );
+  const [selectedAddons, setSelectedAddons] = useState<number[]>([]);
+
+  const toggleAddon = useCallback((id: number) => {
+    setSelectedAddons((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+    );
+  }, []);
+
+  const chosenAddons = useMemo(
+    () => addonOptions.filter((a) => selectedAddons.includes(a.id)),
+    [addonOptions, selectedAddons],
+  );
+
+  /* Combined totals shown while booking; Acuity's own figures take over on
+     the confirmation. */
+  const totals = useMemo(() => {
+    const baseDuration = services.reduce((n, s) => n + s.duration, 0);
+    const basePrice = services.reduce((n, s) => n + parsePrice(s.priceDisplay), 0);
+    const duration = baseDuration + chosenAddons.reduce((n, a) => n + a.durationDelta, 0);
+    const price = basePrice + chosenAddons.reduce((n, a) => n + a.priceDelta, 0);
+    return { duration, priceDisplay: formatPrice(price) };
+  }, [services, chosenAddons]);
+
+  /* Appended to availability calls so slots account for the extras' added
+     time. Empty string keeps URLs unchanged otherwise. */
+  const addonsQuery =
+    selectedAddons.length > 0 ? `&addons=${selectedAddons.join(",")}` : "";
+
+  // Latest picked time, readable inside the times effect without retriggering
+  const selectedTimeRef = useRef<string | null>(null);
+  useEffect(() => {
+    selectedTimeRef.current = selectedTime;
+  }, [selectedTime]);
 
   const [form, setForm] = useState({
     firstName: "",
@@ -130,7 +190,9 @@ export function NativeScheduler({
         const results = await Promise.all(
           months.map((m) =>
             getJson<{ dates: string[] }>(
-              `/api/booking/availability?type=${service.acuityId}&month=${m}`,
+              isMulti
+                ? `/api/booking/availability?types=${typeIds.join(",")}&month=${m}`
+                : `/api/booking/availability?type=${primary.acuityId}&month=${m}${addonsQuery}`,
             ),
           ),
         );
@@ -145,7 +207,7 @@ export function NativeScheduler({
     return () => {
       cancelled = true;
     };
-  }, [service.acuityId, onUnavailable]);
+  }, [isMulti, typeIds, primary.acuityId, servicesKey, addonsQuery, onUnavailable]);
 
   /* -------------------- Step B: times for a date -------------------- */
 
@@ -155,10 +217,24 @@ export function NativeScheduler({
     setTimes(null);
     (async () => {
       try {
-        const { times: slots } = await getJson<{ times: string[] }>(
-          `/api/booking/availability?type=${service.acuityId}&date=${selectedDate}`,
+        const { times: slots, chains } = await getJson<{
+          times: string[];
+          chains?: Record<string, ResolvedChain>;
+        }>(
+          `/api/booking/availability?${
+            isMulti
+              ? `types=${typeIds.join(",")}`
+              : `type=${primary.acuityId}${addonsQuery}`
+          }&date=${selectedDate}`,
         );
-        if (!cancelled) setTimes(slots);
+        if (!cancelled) {
+          setTimes(slots);
+          setChainMap(chains ?? {});
+          // An add-on's extra time can invalidate a slot picked moments ago
+          if (selectedTimeRef.current && !slots.includes(selectedTimeRef.current)) {
+            setSelectedTime(null);
+          }
+        }
       } catch {
         if (!cancelled) onUnavailable();
       }
@@ -166,7 +242,7 @@ export function NativeScheduler({
     return () => {
       cancelled = true;
     };
-  }, [service.acuityId, selectedDate, timesVersion, onUnavailable]);
+  }, [isMulti, typeIds, primary.acuityId, servicesKey, selectedDate, addonsQuery, timesVersion, onUnavailable]);
 
   const backToTimes = useCallback(() => {
     setSelectedTime(null);
@@ -183,19 +259,29 @@ export function NativeScheduler({
       setFormError(null);
       setSubmitting(true);
       const post = () =>
-        fetch("/api/booking/appointments", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            appointmentTypeID: service.acuityId,
-            datetime: selectedTime,
-            firstName: form.firstName,
-            lastName: form.lastName,
-            email: form.email,
-            phone: form.phone,
-            company: form.company,
-          }),
-        });
+        fetch(
+          isMulti
+            ? "/api/booking/appointments/basket"
+            : "/api/booking/appointments",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              ...(isMulti
+                ? { appointmentTypeIDs: typeIds }
+                : {
+                    appointmentTypeID: primary.acuityId,
+                    addons: selectedAddons,
+                  }),
+              datetime: selectedTime,
+              firstName: form.firstName,
+              lastName: form.lastName,
+              email: form.email,
+              phone: form.phone,
+              company: form.company,
+            }),
+          },
+        );
       try {
         let res: Response;
         try {
@@ -205,10 +291,13 @@ export function NativeScheduler({
         }
         const body = (await res.json().catch(() => ({}))) as {
           confirmation?: Confirmation;
+          confirmations?: Confirmation[];
           error?: string;
         };
-        if (res.ok && body.confirmation) {
-          setConfirmation(body.confirmation);
+        const rows =
+          body.confirmations ?? (body.confirmation ? [body.confirmation] : []);
+        if (res.ok && rows.length > 0) {
+          setConfirmations(rows);
         } else if (res.status === 409) {
           // the slot went while they typed — back to fresh times, calmly
           setNotice(body.error ?? "That time was just taken — please pick another.");
@@ -224,7 +313,17 @@ export function NativeScheduler({
         setSubmitting(false);
       }
     },
-    [service.acuityId, selectedTime, form, submitting, backToTimes, onUnavailable],
+    [
+      isMulti,
+      typeIds,
+      primary.acuityId,
+      selectedTime,
+      form,
+      submitting,
+      selectedAddons,
+      backToTimes,
+      onUnavailable,
+    ],
   );
 
   const setField = useCallback(
@@ -233,7 +332,12 @@ export function NativeScheduler({
     [],
   );
 
-  const step = confirmation ? "done" : selectedTime ? "details" : "pick";
+  const step =
+    confirmations && confirmations.length > 0
+      ? "done"
+      : selectedTime
+        ? "details"
+        : "pick";
 
   const summary = useMemo(() => {
     if (!selectedTime) return null;
@@ -245,15 +349,60 @@ export function NativeScheduler({
     };
   }, [selectedTime]);
 
+  /* The actual visit schedule for the picked slot: real per-item times and
+     the true in-studio span (grid gaps included). */
+  const activeChain =
+    isMulti && selectedTime ? chainMap[selectedTime] ?? null : null;
+
+  /* Confirmation figures straight from Acuity (per appointment), with the
+     client-side totals as fallback. */
+  const booked = useMemo(() => {
+    if (!confirmations?.length) return null;
+    const durSum = confirmations.reduce(
+      (n, c) => n + (Number.parseInt(c.duration ?? "", 10) || 0),
+      0,
+    );
+    const priceSum = confirmations.reduce(
+      (n, c) => n + (Number.parseFloat(c.price ?? "") || 0),
+      0,
+    );
+    /* Multi: the visit span from first start to last end, gaps included. */
+    let spanMin = durSum;
+    if (isMulti && confirmations.length > 1) {
+      const firstMs = parseSlot(confirmations[0].datetime).getTime();
+      const last = confirmations[confirmations.length - 1];
+      const endMs =
+        parseSlot(last.datetime).getTime() +
+        (Number.parseInt(last.duration ?? "0", 10) || 0) * 60_000;
+      spanMin = Math.round((endMs - firstMs) / 60_000);
+    }
+    return {
+      heading: isMulti ? `${confirmations.length} treatments` : primary.name,
+      items: isMulti
+        ? confirmations.map((c) =>
+            [c.type, c.time].filter(Boolean).join(" · "),
+          )
+        : chosenAddons.length > 0
+          ? [`with ${chosenAddons.map((a) => a.name).join(" + ")}`]
+          : [],
+      durationText:
+        spanMin > 0 ? formatDuration(spanMin) : formatDuration(totals.duration),
+      priceText: priceSum > 0 ? formatPrice(priceSum) : totals.priceDisplay,
+    };
+  }, [confirmations, isMulti, primary.name, chosenAddons, totals]);
+
   return (
     <div className="mt-6">
       <AnimatePresence mode="wait" initial={false}>
-        {step === "done" && confirmation && summary ? (
+        {step === "done" && booked && summary ? (
           <motion.div key="done" {...fade}>
             <BookedPanel
-              service={service}
+              heading={booked.heading}
+              items={booked.items}
               longDate={summary.longDate}
               time={summary.time}
+              durationText={booked.durationText}
+              priceText={booked.priceText}
             />
           </motion.div>
         ) : step === "details" && summary ? (
@@ -269,14 +418,41 @@ export function NativeScheduler({
 
             {/* Compact summary of the chosen slot */}
             <p className="mt-2 pb-4 border-b-hairline border-elegant-mocha/15 font-alice text-sm sm:text-base text-elegant-mocha tracking-wide tabular-nums">
-              {service.name}
+              {isMulti ? `${services.length} treatments` : primary.name}
               <span className="mx-2 text-elegant-mocha/30">·</span>
               {summary.shortDate}
               <span className="mx-2 text-elegant-mocha/30">·</span>
-              {summary.time}
+              {activeChain
+                ? `${summary.time} - ${timeFmt.format(parseSlot(activeChain.end))}`
+                : summary.time}
               <span className="mx-2 text-elegant-mocha/30">·</span>
-              {service.priceDisplay}
+              {formatDuration(activeChain ? activeChain.spanMin : totals.duration)}
+              <span className="mx-2 text-elegant-mocha/30">·</span>
+              {totals.priceDisplay}
             </p>
+            {chosenAddons.length > 0 && (
+              <p className="mt-2 font-alice text-sm text-elegant-mocha/70 tracking-wide">
+                with {chosenAddons.map((a) => a.name).join(" + ")}
+              </p>
+            )}
+            {isMulti && (
+              <div className="mt-3 space-y-1">
+                {services.map((s, i) => (
+                  <p key={s.slug} className="font-alice text-sm text-elegant-mocha/75 tracking-wide tabular-nums">
+                    {i + 1}. {s.name}
+                    <span className="mx-2 text-elegant-mocha/30">·</span>
+                    {activeChain
+                      ? timeFmt.format(parseSlot(activeChain.items[i]))
+                      : formatDuration(s.duration)}
+                  </p>
+                ))}
+                <p className="pt-1 font-alta text-xs tracking-refined uppercase text-elegant-mocha/60">
+                  {activeChain
+                    ? "Times confirmed for this slot"
+                    : "Booked back-to-back in this order"}
+                </p>
+              </div>
+            )}
 
             <form onSubmit={submit} noValidate className="mt-6 max-w-lg">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-5">
@@ -351,6 +527,36 @@ export function NativeScheduler({
           </motion.div>
         ) : (
           <motion.div key="pick" {...fade}>
+            {addonOptions.length > 0 && (
+              <fieldset className="mb-7 border border-elegant-mocha/15 rounded-sm px-5 py-4 bg-light-cream/30">
+                <legend className="px-2 font-alta text-xs tracking-luxury uppercase text-elegant-mocha/80">
+                  Add to your appointment
+                </legend>
+                <div className="divide-y divide-elegant-mocha/10">
+                  {addonOptions.map((addon) => (
+                    <label
+                      key={addon.id}
+                      className="flex items-center justify-between gap-4 min-h-[44px] py-1 cursor-pointer"
+                    >
+                      <span className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedAddons.includes(addon.id)}
+                          onChange={() => toggleAddon(addon.id)}
+                          className="w-4 h-4 accent-deep-bronze"
+                        />
+                        <span className="font-alice text-sm sm:text-base text-elegant-mocha tracking-wide">
+                          {addon.name}
+                        </span>
+                      </span>
+                      <span className="font-alta text-xs tracking-wider text-elegant-mocha/70 tabular-nums whitespace-nowrap">
+                        {addon.priceDisplay} · +{formatDuration(addon.durationDelta)}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            )}
             <p className="font-alta text-xs tracking-refined uppercase text-elegant-mocha/70 mb-4">
               All times London (GMT+1)
             </p>
@@ -522,13 +728,21 @@ function TimesGridSkeleton() {
 }
 
 function BookedPanel({
-  service,
+  heading,
+  items,
   longDate,
   time,
+  durationText,
+  priceText,
 }: {
-  service: CatalogService;
+  /** Treatment name for single bookings, "N treatments" for baskets */
+  heading: string;
+  /** One row per appointment; may embed the item's own start time */
+  items: string[];
   longDate: string;
   time: string;
+  durationText: string;
+  priceText: string;
 }) {
   return (
     <div className="border border-elegant-mocha/15 bg-light-cream/20 rounded-sm px-6 py-10 sm:px-10 text-center">
@@ -539,16 +753,23 @@ function BookedPanel({
         Booked
       </h3>
       <div className="font-alice text-sm sm:text-base text-elegant-mocha/85 leading-relaxed tracking-wide space-y-1">
-        <p>{service.name}</p>
+        <p>{heading}</p>
         <p className="tabular-nums">
           {longDate}
           <span className="mx-2 text-elegant-mocha/30">·</span>
           {time}
         </p>
-        <p className="tabular-nums">
-          {formatDuration(service.duration)}
+        {items.length > 0 && (
+          <div className="pt-2 mt-2 border-t border-elegant-mocha/10 space-y-1">
+            {items.map((label, i) => (
+              <p key={`${label}-${i}`}>{label}</p>
+            ))}
+          </div>
+        )}
+        <p className="tabular-nums pt-2 mt-2 border-t border-elegant-mocha/10">
+          {durationText}
           <span className="mx-2 text-elegant-mocha/30">·</span>
-          {service.priceDisplay}
+          {priceText}
         </p>
       </div>
       <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8">

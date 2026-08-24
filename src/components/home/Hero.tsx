@@ -343,7 +343,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2, ease: LUXURY_EASING }}
               >
-                Microblading, lash artistry, and facials — designed
+                Brows, lashes &amp; facials - designed
                 to enhance, never mask.
               </motion.p>
 
@@ -358,8 +358,8 @@ const Hero = () => {
             >
               <div className="w-full lg:w-auto">
                 <LuxuryShadcnButton
-                  href={getBookingHref("consultation")}
-                  text={CTA.bookConsultation}
+                  href={getBookingHref()}
+                  text={CTA.bookPrimary}
                   luxuryVariant="elegant"
                   luxuryTheme="transparent"
                   luxurySize="large"

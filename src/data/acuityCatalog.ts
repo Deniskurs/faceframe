@@ -824,3 +824,133 @@ if (process.env.NODE_ENV !== "production") {
     }
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Add-ons: Acuity "add to appointment" extras (hand-maintained).      */
+/* Created and attached in the Acuity dashboard; IDs/prices verified   */
+/* against GET /appointment-addons + /appointment-types. Extend this   */
+/* block whenever add-ons change there.                                */
+/* ------------------------------------------------------------------ */
+
+export interface CatalogAddon {
+  id: number;
+  name: string;
+  /** Added cost, display form ("+£20") */
+  priceDisplay: string;
+  /** Added cost in pounds, for totals math */
+  priceDelta: number;
+  /** Added minutes on top of the base treatment */
+  durationDelta: number;
+}
+
+export const CATALOG_ADDONS: Record<number, CatalogAddon> = {
+  7121871: {
+    id: 7121871,
+    name: "Premium Facial Add-on",
+    priceDisplay: "+£20",
+    priceDelta: 20,
+    durationDelta: 30,
+  },
+  7121872: {
+    id: 7121872,
+    name: "Microneedling: Skin Boosters",
+    priceDisplay: "+£40",
+    priceDelta: 40,
+    durationDelta: 30,
+  },
+  7248797: {
+    id: 7248797,
+    name: "Brow Shape",
+    priceDisplay: "+£10",
+    priceDelta: 10,
+    durationDelta: 15,
+  },
+  7248799: {
+    id: 7248799,
+    name: "Brow Tint",
+    priceDisplay: "+£10",
+    priceDelta: 10,
+    durationDelta: 15,
+  },
+  7248801: {
+    id: 7248801,
+    name: "Brow Shape & Tint",
+    priceDisplay: "+£15",
+    priceDelta: 15,
+    durationDelta: 20,
+  },
+  7248803: {
+    id: 7248803,
+    name: "Brow & Lash Tint",
+    priceDisplay: "+£20",
+    priceDelta: 20,
+    durationDelta: 25,
+  },
+  7248804: {
+    id: 7248804,
+    name: "Dermaplane",
+    priceDisplay: "+£35",
+    priceDelta: 35,
+    durationDelta: 30,
+  },
+  7248805: {
+    id: 7248805,
+    name: "Skin Boosters",
+    priceDisplay: "+£40",
+    priceDelta: 40,
+    durationDelta: 30,
+  },
+};
+
+/** Acuity appointmentType ID mapped to the add-on IDs attached to it in the dashboard. */
+export const ADDONS_BY_SERVICE: Record<number, number[]> = {
+  // Lash services: the four brow add-ons
+  95376935: [7248803, 7248797, 7248801, 7248799], // Lash Lift & Tint
+  95376936: [7248803, 7248797, 7248801, 7248799], // Classic Lash Extensions - Full Set
+  95376937: [7248803, 7248797, 7248801, 7248799], // Classic Lash Infill - 2 Weeks
+  95376938: [7248803, 7248797, 7248801, 7248799], // Classic Lash Infill - 3 Weeks
+  95376940: [7248803, 7248797, 7248801, 7248799], // Hybrid Lash Extensions - New Set
+  95376941: [7248803, 7248797, 7248801, 7248799], // Hybrid Lash Infill - 2 Weeks
+  95376942: [7248803, 7248797, 7248801, 7248799], // Hybrid Lash Infill - 3 Weeks
+  95376944: [7248803, 7248797, 7248801, 7248799], // Volume Lash Extensions - New Set
+  95376945: [7248803, 7248797, 7248801, 7248799], // Volume Lash Infill - 2 Weeks
+  95376947: [7248803, 7248797, 7248801, 7248799], // Volume Lash Infill - 3 Weeks
+  // Facials: Dermaplane + Premium Facial Add-on + Skin Boosters
+  95376949: [7248804, 7121871, 7248805], // Men's Facial
+  95376950: [7248804, 7121871, 7248805], // Deep Cleansing Facial
+  95376952: [7121871, 7248805], // Dermaplaning (no Dermaplane add-on on itself)
+  95376954: [7248804, 7121871, 7248805], // Million Dollar Facial
+  95376955: [7248804, 7121871, 7248805], // Immaculate Peel
+  95376957: [7248804, 7121871], // PregnaCare Facial (no Skin Boosters in pregnancy)
+  95376959: [7248804, 7121871, 7248805], // Million Dollar Miracle Mask
+  95376961: [7248804, 7121871, 7248805], // Back Cleansing Facial
+  95376953: [7121872], // Microneedling (own Skin Boosters variant)
+};
+
+/** A resolved multi-treatment visit for one chosen start time */
+export interface ResolvedChain {
+  /** ISO start datetime per treatment, order preserved */
+  items: string[];
+  /** ISO datetime the visit ends (last item start + its duration) */
+  end: string;
+  /** True in-studio span in minutes, including grid gaps */
+  spanMin: number;
+}
+
+/** Add-ons offered with a treatment, in dashboard attachment order. */
+export function addonsForService(acuityId: number): CatalogAddon[] {
+  return (ADDONS_BY_SERVICE[acuityId] ?? []).flatMap(
+    (id) => CATALOG_ADDONS[id] ?? [],
+  );
+}
+
+/** "£60" | "£47.50" | "Free" -> 60 | 47.5 | 0 (Free and unparseable = 0) */
+export function parsePrice(display: string): number {
+  const m = display.match(/\d+(?:\.\d+)?/);
+  return m ? Number.parseFloat(m[0]) : 0;
+}
+
+/** 65 -> "£65", 47.5 -> "£47.50" */
+export function formatPrice(value: number): string {
+  return Number.isInteger(value) ? `£${value}` : `£${value.toFixed(2)}`;
+}

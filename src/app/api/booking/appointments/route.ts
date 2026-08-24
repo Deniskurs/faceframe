@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AcuityError, createAppointment } from "@/lib/acuity";
-import { CATALOG_SERVICES } from "@/data/acuityCatalog";
+import { ADDONS_BY_SERVICE, CATALOG_SERVICES } from "@/data/acuityCatalog";
 
 /**
  * POST /api/booking/appointments
- * Body: { appointmentTypeID, datetime, firstName, lastName, email, phone, company? }
+ * Body: { appointmentTypeID, datetime, firstName, lastName, email, phone, addons?, company? }
  *
  * Creates the appointment in CLIENT mode so Acuity enforces availability and
  * scheduling limits. `company` is a honeypot — bots that fill it get a fake
@@ -62,6 +62,19 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "That treatment is no longer offered." }, { status: 400 });
   }
 
+  // Add-ons: only integers actually attached to this treatment in the Acuity
+  // dashboard pass through; anything else is stripped, never trusted.
+  const attached = ADDONS_BY_SERVICE[appointmentTypeID] ?? [];
+  const addonIDs = Array.isArray(body.addons)
+    ? body.addons.filter(
+        (id): id is number =>
+          typeof id === "number" &&
+          Number.isSafeInteger(id) &&
+          id > 0 &&
+          attached.includes(id),
+      ).slice(0, 5)
+    : [];
+
   try {
     const a = await createAppointment({
       appointmentTypeID,
@@ -70,6 +83,7 @@ export async function POST(request: NextRequest) {
       lastName,
       email,
       phone,
+      ...(addonIDs.length ? { addonIDs } : {}),
     });
     return NextResponse.json({
       confirmation: {

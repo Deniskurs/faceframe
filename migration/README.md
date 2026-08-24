@@ -22,6 +22,22 @@ Files for migrating FaceFrame Beauty's service catalogue from Booksolo into Acui
 > `src/data/acuityCatalog.ts` — GENERATED from the live account; regenerate it
 > if services change in Acuity (names/prices/durations/descriptions/IDs).
 >
+> **Add-ons + multi-treatment visits (2026-08-23):** six add-ons created via
+> dashboard automation and attached: Brow Shape (+£10/+15), Brow Tint (+£10/+15),
+> Brow Shape & Tint (+£15/+20), Brow & Lash Tint (+£20/+25) on all ten lash
+> services; Dermaplane (+£35/+30) and Skin Boosters (+£40/+30) on the facials
+> (PregnaCare: no Skin Boosters; Dermaplaning service: no Dermaplane add-on;
+> Microneedling keeps its own Skin Boosters variant). The website now renders
+> add-ons in its native scheduler (addonIDs through the public API) and
+> supports multi-treatment "basket" visits: clients pick several treatments,
+> the site chains back-to-back appointments via POST /appointments (max six,
+> gaps up to 20 min, automatic rollback via PUT /appointments/:id/cancel on
+> partial failure). Live-tested end to end on the test client record and
+> cancelled. NOTE: the public API's appointment-types addonIDs field can lag
+> the dashboard by minutes - verify attachments via
+> /availability/times?addonIDs[]= (invalid pairings return 400
+> invalid_addons_type), not via the types list.
+>
 > **Client account portal (2026-07-05, v3):** `/account` is a native "My
 > Account" surface backed by our own API routes (`src/app/api/account/*`),
 > which call the Acuity ADMIN API server-side (`src/lib/acuityAccount.ts` —
